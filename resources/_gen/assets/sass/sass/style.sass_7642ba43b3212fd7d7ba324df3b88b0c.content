@@ -82,6 +82,13 @@ hr {
   justify-content: flex-start;
   align-items: center; }
 
+.author-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-style: italic; }
+
 .tag {
   background-color: transparent;
   position: relative;
