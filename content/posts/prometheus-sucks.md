@@ -3,6 +3,7 @@ title: "Prometheus Sucks?"
 date: 2019-06-28T11:47:11+07:00
 showDate: true
 comment: true
+author: kiennt
 tags: ["blog","tech"]
 ---
 
