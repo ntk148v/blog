@@ -1,0 +1,43 @@
+{{ define "section_content" }}
+<div class="section" id="content">
+    {{ .Date.Format (.Site.Params.dateForm | default "Mon Jan 02, 2006") }} &#183; {{ .WordCount }} words
+    {{ with .Params.tags }}
+    <div class="tag-container">
+        {{ range . }}
+        <span class="tag">
+            <a href="{{ "tags/" | absURL }}{{ . | urlize }}">
+                {{.}}
+            </a>
+        </span>
+        {{ end }}
+    </div>
+    {{ end }}
+    <hr/>
+    {{ .Content }}
+</div>
+
+{{ if .Params.clickablePhotos }}
+    <div class="grid">
+    {{ $images := .Resources.ByType "image" }}
+    {{ range shuffle $images }}
+    {{ $resized := .Resize $.Params.maxWidth }}
+        <div>
+            <a href="{{ .RelPermalink }}">
+                <img src="{{ $resized.RelPermalink }}" alt="{{ .Name }}" />     
+            </a>
+        </div>
+        {{ end }}
+    </div>
+{{ else }}
+    <div class="grid">
+    {{ $images := .Resources.ByType "image" }}
+    {{ range shuffle $images }}
+    {{ $resized := .Resize $.Params.maxWidth }}
+        <div>
+            <img src="{{ $resized.RelPermalink }}" alt="{{ .Name }}" />
+        </div>
+    {{ end }}
+
+    </div>
+{{ end }}
+{{ end }}
