@@ -3,6 +3,7 @@ title: "Mục tiêu 2019"
 date: 2019-02-04T23:16:47+07:00
 showDate: true
 comment: true
+author: kiennt
 tags: ["blog","story"]
 ---
 
@@ -12,7 +13,7 @@ tags: ["blog","story"]
 
 Nah, năm mới rồi nên thay đổi thôi, chững chạc lên nào! Năm nay tui sẽ viết rõ ràng các mục tiêu mang tính định lượng, không viết chung chung như mọi năm nữa. Yo, let's go!
 
-* **Viết mục tiêu cho 2019**: checked hihi. 
+* **Viết mục tiêu cho 2019**: checked hihi.
 * **Thu nhập**:
 
 ```
