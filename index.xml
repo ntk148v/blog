@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ramblings from Kien</title>
+    <link>https://ntk148v.github.io/blog/</link>
+    <description>Recent content on Ramblings from Kien</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 19 Aug 2019 21:19:38 +0700</lastBuildDate>
+    
+	<atom:link href="https://ntk148v.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Openstack Autoscaling New Approach</title>
+      <link>https://ntk148v.github.io/blog/posts/openstack-autoscaling-new-approach/</link>
+      <pubDate>Mon, 19 Aug 2019 21:19:38 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/openstack-autoscaling-new-approach/</guid>
+      <description>NOTE(kiennt): There is a Faythe guideline
+ This guide describes how to automatically scale out your Compute instances in response to heavy system usage. By combining with Prometheus pre-defined rules that consider factors such as CPU or memory usage, you can configure OpenStack Orchestration (Heat) to add and remove additional instances automatically, when they are needed.
+1. The standard OpenStack Autoscaling approach Let&amp;rsquo;s talk about the standard OpenStack Autoscaling approach before goes to the new approach.</description>
+    </item>
+    
+    <item>
+      <title>Prometheus Sucks?</title>
+      <link>https://ntk148v.github.io/blog/posts/prometheus-sucks/</link>
+      <pubDate>Fri, 28 Jun 2019 11:47:11 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/prometheus-sucks/</guid>
+      <description>Huh, really?
+Ok ok, calm down, the title is completely a clickbait. Prometheus is still a very great monitoring and alerting solution, no doubt but beside the wonderful features, there are some existing disadvantages.
+This post is my personal opinion, so if you are disagree, leave some comments.
+1. Doesn&amp;rsquo;t support TLS or authentication Ok, look at FAQ:
+While TLS and authentication are frequently requested features, we have intentionally not implemented them in any of Prometheus&#39;s server-side components.</description>
+    </item>
+    
+    <item>
+      <title>Sapa 2019</title>
+      <link>https://ntk148v.github.io/blog/gallery/sapa-2019/</link>
+      <pubDate>Sat, 13 Apr 2019 10:22:43 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/gallery/sapa-2019/</guid>
+      <description>Have been friends for a long time but there is the first trip together.</description>
+    </item>
+    
+    <item>
+      <title>Mục tiêu 2019</title>
+      <link>https://ntk148v.github.io/blog/posts/target-2019/</link>
+      <pubDate>Mon, 04 Feb 2019 23:16:47 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/target-2019/</guid>
+      <description>Đến hẹn lại lên, thời điểm Tết đến xuân về, tui lại ngồi copy &amp;amp; paste viết mục tiêu phấn đấu cho năm mới. Tui khá là lười và dễ xao nhãng nên việc viết lên các mục tiêu năm mới đơn giản là một cách tự thúc ép bản thân. &amp;ldquo;Mày đã viết ra những điều này, cố mà làm&amp;rdquo;, kiểu vậy. À khoan, hay không viết nữa nhỉ? Lười quá&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Xuân 2019: 29 Tết</title>
+      <link>https://ntk148v.github.io/blog/gallery/xuan-2019/</link>
+      <pubDate>Sun, 03 Feb 2019 22:53:21 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/gallery/xuan-2019/</guid>
+      <description>Một chiều lang thang trên phố Tràng Thi.</description>
+    </item>
+    
+    <item>
+      <title>Hà Nội: Cầu Long Biên - Hồ Hoàn Kiêm</title>
+      <link>https://ntk148v.github.io/blog/gallery/hanoi-longbien-hoankiem/</link>
+      <pubDate>Thu, 31 Jan 2019 10:22:43 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/gallery/hanoi-longbien-hoankiem/</guid>
+      <description>Lang thang quanh hồ Hoàn Kiếm, cầu Long Biên&amp;hellip; Vào một ngày hè, cụ thể ngày nào thì quên mất rồi 🙈</description>
+    </item>
+    
+    <item>
+      <title>Linh Tinh</title>
+      <link>https://ntk148v.github.io/blog/gallery/linh-tinh/</link>
+      <pubDate>Thu, 03 Jan 2019 23:23:13 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/gallery/linh-tinh/</guid>
+      <description>Thỉnh thoảng chụp xong cũng không nhớ chụp hôm nào, chụp về chủ đề gì, tại sao lại chụp. Thôi để tạm đây vậy&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Lets Comment</title>
+      <link>https://ntk148v.github.io/blog/posts/lets-comment/</link>
+      <pubDate>Tue, 02 Oct 2018 09:47:11 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/lets-comment/</guid>
+      <description>Hugo ships with support for Disqus, a third-party service that provides comment and community capabilities to websites via JavaScript. But Disqus generates a shit load of page requests and heavy contents&amp;hellip; which even with the benefits that come with having Disqus in place. People just want something that can be used to post a comment, that is.
+That&amp;rsquo;s why I choose a Disqus alternative - Utterances. Utterances is a lightweight comments widget built on Github issues.</description>
+    </item>
+    
+    <item>
+      <title>Viết cho tuổi 25</title>
+      <link>https://ntk148v.github.io/blog/posts/viet-cho-tuoi_25/</link>
+      <pubDate>Wed, 26 Sep 2018 18:20:16 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/viet-cho-tuoi_25/</guid>
+      <description>Hôm nay, 26&amp;frasl;09 là sinh nhật tôi, sinh nhật lần thứ 25.
+Tuổi 25, cái tuổi mà bảo trẻ con cũng không phải, mà nói trưởng thành cũng chưa hẳn, là cái độ tuổi đứng giữa ngã ba đường, có quá nhiều lối rẽ.
+Tuổi 25, bắt đầu phải sống có trách nhiệm hơn vì sự lựa chọn bản thân ảnh hưởng đến những người xung quanh. Không còn có thể vứt bỏ tất cả, sống vì đam mê, theo đuổi đam mê một cách toàn tâm toàn ý.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://ntk148v.github.io/blog/about/</link>
+      <pubDate>Thu, 20 Sep 2018 11:22:22 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/about/</guid>
+      <description>Brief  Python developer 🐍. Basketball junkie 🏀. Love taking lifestyle photos 📷 &amp;amp; drawing ✏️. OpenStack contributor &amp;amp; lover. Linux lover 😘 &amp;amp; Window hater 🙅.   A computer is like air conditioning - it becomes useless when you open Windows. &amp;ndash; Linus Torvalds &amp;ndash;
+ Getting in touch Email is probably best, get me directly on kiennt2609@gmail.com or reach me out on my online profiles.
+ Twitter IRC - kiennt2609.</description>
+    </item>
+    
+  </channel>
+</rss>
