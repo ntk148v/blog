@@ -26,8 +26,8 @@ enableEmoji              = true
     text = "gallery"
 
 [[params.mainMenu]]
-    link = "/blog/about"
-    text = "who is Kien Nguyen?"
+    link = "/blog/authors"
+    text = "authors"
 
 [imaging]
     quality = 75
