@@ -8,7 +8,7 @@ showDate: true
 tags: ["blog", "tech"]
 ---
 
-In the beginning, I supposed that I'm the only one who write-up thing in this blog. But now thing was change, this blog might have multiple [blogger](https://ntk148v.github.io/blog/authors/). So it needs a guideline to describe how to contribute.
+In the beginning, I supposed that I'm the only one who write-up thing in this blog. But now thing was change, this blog might have multiple [bloggers](https://ntk148v.github.io/blog/authors/). So it needs a guideline to describe how to contribute.
 
 ![](https://sayingimages.com/wp-content/uploads/welcome-to-the-team-meme.jpg)
 
