@@ -3,7 +3,8 @@ title: "Mục tiêu 2019"
 date: 2019-02-04T23:16:47+07:00
 showDate: true
 comment: true
-author: kiennt
+authors:
+    - kiennt
 tags: ["blog","story"]
 ---
 

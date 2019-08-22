@@ -3,7 +3,8 @@ title: "Lets Comment"
 date: 2018-10-02T09:47:11+07:00
 showDate: true
 comment: true
-author: kiennt
+authors:
+    - kiennt
 tags: ["blog","tech"]
 ---
 

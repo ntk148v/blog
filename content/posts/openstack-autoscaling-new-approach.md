@@ -3,7 +3,8 @@ title: "Openstack Autoscaling New Approach"
 date: 2019-08-19T21:19:38+07:00
 showDate: true
 comment: true
-author: kiennt
+authors:
+    - kiennt
 tags: ["blog","tech"]
 ---
 
