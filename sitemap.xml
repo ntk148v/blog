@@ -3,32 +3,37 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://ntk148v.github.io/blog/tags/blog/</loc>
+    <lastmod>2019-08-22T14:40:59+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ntk148v.github.io/blog/posts/blog-guideline/</loc>
+    <lastmod>2019-08-22T14:40:59+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ntk148v.github.io/blog/</loc>
+    <lastmod>2019-08-22T14:40:59+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ntk148v.github.io/blog/tags/</loc>
+    <lastmod>2019-08-22T14:40:59+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ntk148v.github.io/blog/tags/tech/</loc>
+    <lastmod>2019-08-22T14:40:59+07:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ntk148v.github.io/blog/authors/</loc>
     <lastmod>2019-08-21T10:25:36+07:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ntk148v.github.io/blog/tags/blog/</loc>
-    <lastmod>2019-08-19T21:19:38+07:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://ntk148v.github.io/blog/posts/openstack-autoscaling-new-approach/</loc>
-    <lastmod>2019-08-19T21:19:38+07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ntk148v.github.io/blog/</loc>
-    <lastmod>2019-08-19T21:19:38+07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ntk148v.github.io/blog/tags/</loc>
-    <lastmod>2019-08-19T21:19:38+07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ntk148v.github.io/blog/tags/tech/</loc>
     <lastmod>2019-08-19T21:19:38+07:00</lastmod>
   </url>
   

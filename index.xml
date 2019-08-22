@@ -6,10 +6,20 @@
     <description>Recent content on Ramblings</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 19 Aug 2019 21:19:38 +0700</lastBuildDate>
+    <lastBuildDate>Thu, 22 Aug 2019 14:40:59 +0700</lastBuildDate>
     
 	<atom:link href="https://ntk148v.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Blog Guideline</title>
+      <link>https://ntk148v.github.io/blog/posts/blog-guideline/</link>
+      <pubDate>Thu, 22 Aug 2019 14:40:59 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/blog-guideline/</guid>
+      <description>In the beginning, I supposed that I&amp;rsquo;m the only one who write-up thing in this blog. But now thing was change, this blog might have multiple blogger. So it needs a guideline to describe how to contribute.
+1. How to submit a new content  Here is the source repo. Fork it &amp;amp; start writing. Create a pull request to submit your content. Make sure to create your author page.</description>
+    </item>
     
     <item>
       <title>Openstack Autoscaling New Approach</title>
@@ -127,7 +137,7 @@ Tuổi 25, bắt đầu phải sống có trách nhiệm hơn vì sự lựa ch�
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://ntk148v.github.io/blog/authors/kiennt/</guid>
-      <description>Brief  Python developer 🐍. Basketball junkie 🏀. Love taking lifestyle photos 📷 &amp;amp; drawing ✏️. OpenStack contributor &amp;amp; lover. Linux lover 😘 &amp;amp; Window hater 🙅.   A computer is like air conditioning - it becomes useless when you open Windows. -- Linus Torvalds &amp;ndash;
+      <description>Brief  Devops Golang developer Python developer 🐍. Basketball junkie 🏀. Love taking lifestyle photos 📷 &amp;amp; drawing ✏️. OpenStack contributor &amp;amp; lover. Linux lover 😘 &amp;amp; Window hater 🙅.   A computer is like air conditioning - it becomes useless when you open Windows. -- Linus Torvalds &amp;ndash;
  Getting in touch Email is probably best, get me directly on kiennt2609@gmail.com or reach me out on my online profiles.</description>
     </item>
     
