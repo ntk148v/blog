@@ -1,6 +1,6 @@
 baseurl                  = "https://ntk148v.github.io/blog"
 languageCode             = "en-us"
-title                    = "Ramblings from Kien"
+title                    = "Ramblings"
 theme                    = "sam"
 pygmentsStyle            = "solarized-dark256"
 pygmentsCodefences       = true
