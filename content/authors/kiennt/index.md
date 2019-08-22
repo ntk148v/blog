@@ -12,6 +12,8 @@ website: "https://ntk148v.github.io/blog/"
 
 ![basketball](https://ntk148v.github.io/blog/gallery/linh-tinh/DSCF2637.JPG)
 
+-   Devops
+-   Golang developer
 -   Python developer :snake:.
 -   Basketball junkie :basketball:.
 -   Love taking lifestyle photos :camera: & drawing :pencil2:.
