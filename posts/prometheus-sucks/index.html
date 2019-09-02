@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="Hello World, I&#39;m Kien Nguyen. This is my Dark Corner.">
+<title>
+Prometheus Sucks? - Ramblings
+</title>
+
+
+
+
+<link rel="shortcut icon" href="/blog/kien.ico">
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/blog/css/main.min.64aa2204546252dae84688d1bf0a97d285a4a074eae6c1f9e5895cc3819d0038.css" integrity="sha256-ZKoiBFRiUtroRojRvwqX0oWkoHTq5sH55Ylcw4GdADg=" crossorigin="anonymous" media="screen">
+
+
+
+ 
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://ntk148v.github.io/blog/kien.jpg"/>
+
+<meta name="twitter:title" content="Prometheus Sucks?"/>
+<meta name="twitter:description" content="Huh, really?
+Ok ok, calm down, the title is completely a clickbait. Prometheus is still a very great monitoring and alerting solution, no doubt but beside the wonderful features, there are some existing disadvantages.
+This post is my personal opinion, so if you are disagree, leave some comments.
+1. Doesn&rsquo;t support TLS or authentication Ok, look at FAQ:
+While TLS and authentication are frequently requested features, we have intentionally not implemented them in any of Prometheus&#39;s server-side components."/>
+
+<meta property="og:title" content="Prometheus Sucks?" />
+<meta property="og:description" content="Huh, really?
+Ok ok, calm down, the title is completely a clickbait. Prometheus is still a very great monitoring and alerting solution, no doubt but beside the wonderful features, there are some existing disadvantages.
+This post is my personal opinion, so if you are disagree, leave some comments.
+1. Doesn&rsquo;t support TLS or authentication Ok, look at FAQ:
+While TLS and authentication are frequently requested features, we have intentionally not implemented them in any of Prometheus&#39;s server-side components." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ntk148v.github.io/blog/posts/prometheus-sucks/" />
+
+<meta property="og:image" content="https://ntk148v.github.io/blog/kien.jpg" />
+<meta property="article:published_time" content="2019-06-28T11:47:11+07:00" />
+<meta property="article:modified_time" content="2019-06-28T11:47:11+07:00" />
+
+
+
+    
+
+    
+    
+    
+    <title>
+        
+        Prometheus Sucks?
+        
+    </title>
+</head>
+
+<body>
+    
+    <div class="wrap">
+        
+        <div class="section" id="title">Prometheus Sucks?</div>
+
+        
+<div class="section" id="content">
+    Fri Jun 28, 2019 &#183; 558 words
+    <div class="authors-container">
+        
+        
+        
+        <figcaption><a href="https://ntk148v.github.io/blog/authors/kiennt/">Kien Nguyen-Tuan</a></figcaption>
+        
+        
+        
+    </div>
+    
+    <div class="tag-container">
+        
+        <span class="tag">
+            <a href="https://ntk148v.github.io/blog/tags/blog">
+                blog
+            </a>
+        </span>
+        
+        <span class="tag">
+            <a href="https://ntk148v.github.io/blog/tags/tech">
+                tech
+            </a>
+        </span>
+        
+    </div>
+    
+    <hr />
+    <aside>
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#1-doesn-t-support-tls-or-authentication">1. Doesn&rsquo;t support TLS or authentication</a></li>
+<li><a href="#2-plain-configuration">2. Plain Configuration</a></li>
+<li><a href="#3-doesn-t-have-rbac-role-based-access-control">3. Doesn&rsquo;t have RBAC (Role-based access control)</a></li>
+<li><a href="#4-high-availability">4. High-availability</a></li>
+<li><a href="#5-the-lack-of-documentation">5. The lack of documentation</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul>
+</nav>
+    </aside>
+    
+
+<p><em>Huh, really?</em></p>
+
+<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk26SiCrYdFmDMs2o4YD4MuwEnP8rHSR1hAyymXTKVUg2UJuUqaQ" alt="" /></p>
+
+<p>Ok ok, calm down, the title is completely a clickbait. Prometheus is still a very great monitoring and alerting solution, no doubt but beside the wonderful features, there are some existing disadvantages.</p>
+
+<p>This post is my personal opinion, so if you are disagree, <a href="https://ntk148v.github.io/blog/posts/lets-comment/">leave some comments</a>.</p>
+
+<h1 id="1-doesn-t-support-tls-or-authentication">1. Doesn&rsquo;t support TLS or authentication</h1>
+
+<p>Ok, look at <a href="https://prometheus.io/docs/introduction/faq/#why-dont-the-prometheus-server-components-support-tls-or-authentication-can-i-add-those">FAQ</a>:</p>
+
+<pre><code>While TLS and authentication are frequently requested features,
+we have intentionally not implemented them in any of Prometheus's
+server-side components.
+</code></pre>
+
+<p>IMO, there should be a built-in feature rather than using 3rd-party components like a reverse proxy. Nicely, the Prometheus team has changed their stance (<em>Thanks!!!</em> 🙇) on this during its development summit on August 11, 2018, and support for TLS and authentication in serving endpoints is now on <a href="https://prometheus.io/docs/introduction/faq/#why-dont-the-prometheus-server-components-support-tls-or-authentication-can-i-add-those">the project&rsquo;s roadmap</a>. TLS and authentication aren&rsquo;t available now, so let&rsquo;s list it as a drawback, right.</p>
+
+<h1 id="2-plain-configuration">2. Plain Configuration</h1>
+
+<p>In general, there is <code>user experience</code>.</p>
+
+<p>Not everyone is familiar with plain configuration file(s). When I introduce Prometheus to my colleagues, how great it is, what it can do, blah&hellip;, everytime they ask me like:</p>
+
+<pre><code>(People) - &quot;Hey, how can I add a new target, change rule?&quot;
+(Me) - &quot;Open configuration files, like this&quot; *click* ...
+       &quot;find this line and change it&quot; *typing, typing*
+(People) - &quot;Huh, what...&quot; *disappointed*
+</code></pre>
+
+<p>Then they deny all wonderful features I mentioned before. 😓 😓</p>
+
+<p>Even me, sometimes I wish that Prometheus provides an user interface to update its configuration. <a href="https://github.com/line/promgen">LINE&rsquo;s Promgen</a> for example:</p>
+
+<p><img src="https://raw.githubusercontent.com/line/promgen/master/docs/images/screenshot.png" alt="" /></p>
+
+<h1 id="3-doesn-t-have-rbac-role-based-access-control">3. Doesn&rsquo;t have RBAC (Role-based access control)</h1>
+
+<p>Prometheus doesn&rsquo;t have user, project, group, role and permission concepts. In production, the number of targets keeps increasing rapidly, I couldn&rsquo;t handle them all. I want to share Prometheus configuration with someone else, so they can update it for me. But at the same time, I don&rsquo;t want they change other set of targets. &ldquo;Please don&rsquo;t touch anything rather than your targets!&rdquo; and no guarantee that my configuration won&rsquo;t be changed suddenly. You know, <em>Humans are all curious creatures</em>.</p>
+
+<p>In my expectation, Prometheus could has an user/project management with RBAC.</p>
+
+<h1 id="4-high-availability">4. High-availability</h1>
+
+<p>Prometheus itself provides no real HA/clustering support. As such the best-practice is to run multiple (e.g N) hosts with the same config (and it should be <strong>Active-Passive model</strong> instead of <strong>Active-Active</strong>). Data between Prometheus servers aren&rsquo;t sync with each other. They aren&rsquo;t persistent data.</p>
+
+<p>If we have 3 Prometheus servers, metrics have to be scraped 3 times. It increases network traffics and target resource usages (a little bit).</p>
+
+<p>Another thing should be considered as a drawback. Prometheus resource are restricted on a single physical servers that has its own limit. We can scale up only, to scale out we have to split a set of targets to other Prometheus servers manually.</p>
+
+<h1 id="5-the-lack-of-documentation">5. The lack of documentation</h1>
+
+<p>IMO, Prometheus doesn&rsquo;t give enough necessary information for user. Many important tips I have to learn from <a href="https://www.robustperception.io/">Robust Perception blog</a> instead of official documentation. But this is just a minor drawback, Prometheus is an open-source project so we can contribute to it 💪.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Everything isn&rsquo;t perfect. Prometheus isn&rsquo;t an exception, it still has some drawbacks (IMO). Note again that there is my opinon, it could be wrong. Someone can tell that Prometheus is good enough, Prometheus should focus on performance rather than wasting time on side features&hellip; If you have other opinions, please leave comments bellow 👇.</p>
+
+</div>
+
+
+        
+<div class="section bottom-menu">
+    
+<hr />
+<script src="https://utteranc.es/client.js" repo="ntk148v/blog" issue-term="pathname" theme="photon-dark" crossorigin="anonymous" async>
+</script>
+<p>
+    
+    
+    <hr />
+    <p>
+        
+
+        
+        <a href="/blog/posts">back</a>
+        
+        &#183;
+        
+        
+
+        
+        
+        <a href="/blog/posts">
+            posts
+        </a>
+        
+
+        
+        
+        &#183;
+        <a href="/blog/gallery">
+            gallery
+        </a>
+        
+        &#183;
+        <a href="/blog/authors">
+            authors
+        </a>
+        
+        
+        &#183;
+        <a href="https://ntk148v.github.io/blog">
+            main
+        </a>
+        
+    </p>
+
+</div>
+
+
+        
+        <div class="section footer">Copyright © 2018 - Powered by Hugo and Call me Sam theme.
+</div>
+    </div>
+</body>
+
+</html>
