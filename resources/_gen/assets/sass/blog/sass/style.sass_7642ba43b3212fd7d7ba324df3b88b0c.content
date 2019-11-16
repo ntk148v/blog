@@ -6,12 +6,12 @@
 
 html {
   background-color: #282c34;
-  font-family: "Operator Mono";
+  font-family: "Nunito", sans-serif;
   font-size: 16px; }
 
 body {
   font-size: 16px;
-  font-family: "Operator Mono";
+  font-family: "Nunito", sans-serif;
   color: #dadfe8;
   line-height: 2rem;
   letter-spacing: 1.5px;
@@ -25,7 +25,7 @@ body {
 h1, h2, h3 {
   margin-bottom: 0.5em;
   text-align: center;
-  font-family: "Operator Mono";
+  font-family: "Nunito", sans-serif;
   opacity: 0.6; }
 
 li {
@@ -84,7 +84,7 @@ hr {
 
 #content .author-container {
   font-style: normal;
-  font-family: "Operator Mono";
+  font-family: "Nunito", sans-serif;
   text-align: center;
   align-items: center; }
   #content .author-container img {
@@ -133,7 +133,7 @@ hr {
   position: relative;
   bottom: 0;
   padding: 3rem 1rem;
-  font-family: "Operator Mono";
+  font-family: "Nunito", sans-serif;
   font-size: 1rem;
   line-height: 1em;
   opacity: 0.8; }
@@ -151,7 +151,7 @@ hr {
       width: 90%; } }
 
 .big-link {
-  font-family: "Operator Mono";
+  font-family: "Nunito", sans-serif;
   font-size: 3rem;
   font-weight: 300;
   margin-bottom: 2rem;
@@ -159,7 +159,7 @@ hr {
 
 #title {
   margin-top: 3rem;
-  font-family: "Operator Mono";
+  font-family: "Nunito", sans-serif;
   font-size: 2rem;
   line-height: 3rem;
   margin-bottom: 2rem; }
