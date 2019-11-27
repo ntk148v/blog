@@ -27,22 +27,8 @@
       <pubDate>Mon, 19 Aug 2019 21:19:38 +0700</pubDate>
       
       <guid>https://ntk148v.github.io/blog/posts/openstack-autoscaling-new-approach/</guid>
-      <description>NOTE(kiennt): There is a Faythe guideline
- This guide describes how to automatically scale out your Compute instances in response to heavy system usage. By combining with Prometheus pre-defined rules that consider factors such as CPU or memory usage, you can configure OpenStack Orchestration (Heat) to add and remove additional instances automatically, when they are needed.
-1. The standard OpenStack Autoscaling approach Let&amp;rsquo;s talk about the standard OpenStack Autoscaling approach before goes to the new approach.</description>
-    </item>
-    
-    <item>
-      <title>Prometheus Sucks?</title>
-      <link>https://ntk148v.github.io/blog/posts/prometheus-sucks/</link>
-      <pubDate>Fri, 28 Jun 2019 11:47:11 +0700</pubDate>
-      
-      <guid>https://ntk148v.github.io/blog/posts/prometheus-sucks/</guid>
-      <description>Huh, really?
-Ok ok, calm down, the title is completely a clickbait. Prometheus is still a very great monitoring and alerting solution, no doubt but beside the wonderful features, there are some existing disadvantages.
-This post is my personal opinion, so if you are disagree, leave some comments.
-1. Doesn&amp;rsquo;t support TLS or authentication Ok, look at FAQ:
-While TLS and authentication are frequently requested features, we have intentionally not implemented them in any of Prometheus&#39;s server-side components.</description>
+      <description>NOTE(kiennt): There is a legacy Faythe guideline. The new version is coming soon, check its repository for status.
+ This guide describes how to automatically scale out your Compute instances in response to heavy system usage. By combining with Prometheus pre-defined rules that consider factors such as CPU or memory usage, you can configure OpenStack Orchestration (Heat) to add and remove additional instances automatically, when they are needed.</description>
     </item>
     
     <item>
