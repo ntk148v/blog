@@ -6,6 +6,7 @@ comment: true
 authors:
     - kiennt
 tags: ["blog","tech"]
+draft: true
 ---
 
 *Huh, really?*
