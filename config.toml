@@ -1,33 +1,64 @@
-baseurl                  = "https://ntk148v.github.io/blog"
-languageCode             = "en-us"
-title                    = "Ramblings"
-theme                    = "sam"
-pygmentsStyle            = "solarized-dark256"
-pygmentsCodefences       = true
-enableEmoji              = true
+baseurl = "https://ntk148v.github.io/blog"
+languageCode = "en-us"
+theme = "terminal"
+paginate = 5
+pygmentsCodefences = true
+enableEmoji = true
 
 [params]
-    dateform             = "Mon Jan 02, 2006"
-    dateformfull         = "Mon Jan 2 2006 15:04:05 EST"
-    favicon              = "/kien.ico"
-    homepage             = "main"                        # What to call the home page link
-    footerText           = "Copyright © 2018 - Powered by Hugo and Call me Sam theme."
+  # dir name of your blog content (default is `content/posts`)
+  contentTypeName = "posts"
 
-# Metadata
-    description          = "Hello World, I'm Kien Nguyen. This is my Dark Corner."             # Max 160 characters show in search results
-    images               = ["kien.jpg"]                   # Image that shows on Twitter cards and OpenGraph links
+  # ["orange", "blue", "red", "green", "pink"]
+  themeColor = "green"
 
-[[params.mainMenu]]
-    link = "/blog/posts"
-    text = "posts"
+  # if you set this to 0, only submenu trigger will be visible
+  showMenuItems = 4
 
-[[params.mainMenu]]
-    link = "/blog/gallery"
-    text = "gallery"
+  # show selector to switch language
+  showLanguageSelector = false
 
-[[params.mainMenu]]
-    link = "/blog/authors"
-    text = "authors"
+  # set theme to full screen width
+  fullWidthTheme = false
 
-[imaging]
-    quality = 75
+  # center theme with default width
+  centerTheme = true
+
+  # set a custom favicon (default is a `themeColor` square)
+  # favicon = "favicon.ico"
+
+  # set all headings to their default size (depending on browser settings)
+  # it's set to `true` by default
+  # oneHeadingSize = false
+
+[languages]
+  [languages.en]
+    languageName = "English"
+    title = "Ramblings"
+    subtitle = "Kiennt's /home"
+    keywords = ""
+    copyright = ""
+    menuMore = "Show more"
+    readMore = "Read more"
+    readOtherPosts = "Read other posts"
+
+    [languages.en.params.logo]
+      logoText = "/home/kiennt"
+
+    [languages.en.menu]
+      [[languages.en.menu.main]]
+        identifier = "gallery"
+        name = "Gallery"
+        url = "/gallery"
+      [[languages.en.menu.main]]
+        identifier = "authors"
+        name = "Authors"
+        url = "/authors"
+      [[languages.en.menu.main]]
+        identifier = "rss"
+        name = "RSS"
+        url = "/index.xml"
+      [[languages.en.menu.main]]
+        identifier = "posts"
+        name = "Posts"
+        url = "/posts"
