@@ -21,7 +21,7 @@ echo "Removing existing files"
 rm -rf public/*
 
 echo "Generating site"
-hugo -t sam
+hugo -t terminal
 
 echo "Updating gh-pages branch"
 cd public && git add --all && git commit -m "Publishing to gh-pages (publish.sh)"
