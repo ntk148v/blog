@@ -83,7 +83,7 @@ tags: ["blog", "tech"]
 -   You can disable or enable comment section with `comment` option. You might want to take look at [how I create comment section](https://ntk148v.github.io/blog/posts/lets-comment/).
 -   Don't forget to add a tag.
 
-# 4. Create a gallery
+# 4. Create a photo/art gallery
 
 Hmm, this is my secret corner, so... Might be in future?
 
