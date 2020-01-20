@@ -17,8 +17,8 @@
       <pubDate>Thu, 22 Aug 2019 14:40:59 +0700</pubDate>
       
       <guid>https://ntk148v.github.io/blog/posts/blog-guideline/</guid>
-      <description>In the beginning, I supposed that I&amp;rsquo;m the only one who write-up thing in this blog. But now thing was change, this blog might have multiple bloggers. So it needs a guideline to describe how to contribute.
-1. How to submit a new content  Here is the source repo. Fork it &amp;amp; start writing. Create a pull request to submit your content. Make sure to create your author page.</description>
+      <description>In the beginning, I supposed that I&#39;m the only one who write-up thing in this blog. But now thing was change, this blog might have multiple bloggers. So it needs a guideline to describe how to contribute.
+1. How to submit a new content  Here is the source repo. Fork it &amp;amp; start writing. Create a pull request to submit your content. Make sure to create your author page.  2.</description>
     </item>
     
     <item>
@@ -28,7 +28,8 @@
       
       <guid>https://ntk148v.github.io/blog/posts/openstack-autoscaling-new-approach/</guid>
       <description>NOTE(kiennt): There is a legacy Faythe guideline. The new version is coming soon, check its repository for status.
- This guide describes how to automatically scale out your Compute instances in response to heavy system usage. By combining with Prometheus pre-defined rules that consider factors such as CPU or memory usage, you can configure OpenStack Orchestration (Heat) to add and remove additional instances automatically, when they are needed.</description>
+ This guide describes how to automatically scale out your Compute instances in response to heavy system usage. By combining with Prometheus pre-defined rules that consider factors such as CPU or memory usage, you can configure OpenStack Orchestration (Heat) to add and remove additional instances automatically, when they are needed.
+1. The standard OpenStack Autoscaling approach Let&#39;s talk about the standard OpenStack Autoscaling approach before goes to the new approach.</description>
     </item>
     
     <item>
@@ -47,7 +48,7 @@
       
       <guid>https://ntk148v.github.io/blog/posts/lets-comment/</guid>
       <description>Hugo ships with support for Disqus, a third-party service that provides comment and community capabilities to websites via JavaScript. But Disqus generates a shit load of page requests and heavy contents&amp;hellip; which even with the benefits that come with having Disqus in place. People just want something that can be used to post a comment, that is.
-That&amp;rsquo;s why I choose a Disqus alternative - Utterances. Utterances is a lightweight comments widget built on Github issues.</description>
+That&#39;s why I choose a Disqus alternative - Utterances. Utterances is a lightweight comments widget built on Github issues.</description>
     </item>
     
     <item>
@@ -56,7 +57,7 @@ That&amp;rsquo;s why I choose a Disqus alternative - Utterances. Utterances is a
       <pubDate>Wed, 26 Sep 2018 18:20:16 +0700</pubDate>
       
       <guid>https://ntk148v.github.io/blog/posts/viet-cho-tuoi_25/</guid>
-      <description>Hôm nay, 26&amp;frasl;09 là sinh nhật tôi, sinh nhật lần thứ 25.
+      <description>Hôm nay, 26/09 là sinh nhật tôi, sinh nhật lần thứ 25.
 Tuổi 25, cái tuổi mà bảo trẻ con cũng không phải, mà nói trưởng thành cũng chưa hẳn, là cái độ tuổi đứng giữa ngã ba đường, có quá nhiều lối rẽ.
 Tuổi 25, bắt đầu phải sống có trách nhiệm hơn vì sự lựa chọn bản thân ảnh hưởng đến những người xung quanh. Không còn có thể vứt bỏ tất cả, sống vì đam mê, theo đuổi đam mê một cách toàn tâm toàn ý.</description>
     </item>
