@@ -26,6 +26,7 @@ enableEmoji = true
 
   # set a custom favicon (default is a `themeColor` square)
   # favicon = "favicon.ico"
+  favicon = "/kien.ico"
 
   # set all headings to their default size (depending on browser settings)
   # it's set to `true` by default
