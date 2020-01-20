@@ -1,0 +1,66 @@
+.author-container {
+    font-style: normal;
+    text-align: center;
+    align-items: center;
+}
+
+.author-container img {
+    width: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.author-container h1 {
+    text-align: center;
+}
+
+.author-container ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.author-container ul li {
+    display: inline-block;
+    zoom: 1;
+}
+
+.author-container ul li a {
+    display: block;
+    font-size: 1.5em;
+    margin: 0.5px;
+    text-decoration: none;
+}
+
+.grid {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-auto-rows: 400px;
+}
+
+@media screen and (max-width: 736px) {
+    .grid {
+        grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+    }
+}
+
+.grid>div {
+    background-color: transparent;
+    overflow: hidden;
+}
+
+.grid>div>img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    opacity: 1;
+}
+
+.grid>div>a>img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    opacity: 1;
+}
