@@ -3,11 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://ntk148v.github.io/blog/</loc>
-    <lastmod>2019-11-13T13:39:24+07:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://ntk148v.github.io/blog/posts/shanghai-2019/</loc>
     <lastmod>2019-11-13T13:39:24+07:00</lastmod>
   </url>
@@ -95,6 +90,11 @@
   <url>
     <loc>https://ntk148v.github.io/blog/posts/</loc>
     <lastmod>2018-09-20T11:25:36+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ntk148v.github.io/blog/</loc>
+    <lastmod>2018-09-20T11:22:22+07:00</lastmod>
   </url>
   
   <url>
