@@ -2,6 +2,10 @@
 
 DIR=$(dirname "$0")
 
+echo "Update theme, no matter what"
+git add themes/terminal
+git commit -m "Update theme"
+
 if [[ $(git status -s) ]]
 then
     echo "The working directory is dirty. Please commit any pending changes."
