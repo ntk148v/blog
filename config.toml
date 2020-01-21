@@ -32,6 +32,11 @@ enableEmoji = true
   # it's set to `true` by default
   # oneHeadingSize = false
 
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
 [languages]
   [languages.en]
     languageName = "English"
