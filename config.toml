@@ -35,8 +35,8 @@ enableEmoji = true
 [languages]
   [languages.en]
     languageName = "English"
-    title = "Ramblings"
-    subtitle = "Kiennt's /home"
+    title = "/home/kiennt"
+    subtitle = "Kiennt's ramblings"
     keywords = ""
     copyright = ""
     menuMore = "Show more"
