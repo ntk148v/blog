@@ -94,8 +94,24 @@ a.read-more:hover {
     align-items: center;
     max-width: 100%
 }
+
 .home {
     width: 100%;
     display: block;
-    padding: 20% 0 20%;
+    padding: 20% 0 5%;
+}
+
+.container {
+    position: relative;
+}
+
+.content {
+    padding-bottom: 5%;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: inherit;
 }
