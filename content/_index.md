@@ -22,6 +22,11 @@ date: 2018-09-20T11:22:22+07:00
           </a>
         </li>
         <li>
+          <a href="https://t.me/@kiennt26">
+            <i class="fa fa-telegram"></i>
+          </a>
+        </li>
+        <li>
           <a href="https://facebook.com/kiennt2609">
             <i class="fa fa-facebook"></i>
           </a>
