@@ -98,7 +98,7 @@ a.read-more:hover {
 .home {
     width: 100%;
     display: block;
-    padding: 20% 0 5%;
+    padding: 20% 0 10%;
 }
 
 .container {
@@ -106,7 +106,7 @@ a.read-more:hover {
 }
 
 .content {
-    padding-bottom: 5%;
+    padding-bottom: 40px;
 }
 
 .footer {
