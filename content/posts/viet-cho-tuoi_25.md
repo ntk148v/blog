@@ -6,6 +6,7 @@ comment: false
 authors:
     - kiennt  
 tags: ["blog","story"]
+draft: true
 ---
 
 Hôm nay, 26/09 là sinh nhật tôi, sinh nhật lần thứ 25.
