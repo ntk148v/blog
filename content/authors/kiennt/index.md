@@ -5,6 +5,7 @@ contact:
     facebook: "kiennt2609"
     github: "ntk148v"
     email: "kiennt2609@gmail.com"
+    telegram: "kiennt26"
 website: "https://ntk148v.github.io/blog/"
 ---
 
