@@ -6,10 +6,20 @@
     <description>Recent content in story on /home/kiennt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 04 Feb 2019 23:16:47 +0700</lastBuildDate>
+    <lastBuildDate>Fri, 24 Jan 2020 23:34:23 +0700</lastBuildDate>
     
 	<atom:link href="https://ntk148v.github.io/blog/tags/story/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Mục tiêu 2020</title>
+      <link>https://ntk148v.github.io/blog/posts/target-2020/</link>
+      <pubDate>Fri, 24 Jan 2020 23:34:23 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/target-2020/</guid>
+      <description>Tổng kết 2019 Mục tiêu 2019:
+ Viết mục tiêu cho 2019 Kỹ năng:  Sử dụng thành thạo và ứng dụng Golang vào project thực tết. &amp;gt;=1000 commits trên Github. Hey yooooooo! 🎉 Học về cách thiết kế một hệ thống phân tán giải quyết bài toán thật -&amp;gt; Vẫn nửa vời :( Đưa Kubernetes vào ứng dụng thực tế. Củng cố thêm kiến thức đã có hiện tại, nhưng chưa đủ 😢 Thất bại hoàn toàn: Dành thêm thời gian OpenStack (Kolla-Ansible, Zun,&amp;hellip;)   Sách: 20-30 cuốn sách (sách gì cũng được, truyện trinh thám, văn học kinh điển, tech book).</description>
+    </item>
     
     <item>
       <title>Mục tiêu 2019</title>
