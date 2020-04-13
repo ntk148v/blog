@@ -6,10 +6,19 @@
     <description>Recent content in gallery on /home/kiennt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 13 Apr 2019 10:22:43 +0700</lastBuildDate>
+    <lastBuildDate>Wed, 01 May 2019 23:23:13 +0700</lastBuildDate>
     
 	<atom:link href="https://ntk148v.github.io/blog/tags/gallery/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linh Tinh</title>
+      <link>https://ntk148v.github.io/blog/gallery/linh-tinh/</link>
+      <pubDate>Wed, 01 May 2019 23:23:13 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/gallery/linh-tinh/</guid>
+      <description>Thỉnh thoảng chụp xong cũng không nhớ chụp hôm nào, chụp về chủ đề gì, tại sao lại chụp. Thôi để tạm đây vậy&amp;hellip;</description>
+    </item>
     
     <item>
       <title>Sapa 2019</title>
@@ -36,15 +45,6 @@
       
       <guid>https://ntk148v.github.io/blog/gallery/hanoi-longbien-hoankiem/</guid>
       <description>Lang thang quanh hồ Hoàn Kiếm, cầu Long Biên&amp;hellip; Vào một ngày hè, cụ thể ngày nào thì quên mất rồi 🙈</description>
-    </item>
-    
-    <item>
-      <title>Linh Tinh</title>
-      <link>https://ntk148v.github.io/blog/gallery/linh-tinh/</link>
-      <pubDate>Thu, 03 Jan 2019 23:23:13 +0700</pubDate>
-      
-      <guid>https://ntk148v.github.io/blog/gallery/linh-tinh/</guid>
-      <description>Thỉnh thoảng chụp xong cũng không nhớ chụp hôm nào, chụp về chủ đề gì, tại sao lại chụp. Thôi để tạm đây vậy&amp;hellip;</description>
     </item>
     
   </channel>
