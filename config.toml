@@ -68,3 +68,8 @@ enableEmoji = true
         identifier = "posts"
         name = "Posts"
         url = "/posts"
+
+[imaging]
+resampleFilter = "box"
+quality = 100
+anchor = "smart"
