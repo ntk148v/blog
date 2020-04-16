@@ -1,0 +1,38 @@
+.author-container {
+    font-style: normal;
+    text-align: center;
+    align-items: center;
+}
+
+.author-container img {
+    width: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.author-container h1 {
+    text-align: center;
+}
+
+.author-container ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.author-container ul li {
+    display: inline-block;
+    zoom: 1;
+}
+
+.author-container ul li:before {
+    display: none;
+}
+
+.author-container ul li a {
+    display: block;
+    font-size: 1.5em;
+    margin: 0.5px;
+    text-decoration: none;
+}
