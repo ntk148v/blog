@@ -3,7 +3,7 @@
 DIR=$(dirname "$0")
 
 echo "Update theme, no matter what"
-git add themes/terminal
+git add themes/hugo-notepadium
 git commit -m "Update theme"
 
 if [[ $(git status -s) ]]
@@ -25,7 +25,7 @@ echo "Removing existing files"
 rm -rf public/*
 
 echo "Generating site"
-hugo -t terminal
+hugo -t hugo-notepadium
 
 echo "Updating gh-pages branch"
 cd public && git add --all && git commit -m "Publishing to gh-pages (publish.sh)"
