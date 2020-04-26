@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Tags on /home/kiennt</title>
+    <link>/blog/tags/</link>
+    <description>Recent content in Tags on /home/kiennt</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 22 Aug 2019 14:40:59 +0700</lastBuildDate>
+    
+        <atom:link href="/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>blog</title>
+      <link>/blog/tags/blog/</link>
+      <pubDate>Thu, 22 Aug 2019 14:40:59 +0700</pubDate>
+      
+      <guid>/blog/tags/blog/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>tech</title>
+      <link>/blog/tags/tech/</link>
+      <pubDate>Thu, 22 Aug 2019 14:40:59 +0700</pubDate>
+      
+      <guid>/blog/tags/tech/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>faythe</title>
+      <link>/blog/tags/faythe/</link>
+      <pubDate>Mon, 19 Aug 2019 21:19:38 +0700</pubDate>
+      
+      <guid>/blog/tags/faythe/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>openstack</title>
+      <link>/blog/tags/openstack/</link>
+      <pubDate>Mon, 19 Aug 2019 21:19:38 +0700</pubDate>
+      
+      <guid>/blog/tags/openstack/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>prometheus</title>
+      <link>/blog/tags/prometheus/</link>
+      <pubDate>Mon, 19 Aug 2019 21:19:38 +0700</pubDate>
+      
+      <guid>/blog/tags/prometheus/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>gallery</title>
+      <link>/blog/tags/gallery/</link>
+      <pubDate>Wed, 01 May 2019 23:23:13 +0700</pubDate>
+      
+      <guid>/blog/tags/gallery/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>ramblings</title>
+      <link>/blog/tags/ramblings/</link>
+      <pubDate>Mon, 04 Feb 2019 23:16:47 +0700</pubDate>
+      
+      <guid>/blog/tags/ramblings/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>story</title>
+      <link>/blog/tags/story/</link>
+      <pubDate>Mon, 04 Feb 2019 23:16:47 +0700</pubDate>
+      
+      <guid>/blog/tags/story/</guid>
+      <description></description>
+      
+    </item>
+    
+  </channel>
+</rss>

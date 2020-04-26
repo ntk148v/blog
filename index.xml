@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>About on /home/kiennt</title>
+    <link>/blog/</link>
+    <description>Recent content in About on /home/kiennt</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 Sep 2018 11:22:22 +0700</lastBuildDate>
+    
+        <atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Authors</title>
+      <link>/blog/authors/</link>
+      <pubDate>Wed, 21 Aug 2019 10:25:36 +0700</pubDate>
+      
+      <guid>/blog/authors/</guid>
+      <description>Welcome to the author section!</description>
+      
+    </item>
+    
+    <item>
+      <title>Gallery</title>
+      <link>/blog/gallery/</link>
+      <pubDate>Thu, 20 Sep 2018 11:25:52 +0700</pubDate>
+      
+      <guid>/blog/gallery/</guid>
+      <description>Stores my photos and pictures that I love!</description>
+      
+    </item>
+    
+    <item>
+      <title>Posts</title>
+      <link>/blog/posts/</link>
+      <pubDate>Thu, 20 Sep 2018 11:25:36 +0700</pubDate>
+      
+      <guid>/blog/posts/</guid>
+      <description>Welcome to the blog section!</description>
+      
+    </item>
+    
+  </channel>
+</rss>

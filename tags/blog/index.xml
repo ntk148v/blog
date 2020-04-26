@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>blog on /home/kiennt</title>
+    <link>/blog/tags/blog/</link>
+    <description>Recent content in blog on /home/kiennt</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 22 Aug 2019 14:40:59 +0700</lastBuildDate>
+    
+        <atom:link href="/blog/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Blog Guideline</title>
+      <link>/blog/posts/blog-guideline/</link>
+      <pubDate>Thu, 22 Aug 2019 14:40:59 +0700</pubDate>
+      
+      <guid>/blog/posts/blog-guideline/</guid>
+      <description>In the beginning, I supposed that I&amp;rsquo;m the only one who write-up thing in this blog. But now thing was change, this blog might have multiple bloggers. So it needs a guideline to describe how to contribute.
+
+1. How to submit a new content  Here is the source repo. Fork it &amp;amp; start writing. Create a pull request to submit your content. Make sure to create your author page.</description>
+      
+    </item>
+    
+  </channel>
+</rss>
