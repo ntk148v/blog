@@ -2,6 +2,7 @@
 title: "Rest In Peace Kobe Bryant"
 date: 2020-01-27T22:15:07+07:00
 comments: true
+tags: ["ramblings", "basketball"]
 ---
 
 ![](./theundefeated-kobe-bryant.pg)
