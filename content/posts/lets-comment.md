@@ -5,7 +5,7 @@ showDate: true
 comment: true
 authors:
     - kiennt
-tags: ["blog","tech"]
+tags: ["tech"]
 ---
 
 Hugo ships with support for Disqus, a third-party service that provides comment and community capabilities to websites via JavaScript. But Disqus generates a shit load of page requests and heavy contents... which even with the benefits that come with having Disqus in place. People just want something that can be used to post a comment, that is.

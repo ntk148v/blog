@@ -6,7 +6,7 @@ comment: true
 draft: true
 authors:
     - kiennt
-tags: ["blog","story"]
+tags: ["ramblings","story"]
 ---
 
 ## Tổng kết 2019

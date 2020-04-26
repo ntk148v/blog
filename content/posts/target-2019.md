@@ -5,7 +5,7 @@ showDate: true
 comment: true
 authors:
     - kiennt
-tags: ["blog","story"]
+tags: ["ramblings","story"]
 ---
 
 Đến hẹn lại lên, thời điểm Tết đến xuân về, tui lại ngồi ~~copy & paste~~ viết mục tiêu phấn đấu cho năm mới. Tui khá là lười và dễ xao nhãng nên việc viết lên các mục tiêu năm mới đơn giản là một cách tự thúc ép bản thân. "Mày đã viết ra những điều này, cố mà làm", kiểu vậy. À khoan, hay không viết nữa nhỉ? Lười quá...
