@@ -5,7 +5,7 @@ showDate: true
 comment: true
 authors:
     - kiennt
-tags: ["blog","tech"]
+tags: ["openstack", "prometheus", "faythe", "tech"]
 ---
 
 > NOTE(kiennt): There is a [legacy Faythe guideline](https://github.com/vCloud-DFTBA/faythe/blob/legacy/docs/autoscaling.md). The new version is coming soon, check [its repository](https://github.com/vCloud-DFTBA/faythe) for status.

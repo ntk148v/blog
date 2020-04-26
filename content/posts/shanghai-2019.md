@@ -5,6 +5,8 @@ comment: true
 showDate: true
 authors:
     - kiennt
+draft: true
+tags: ["ramblings", "story", "travel"]
 ---
 
 > WIP

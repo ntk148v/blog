@@ -1,73 +1,59 @@
 baseurl = "https://ntk148v.github.io/blog"
 languageCode = "en-us"
-theme = "terminal"
-paginate = 5
+theme = "hugo-notepadium"
 pygmentsCodefences = true
 enableEmoji = true
 
 [params]
-  # dir name of your blog content (default is `content/posts`)
-  contentTypeName = "posts"
+style = "auto"
+logoText = "/home/kiennt"
+license = "CC Lincense"
+slogan = "Kiennt's ramblings"
 
-  # ["orange", "blue", "red", "green", "pink"]
-  themeColor = "green"
+[params.math]
+enable = true # optional: true, false. Enable globally, default: false. You can always enable math on per page.
+use = "katex" # option: "katex", "mathjax". default: "katex"
 
-  # if you set this to 0, only submenu trigger will be visible
-  showMenuItems = 4
+[params.syntax]
+use = "none" # builtin: "prismjs", "hljs". "none" means Chroma
+theme = "dracula"
+darkTheme = "xcode-dark" # apply this theme in dark mode
 
-  # show selector to switch language
-  showLanguageSelector = false
+[params.share]
+enable = false
+addThisId = ""
+inlineToolId = ""
 
-  # set theme to full screen width
-  fullWidthTheme = false
+[params.nav]
+showCategories = false # /categories/
+showTags = true # /tags/
 
-  # center theme with default width
-  centerTheme = true
+[[params.nav.custom]]
+title = "Gallery"
+url = "/gallery"
 
-  # set a custom favicon (default is a `themeColor` square)
-  # favicon = "favicon.ico"
-  favicon = "/kien.ico"
+[[params.nav.custom]]
+title = "RSS"
+url = "/index.xml"
 
-  # set all headings to their default size (depending on browser settings)
-  # it's set to `true` by default
-  # oneHeadingSize = false
+[params.assets]
+css = ["css/custom.css"]
 
+# set all headings to their default size (depending on browser settings)
+# it's set to `true` by default
+# oneHeadingSize = false
 [markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
+codeFences = true
+noClasses = false
+
+[markup.goldmark.renderer]
+unsafe = true
 
 [languages]
-  [languages.en]
-    languageName = "English"
-    title = "/home/kiennt"
-    subtitle = "Kiennt's ramblings"
-    keywords = ""
-    copyright = ""
-    menuMore = "Show more"
-    readMore = "Read more"
-    readOtherPosts = "Read other posts"
 
-    [languages.en.params.logo]
-      logoText = "/home/kiennt"
-
-    [languages.en.menu]
-      [[languages.en.menu.main]]
-        identifier = "gallery"
-        name = "Gallery"
-        url = "/gallery"
-      [[languages.en.menu.main]]
-        identifier = "authors"
-        name = "Authors"
-        url = "/authors"
-      [[languages.en.menu.main]]
-        identifier = "rss"
-        name = "RSS"
-        url = "/index.xml"
-      [[languages.en.menu.main]]
-        identifier = "posts"
-        name = "Posts"
-        url = "/posts"
+[languages.en]
+languageName = "English"
+title = "/home/kiennt"
 
 [imaging]
 resampleFilter = "box"

@@ -1,0 +1,38 @@
+.contact-container {
+    font-style: normal;
+    text-align: center;
+    align-items: center;
+}
+
+.contact-container img {
+    width: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-container h1 {
+    text-align: center;
+}
+
+.contact-container ul {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.contact-container ul li {
+    display: inline-block;
+    zoom: 1;
+}
+
+.contact-container ul li:before {
+    display: none;
+}
+
+.contact-container ul li a {
+    display: block;
+    font-size: 1.5em;
+    margin: 0.5px;
+    text-decoration: none;
+}

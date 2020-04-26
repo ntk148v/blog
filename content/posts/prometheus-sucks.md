@@ -5,7 +5,7 @@ showDate: true
 comment: true
 authors:
     - kiennt
-tags: ["blog","tech"]
+tags: ["prometheus", "tech"]
 draft: true
 ---
 

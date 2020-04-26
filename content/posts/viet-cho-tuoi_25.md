@@ -5,7 +5,7 @@ showDate: true
 comment: false
 authors:
     - kiennt  
-tags: ["blog","story"]
+tags: ["ramblings", "story"]
 draft: true
 ---
 
