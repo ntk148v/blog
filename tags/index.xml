@@ -6,10 +6,30 @@
     <description>Recent content in Tags on /home/kiennt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Aug 2019 14:40:59 +0700</lastBuildDate>
+    <lastBuildDate>Mon, 27 Jan 2020 22:15:07 +0700</lastBuildDate>
     
         <atom:link href="/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>basketball</title>
+      <link>/blog/tags/basketball/</link>
+      <pubDate>Mon, 27 Jan 2020 22:15:07 +0700</pubDate>
+      
+      <guid>/blog/tags/basketball/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>ramblings</title>
+      <link>/blog/tags/ramblings/</link>
+      <pubDate>Mon, 27 Jan 2020 22:15:07 +0700</pubDate>
+      
+      <guid>/blog/tags/ramblings/</guid>
+      <description></description>
+      
+    </item>
     
     <item>
       <title>blog</title>
@@ -67,16 +87,6 @@
       <pubDate>Wed, 01 May 2019 23:23:13 +0700</pubDate>
       
       <guid>/blog/tags/gallery/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>ramblings</title>
-      <link>/blog/tags/ramblings/</link>
-      <pubDate>Mon, 04 Feb 2019 23:16:47 +0700</pubDate>
-      
-      <guid>/blog/tags/ramblings/</guid>
       <description></description>
       
     </item>
