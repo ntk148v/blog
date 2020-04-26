@@ -6,7 +6,7 @@ maxWidth: "600x"
 clickablePhotos: true
 date: 2019-04-13T10:22:43+07:00
 showDate: true
-comment: false
+comments: false
 tags: ["gallery"]
 ---
 

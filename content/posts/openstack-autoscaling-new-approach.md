@@ -2,7 +2,7 @@
 title: "Openstack Autoscaling New Approach"
 date: 2019-08-19T21:19:38+07:00
 showDate: true
-comment: true
+comments: true
 authors:
     - kiennt
 tags: ["openstack", "prometheus", "faythe", "tech"]

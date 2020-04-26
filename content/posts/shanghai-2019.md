@@ -1,7 +1,7 @@
 ---
 title: "Shanghai 2019"
 date: 2019-11-13T13:39:24+07:00
-comment: true
+comments: true
 showDate: true
 authors:
     - kiennt

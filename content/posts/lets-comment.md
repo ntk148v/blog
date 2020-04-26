@@ -2,7 +2,7 @@
 title: "Lets Comment"
 date: 2018-10-02T09:47:11+07:00
 showDate: true
-comment: true
+comments: true
 authors:
     - kiennt
 tags: ["tech"]

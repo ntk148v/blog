@@ -1,7 +1,7 @@
 ---
 title: "Blog Guideline"
 date: 2019-08-22T14:40:59+07:00
-comment: true
+comments: true
 authors:
     - kiennt
 showDate: true
@@ -71,7 +71,7 @@ $ hugo new content/posts/a-new-post.md -t sam
 ---
 title: "Blog Guideline"
 date: 2019-08-22T14:40:59+07:00
-comment: true
+comments: true
 authors:
     - kiennt
 showDate: true
