@@ -12,6 +12,19 @@
     
     
     <item>
+      <title>Golang: Block forever</title>
+      <link>/blog/posts/golang-use-for-select-right-way/</link>
+      <pubDate>Mon, 27 Apr 2020 15:59:21 +0700</pubDate>
+      
+      <guid>/blog/posts/golang-use-for-select-right-way/</guid>
+      <description>Sometimes, you want to block the current goroutine when allowing others to continue. Here is some tricks I&amp;rsquo;ve collected:
+References Firstly give them some credits:
+ https://blog.sgmansfield.com/2016/06/how-to-block-forever-in-go/ https://pliutau.com/different-ways-to-block-go-runtime-forever/   NOTE: I run these with Golang 1.12
+ The original package main import &amp;#34;fmt&amp;#34; func show() { for i := 1; i &amp;lt; 9696969; i++ { time.Sleep(1000) fmt.Println(i) } } func main() { go show() // The main goroutine is exited before the show() be done.</description>
+      
+    </item>
+    
+    <item>
       <title>Rest In Peace Kobe Bryant</title>
       <link>/blog/posts/rip-kobe-bryant/</link>
       <pubDate>Mon, 27 Jan 2020 22:15:07 +0700</pubDate>

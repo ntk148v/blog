@@ -6,7 +6,11 @@
     <div class="base-body"><section id="header" class="site header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/blog/"><span class="site name">/home/kiennt</span></a></span>
         <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/blog/tags/">Tags</a><a class="nav item" href="/blog/gallery">Gallery</a><a class="nav item" href="/blog/index.xml">RSS</a></nav></div></span></div><div class="site slogan"><span class="title">Kiennt's ramblings</span></div></section><div id="content"><section class="article header"><h1>Posts</h1></section><article class="article markdown-body"><p>Welcome to the blog section!</p>
-</article><ul class="note list"><li class="item"><a class="note" href="/blog/posts/rip-kobe-bryant/">
+</article><ul class="note list"><li class="item"><a class="note" href="/blog/posts/golang-use-for-select-right-way/">
+            <p class="note title">Golang: Block forever</p><p class="note date">2020-04-27</p><p class="note content">Sometimes, you want to block the current goroutine when allowing others to continue. Here is some tricks I&rsquo;ve collected:
+References Firstly give them some credits:
+ https://blog.sgmansfield.com/2016/06/how-to-block-forever-in-go/ https://pliutau.com/different-ways-to-block-go-runtime-forever/   NOTE: I run these with Golang 1.12
+ The original package main import &#34;fmt&#34; func show() { for i := 1; i &lt; 9696969; i++ { time.Sleep(1000) fmt.Println(i) } } func main() { go show() // The main goroutine is exited before the show() be done.<span class="mldr">&mldr;more</span></p></a><p class="note labels"><a class="tag" href="/blog/tags/golang/">golang</a><a class="tag" href="/blog/tags/trick/">trick</a><a class="tag" href="/blog/tags/note/">note</a></p></li><li class="item"><a class="note" href="/blog/posts/rip-kobe-bryant/">
             <p class="note title">Rest In Peace Kobe Bryant</p><p class="note date">2020-01-27</p><p class="note content">Source: The Undefeated
 I am not Kobe fan honestly but just like him, basketball is something I love. I hope he&rsquo;s at peace because although his journey in life is over, the legacy he left behind is etched in all our souls.
 Rest In Peace Mamba 🏀</p></a><p class="note labels"><a class="tag" href="/blog/tags/ramblings/">ramblings</a><a class="tag" href="/blog/tags/basketball/">basketball</a></p></li><li class="item"><a class="note" href="/blog/posts/blog-guideline/">

@@ -6,10 +6,40 @@
     <description>Recent content in Tags on /home/kiennt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 Jan 2020 22:15:07 +0700</lastBuildDate>
+    <lastBuildDate>Mon, 27 Apr 2020 15:59:21 +0700</lastBuildDate>
     
         <atom:link href="/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>golang</title>
+      <link>/blog/tags/golang/</link>
+      <pubDate>Mon, 27 Apr 2020 15:59:21 +0700</pubDate>
+      
+      <guid>/blog/tags/golang/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>note</title>
+      <link>/blog/tags/note/</link>
+      <pubDate>Mon, 27 Apr 2020 15:59:21 +0700</pubDate>
+      
+      <guid>/blog/tags/note/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>trick</title>
+      <link>/blog/tags/trick/</link>
+      <pubDate>Mon, 27 Apr 2020 15:59:21 +0700</pubDate>
+      
+      <guid>/blog/tags/trick/</guid>
+      <description></description>
+      
+    </item>
     
     <item>
       <title>basketball</title>
