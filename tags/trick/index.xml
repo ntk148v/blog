@@ -18,9 +18,9 @@
       
       <guid>/blog/posts/golang-block-forever/</guid>
       <description>Sometimes, you want to block the current goroutine when allowing others to continue. Here is some tricks I&amp;rsquo;ve collected:
-References Firstly give them some credits:
+1. References Firstly give them some credits:
  https://blog.sgmansfield.com/2016/06/how-to-block-forever-in-go/ https://pliutau.com/different-ways-to-block-go-runtime-forever/   NOTE: I run these with Golang 1.12
- The original package main import &amp;#34;fmt&amp;#34; func show() { for i := 1; i &amp;lt; 9696969; i++ { time.Sleep(1000) fmt.Println(i) } } func main() { go show() // The main goroutine is exited before the show() be done.</description>
+ 2. The original package main import &amp;#34;fmt&amp;#34; func show() { for i := 1; i &amp;lt; 9696969; i++ { time.Sleep(1000) fmt.Println(i) } } func main() { go show() // The main goroutine is exited before the show() be done.</description>
       
     </item>
     

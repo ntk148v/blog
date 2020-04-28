@@ -9,18 +9,18 @@
     <h1 class="article title">Golang: Block forever</h1><p class="article date">2020-04-27<span class="reading-time"> • 3 minutes to read</span></p></section><article class="article markdown-body">
         <aside><nav id="TableOfContents">
   <ul>
-    <li><a href="#references">References</a></li>
-    <li><a href="#the-original">The original</a></li>
-    <li><a href="#bad---an-empty-infinite-loop">Bad - An empty infinite loop</a></li>
-    <li><a href="#good---busy-blocking">Good - Busy blocking</a></li>
-    <li><a href="#good---waiting-on-itself">Good - Waiting on itself</a></li>
-    <li><a href="#good---empty-select">Good - Empty select</a></li>
-    <li><a href="#good---double-locking">Good - Double locking</a></li>
-    <li><a href="#good---reading-an-empty-channel">Good - Reading an Empty Channel</a></li>
-    <li><a href="#good---self-produce-and-consume">Good - Self produce-and-consume</a></li>
+    <li><a href="#1-references">1. References</a></li>
+    <li><a href="#2-the-original">2. The original</a></li>
+    <li><a href="#3-bad---an-empty-infinite-loop">3. Bad - An empty infinite loop</a></li>
+    <li><a href="#4-good---busy-blocking">4. Good - Busy blocking</a></li>
+    <li><a href="#5-good---waiting-on-itself">5. Good - Waiting on itself</a></li>
+    <li><a href="#6-good---empty-select">6. Good - Empty select</a></li>
+    <li><a href="#7-good---double-locking">7. Good - Double locking</a></li>
+    <li><a href="#8-good---reading-an-empty-channel">8. Good - Reading an Empty Channel</a></li>
+    <li><a href="#9-good---self-produce-and-consume">9. Good - Self produce-and-consume</a></li>
   </ul>
 </nav></aside><p>Sometimes, you want to block the current goroutine when allowing others to continue. Here is some tricks I&rsquo;ve collected:</p>
-<h2 id="references">References</h2>
+<h2 id="1-references">1. References</h2>
 <p>Firstly give them some credits:</p>
 <ol>
 <li><a href="https://blog.sgmansfield.com/2016/06/how-to-block-forever-in-go/">https://blog.sgmansfield.com/2016/06/how-to-block-forever-in-go/</a></li>
@@ -29,7 +29,7 @@
 <blockquote>
 <p>NOTE: I run these with Golang 1.12</p>
 </blockquote>
-<h2 id="the-original">The original</h2>
+<h2 id="2-the-original">2. The original</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
@@ -45,7 +45,7 @@
     <span style="color:#66d9ef">go</span> <span style="color:#a6e22e">show</span>() <span style="color:#75715e">// The main goroutine is exited before the show() be done.
 </span><span style="color:#75715e"></span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;OK we&#39;re done&#34;</span>)
 }
-</code></pre></div><h2 id="bad---an-empty-infinite-loop">Bad - An empty infinite loop</h2>
+</code></pre></div><h2 id="3-bad---an-empty-infinite-loop">3. Bad - An empty infinite loop</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
@@ -72,7 +72,7 @@
     <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;OK we&#39;re done&#34;</span>)
 }
 </code></pre></div><p>An infinite loop here is a busy loop that does nothing except burn CPU time.</p>
-<h2 id="good---busy-blocking">Good - Busy blocking</h2>
+<h2 id="4-good---busy-blocking">4. Good - Busy blocking</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
@@ -100,7 +100,7 @@
     <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;OK we&#39;re done&#34;</span>)
 }
 </code></pre></div><p>It will reduce your CPU usage but it isn&rsquo;t the preferable solution.</p>
-<h2 id="good---waiting-on-itself">Good - Waiting on itself</h2>
+<h2 id="5-good---waiting-on-itself">5. Good - Waiting on itself</h2>
 <p>We wait but we never done XD</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
@@ -128,7 +128,7 @@
     <span style="color:#a6e22e">forever</span>()
     <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;OK we&#39;re done&#34;</span>)
 }
-</code></pre></div><h2 id="good---empty-select">Good - Empty select</h2>
+</code></pre></div><h2 id="6-good---empty-select">6. Good - Empty select</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
@@ -152,7 +152,7 @@
     <span style="color:#a6e22e">forever</span>()
     <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;OK we&#39;re done&#34;</span>)
 }
-</code></pre></div><h2 id="good---double-locking">Good - Double locking</h2>
+</code></pre></div><h2 id="7-good---double-locking">7. Good - Double locking</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
@@ -179,7 +179,7 @@
     <span style="color:#a6e22e">forever</span>()
     <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;OK we&#39;re done&#34;</span>)
 }
-</code></pre></div><h2 id="good---reading-an-empty-channel">Good - Reading an Empty Channel</h2>
+</code></pre></div><h2 id="8-good---reading-an-empty-channel">8. Good - Reading an Empty Channel</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
@@ -204,7 +204,7 @@
     <span style="color:#a6e22e">forever</span>()
     <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;OK we&#39;re done&#34;</span>)
 }
-</code></pre></div><h2 id="good---self-produce-and-consume">Good - Self produce-and-consume</h2>
+</code></pre></div><h2 id="9-good---self-produce-and-consume">9. Good - Self produce-and-consume</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
@@ -234,7 +234,7 @@
     <span style="color:#a6e22e">forever</span>()
     <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;OK we&#39;re done&#34;</span>)
 }
-</code></pre></div></article><section class="article labels"><a class="tag" href=/blog/tags/golang/>golang</a><a class="tag" href=/blog/tags/trick/>trick</a><a class="tag" href=/blog/tags/note/>note</a></section><section class="article license">CC Lincense</section></div><section class="article navigation"><p><a class="link" href="/blog/posts/rip-kobe-bryant/"><span class="li">&rarr;</span>Rest In Peace Kobe Bryant</a></p></section><section class="article discussion">
+</code></pre></div></article><section class="article labels"><a class="tag" href=/blog/tags/golang/>golang</a><a class="tag" href=/blog/tags/trick/>trick</a><a class="tag" href=/blog/tags/note/>note</a></section><section class="article license">CC Lincense</section></div><section class="article navigation"><p><a class="link" href="/blog/posts/operate-etcd-cluster/"><span class="li">&larr;</span>Operate Etcd cluster</a></p><p><a class="link" href="/blog/posts/rip-kobe-bryant/"><span class="li">&rarr;</span>Rest In Peace Kobe Bryant</a></p></section><section class="article discussion">
     <script src="https://utteranc.es/client.js" repo="ntk148v/blog" issue-term="pathname" theme="github-light"
         crossorigin="anonymous" async>
     </script>

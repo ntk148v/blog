@@ -6,10 +6,30 @@
     <description>Recent content in Tags on /home/kiennt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 Apr 2020 15:59:21 +0700</lastBuildDate>
+    <lastBuildDate>Tue, 28 Apr 2020 11:24:04 +0700</lastBuildDate>
     
         <atom:link href="/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>etcd</title>
+      <link>/blog/tags/etcd/</link>
+      <pubDate>Tue, 28 Apr 2020 11:24:04 +0700</pubDate>
+      
+      <guid>/blog/tags/etcd/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>tech</title>
+      <link>/blog/tags/tech/</link>
+      <pubDate>Tue, 28 Apr 2020 11:24:04 +0700</pubDate>
+      
+      <guid>/blog/tags/tech/</guid>
+      <description></description>
+      
+    </item>
     
     <item>
       <title>golang</title>
@@ -67,16 +87,6 @@
       <pubDate>Thu, 22 Aug 2019 14:40:59 +0700</pubDate>
       
       <guid>/blog/tags/blog/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>tech</title>
-      <link>/blog/tags/tech/</link>
-      <pubDate>Thu, 22 Aug 2019 14:40:59 +0700</pubDate>
-      
-      <guid>/blog/tags/tech/</guid>
       <description></description>
       
     </item>
