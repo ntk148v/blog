@@ -13,10 +13,10 @@
     
     <item>
       <title>Golang: Block forever</title>
-      <link>/blog/posts/golang-use-for-select-right-way/</link>
+      <link>/blog/posts/golang-block-forever/</link>
       <pubDate>Mon, 27 Apr 2020 15:59:21 +0700</pubDate>
       
-      <guid>/blog/posts/golang-use-for-select-right-way/</guid>
+      <guid>/blog/posts/golang-block-forever/</guid>
       <description>Sometimes, you want to block the current goroutine when allowing others to continue. Here is some tricks I&amp;rsquo;ve collected:
 References Firstly give them some credits:
  https://blog.sgmansfield.com/2016/06/how-to-block-forever-in-go/ https://pliutau.com/different-ways-to-block-go-runtime-forever/   NOTE: I run these with Golang 1.12

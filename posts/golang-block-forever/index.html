@@ -6,7 +6,20 @@
     <div class="base-body"><section id="header" class="site header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/blog/"><span class="site name">/home/kiennt</span></a></span>
         <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/blog/tags/">Tags</a><a class="nav item" href="/blog/gallery">Gallery</a><a class="nav item" href="/blog/index.xml">RSS</a></nav></div></span></div><div class="site slogan"><span class="title">Kiennt's ramblings</span></div></section><div id="content"><div class="article-container"><section class="article header">
-    <h1 class="article title">Golang: Block forever</h1><p class="article date">2020-04-27<span class="reading-time"> • 3 minutes to read</span></p></section><article class="article markdown-body"><p>Sometimes, you want to block the current goroutine when allowing others to continue. Here is some tricks I&rsquo;ve collected:</p>
+    <h1 class="article title">Golang: Block forever</h1><p class="article date">2020-04-27<span class="reading-time"> • 3 minutes to read</span></p></section><article class="article markdown-body">
+        <aside><nav id="TableOfContents">
+  <ul>
+    <li><a href="#references">References</a></li>
+    <li><a href="#the-original">The original</a></li>
+    <li><a href="#bad---an-empty-infinite-loop">Bad - An empty infinite loop</a></li>
+    <li><a href="#good---busy-blocking">Good - Busy blocking</a></li>
+    <li><a href="#good---waiting-on-itself">Good - Waiting on itself</a></li>
+    <li><a href="#good---empty-select">Good - Empty select</a></li>
+    <li><a href="#good---double-locking">Good - Double locking</a></li>
+    <li><a href="#good---reading-an-empty-channel">Good - Reading an Empty Channel</a></li>
+    <li><a href="#good---self-produce-and-consume">Good - Self produce-and-consume</a></li>
+  </ul>
+</nav></aside><p>Sometimes, you want to block the current goroutine when allowing others to continue. Here is some tricks I&rsquo;ve collected:</p>
 <h2 id="references">References</h2>
 <p>Firstly give them some credits:</p>
 <ol>
@@ -115,7 +128,7 @@
     <span style="color:#a6e22e">forever</span>()
     <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;OK we&#39;re done&#34;</span>)
 }
-</code></pre></div><h3 id="good---empty-select">Good - Empty select</h3>
+</code></pre></div><h2 id="good---empty-select">Good - Empty select</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
@@ -139,7 +152,7 @@
     <span style="color:#a6e22e">forever</span>()
     <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;OK we&#39;re done&#34;</span>)
 }
-</code></pre></div><h3 id="good---double-locking">Good - Double locking</h3>
+</code></pre></div><h2 id="good---double-locking">Good - Double locking</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
@@ -191,7 +204,7 @@
     <span style="color:#a6e22e">forever</span>()
     <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;OK we&#39;re done&#34;</span>)
 }
-</code></pre></div><h3 id="good---self-produce-and-consume">Good - Self produce-and-consume</h3>
+</code></pre></div><h2 id="good---self-produce-and-consume">Good - Self produce-and-consume</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
