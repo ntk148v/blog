@@ -144,7 +144,7 @@ func main() {
 }
 ```
 
-### Good - Empty select
+## Good - Empty select
 
 ```go
 package main
@@ -172,7 +172,7 @@ func main() {
 }
 ```
 
-### Good - Double locking
+## Good - Double locking
 
 ```go
 package main
@@ -232,7 +232,7 @@ func main() {
 }
 ```
 
-### Good - Self produce-and-consume
+## Good - Self produce-and-consume
 
 ```go
 package main
