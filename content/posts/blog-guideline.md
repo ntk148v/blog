@@ -6,19 +6,21 @@ authors:
     - kiennt
 showDate: true
 tags: ["blog", "tech"]
+readingTime: true  ## show reading time after article date
+toc: true
 ---
 
 In the beginning, I supposed that I'm the only one who write-up thing in this blog. But now thing was change, this blog might have multiple [bloggers](https://ntk148v.github.io/blog/authors/). So it needs a guideline to describe how to contribute.
 
 ![](https://sayingimages.com/wp-content/uploads/welcome-to-the-team-meme.jpg)
 
-# 1. How to submit a new content
+## 1. How to submit a new content
 
 -   [Here](https://github.com/ntk148v/blog) is the source repo. Fork it & start writing.
 -   Create a pull request to submit your content.
 -   Make sure to create your author page.
 
-# 2. Create an author page
+## 2. Create an author page
 
 -   Create a directory under [content/authors](https://github.com/ntk148v/blog/tree/master/content/authors), name it as your desire nickname. For example, your name is `amazingblogger`.
 
@@ -34,7 +36,7 @@ content/authors
 └── kiennt
     ├── avatar.jpg
     └── index.md
-└── amazingblogger # Here
+└── amazingblogger ## Here
     ├── avatar.jpg
     └── index.md
 ```
@@ -57,7 +59,7 @@ Your amazing personal page here
 
 -   Don't forget to place your avatar in directory. The picture format should be `jpg` or `png`, no name restriction.
 
-# 3. Write a post
+## 3. Write a post
 
 -   Very similar with author page, just place your post under [content/posts](https://github.com/ntk148v/blog/tree/master/content/posts).
 
@@ -83,19 +85,19 @@ tags: ["blog", "tech"]
 -   You can disable or enable comment section with `comment` option. You might want to take look at [how I create comment section](https://ntk148v.github.io/blog/posts/lets-comment/).
 -   Don't forget to add a tag.
 
-# 4. Create a photo/art gallery
+## 4. Create a photo/art gallery
 
 Hmm, this is my secret corner, so... Might be in future?
 
-# 5. Scripts
+## 5. Scripts
 
 You can notice that some shell scripts are placed in repository. You can only use these if you're the repository collaborator. Just send me a request! :smile:
 
-## 5.1. Lazy pull
+### 5.1. Lazy pull
 
 Just a script to init and update submodule, do git pull (both master and gh-pages branchs).
 
-## 5.2. Publish to github page
+### 5.2. Publish to github page
 
 I deploy the blog from `gh-pages` branch. You can also tell Github pages to treat your `master` branch as the published site or point to a separate `gh-pages` branch. The latter approach is a bit more complex but has some advantages:
 

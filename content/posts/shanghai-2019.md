@@ -7,6 +7,8 @@ authors:
     - kiennt
 draft: true
 tags: ["ramblings", "story", "travel"]
+readingTime: true  ## show reading time after article date
+toc: true
 ---
 
 > WIP

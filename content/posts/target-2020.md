@@ -7,6 +7,8 @@ draft: true
 authors:
     - kiennt
 tags: ["ramblings","story"]
+readingTime: true  ## show reading time after article date
+toc: true
 ---
 
 ## Tổng kết 2019
