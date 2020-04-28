@@ -17,7 +17,7 @@
       <pubDate>Tue, 28 Apr 2020 11:24:04 +0700</pubDate>
       
       <guid>/blog/posts/operate-etcd-cluster/</guid>
-      <description>NOTE: This is my aggregate note on personal perspective. You can easily find these such of knowledges in the references.
+      <description>NOTE: This is my perspective aggregation. You can easily find these such of knowledges in the references.
  1. Context Etcd Version v3.4.0.
 2. Requirements 2.1. Number of nodes  &amp;gt;= 3 nodes. A etcd cluster needs a majority of nodes, a quorum to agree on updates to the cluster state. For a cluster with n-members, quorum is (n/2)+1.  2.2. CPUs  Etcd doesn&amp;rsquo;t require a lot of CPU capacity.</description>
       
