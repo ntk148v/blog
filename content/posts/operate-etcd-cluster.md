@@ -15,7 +15,7 @@ license = ""  # CC License
 draft = false
 +++
 
-> **NOTE**: This is my aggregate note on personal perspective. You can easily find these such of knowledges in [the references](#5-references).
+> **NOTE**: This is my perspective aggregation. You can easily find these such of knowledges in [the references](#5-references).
 
 ## 1. Context
 
