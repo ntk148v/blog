@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"><url>
+    <loc>https://ntk148v.github.io/blog/tags/ansible/</loc><lastmod>2020-05-05T13:51:59+07:00</lastmod></url><url>
+    <loc>https://ntk148v.github.io/blog/posts/ansitheus/</loc><lastmod>2020-05-05T13:51:59+07:00</lastmod></url><url>
+    <loc>https://ntk148v.github.io/blog/tags/prometheus/</loc><lastmod>2020-05-05T13:51:59+07:00</lastmod></url><url>
+    <loc>https://ntk148v.github.io/blog/tags/</loc><lastmod>2020-05-05T13:51:59+07:00</lastmod></url><url>
+    <loc>https://ntk148v.github.io/blog/tags/tech/</loc><lastmod>2020-05-05T13:51:59+07:00</lastmod></url><url>
     <loc>https://ntk148v.github.io/blog/tags/etcd/</loc><lastmod>2020-04-28T11:24:04+07:00</lastmod></url><url>
     <loc>https://ntk148v.github.io/blog/posts/operate-etcd-cluster/</loc><lastmod>2020-04-28T11:24:04+07:00</lastmod></url><url>
-    <loc>https://ntk148v.github.io/blog/tags/</loc><lastmod>2020-04-28T11:24:04+07:00</lastmod></url><url>
-    <loc>https://ntk148v.github.io/blog/tags/tech/</loc><lastmod>2020-04-28T11:24:04+07:00</lastmod></url><url>
     <loc>https://ntk148v.github.io/blog/tags/golang/</loc><lastmod>2020-04-27T15:59:21+07:00</lastmod></url><url>
     <loc>https://ntk148v.github.io/blog/posts/golang-block-forever/</loc><lastmod>2020-04-27T15:59:21+07:00</lastmod></url><url>
     <loc>https://ntk148v.github.io/blog/tags/note/</loc><lastmod>2020-04-27T15:59:21+07:00</lastmod></url><url>
@@ -17,7 +20,6 @@
     <loc>https://ntk148v.github.io/blog/tags/faythe/</loc><lastmod>2019-08-19T21:19:38+07:00</lastmod></url><url>
     <loc>https://ntk148v.github.io/blog/tags/openstack/</loc><lastmod>2019-08-19T21:19:38+07:00</lastmod></url><url>
     <loc>https://ntk148v.github.io/blog/posts/openstack-autoscaling-new-approach/</loc><lastmod>2019-08-19T21:19:38+07:00</lastmod></url><url>
-    <loc>https://ntk148v.github.io/blog/tags/prometheus/</loc><lastmod>2019-08-19T21:19:38+07:00</lastmod></url><url>
     <loc>https://ntk148v.github.io/blog/tags/gallery/</loc><lastmod>2019-05-01T23:23:13+07:00</lastmod></url><url>
     <loc>https://ntk148v.github.io/blog/gallery/linh-tinh/</loc><lastmod>2019-05-01T23:23:13+07:00</lastmod></url><url>
     <loc>https://ntk148v.github.io/blog/gallery/sapa-2019/</loc><lastmod>2019-04-13T10:22:43+07:00</lastmod></url><url>

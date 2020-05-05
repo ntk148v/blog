@@ -6,17 +6,27 @@
     <description>Recent content in Tags on /home/kiennt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 28 Apr 2020 11:24:04 +0700</lastBuildDate>
+    <lastBuildDate>Tue, 05 May 2020 13:51:59 +0700</lastBuildDate>
     
         <atom:link href="/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>etcd</title>
-      <link>/blog/tags/etcd/</link>
-      <pubDate>Tue, 28 Apr 2020 11:24:04 +0700</pubDate>
+      <title>ansible</title>
+      <link>/blog/tags/ansible/</link>
+      <pubDate>Tue, 05 May 2020 13:51:59 +0700</pubDate>
       
-      <guid>/blog/tags/etcd/</guid>
+      <guid>/blog/tags/ansible/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>prometheus</title>
+      <link>/blog/tags/prometheus/</link>
+      <pubDate>Tue, 05 May 2020 13:51:59 +0700</pubDate>
+      
+      <guid>/blog/tags/prometheus/</guid>
       <description></description>
       
     </item>
@@ -24,9 +34,19 @@
     <item>
       <title>tech</title>
       <link>/blog/tags/tech/</link>
-      <pubDate>Tue, 28 Apr 2020 11:24:04 +0700</pubDate>
+      <pubDate>Tue, 05 May 2020 13:51:59 +0700</pubDate>
       
       <guid>/blog/tags/tech/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>etcd</title>
+      <link>/blog/tags/etcd/</link>
+      <pubDate>Tue, 28 Apr 2020 11:24:04 +0700</pubDate>
+      
+      <guid>/blog/tags/etcd/</guid>
       <description></description>
       
     </item>
@@ -107,16 +127,6 @@
       <pubDate>Mon, 19 Aug 2019 21:19:38 +0700</pubDate>
       
       <guid>/blog/tags/openstack/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>prometheus</title>
-      <link>/blog/tags/prometheus/</link>
-      <pubDate>Mon, 19 Aug 2019 21:19:38 +0700</pubDate>
-      
-      <guid>/blog/tags/prometheus/</guid>
       <description></description>
       
     </item>

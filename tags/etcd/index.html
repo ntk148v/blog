@@ -1,21 +1,19 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.69.2" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.67.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark"><title>etcd&nbsp;&ndash;&nbsp;/home/kiennt</title><link rel="stylesheet" href="/blog/css/core.min.7c357cad3545373aa9dca88614f9a8f3ff8b725a5da594ddab0c1bd8d5720e351146a09fb9ca86d65748540099287567.css" integrity="sha384-fDV8rTVFNzqp3KiGFPmo8/&#43;LclpdpZTdqwwb2NVyDjURRqCfucqG1ldIVACZKHVn"><link rel="alternate" type="application/rss+xml" href="/blog/tags/etcd/index.xml" title="/home/kiennt" /><meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="etcd" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><body>
-    <div class="base-body"><section id="header" class="site header">
+<meta name="supported-color-schemes" content="light dark"><title>etcd&nbsp;&ndash;&nbsp;/home/kiennt</title><link rel="stylesheet" href="/blog/css/core.min.e71b71be980291358e21a46bd156199ebc13e96fb0ae90811bfbded8da2b72771304bfda202e88320832c2ef96732ffe.css" integrity="sha384-5xtxvpgCkTWOIaRr0VYZnrwT6W&#43;wrpCBG/ve2NorcncTBL/aIC6IMggywu&#43;Wcy/&#43;"><link rel="alternate" type="application/rss+xml" href="/blog/tags/etcd/index.xml" title="/home/kiennt" /><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="etcd" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><body><section id="header">
     <div class="header wrap"><span class="header left-side"><a class="site home" href="/blog/"><span class="site name">/home/kiennt</span></a></span>
-        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/blog/tags/">Tags</a><a class="nav item" href="/blog/gallery">Gallery</a><a class="nav item" href="/blog/index.xml">RSS</a></nav></div></span></div><div class="site slogan"><span class="title">Kiennt's ramblings</span></div></section><div id="content"><section class="article header"><h1>etcd</h1></section><ul class="note list"><li class="item"><a class="note" href="/blog/posts/operate-etcd-cluster/">
+        <span class="header right-side"><div class="nav wrap"><nav class="nav"><a class="nav item" href="/blog/tags/">Tags</a><a class="nav item" href="/blog/gallery">Gallery</a><a class="nav item" href="/blog/index%2exml">RSS</a></nav></div></span></div><div class="site slogan"><span class="title">Kiennt's ramblings</span></div></section><section id="content"><section class="article header"><h1>etcd</h1></section><ul class="note list"><li class="item"><a class="note" href="/blog/posts/operate-etcd-cluster/">
             <p class="note title">Operate Etcd cluster</p><p class="note date">2020-04-28</p><p class="note content">NOTE: This is my perspective aggregation. You can easily find these such of knowledges in the references.
  1. Context Etcd Version v3.4.0.
-2. Requirements 2.1. Number of nodes  &gt;= 3 nodes. A etcd cluster needs a majority of nodes, a quorum to agree on updates to the cluster state. For a cluster with n-members, quorum is (n/2)+1.  2.2. CPUs  Etcd doesn&rsquo;t require a lot of CPU capacity.<span class="mldr">&mldr;more</span></p></a><p class="note labels"><a class="tag" href="/blog/tags/tech/">tech</a><a class="tag" href="/blog/tags/etcd/">etcd</a></p></li></ul></div><section id="footer" class="footer"><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:space-between;">
+2. Requirements 2.1. Number of nodes  &gt;= 3 nodes. A etcd cluster needs a majority of nodes, a quorum to agree on updates to the cluster state. For a cluster with n-members, quorum is (n/2)+1.  2.2. CPUs  Etcd doesn&rsquo;t require a lot of CPU capacity.<span class="mldr">&mldr;</span></p></a><p class="note labels"><a class="tag" href="/blog/tags/tech/">tech</a><a class="tag" href="/blog/tags/etcd/">etcd</a></p></li></ul></section><section id="footer"><div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:space-between;">
 <p style="flex-shrink: 0;">/home/kiennt</p>
 <p><span>Powered by </span><a
     href="https://gohugo.io" target="_blank">Hugo</a><span> and the </span><a
     href="https://themes.gohugo.io/hugo-notepadium/" target="_blank">Notepadium</a></p>
 </div>
 </section><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/&#43;DiW/UqRcLbRjq" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l&#43;B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd&#43;qj&#43;o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
-            onload="renderMathInElement(document.body);"></script></div>
-</body>
+            onload="renderMathInElement(document.body);"></script></body>
 
 </html>

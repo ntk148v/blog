@@ -12,6 +12,18 @@
     
     
     <item>
+      <title>Ansitheus</title>
+      <link>/blog/posts/ansitheus/</link>
+      <pubDate>Tue, 05 May 2020 13:51:59 +0700</pubDate>
+      
+      <guid>/blog/posts/ansitheus/</guid>
+      <description>Ansitheus = Ansible + Prometheus 1. Prometheus overview  NOTE: Checkout the Prometheus official documentation.
+ Prometheus is an open-source systems monitoring &amp;amp; alerting toolkit originally built at SoundCloud.
+1.1. Features  a multi-dimensional data model with time series data identified by metric name &amp;amp; key/value pairs PromQL, a flexible query language to leverage this dimensionality no reliance on distributed storage; single server nodes are autonomous time series collection happens via a pull model over HTTP pushing time series is supported via an intermediary gateway targets are discovered via service discovery or static configuration multiple modes of graphing &amp;amp; dashboarding support  1.</description>
+      
+    </item>
+    
+    <item>
       <title>Operate Etcd cluster</title>
       <link>/blog/posts/operate-etcd-cluster/</link>
       <pubDate>Tue, 28 Apr 2020 11:24:04 +0700</pubDate>
@@ -55,8 +67,7 @@ Rest In Peace Mamba 🏀</description>
       
       <guid>/blog/posts/blog-guideline/</guid>
       <description>In the beginning, I supposed that I&amp;rsquo;m the only one who write-up thing in this blog. But now thing was change, this blog might have multiple bloggers. So it needs a guideline to describe how to contribute.
-
-1. How to submit a new content  Here is the source repo. Fork it &amp;amp; start writing. Create a pull request to submit your content. Make sure to create your author page.</description>
+1. How to submit a new content  Here is the source repo. Fork it &amp;amp; start writing. Create a pull request to submit your content. Make sure to create your author page.  2.</description>
       
     </item>
     
