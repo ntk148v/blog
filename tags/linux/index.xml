@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>linux on /home/kiennt</title>
+    <link>/blog/tags/linux/</link>
+    <description>Recent content in linux on /home/kiennt</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 20 May 2020 09:30:28 +0700</lastBuildDate>
+    
+        <atom:link href="/blog/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Swap space note</title>
+      <link>/blog/posts/linux-swap-space-note/</link>
+      <pubDate>Wed, 20 May 2020 09:30:28 +0700</pubDate>
+      
+      <guid>/blog/posts/linux-swap-space-note/</guid>
+      <description>1. What is Swap? Swap file systems support virtual memory, data is written to a swap file system when there is not enough RAM to store the data your system is processing.
+2. Swap partition size 2.1. Old rule of thumb swap = 2 * the-amount-of-RAM So if a computer had 64KB of RAM, a swap partition of 128KB would be an optimum size. This rule took into the facts that RAM sizes were typically quite small at the time.</description>
+      
+    </item>
+    
+  </channel>
+</rss>
