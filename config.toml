@@ -5,7 +5,7 @@ pygmentsCodefences = true
 enableEmoji = true
 
 [params]
-style = "auto"
+style = "light"
 logoText = "/home/kiennt"
 license = "CC Lincense"
 slogan = "Kiennt's ramblings"
