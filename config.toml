@@ -37,7 +37,7 @@ title = "RSS"
 url = "/index.xml"
 
 [params.assets]
-css = ["css/custom.css"]
+css = ["css/custom.css", "css/font.css"]
 
 # set all headings to their default size (depending on browser settings)
 # it's set to `true` by default
