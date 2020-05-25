@@ -7,7 +7,7 @@ enableEmoji = true
 [params]
 style = "light"
 logoText = "/home/kiennt"
-license = "CC Lincense"
+license = "CC License"
 slogan = "Kiennt's ramblings"
 
 [params.math]
