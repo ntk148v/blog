@@ -1,0 +1,15 @@
+{{ define "main" }}
+<div class="posts">
+  {{ range .Data.Pages }}
+  <div class="post on-list">
+    <h1 class="post-title">
+      <a href="{{ .Permalink }}">{{ .Params.name | markdownify }}</a></h1>
+
+    {{ with .Params.Cover }}
+    <img src="{{ . | absURL }}" class="post-cover" />
+    {{ end }}
+  </div>
+  {{ end }}
+  {{ partial "pagination.html" . }}
+</div>
+{{ end }}

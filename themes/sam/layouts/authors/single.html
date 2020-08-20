@@ -1,0 +1,70 @@
+{{ define "section_content" }}
+<div class="section" id="content">
+    <div class="author-container">
+        <!-- Get only the first picture in folder -->
+        {{ range first 1 (.Resources.ByType "image") }}
+        <img src="{{ .RelPermalink }}" alt="{{ .Name }}">
+        {{ end }}
+        <h1>{{ .Params.name }}</h1>
+        <ul>
+            {{ with .Params.contact.twitter }}
+            <li>
+                <a href="https://twitter.com/{{ substr . 1 }}">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            </li>
+            {{ end }}
+            {{ with .Params.contact.github }}
+            <li>
+                <a href="https://github.com/{{ . }}">
+                    <i class="fa fa-github"></i>
+                </a>
+            </li>
+            {{ end }}
+            {{ with .Params.contact.linkedin }}
+            <li>
+                <a href="https://linkedin.com/{{ . }}">
+                    <i class="fa fa-linkedin"></i>
+                </a>
+            </li>
+            {{ end }}
+            {{ with .Params.contact.facebook }}
+            <li>
+                <a href="https://facebook.com/{{ . }}">
+                    <i class="fa fa-facebook"></i>
+                </a>
+            </li>
+            {{ end }}
+            {{ with .Params.contact.email }}
+            <li>
+                <a href="mailto: {{ . }}">
+                    <i class="fa fa-envelope"></i>
+                </a>
+            </li>
+            {{ end }}
+            {{ with .Params.website }}
+            <li>
+                <a href="{{ . }}">
+                    <i class="fa fa-globe"></i>
+                </a>
+            </li>
+            {{ end }}
+        </ul>
+    </div>
+    {{ .Content }}
+
+
+    <h2>Articles</h2>
+    <ul>
+        {{ range .Data.Pages }}
+        <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+        {{ end }}
+    </ul>
+</div>
+{{ end }}
+
+{{ define "bottom-menu" }}
+<div class="section bottom-menu">
+    {{ partial "bottom_menu.html" (dict "Page" . "show_back_menu_item" true) }}
+</div>
+{{ end }}

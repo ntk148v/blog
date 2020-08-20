@@ -1,0 +1,36 @@
+{{ define "section_content" }}
+<div class="section" id="content">
+    {{ .Date.Format (.Site.Params.dateForm | default "Mon Jan 02, 2006") }} &#183; {{ .WordCount }} words
+    <div class="authors-container">
+        {{ with .Params.authors }}
+        {{ range . }}
+        {{ with $.Site.GetPage "taxonomyTerm" (printf "authors/%s" (urlize .)) }}
+        <figcaption><a href="{{ .Permalink }}">{{ .Params.name }}</a></figcaption>
+        {{ end }}
+        {{ end }}
+        {{ end }}
+    </div>
+    {{ with .Params.tags }}
+    <div class="tag-container">
+        {{ range . }}
+        <span class="tag">
+            <a href="{{ "tags/" | absURL }}{{ . | urlize }}">
+                {{.}}
+            </a>
+        </span>
+        {{ end }}
+    </div>
+    {{ end }}
+    <hr />
+    <aside>
+        {{ .TableOfContents }}
+    </aside>
+    {{ .Content }}
+</div>
+{{ end }}
+
+{{ define "bottom-menu" }}
+<div class="section bottom-menu">
+    {{ partial "bottom_menu.html" (dict "Page" . "show_back_menu_item" true) }}
+</div>
+{{ end }}
