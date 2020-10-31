@@ -112,6 +112,16 @@
     </item>
     
     <item>
+      <title>story</title>
+      <link>/blog/tags/story/</link>
+      <pubDate>Fri, 24 Jan 2020 23:34:23 +0700</pubDate>
+      
+      <guid>/blog/tags/story/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
       <title>blog</title>
       <link>/blog/tags/blog/</link>
       <pubDate>Thu, 22 Aug 2019 14:40:59 +0700</pubDate>
@@ -147,16 +157,6 @@
       <pubDate>Wed, 01 May 2019 23:23:13 +0700</pubDate>
       
       <guid>/blog/tags/gallery/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>story</title>
-      <link>/blog/tags/story/</link>
-      <pubDate>Mon, 04 Feb 2019 23:16:47 +0700</pubDate>
-      
-      <guid>/blog/tags/story/</guid>
       <description></description>
       
     </item>
