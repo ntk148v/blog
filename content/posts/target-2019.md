@@ -7,6 +7,7 @@ authors:
     - kiennt
 tags: ["ramblings","story"]
 readingTime: true  ## show reading time after article date
+draft: true
 toc: true
 ---
 
