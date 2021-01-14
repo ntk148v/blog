@@ -6,7 +6,7 @@
     <description>Recent content in Tags on /home/kiennt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 May 2020 09:30:28 +0700</lastBuildDate>
+    <lastBuildDate>Thu, 14 Jan 2021 09:36:34 +0700</lastBuildDate>
     
         <atom:link href="/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>linux</title>
       <link>/blog/tags/linux/</link>
-      <pubDate>Wed, 20 May 2020 09:30:28 +0700</pubDate>
+      <pubDate>Thu, 14 Jan 2021 09:36:34 +0700</pubDate>
       
       <guid>/blog/tags/linux/</guid>
       <description></description>
@@ -24,9 +24,19 @@
     <item>
       <title>tech</title>
       <link>/blog/tags/tech/</link>
-      <pubDate>Wed, 20 May 2020 09:30:28 +0700</pubDate>
+      <pubDate>Thu, 14 Jan 2021 09:36:34 +0700</pubDate>
       
       <guid>/blog/tags/tech/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>tips</title>
+      <link>/blog/tags/tips/</link>
+      <pubDate>Thu, 14 Jan 2021 09:36:34 +0700</pubDate>
+      
+      <guid>/blog/tags/tips/</guid>
       <description></description>
       
     </item>
