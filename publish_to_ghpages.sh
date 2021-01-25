@@ -3,7 +3,8 @@
 DIR=$(dirname "$0")
 
 echo "Update theme, no matter what"
-git add themes/hugo-notepadium
+git -C themes/book pull
+git add themes/book
 git commit -m "Update theme"
 
 if [[ $(git status -s) ]]
