@@ -1,25 +1,1100 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog on /home/kiennt</title>
-    <link>/blog/tags/blog/</link>
+    <link>https://ntk148v.github.io/blog/tags/blog/</link>
     <description>Recent content in blog on /home/kiennt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 22 Aug 2019 14:40:59 +0700</lastBuildDate>
     
-        <atom:link href="/blog/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://ntk148v.github.io/blog/tags/blog/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Set Animated Gif as Wallpaper</title>
+      <link>https://ntk148v.github.io/blog/posts/set-animated-gif-as-wallpaper/</link>
+      <pubDate>Thu, 14 Jan 2021 09:36:34 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/set-animated-gif-as-wallpaper/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: Environment Ubuntu 20.04&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ujjwal96/xwinwrap&#34;target=&#34;_blank&#34;&gt;Xwinwrap&lt;/a&gt;:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo apt-get install xorg-dev build-essential libx11-dev x11proto-xext-dev libxrender-dev libxext-dev
+git clone https://github.com/ujjwal96/xwinwrap.git
+cd xwinwrap
+make
+sudo make install
+make clean
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;Gifsicle:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo apt install gifsicle
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;the-helper-script&#34;&gt;The helper script&lt;/h2&gt;
+&lt;p&gt;A helper script to setup animated .gif in dual monitors.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Uses xwinwrap to display given animated .gif in dual monitors.&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; $# -ne &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;; &lt;span style=&#34;color:#66d9ef&#34;&gt;then&lt;/span&gt;
+    echo 1&amp;gt;&amp;amp;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; Usage: $0 image.gif
+    exit &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;fi&lt;/span&gt;
+gif&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;$1
+killall -9 xwinwrap
+killall -9 gifview
+&lt;span style=&#34;color:#75715e&#34;&gt;# Get monitors resolution&lt;/span&gt;
+SCR1&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;xrandr | awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/primary/ &amp;amp;&amp;amp; /connected/ { print $4 }&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;
+SCR2&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;xrandr | awk &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;!/primary/ &amp;amp;&amp;amp; /connected/ { print $3 }&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;
+
+xwinwrap -g $SCR1 -ov -ni -s -nf -- gifview -w WID $gif -a &amp;amp;
+xwinwrap -g $SCR2 -ov -ni -s -nf -- gifview -w WID $gif -a &amp;amp;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you want to run xwinwrap by yourself, here is the example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;xwinwrap -g 1920x1080 -ov -ni -s -nf -- gifview -w WID /full/path/to/gif -a
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Swap space note</title>
+      <link>https://ntk148v.github.io/blog/posts/linux-swap-space-note/</link>
+      <pubDate>Wed, 20 May 2020 09:30:28 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/linux-swap-space-note/</guid>
+      <description>&lt;h2 id=&#34;1-what-is-swap&#34;&gt;1. What is Swap?&lt;/h2&gt;
+&lt;p&gt;Swap file systems support virtual memory, data is written to a swap file system when there is not enough RAM to store the data your system is processing.&lt;/p&gt;
+&lt;h2 id=&#34;2-swap-partition-size&#34;&gt;2. Swap partition size&lt;/h2&gt;
+&lt;h3 id=&#34;21-old-rule-of-thumb&#34;&gt;2.1. Old rule of thumb&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;swap = 2 * the-amount-of-RAM
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;So if a computer had 64KB of RAM, a swap partition of 128KB would be an optimum size. This rule took into the facts that RAM sizes were typically quite small at the time. Nowadays, RAM has become a &lt;code&gt;cheap&lt;/code&gt; &amp;amp; &lt;code&gt;affordable&lt;/code&gt; commondity, so the 2x rule is outdated.&lt;/p&gt;
+&lt;h3 id=&#34;22-what-is-the-right-amount-of-swap-space&#34;&gt;2.2. What is the right amount of swap space?&lt;/h3&gt;
+&lt;p&gt;Choosing the correct swap size is important. Too much swap space can hide memory leaks, also the storage space is allocated but idle. It can affect the system performance in general.&lt;/p&gt;
+&lt;p&gt;Follow the RedHat (CentOS 7x &amp;amp; RHEL 7) guide, the recommended size of a swap partition depending on the amount of RAM &amp;amp; whether you want sufficient memory for your system.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;swap &amp;lt;= 10% * total-size-hard-drives &amp;amp;&amp;amp; swap &amp;lt;= 128GB (if hibernation is allowed)
+&lt;/code&gt;&lt;/pre&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Amount of RAM&lt;/th&gt;
+&lt;th&gt;Recommended swap space&lt;/th&gt;
+&lt;th&gt;Recommended swap space if allowing for hibernation&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;lt; 2GB&lt;/td&gt;
+&lt;td&gt;2 * the-amount-of-RAM&lt;/td&gt;
+&lt;td&gt;3 * the-amount-of-RAM&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;gt; 2GB - 8GB&lt;/td&gt;
+&lt;td&gt;the-amount-of-RAM&lt;/td&gt;
+&lt;td&gt;2 * the-amount-of-RAM&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;gt; 8GB - 64GB&lt;/td&gt;
+&lt;td&gt;&amp;gt;= 4GB&lt;/td&gt;
+&lt;td&gt;1.5 * the-amount-of-RAM&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;gt; 64GB&lt;/td&gt;
+&lt;td&gt;&amp;gt;= 4GB&lt;/td&gt;
+&lt;td&gt;Hibernation not recommended&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;3-common-misconceptions--gotchas&#34;&gt;3. Common misconceptions &amp;amp; gotchas&lt;/h2&gt;
+&lt;h3 id=&#34;31-increasing-swap-size-would-increase-performance&#34;&gt;3.1. Increasing swap size would increase performance&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;No, it wouldn&amp;rsquo;t. Remember that the slowest part of memory is your hard-disk - &lt;em&gt;swap&lt;/em&gt; just provides the ability to use more memory by swapping some pages out to the disk, which is &lt;strong&gt;slow&lt;/strong&gt; compared to RAM operations. Swap can also &lt;a href=&#34;https://askubuntu.com/questions/367881/does-swap-file-usage-increase-disk-i-o-and-cpu-load&#34;target=&#34;_blank&#34;&gt;increase disk I/O &amp;amp; CPU load&lt;/a&gt;. This is a tradeoff. Without swap, the OOM may get you. It causes a downtime and in the real life scenario, the application can be slow a bit rather than down completely.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;32-swappiness&#34;&gt;3.2. Swappiness&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The linux kernel tunable parameter &lt;code&gt;vm.swappiness&lt;/code&gt; (/proc/sys/vm/swappiness) can be used to define how aggressively memory pages are swapped to disk.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The default value: &lt;code&gt;60&lt;/code&gt;. The lower the value, the less swapping is used &amp;amp; the more memory pages are kept in the physical memory.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;* 0: swap is disable.
+* 1: minimum amount of swapping without disabling it entirely.
+* 10: recommended value to improve performance when sufficient memory exists in a system
+* 100: aggressive swapping
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Useful commands:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Check the current value&lt;/span&gt;
+sysctl vm.swappiness
+&lt;span style=&#34;color:#75715e&#34;&gt;# Adjust the value&lt;/span&gt;
+echo &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt; &amp;gt; /proc/sys/vm/swappiness
+sysctl -w vm.swappiness&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
+echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;vm.swappiness = 10&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt; /etc/sysctl.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;On SSDs, swapping out anonymous pages and reclaiming file pages are essentially equivalent in terms of performance/latency. On older spinning disks, swap reads are slower due to random reads, so a lower vm.swappiness setting makes sense there.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;33-using-swap-as-emergency-memory&#34;&gt;3.3. Using swap as emergency memory&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Swap is not generally about getting emergency memory, it&amp;rsquo;s about making memory reclamation egalitarian and efficient. In fact, using it as &amp;ldquo;emergency memory&amp;rdquo; is generally actively harmful.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4-references&#34;&gt;4. References&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/installation_guide/sect-disk-partitioning-setup-x86#sect-recommended-partitioning-scheme-x86&#34;target=&#34;_blank&#34;&gt;RedHad guideline&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://chrisdown.name/2018/01/02/in-defence-of-swap.html&#34;target=&#34;_blank&#34;&gt;Chris Down&amp;rsquo;s post&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://linuxhint.com/understanding_vm_swappiness/&#34;target=&#34;_blank&#34;&gt;Linux Hint - Understanding vm.swappiness&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Ansitheus</title>
+      <link>https://ntk148v.github.io/blog/posts/ansitheus/</link>
+      <pubDate>Tue, 05 May 2020 13:51:59 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/ansitheus/</guid>
+      <description>&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Ansitheus &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Ansible + Prometheus
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;1-prometheus-overview&#34;&gt;1. Prometheus overview&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: Checkout the &lt;a href=&#34;https://prometheus.io/docs/introduction/overview/&#34;target=&#34;_blank&#34;&gt;Prometheus official documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/prometheus&#34;target=&#34;_blank&#34;&gt;Prometheus&lt;/a&gt; is an open-source systems monitoring &amp;amp; alerting toolkit originally built at SoundCloud.&lt;/p&gt;
+&lt;h3 id=&#34;11-features&#34;&gt;1.1. Features&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;a multi-dimensional data model with time series data identified by metric name &amp;amp; key/value pairs&lt;/li&gt;
+&lt;li&gt;PromQL, a flexible query language to leverage this dimensionality&lt;/li&gt;
+&lt;li&gt;no reliance on distributed storage; single server nodes are autonomous&lt;/li&gt;
+&lt;li&gt;time series collection happens via a pull model over HTTP&lt;/li&gt;
+&lt;li&gt;pushing time series is supported via an intermediary gateway&lt;/li&gt;
+&lt;li&gt;targets are discovered via service discovery or static configuration&lt;/li&gt;
+&lt;li&gt;multiple modes of graphing &amp;amp; dashboarding support&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;12-architecture--components&#34;&gt;1.2. Architecture &amp;amp; components&lt;/h3&gt;
+&lt;p&gt;Prometheus scrapes metrics from instrumented jobs, either directly or via an intermediary push gateway for short-lived jobs. It stores all scraped samples locally &amp;amp; runs rules over this data to either aggregate &amp;amp; record new time series from existing data or generate alerts. Grafana or other API consumers can be used to visualize the collected data.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://prometheus.io/assets/architecture.png&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Prometheus server: scrapes &amp;amp; stores time series data.&lt;/li&gt;
+&lt;li&gt;Prometheus alertmanager: handle alerts.&lt;/li&gt;
+&lt;li&gt;Special-purpose exporters.&lt;/li&gt;
+&lt;li&gt;Push-gateway: support short-lived jobs.&lt;/li&gt;
+&lt;li&gt;client libraries: instrument application code.&lt;/li&gt;
+&lt;li&gt;Various support tools: Grafana,&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2-ansitheus&#34;&gt;2. Ansitheus&lt;/h2&gt;
+&lt;h3 id=&#34;21-why-ansitheus&#34;&gt;2.1. Why Ansitheus?&lt;/h3&gt;
+&lt;p&gt;As you can see that, Prometheus ecosystem consists of multiple components. The operator may need a lot of efforts to configure, deploy &amp;amp; maintain these components. To make life easier, it is necessary to enter the world of automation, using modern tools of configuration management, provisioning &amp;amp; orchestration. &lt;a href=&#34;https://ansible.com&#34;target=&#34;_blank&#34;&gt;Ansible&lt;/a&gt; is one of them. It is &lt;a href=&#34;https://www.ansible.com/overview/how-ansible-works&#34;target=&#34;_blank&#34;&gt;simple, agentless IT automation that anyone can use&lt;/a&gt;. My team decided to choose it as the automation solution, &amp;amp; &lt;a href=&#34;https://github.com/ntk148v/ansitheus&#34;target=&#34;_blank&#34;&gt;Ansitheus&lt;/a&gt; is the result.&lt;/p&gt;
+&lt;h3 id=&#34;22-features&#34;&gt;2.2. Features&lt;/h3&gt;
+&lt;p&gt;The idea using Ansible to deploy Prometheus is not new. There are many existing solutions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/cloudalchemy/ansible-prometheus&#34;target=&#34;_blank&#34;&gt;cloudalchemy/ansible-prometheus&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ernestas-poskus/ansible-prometheus&#34;target=&#34;_blank&#34;&gt;ernestas-poskus/ansible-prometheus&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So what makes &lt;code&gt;Ansitheus&lt;/code&gt; be different with others?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Deploy, configure &amp;amp; maintain the Prometheus ecosystem easily&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Allow users to configure, deploy the system from scratch&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;Prepare, configure the local repository.&lt;/li&gt;
+&lt;li&gt;Install the necessary packages.&lt;/li&gt;
+&lt;li&gt;Configure Docker private registry.&lt;/li&gt;
+&lt;li&gt;Configure Docker daemon.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Containerize Prometheus components&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docker.com&#34;target=&#34;_blank&#34;&gt;Docker&lt;/a&gt; is hotter than hot because it makes it possible to get far more apps running on the same old servers &amp;amp; it also makes it very easy to package &amp;amp; ship programs.&lt;/li&gt;
+&lt;li&gt;You can easily find the advantages of Docker &amp;amp; container through internet.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;High availability&lt;/strong&gt; with HAProxy &amp;amp; Keepalived.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Support centralized Docker logging&lt;/strong&gt; with Fluentd.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Support Ansible vault&lt;/strong&gt; to work with sensitive data.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;23-components&#34;&gt;2.3. Components&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/prometheus/prometheus&#34;target=&#34;_blank&#34;&gt;Prometheus Server&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/prometheus/alertmanager&#34;target=&#34;_blank&#34;&gt;Prometheus Alertmanager&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/prometheus/node_exporter&#34;target=&#34;_blank&#34;&gt;Prometheus Node-exporter&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/google/cadvisor&#34;target=&#34;_blank&#34;&gt;Google Cadvisor&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/prometheus/snmp_exporter&#34;target=&#34;_blank&#34;&gt;Prometheus SNMP exporter&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.haproxy.org/&#34;target=&#34;_blank&#34;&gt;Haproxy&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.keepalived.org/&#34;target=&#34;_blank&#34;&gt;Keepalived&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/fluent/fluentd&#34;target=&#34;_blank&#34;&gt;Fluentd&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/grafana/grafana&#34;target=&#34;_blank&#34;&gt;Grafana&lt;/a&gt; - &lt;strong&gt;TODO&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Other Prometheus exporters - &lt;strong&gt;TODO&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;24-getting-started&#34;&gt;2.4. Getting started&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install Ansible in deployment node.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Clone this repostiory.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create configuration directory, default path &lt;code&gt;/etc/ansitheus&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo mkdir -p /etc/ansitheus
+sudo chown $USER:$USER /etc/ansitheus
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Copy &lt;code&gt;config.yml&lt;/code&gt; to &lt;code&gt;/etc/ansitheus&lt;/code&gt; directory - this is the main configuration for Ansible monitoring tool.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;cp /path/to/ansitheus/repository/etc/ansitheus/config.yml &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;    /etc/ansitheus/config.yml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Copy inventory files to the current directory.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;cp /path/to/ansitheus/repository/ansible/inventory/* .
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Modify inventory &amp;amp; &lt;code&gt;/etc/ansitheus/config.yml&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run &lt;a href=&#34;./tools/ansitheus&#34;&gt;tools/ansitheus&lt;/a&gt;, figure out yourself:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Usage: ./tools/ansitheus COMMAND &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;option&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+
+Options:
+    --inventory, -i &amp;lt;inventory_path&amp;gt; Specify path to ansible inventory file
+    --configdir, -c &amp;lt;config_path&amp;gt;    Specify path to directory with config.yml
+    --verbose, -v                    Increase verbosity of ansible-playbook
+    --tags, -t &amp;lt;tags&amp;gt;                Only run plays &amp;amp; tasks tagged with these values
+    --help, -h                       Show this usage information
+    --skip-common                    Skip common role
+    --ask-vault-pass                 Ask &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; vault password
+
+Commands:
+    precheck                         Do pre-deployment checks &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; hosts
+    deploy                           Deploy &amp;amp; start all ansitheus containers
+    pull                             Pull all images &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; containers &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;only pull, no running containers&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+    destroy                          Destroy Prometheus containers &amp;amp; service configuration
+                                        --include-images to also destroy Prometheus images
+                                        --include-volumes to also destroy Prometheus volumes
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;25-contributors&#34;&gt;2.5. Contributors&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ntk148v&#34;target=&#34;_blank&#34;&gt;Kien Nguyen&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/vtdat&#34;target=&#34;_blank&#34;&gt;Dat Vu&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/vanduc95&#34;target=&#34;_blank&#34;&gt;Duc Nguyen&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/LongCaoBK&#34;target=&#34;_blank&#34;&gt;Long Cao&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Operate Etcd cluster</title>
+      <link>https://ntk148v.github.io/blog/posts/operate-etcd-cluster/</link>
+      <pubDate>Tue, 28 Apr 2020 11:24:04 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/operate-etcd-cluster/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: This is my perspective aggregation. You can easily find these such of knowledges in &lt;a href=&#34;#5-references&#34;&gt;the references&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;1-context&#34;&gt;1. Context&lt;/h2&gt;
+&lt;p&gt;Etcd Version &lt;code&gt;v3.4.0&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;2-requirements&#34;&gt;2. Requirements&lt;/h2&gt;
+&lt;h3 id=&#34;21-number-of-nodes&#34;&gt;2.1. Number of nodes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;gt;= 3 nodes. A etcd cluster needs a majority of nodes, a quorum to agree on updates to the cluster state. For a cluster with &lt;strong&gt;n-members&lt;/strong&gt;, quorum is &lt;strong&gt;(n/2)+1&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;22-cpus&#34;&gt;2.2. CPUs&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Etcd doesn&amp;rsquo;t require a lot of CPU capacity.&lt;/li&gt;
+&lt;li&gt;Typical clusters need &lt;strong&gt;2-4 cores&lt;/strong&gt; to run smoothly.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;23-memory&#34;&gt;2.3. Memory&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Etcd performance depends on having enough memory (cache key-value data, tracking watchers&amp;hellip;).&lt;/li&gt;
+&lt;li&gt;Typical &lt;strong&gt;8GB&lt;/strong&gt; is enough.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;24-disk&#34;&gt;2.4. Disk&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;An etcd cluster is very sensitive to disk latencies. Since etcd must persist proposals to its log, disk activity from other processes may cause long &lt;code&gt;fsync&lt;/code&gt; latencies. The upshot is etcd may miss heartbeats, causing request timeouts and temporary leader loss. An etcd server can sometimes stably run alongside these processes when given a high disk priority.&lt;/li&gt;
+&lt;li&gt;Check whether a disk is fast enough for etcd using &lt;a href=&#34;https://github.com/axboe/fio&#34;target=&#34;_blank&#34;&gt;fio&lt;/a&gt;. If the 99th percentile of fdatasync is &lt;strong&gt;&amp;lt;10ms&lt;/strong&gt;, your storage is ok.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ fio --rw&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;write --ioengine&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;sync --fdatasync&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; --directory&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;test-data &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;    --size&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;22m --bs&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2300&lt;/span&gt; --name&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;mytest
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;SSD&lt;/strong&gt; is recommended.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;25-network&#34;&gt;2.5. Network&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Etcd cluster should be deployed in a fast and reliable network. Low latency ensures etcd members can communicate fast. High bandwidth can reduce the time to recover a failed etcd member.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;1GbE&lt;/strong&gt; is sufficient for common etcd.&lt;/li&gt;
+&lt;li&gt;Note that the network isn&amp;rsquo;t the only source of latency. Each request and response may be impacted by slow disks on both the leader and followers.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3-tuning&#34;&gt;3. Tuning&lt;/h2&gt;
+&lt;h3 id=&#34;31-time-parameters&#34;&gt;3.1. Time parameters&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Heartbeat interval&lt;/code&gt;.
+&lt;ul&gt;
+&lt;li&gt;The frequency with which the leader will notify followers that it is still the leader.&lt;/li&gt;
+&lt;li&gt;Default: &lt;strong&gt;100ms&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Best practice: &lt;strong&gt;Around 0.5-1.5 x round-trip time (RTT) between members&lt;/strong&gt;. Measure RTT with &lt;code&gt;ping&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Tradeoff: Too low -&amp;gt; etcd will send unnecessary messages -&amp;gt; increase the usage of CPU and network resources. Too high -&amp;gt; leads to high election timeout.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Election timeout&lt;/code&gt;.
+&lt;ul&gt;
+&lt;li&gt;How long a follower node will go without hearing a heartbeat before attempting to become leader itself.&lt;/li&gt;
+&lt;li&gt;Default: &lt;strong&gt;1000ms&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Best practice: &lt;strong&gt;&amp;gt;= 10 x RTT and &amp;lt; 50s&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The heartbeat interval and election timeout value should be &lt;strong&gt;the same for all members in one cluster&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Command line arguments:&lt;/span&gt;
+$ etcd --heartbeat-interval&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt; --election-timeout&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# Environment variables:&lt;/span&gt;
+$ ETCD_HEARTBEAT_INTERVAL&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt; ETCD_ELECTION_TIMEOUT&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt; etcd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;32-disk&#34;&gt;3.2. Disk&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;An etcd server can sometimes stably run alongside these processes when given a high disk priority using &lt;a href=&#34;https://linux.die.net/man/1/ionice&#34;target=&#34;_blank&#34;&gt;ionice&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# best effort, highest priority&lt;/span&gt;
+$ sudo ionice -c2 -n0 -p &lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;pgrep etcd&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;33-snapshot&#34;&gt;3.3. Snapshot&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;etcd appends all key changes to a log file -&amp;gt; huge log that grows forever ☝️&lt;/li&gt;
+&lt;li&gt;Solution: Make periodic snapshots (save the current and remove old logs).&lt;/li&gt;
+&lt;li&gt;Default: make snapshots after every &lt;strong&gt;10 000 changes&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Tuning: Just in case that etcd&amp;rsquo;s memory and disk usage is too high, lower threshold.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Command line arguments:&lt;/span&gt;
+$ etcd --snapshot-count&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5000&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# Environment variables:&lt;/span&gt;
+$ ETCD_SNAPSHOT_COUNT&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5000&lt;/span&gt; etcd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;4-maintenance&#34;&gt;4. Maintenance&lt;/h2&gt;
+&lt;h3 id=&#34;41-history-compaction&#34;&gt;4.1. History compaction&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Etcd keeps an exact history of its keyspace, the history should be periodically compacted to avoid performance degradation and eventual storage space exhaustion.&lt;/li&gt;
+&lt;li&gt;Etcd can be set to automatically compact the keyspace with the &lt;code&gt;--auto-compaction-*&lt;/code&gt; option with a period of hours.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# keep one hour of history&lt;/span&gt;
+$ etcd --auto-compaction-retention&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; --auto-compaction-mode&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;periodic
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;Compaction modes:
+&lt;ul&gt;
+&lt;li&gt;Revision-based: &lt;code&gt;--auto-compaction-mode=revision --auto-compaction-retention=1000&lt;/code&gt; automatically Compact on &amp;ldquo;latest revision&amp;rdquo; - 1000 every 5-minute (when latest revision is 30000, compact on revision 29000). Use this when having a large keyspace.&lt;/li&gt;
+&lt;li&gt;Periodic: &lt;code&gt;--auto-compaction-mode=periodic --auto-compaction-retention=72h&lt;/code&gt; automatically Compact with 72-hour retention window every 1-hour. Use this when having a huge number of revisions for a key-value pair.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;42-defragmentation&#34;&gt;4.2. Defragmentation&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Compacting old revisions internally fragments etcd by leaving gaps in backend database - &lt;code&gt;internal fragmentation&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Internal fragmentation space is available for use by etcd but unavailable to the host filesystem.&lt;/li&gt;
+&lt;li&gt;Solution: Release this space back to the filesystem with defrag.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ etcdctl defrag
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;It should be run rather infrequently, as there is always going to be an unavoidable pause.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;5-references&#34;&gt;5. References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Etcd hardware: &lt;a href=&#34;https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/hardware.md&#34;&gt;https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/hardware.md&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Etcd tuning: &lt;a href=&#34;https://github.com/etcd-io/etcd/blob/master/Documentation/tuning.md&#34;&gt;https://github.com/etcd-io/etcd/blob/master/Documentation/tuning.md&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Etcd maintainence: &lt;a href=&#34;https://etcd.io/docs/v3.4.0/op-guide/maintenance/&#34;&gt;https://etcd.io/docs/v3.4.0/op-guide/maintenance/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Golang: Block forever</title>
+      <link>https://ntk148v.github.io/blog/posts/golang-block-forever/</link>
+      <pubDate>Mon, 27 Apr 2020 15:59:21 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/golang-block-forever/</guid>
+      <description>&lt;p&gt;Sometimes, you want to block the current goroutine when allowing others to continue. Here is some tricks I&amp;rsquo;ve collected:&lt;/p&gt;
+&lt;h2 id=&#34;1-references&#34;&gt;1. References&lt;/h2&gt;
+&lt;p&gt;Firstly give them some credits:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.sgmansfield.com/2016/06/how-to-block-forever-in-go/&#34;&gt;https://blog.sgmansfield.com/2016/06/how-to-block-forever-in-go/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pliutau.com/different-ways-to-block-go-runtime-forever/&#34;&gt;https://pliutau.com/different-ways-to-block-go-runtime-forever/&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;NOTE: I run these with Golang 1.12&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;2-the-original&#34;&gt;2. The original&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;package&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;
+
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fmt&amp;#34;&lt;/span&gt;
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;show&lt;/span&gt;() {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &amp;lt; &lt;span style=&#34;color:#ae81ff&#34;&gt;9696969&lt;/span&gt;; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; {
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;time&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Sleep&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;1000&lt;/span&gt;)
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt;)
+    }
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;() {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;go&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;show&lt;/span&gt;() &lt;span style=&#34;color:#75715e&#34;&gt;// The main goroutine is exited before the show() be done.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;OK we&amp;#39;re done&amp;#34;&lt;/span&gt;)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;3-bad---an-empty-infinite-loop&#34;&gt;3. Bad - An empty infinite loop&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;package&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;
+
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; (
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fmt&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;time&amp;#34;&lt;/span&gt;
+)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;forever&lt;/span&gt;() {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; {
+        &lt;span style=&#34;color:#75715e&#34;&gt;// Empty, just do nothing
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    }
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;show&lt;/span&gt;() {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &amp;lt; &lt;span style=&#34;color:#ae81ff&#34;&gt;9696969&lt;/span&gt;; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; {
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;time&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Sleep&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;time&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Second&lt;/span&gt;)
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt;)
+    }
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;() {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;go&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;show&lt;/span&gt;()
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;forever&lt;/span&gt;()
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;OK we&amp;#39;re done&amp;#34;&lt;/span&gt;)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;An infinite loop here is a busy loop that does nothing except burn CPU time.&lt;/p&gt;
+&lt;h2 id=&#34;4-good---busy-blocking&#34;&gt;4. Good - Busy blocking&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;package&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;
+
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; (
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fmt&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;runtime&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;time&amp;#34;&lt;/span&gt;
+)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;forever&lt;/span&gt;() {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; {
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;runtime&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Gosched&lt;/span&gt;()
+    }
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;show&lt;/span&gt;() {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &amp;lt; &lt;span style=&#34;color:#ae81ff&#34;&gt;9696969&lt;/span&gt;; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; {
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;time&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Sleep&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;time&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Second&lt;/span&gt;)
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt;)
+    }
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;() {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;go&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;show&lt;/span&gt;()
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;forever&lt;/span&gt;()
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;OK we&amp;#39;re done&amp;#34;&lt;/span&gt;)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;It will reduce your CPU usage but it isn&amp;rsquo;t the preferable solution.&lt;/p&gt;
+&lt;h2 id=&#34;5-good---waiting-on-itself&#34;&gt;5. Good - Waiting on itself&lt;/h2&gt;
+&lt;p&gt;We wait but we never done XD&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;package&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;
+
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; (
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fmt&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sync&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;time&amp;#34;&lt;/span&gt;
+)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;forever&lt;/span&gt;() {
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;wg&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;sync&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;WaitGroup&lt;/span&gt;{}
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;wg&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Add&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;wg&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Wait&lt;/span&gt;()
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;show&lt;/span&gt;() {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &amp;lt; &lt;span style=&#34;color:#ae81ff&#34;&gt;9696969&lt;/span&gt;; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; {
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;time&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Sleep&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;time&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Second&lt;/span&gt;)
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt;)
+    }
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;() {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;go&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;show&lt;/span&gt;()
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;forever&lt;/span&gt;()
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;OK we&amp;#39;re done&amp;#34;&lt;/span&gt;)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;6-good---empty-select&#34;&gt;6. Good - Empty select&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;package&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;
+
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; (
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fmt&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;time&amp;#34;&lt;/span&gt;
+)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;forever&lt;/span&gt;() {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;select&lt;/span&gt;{ }
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;show&lt;/span&gt;() {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &amp;lt; &lt;span style=&#34;color:#ae81ff&#34;&gt;9696969&lt;/span&gt;; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; {
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;time&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Sleep&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;time&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Second&lt;/span&gt;)
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt;)
+    }
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;() {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;go&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;show&lt;/span&gt;()
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;forever&lt;/span&gt;()
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;OK we&amp;#39;re done&amp;#34;&lt;/span&gt;)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;7-good---double-locking&#34;&gt;7. Good - Double locking&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;package&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;
+
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; (
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fmt&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sync&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;time&amp;#34;&lt;/span&gt;
+)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;forever&lt;/span&gt;() {
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;m&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;sync&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Mutex&lt;/span&gt;{} &lt;span style=&#34;color:#75715e&#34;&gt;// Same with sync.RWMutex
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;m&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Lock&lt;/span&gt;()
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;m&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Lock&lt;/span&gt;()
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;show&lt;/span&gt;() {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &amp;lt; &lt;span style=&#34;color:#ae81ff&#34;&gt;9696969&lt;/span&gt;; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; {
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;time&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Sleep&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;time&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Second&lt;/span&gt;)
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt;)
+    }
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;() {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;go&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;show&lt;/span&gt;()
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;forever&lt;/span&gt;()
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;OK we&amp;#39;re done&amp;#34;&lt;/span&gt;)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;8-good---reading-an-empty-channel&#34;&gt;8. Good - Reading an Empty Channel&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;package&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;
+
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; (
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fmt&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;time&amp;#34;&lt;/span&gt;
+)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;forever&lt;/span&gt;() {
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;c&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; make(&lt;span style=&#34;color:#66d9ef&#34;&gt;chan&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt;{})
+    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;-&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;c&lt;/span&gt;
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;show&lt;/span&gt;() {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &amp;lt; &lt;span style=&#34;color:#ae81ff&#34;&gt;9696969&lt;/span&gt;; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; {
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;time&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Sleep&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;time&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Second&lt;/span&gt;)
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt;)
+    }
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;() {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;go&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;show&lt;/span&gt;()
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;forever&lt;/span&gt;()
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;OK we&amp;#39;re done&amp;#34;&lt;/span&gt;)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;9-good---self-produce-and-consume&#34;&gt;9. Good - Self produce-and-consume&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;package&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;
+
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; (
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fmt&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;time&amp;#34;&lt;/span&gt;
+)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;forever&lt;/span&gt;() {
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;c&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; make(&lt;span style=&#34;color:#66d9ef&#34;&gt;chan&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt;{}, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;select&lt;/span&gt; {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;-&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;c&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;c&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt;{}{}:
+        }
+    }
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;show&lt;/span&gt;() {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &amp;lt; &lt;span style=&#34;color:#ae81ff&#34;&gt;9696969&lt;/span&gt;; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; {
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;time&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Sleep&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;time&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Second&lt;/span&gt;)
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt;)
+    }
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;() {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;go&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;show&lt;/span&gt;()
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;forever&lt;/span&gt;()
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;OK we&amp;#39;re done&amp;#34;&lt;/span&gt;)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Rest In Peace Kobe Bryant</title>
+      <link>https://ntk148v.github.io/blog/posts/rip-kobe-bryant/</link>
+      <pubDate>Mon, 27 Jan 2020 22:15:07 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/rip-kobe-bryant/</guid>
+      <description>&lt;p&gt;&lt;img  src=&#34;./theundefeated-kobe-bryant.pg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;Source: &lt;a href=&#34;https://theundefeated.com/features/kobe-vs-kobe-bryant-lakers-numbers-8-and-24-jersey-retirement/&#34;target=&#34;_blank&#34;&gt;The Undefeated&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I am not Kobe fan honestly but just like him, basketball is something I love. I hope he&amp;rsquo;s at peace because although his journey in life is over, the legacy he left behind is etched in all our souls.&lt;/p&gt;
+&lt;p&gt;Rest In Peace Mamba 🏀&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;./kobe.jpg&#34;
+        alt/&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Mục tiêu 2020</title>
+      <link>https://ntk148v.github.io/blog/posts/target-2020/</link>
+      <pubDate>Fri, 24 Jan 2020 23:34:23 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/target-2020/</guid>
+      <description>&lt;h2 id=&#34;tổng-kết-2019&#34;&gt;Tổng kết 2019&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;../target-2019&#34;&gt;Mục tiêu 2019&lt;/a&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;Viết mục tiêu cho 2019&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;Kỹ năng&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Sử dụng thành thạo và ứng dụng Golang vào project thực tết.&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;a href=&#34;https://github.com/ntk148v&#34;target=&#34;_blank&#34;&gt;&amp;gt;=1000 commits trên Github&lt;/a&gt;. Hey yooooooo! 🎉&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Học về cách thiết kế một hệ thống phân tán giải quyết bài toán thật -&amp;gt; Vẫn nửa vời :(&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Đưa Kubernetes vào ứng dụng thực tế.&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Củng cố thêm kiến thức đã có hiện tại, nhưng chưa đủ 😢&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Thất bại hoàn toàn: Dành thêm thời gian OpenStack (Kolla-Ansible, Zun,&amp;hellip;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;Sách&lt;/strong&gt;: 20-30 cuốn sách (sách gì cũng được, truyện trinh thám, văn học kinh điển, tech book).&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;Du lịch&lt;/strong&gt;: Quảng Bình - Hải Phòng - Thượng Hải&amp;hellip;&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;Thể thao&lt;/strong&gt;: Một câu chuyện buồn&amp;hellip;&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;Blog&lt;/strong&gt; (là cái này nè): Buồn tiếp.&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;Nhạc nhẽo&lt;/strong&gt;: Buồn tiếp^2, mới tập sơ sơ ukulele, chưa ưng ý.&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;Chụp ảnh&lt;/strong&gt;: Buồn tiếp^3.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;iframe src=&#34;https://giphy.com/embed/vNOL8dKxGXfWg&#34; width=&#34;480&#34; height=&#34;480&#34; frameBorder=&#34;0&#34; class=&#34;giphy-embed&#34; allowFullScreen&gt;&lt;/iframe&gt;&lt;p&gt;&lt;a href=&#34;https://giphy.com/gifs/post-copy-paste-vNOL8dKxGXfWg&#34;&gt;via GIPHY&lt;/a&gt;&lt;/p&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;/summary&gt;
+Qua một năm viết ra những mục tiêu, mình nhận thấy một điều rằng không chỉ mình lười, mình còn chẳng biết thực sự mình sống và làm việc để hướng đến điều gì. Vật chất, hay hiện thực hóa chính là tiền, nhà cửa, xe cộ, mình có thể đạt được không sớm thì muộn. Nhưng sau đó sẽ hướng đến gì tiếp theo?
+&lt;iframe src=&#34;https://giphy.com/embed/Y7VSyIgPkYSxG&#34; width=&#34;480&#34; height=&#34;199&#34; frameBorder=&#34;0&#34; class=&#34;giphy-embed&#34; allowFullScreen&gt;&lt;/iframe&gt;&lt;p&gt;&lt;a href=&#34;https://giphy.com/gifs/will-smith-stay-strong-jaden-Y7VSyIgPkYSxG&#34;&gt;via GIPHY&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Nhưng nếu bạn còn không biết bản thân &lt;code&gt;muốn gì&lt;/code&gt; vậy làm thế nào để theo đuổi?&lt;/p&gt;
+&lt;/details&gt;
+&lt;h2 id=&#34;mục-tiêu-2020&#34;&gt;Mục tiêu 2020&lt;/h2&gt;
+&lt;iframe src=&#34;https://giphy.com/embed/Viw2XAAj1HGFi&#34; width=&#34;480&#34; height=&#34;410&#34; frameBorder=&#34;0&#34; class=&#34;giphy-embed&#34; allowFullScreen&gt;&lt;/iframe&gt;&lt;p&gt;&lt;a href=&#34;https://giphy.com/gifs/well-Viw2XAAj1HGFi&#34;&gt;via GIPHY&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Viết tạm ra đây trước, trước tiên mình phải tìm được câu trả lời cho câu hỏi phía trên đã.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Kỹ năng&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;Phát huy những gì đã làm được từ năm trước.&lt;/li&gt;
+&lt;li&gt;Học về kỹ năng căn bản tốt hơn, ít nhất là tốt cho interview.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Du lịch&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;Miền Tây Nam Bộ, yup!!!!&lt;/li&gt;
+&lt;li&gt;Lào? (Maybe)&lt;/li&gt;
+&lt;li&gt;Phan Rang/Lý Sơn.&lt;/li&gt;
+&lt;li&gt;Huế.&lt;/li&gt;
+&lt;li&gt;Hải Phòng.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Sách&lt;/strong&gt;: Đọc thêm sách Tech.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Thể thao&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;Tiếp tục cố gắng chơi bóng rổ. Ballin&#39; 🏀&lt;/li&gt;
+&lt;li&gt;Tiếp tục tập Workout - giữ vững nhịp tập thể dục buổi chiều.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Chụp ảnh&lt;/strong&gt;: Cần xác định rõ liệu còn yêu thích nhiếp ảnh không? Hay chỉ là sở thích nhất thời.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tiếng Anh&lt;/strong&gt;: Tiếng Anh mình thật sự tệ, cần phải đi học tiếng Anh nghiêm túc. Ít nhất là tiếng Anh giao tiếp, tránh việc nói chuyện bị khớp.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Công việc&lt;/strong&gt;: Suy nghĩ thực sự về một cơ hội phát triển bản thân khác. Có thể nhảy việc, có thể làm thêm bên ngoài (đúng hoặc trái ngành).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Nhà cửa/xe cộ&lt;/strong&gt;: Cái này có thể quá tầm với nhưng cứ viết đây để cố gắng.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Blog Guideline</title>
-      <link>/blog/posts/blog-guideline/</link>
+      <link>https://ntk148v.github.io/blog/posts/blog-guideline/</link>
       <pubDate>Thu, 22 Aug 2019 14:40:59 +0700</pubDate>
       
-      <guid>/blog/posts/blog-guideline/</guid>
-      <description>In the beginning, I supposed that I&amp;rsquo;m the only one who write-up thing in this blog. But now thing was change, this blog might have multiple bloggers. So it needs a guideline to describe how to contribute.
-1. How to submit a new content  Here is the source repo. Fork it &amp;amp; start writing. Create a pull request to submit your content. Make sure to create your author page.  2.</description>
+      <guid>https://ntk148v.github.io/blog/posts/blog-guideline/</guid>
+      <description>&lt;p&gt;In the beginning, I supposed that I&amp;rsquo;m the only one who write-up thing in this blog. But now thing was change, this blog might have multiple &lt;a href=&#34;https://ntk148v.github.io/blog/authors/&#34;target=&#34;_blank&#34;&gt;bloggers&lt;/a&gt;. So it needs a guideline to describe how to contribute.&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://sayingimages.com/wp-content/uploads/welcome-to-the-team-meme.jpg&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;h2 id=&#34;1-how-to-submit-a-new-content&#34;&gt;1. How to submit a new content&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ntk148v/blog&#34;target=&#34;_blank&#34;&gt;Here&lt;/a&gt; is the source repo. Fork it &amp;amp; start writing.&lt;/li&gt;
+&lt;li&gt;Create a pull request to submit your content.&lt;/li&gt;
+&lt;li&gt;Make sure to create your author page.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2-create-an-author-page&#34;&gt;2. Create an author page&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Create a directory under &lt;a href=&#34;https://github.com/ntk148v/blog/tree/master/content/authors&#34;target=&#34;_blank&#34;&gt;content/authors&lt;/a&gt;, name it as your desire nickname. For example, your name is &lt;code&gt;amazingblogger&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Directory structure.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;~/Documents/blog master $? via ⬢ v8.10.0 took 6s tree content/authors    
+content/authors
+├── donghm
+│   ├── avatar.jpg
+│   └── index.md
+├── _index.md
+└── kiennt
+    ├── avatar.jpg
+    └── index.md
+└── amazingblogger &lt;span style=&#34;color:#75715e&#34;&gt;## Here&lt;/span&gt;
+    ├── avatar.jpg
+    └── index.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;Write about yourself in &lt;code&gt;index.md&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
+&lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Amazing Blogger&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;contact&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;twitter&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;@blogger&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;facebook&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;blogger&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;github&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;blogger&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;email&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;blogger@gmail.com&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;website&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://blogger.io/&amp;#34;&lt;/span&gt;
+---
+
+&lt;span style=&#34;color:#ae81ff&#34;&gt;Your amazing personal page here&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;Don&amp;rsquo;t forget to place your avatar in directory. The picture format should be &lt;code&gt;jpg&lt;/code&gt; or &lt;code&gt;png&lt;/code&gt;, no name restriction.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3-write-a-post&#34;&gt;3. Write a post&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Very similar with author page, just place your post under &lt;a href=&#34;https://github.com/ntk148v/blog/tree/master/content/posts&#34;target=&#34;_blank&#34;&gt;content/posts&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ hugo new content/posts/a-new-post.md -t sam
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;A sample post.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
+&lt;span style=&#34;color:#f92672&#34;&gt;title&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Blog Guideline&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;date&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;2019-08-22T14:40:59&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;+07&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;comments&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;authors&lt;/span&gt;:
+    - &lt;span style=&#34;color:#ae81ff&#34;&gt;kiennt&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;showDate&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;tags&lt;/span&gt;: [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;blog&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;tech&amp;#34;&lt;/span&gt;]
+---
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;Multiple authors feature is supported.&lt;/li&gt;
+&lt;li&gt;You can disable or enable comment section with &lt;code&gt;comment&lt;/code&gt; option. You might want to take look at &lt;a href=&#34;https://ntk148v.github.io/blog/posts/lets-comment/&#34;target=&#34;_blank&#34;&gt;how I create comment section&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Don&amp;rsquo;t forget to add a tag.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4-create-a-photoart-gallery&#34;&gt;4. Create a photo/art gallery&lt;/h2&gt;
+&lt;p&gt;Hmm, this is my secret corner, so&amp;hellip; Might be in future?&lt;/p&gt;
+&lt;h2 id=&#34;5-scripts&#34;&gt;5. Scripts&lt;/h2&gt;
+&lt;p&gt;You can notice that some shell scripts are placed in repository. You can only use these if you&amp;rsquo;re the repository collaborator. Just send me a request! 😄&lt;/p&gt;
+&lt;h3 id=&#34;51-lazy-pull&#34;&gt;5.1. Lazy pull&lt;/h3&gt;
+&lt;p&gt;Just a script to init and update submodule, do git pull (both master and gh-pages branchs).&lt;/p&gt;
+&lt;h3 id=&#34;52-publish-to-github-page&#34;&gt;5.2. Publish to github page&lt;/h3&gt;
+&lt;p&gt;I deploy the blog from &lt;code&gt;gh-pages&lt;/code&gt; branch. You can also tell Github pages to treat your &lt;code&gt;master&lt;/code&gt; branch as the published site or point to a separate &lt;code&gt;gh-pages&lt;/code&gt; branch. The latter approach is a bit more complex but has some advantages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It keeps your source and generated website in different branches and therefore maintains version control history for both.&lt;/li&gt;
+&lt;li&gt;Unlike the preceding docs/ option, it uses the default public folder.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The &lt;a href=&#34;https://github.com/ntk148v/blog/blob/master/publish_to_ghpages.sh&#34;target=&#34;_blank&#34;&gt;publish_to_ghpages.sh&lt;/a&gt; automates the set up steps.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Openstack Autoscaling New Approach</title>
+      <link>https://ntk148v.github.io/blog/posts/openstack-autoscaling-new-approach/</link>
+      <pubDate>Mon, 19 Aug 2019 21:19:38 +0700</pubDate>
       
+      <guid>https://ntk148v.github.io/blog/posts/openstack-autoscaling-new-approach/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;NOTE(kiennt): There is a &lt;a href=&#34;https://github.com/vCloud-DFTBA/faythe/blob/legacy/docs/autoscaling.md&#34;target=&#34;_blank&#34;&gt;legacy Faythe guideline&lt;/a&gt;. The new version is coming soon, check &lt;a href=&#34;https://github.com/vCloud-DFTBA/faythe&#34;target=&#34;_blank&#34;&gt;its repository&lt;/a&gt; for status.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This guide describes how to automatically scale out your Compute instances in response to heavy system usage. By combining with Prometheus pre-defined rules that consider factors such as CPU or memory usage, you can configure OpenStack Orchestration (Heat) to add and remove additional instances automatically, when they are needed.&lt;/p&gt;
+&lt;h2 id=&#34;1-the-standard-openstack-autoscaling-approach&#34;&gt;1. The standard OpenStack Autoscaling approach&lt;/h2&gt;
+&lt;p&gt;Let&amp;rsquo;s talk about the standard OpenStack Autoscaling approach before goes to the new approach.&lt;/p&gt;
+&lt;h3 id=&#34;11-main-components&#34;&gt;1.1. Main components&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Orchestration: The core component providing automatic scaling is Orchestration (heat). Orchestration allows you to define rules using human-readable YAML templates. These rules are applied to evaluate system load based on Telemetry data to find out whether there is need to more instances into the stack. Once the load has dropped, Orchestration can automatically remove the unused instances again.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Telemetry: Telemetry does performance monitoring of your OpenStack environment, collecting data on CPU, storage and memory utilization for instances and physical hosts. Orchestration templates examine Telemetry data to access whether any pre-defined action should start.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ceilometer: a data collection service that provides the ability to normalise and transform data across all current OpenStack core components with work underway to support future OpenStack components.&lt;/li&gt;
+&lt;li&gt;Gnocchi: provides a time-series resource indexing, metric storage service with enables users to capture OpenStack resources and the metrics associated with them.&lt;/li&gt;
+&lt;li&gt;Aodh: enables the abiltity to trigger actions based on defined rules against sample or event data collected by Ceilometer.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;12-autoscaling-process&#34;&gt;1.2. Autoscaling process&lt;/h3&gt;
+&lt;p&gt;For more details, you could check &lt;a href=&#34;https://ibm-blue-box-help.github.io/help-documentation/heat/autoscaling-with-heat/&#34;target=&#34;_blank&#34;&gt;IBM help documentation&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;13-drawbacks&#34;&gt;1.3. Drawbacks&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Ceilometer, Aodh are lacking of contribution. Ceilometer API was &lt;a href=&#34;https://review.opendev.org/#/c/512286/&#34;target=&#34;_blank&#34;&gt;deprecated&lt;/a&gt;. Either Transform and pipeline was &lt;a href=&#34;https://review.opendev.org/#/c/560854/&#34;target=&#34;_blank&#34;&gt;the same state&lt;/a&gt;, it means cpu_util will be unusable soon. In the commit message, @sileht - Ceilometer Core reviewer wrote that &amp;ldquo;Also backend like Gnocchi offers a better alternative to compute them&amp;rdquo;. But Aodh still &lt;a href=&#34;https://github.com/openstack/aodh/blob/master/aodh/evaluator/gnocchi.py#L140&#34;target=&#34;_blank&#34;&gt;deprecated Gnocchi aggregation API&lt;/a&gt; which doesn&amp;rsquo;t support &lt;code&gt;rate:mean&lt;/code&gt;. For more details, you can follow the &lt;a href=&#34;https://github.com/gnocchixyz/gnocchi/issues/999&#34;target=&#34;_blank&#34;&gt;issue I&amp;rsquo;ve opened before&lt;/a&gt;. Be honest, I was gave up on it - 3 projects which was tightly related together, one change might cause a sequence and break the whole stack, how can I handle that?&lt;/li&gt;
+&lt;li&gt;Aodh has its own formula to define rule based on Ceilometer metrics (that were stored in Gnocchi). But it isn&amp;rsquo;t correct sometimes cause the wrong scaling action.&lt;/li&gt;
+&lt;li&gt;In reality, I face the case that Rabbitmq was under heavy load due to Ceilometer workload.&lt;/li&gt;
+&lt;li&gt;IMO, Gnocchi documentation is not good enough. It might be a bias personal opinion.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2-the-new-approach-with-faythe&#34;&gt;2. The new approach with Faythe&lt;/h2&gt;
+&lt;h3 id=&#34;21-the-idea&#34;&gt;2.1. The idea&lt;/h3&gt;
+&lt;p&gt;Actually, this isn&amp;rsquo;t a complete new approach, it still leverages Orchestration (heat) to do scaling action. The different comes from Monitor service.&lt;/p&gt;
+&lt;p&gt;Take a look at &lt;a href=&#34;https://www.slideshare.net/GuanYuLin1/autoscale-a-selfhealing-cluster-in-openstack-with-heat&#34;target=&#34;_blank&#34;&gt;Rico Lin - Heat&amp;rsquo;s PTL, autoscale slide&lt;/a&gt;, basically, Autoscaling is the combination of 3 steps:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Metering.&lt;/li&gt;
+&lt;li&gt;Alarm.&lt;/li&gt;
+&lt;li&gt;Scale.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img  src=&#34;https://image.slidesharecdn.com/auto-scaleaself-healingclusterinopenstack1-180824033106/95/autoscale-a-selfhealing-cluster-in-openstack-with-heat-21-638.jpg?cb=1536873751&#34;
+        alt/&gt;&lt;/p&gt;
+&lt;p&gt;OpenStack Telemetry takes care of &lt;code&gt;Metering&lt;/code&gt; and &lt;code&gt;Alarm&lt;/code&gt;. Ok, the new approach is simply using &lt;em&gt;another service that can take Telemetry roles&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;The &lt;em&gt;another service&lt;/em&gt; is &lt;a href=&#34;https://prometheus.io/&#34;target=&#34;_blank&#34;&gt;Prometheus stack&lt;/a&gt;. The question here is why I chose this?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Nice query language: Prometheus provides a functional query language called PromQL (Prometheus Query Language) that lets the user select and aggregate time series data in real time.&lt;/li&gt;
+&lt;li&gt;A wide range of exporter: The more exporter the more metrics I can collect and evaluate.&lt;/li&gt;
+&lt;li&gt;Flexibile: Beside the system factor like CPU/Memory usage, I can evaluate any metrics I can collect, for example: JVM metrics.&lt;/li&gt;
+&lt;li&gt;// Take time to investigate about Prometheus and fill it here by yourself&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;22-the-implementation&#34;&gt;2.2. The implementation&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;The ideal architecture&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;                                               +--------------------------------------------------+
+                                               |                                                  |
+                                               |     +-----------------+  +-----------------+     |
++---------------------+                        |     |   Instance 1    |  |   Instance 2    |     |
+|                     |                        |     |                 |  |                 |     |
+|                     |            Scrape Metrics    |  +-----------+  |  |  +-----------+  |     |
+|  Prometheus server  &amp;lt;------------------------+--------+Exporter(s)|  |  |  |Exporter(s)|  |     |
+|                     |                        |     |  +-----------+  |  |  +-----------+  |     |
+|                     |                        |     +-----------------+  +-----------------+     |
++----------+----------+                        |     +--------------------------------------+     |
+           |                                   |     |           Autoscaling Group          |     |
+           | Fire alerts                       |     +--------------------------------------+     |
+           |                                   |                                                  |
+           |                                   |                                                  |
++----------v------------+                      |     +--------------------------------------+     |
+|                       |         Send scale request |                                      |     |
+|Prometheus Alertmanager+----------------------+-----&amp;gt;          Scaling Policy              |     |
+|                       |                      |     |                                      |     |
++-----------------------+                      |     +--------------------------------------+     |
+                                               |                                                  |
+                                               |                     Heat Stack                   |
+                                               +--------------------------------------------------+
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;Prometheus server scrapes metrics from exporters that launch inside Instance.&lt;/li&gt;
+&lt;li&gt;Prometheus server evaluates metrics with pre-defined rules.&lt;/li&gt;
+&lt;li&gt;Prometheus server fires alert to Prometheus alertmanager.&lt;/li&gt;
+&lt;li&gt;Prometheus alertmanager sends POST Scale request to Heat Scaling policy with webhook configuration.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;It&amp;rsquo;s a piece of cake, right? But &lt;em&gt;where is Faythe, I don&amp;rsquo;t see it?&lt;/em&gt; Let&amp;rsquo;s talk about the solution problems:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Prometheus Alertmanager webhook config doesn&amp;rsquo;t &lt;a href=&#34;https://github.com/prometheus/common/issues/140&#34;target=&#34;_blank&#34;&gt;support additional HTTP headers&lt;/a&gt;. And they won&amp;rsquo;t! 😢 Heat Scaling Policy signal url requires &lt;code&gt;X-Auth-Token&lt;/code&gt; in header and Prometheus can&amp;rsquo;t generate a token itself, either.&lt;/li&gt;
+&lt;li&gt;Heat doesn&amp;rsquo;t recognize the resolved alerts from Prometheus Alertmanager to execute scale in action.&lt;/li&gt;
+&lt;li&gt;How to connect these components together?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We need a 3rd service to solve these problems - &lt;code&gt;Faythe does some magic&lt;/code&gt;.&lt;/p&gt;
+&lt;center&gt;&lt;iframe src=&#34;https://giphy.com/embed/12NUbkX6p4xOO4&#34; width=&#34;480&#34; height=&#34;440&#34; frameBorder=&#34;0&#34; class=&#34;giphy-embed&#34; allowFullScreen&gt;&lt;/iframe&gt;&lt;p&gt;&lt;a href=&#34;https://giphy.com/gifs/shia-labeouf-12NUbkX6p4xOO4&#34;&gt;via GIPHY&lt;/a&gt;&lt;/p&gt;&lt;/center&gt;
+&lt;p&gt;&lt;strong&gt;The reality architecture&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;                                              ++-------------------------------------------------+
+                                               |                                                  +
+                                               |     +-----------------+  +-----------------+     |
++---------------------+                        |     |   Instance 1    |  |   Instance 2    |     |
+|                     |                        +     |                 |  |                 |     |
+|                     |            Scrape Metrics    |  +-----------+  |  |  +-----------+  |     |
+|  Prometheus server  &amp;lt;------------------------+--------+Exporter(s)|  |  |  |Exporter(s)|  |     |
+|                     |                        |     |  +-----------+  |  |  +-----------+  |     |
+|                     |                        |     +-----------------+  +-----------------+     |
++----------+----------+                        |     +--------------------------------------+     |
+           |                                   |     |           Autoscaling Group          |     |
+           | Fire alerts                       |     +--------------------------------------+     |
+           |                                   |                                                  |
+           |                                   |                                                  |
++----------v------------+                      |     +--------------------------------------+     |
+|                       |                      |     |                                      |     |
+|Prometheus Alertmanager|                      |                Scaling Policy              |     |
+|                       |                      |     |                                      |     |
++-----------+-----------+                      |     +-----^--------------------------------+     |
+            |                                  |           |                                      |
+            | Send request through             |           |         Heat Stack                   |
+            | pre-configured webhook           +--------------------------------------------------+
+            |                                              |
++-----------v-----------+                                  |
+|                       |                                  |
+|        Faythe         +----------------------------------+
+|                       |       Send actual scale request
++-----------------------+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;NOTE: The stack leverages OpenStack instance metadata and Prometheus labels.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Prometheus server scrapes metrics from exporters that launch inside Instance.&lt;/li&gt;
+&lt;li&gt;Prometheus server evaluates metrics with pre-defined rules.&lt;/li&gt;
+&lt;li&gt;Prometheus server fires alert to Prometheus alertmanager.&lt;/li&gt;
+&lt;li&gt;Prometheus alertmanager sends Alerts via pre-configured webhook URL - Faythe endpoint.&lt;/li&gt;
+&lt;li&gt;Faythe receives and processes Alerts (dedup, group alert and generate a Heat signal URL) and creates a POST request to scale endpoint.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;23-guideline&#34;&gt;2.3. Guideline&lt;/h3&gt;
+&lt;p&gt;The current aprroach requires some further setup and configuration from Prometheus and Heat stack. You will see that it&amp;rsquo;s quite complicated.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The simplify in logic is paid by the complex config steps.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Step 1:&lt;/strong&gt; Create a stack - the following is the sample template. It has several requirements:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;OS::Heat::ScalingPolicy has to be named as &lt;code&gt;scaleout_policy&lt;/code&gt; and &lt;code&gt;scalein_policy&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;OS::Heat::AutoScalingGroup&amp;rsquo;s instance metadata has to contain &lt;code&gt;stack_asg_name&lt;/code&gt; and &lt;code&gt;stack_asg_id&lt;/code&gt;. It will be used to generate signal URL.&lt;/li&gt;
+&lt;li&gt;Instance should have a cloud init script to enable and start Prometheus exporters automatically.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;---
+&lt;span style=&#34;color:#f92672&#34;&gt;resources&lt;/span&gt;:
+  &lt;span style=&#34;color:#f92672&#34;&gt;asg&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;type&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;OS::Heat::AutoScalingGroup&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;properties&lt;/span&gt;:
+      &lt;span style=&#34;color:#f92672&#34;&gt;min_size&lt;/span&gt;: { &lt;span style=&#34;color:#f92672&#34;&gt;get_param&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;min_size }&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;max_size&lt;/span&gt;: { &lt;span style=&#34;color:#f92672&#34;&gt;get_param&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;max_size }&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;resource&lt;/span&gt;:
+        &lt;span style=&#34;color:#f92672&#34;&gt;type&lt;/span&gt;: { &lt;span style=&#34;color:#f92672&#34;&gt;get_param&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;service_template }&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;properties&lt;/span&gt;:
+          &lt;span style=&#34;color:#f92672&#34;&gt;flavor&lt;/span&gt;: { &lt;span style=&#34;color:#f92672&#34;&gt;get_param&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;flavor }&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;image&lt;/span&gt;: { &lt;span style=&#34;color:#f92672&#34;&gt;get_param&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;image }&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;key_name&lt;/span&gt;: { &lt;span style=&#34;color:#f92672&#34;&gt;get_param&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;key_name }&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;network&lt;/span&gt;: { &lt;span style=&#34;color:#f92672&#34;&gt;get_param&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;network }&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;subnet&lt;/span&gt;: { &lt;span style=&#34;color:#f92672&#34;&gt;get_param&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;subnet }&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;metadata&lt;/span&gt;: {
+              &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;monitoring&amp;#34;: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#75715e&#34;&gt;## Required&lt;/span&gt;
+              &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;service&amp;#34;: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;myservice&amp;#34;&lt;/span&gt;,
+              &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;stack_asg_name&amp;#34;: &lt;/span&gt;{ &lt;span style=&#34;color:#f92672&#34;&gt;get_param&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;OS::stack_name&amp;#34;&lt;/span&gt; }, &lt;span style=&#34;color:#75715e&#34;&gt;## Required&lt;/span&gt;
+              &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;stack_asg_id&amp;#34;: &lt;/span&gt;{ &lt;span style=&#34;color:#f92672&#34;&gt;get_param&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;OS::stack_id&amp;#34;&lt;/span&gt; }, &lt;span style=&#34;color:#75715e&#34;&gt;## Required&lt;/span&gt;
+            }
+          &lt;span style=&#34;color:#f92672&#34;&gt;security_group&lt;/span&gt;: { &lt;span style=&#34;color:#f92672&#34;&gt;get_param&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;security_group }&lt;/span&gt;
+
+  &lt;span style=&#34;color:#f92672&#34;&gt;scaleout_policy&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;## Have to be named as `scaleout_policy`&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;type&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;OS::Heat::ScalingPolicy&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;properties&lt;/span&gt;:
+      &lt;span style=&#34;color:#f92672&#34;&gt;adjustment_type&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;change_in_capacity&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;auto_scaling_group_id&lt;/span&gt;: { &lt;span style=&#34;color:#f92672&#34;&gt;get_resource&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;asg }&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;cooldown&lt;/span&gt;: { &lt;span style=&#34;color:#f92672&#34;&gt;get_param&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;scale_out_cooldown }&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;scaling_adjustment&lt;/span&gt;: { &lt;span style=&#34;color:#f92672&#34;&gt;get_param&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;scaling_out_adjustment }&lt;/span&gt;
+
+  &lt;span style=&#34;color:#f92672&#34;&gt;scalein_policy&lt;/span&gt;: &lt;span style=&#34;color:#75715e&#34;&gt;## Have to be named as `scalein_policy`&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;type&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;OS::Heat::ScalingPolicy&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;properties&lt;/span&gt;:
+      &lt;span style=&#34;color:#f92672&#34;&gt;adjustment_type&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;change_in_capacity&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;auto_scaling_group_id&lt;/span&gt;: { &lt;span style=&#34;color:#f92672&#34;&gt;get_resource&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;asg }&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;cooldown&lt;/span&gt;: { &lt;span style=&#34;color:#f92672&#34;&gt;get_param&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;scale_in_cooldown }&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;scaling_adjustment&lt;/span&gt;: { &lt;span style=&#34;color:#f92672&#34;&gt;get_param&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;scaling_in_adjustment }&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Step 2:&lt;/strong&gt; Configure Prometheus openstack discovery&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;- &lt;span style=&#34;color:#f92672&#34;&gt;job_name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;openstack_scale_test&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;openstack_sd_configs&lt;/span&gt;:
+    - &lt;span style=&#34;color:#f92672&#34;&gt;role&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;instance&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;identity_endpoint&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;openstackendpoint&amp;gt;&amp;#34;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;username&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;openstackusername&amp;gt;&amp;#34;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;password&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;openstackpassword&amp;gt;&amp;#34;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;domain_name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;default&amp;#34;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;port&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;9100&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;## Exporter endpoint&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;refresh_interval&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;20s&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;region&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;RegionOne&amp;#34;&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;project_name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;openstackproject&amp;gt;&amp;#34;&lt;/span&gt;
+
+  &lt;span style=&#34;color:#f92672&#34;&gt;relabel_configs&lt;/span&gt;:
+    &lt;span style=&#34;color:#75715e&#34;&gt;## Only keep metrics from ACTIVE instance&lt;/span&gt;
+    - &lt;span style=&#34;color:#f92672&#34;&gt;source_labels&lt;/span&gt;: [&lt;span style=&#34;color:#ae81ff&#34;&gt;__meta_openstack_instance_status]&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;action&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;keep&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;regex&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;ACTIVE&lt;/span&gt;
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;## Only scrape from instance with monitoring tag&lt;/span&gt;
+    - &lt;span style=&#34;color:#f92672&#34;&gt;source_labels&lt;/span&gt;: [&lt;span style=&#34;color:#ae81ff&#34;&gt;__meta_openstack_tag_monitoring]&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;action&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;keep&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;regex&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+    - &lt;span style=&#34;color:#f92672&#34;&gt;source_labels&lt;/span&gt;: [&lt;span style=&#34;color:#ae81ff&#34;&gt;__meta_openstack_project_id]&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;target_label&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;project_id&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;replacement&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;$1&lt;/span&gt;
+
+    - &lt;span style=&#34;color:#f92672&#34;&gt;source_labels&lt;/span&gt;: [&lt;span style=&#34;color:#ae81ff&#34;&gt;__meta_openstack_tag_stack_asg_name]&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;target_label&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;stack_asg_name&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;replacement&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;$1&lt;/span&gt;
+
+    - &lt;span style=&#34;color:#f92672&#34;&gt;source_labels&lt;/span&gt;: [&lt;span style=&#34;color:#ae81ff&#34;&gt;__meta_openstack_tag_stack_asg_id]&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;target_label&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;stack_asg_id&lt;/span&gt;
+      &lt;span style=&#34;color:#f92672&#34;&gt;replacement&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;$1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Step 3:&lt;/strong&gt; Define a Prometheus rule, for example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;groups&lt;/span&gt;:
+  - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;targets&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;rules&lt;/span&gt;:
+      - &lt;span style=&#34;color:#f92672&#34;&gt;alert&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;high_memory_load&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;expr&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;avg by(stack_asg_id, stack_asg_name, project_id) ((node_memory_MemTotal_bytes{service=&amp;#34;myservice&amp;#34;} - node_memory_MemFree_bytes{service=&amp;#34;myservice&amp;#34;}) / node_memory_MemTotal_bytes{service=&amp;#34;myservice&amp;#34;} * 100) &amp;gt; 80&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;for&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;5m&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;labels&lt;/span&gt;:
+          &lt;span style=&#34;color:#f92672&#34;&gt;severity&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;critical&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;annotations&lt;/span&gt;:
+          &lt;span style=&#34;color:#f92672&#34;&gt;summary&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;High memory&amp;#34;&lt;/span&gt;
+          &lt;span style=&#34;color:#f92672&#34;&gt;description&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Instance {{ $labels.instance }} of job {{ $labels.job }} (stack {{ $labels.stack_id }} has been high af for 5m&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Step 4:&lt;/strong&gt; Configure Prometheus Alertmanager webhook, for example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;route&lt;/span&gt;:
+  &lt;span style=&#34;color:#f92672&#34;&gt;receiver&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;custom_alert&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;group_wait&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;20s&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;group_interval&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;3m&lt;/span&gt;
+
+&lt;span style=&#34;color:#f92672&#34;&gt;receivers&lt;/span&gt;:
+  - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;custom_alert&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;webhook_configs&lt;/span&gt;:
+      - &lt;span style=&#34;color:#f92672&#34;&gt;send_resolved&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;http://&amp;lt;faythe-host&amp;gt;:&amp;lt;faythe-port&amp;gt;/openstack/autoscaling/openstack-1f&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;http_config&lt;/span&gt;:
+          &lt;span style=&#34;color:#f92672&#34;&gt;basic_auth&lt;/span&gt;:
+            &lt;span style=&#34;color:#f92672&#34;&gt;username&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;admin&amp;#34;&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;password&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;password&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Note that, &lt;code&gt;openstack-1f&lt;/code&gt; has to be the name of OpenStack configuration group in Faythe config file. It helps Faythe to work with multiple OpenStack.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Step 5:&lt;/strong&gt; Configure Faythe&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## OpenStackConfiguration.&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;openstack_configs&lt;/span&gt;:
+  &lt;span style=&#34;color:#f92672&#34;&gt;openstack-1f&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;region_name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;RegionOne&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;domain_name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Default&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;auth_url&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;openstackendpoint&amp;gt;&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;username&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;openstackusername&amp;gt;&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;password&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;openstackpassword&amp;gt;&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;project_name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;openstackproject&amp;gt;&amp;#34;&lt;/span&gt;
+
+&lt;span style=&#34;color:#f92672&#34;&gt;server_config&lt;/span&gt;:
+  &lt;span style=&#34;color:#75715e&#34;&gt;## Example:&lt;/span&gt;
+  &lt;span style=&#34;color:#75715e&#34;&gt;## &amp;#34;www.example.com&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75715e&#34;&gt;## &amp;#34;([a-z]+).domain.com&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#75715e&#34;&gt;## remote_host_pattern: &amp;#34;10.240.202.209.*&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;basic_auth&lt;/span&gt;:
+    &lt;span style=&#34;color:#f92672&#34;&gt;username&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;admin&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;password&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;password&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#f92672&#34;&gt;log_dir&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/whatever/directory/faythe-logs&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Step 6:&lt;/strong&gt; Let&amp;rsquo;s make them work:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Prometheus server.&lt;/li&gt;
+&lt;li&gt;Prometheus alertmanager.&lt;/li&gt;
+&lt;li&gt;Faythe.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;&lt;iframe src=&#34;https://giphy.com/embed/cLlVn5zC5UOSmQZKJ7&#34; width=&#34;480&#34; height=&#34;270&#34; frameBorder=&#34;0&#34; class=&#34;giphy-embed&#34; allowFullScreen&gt;&lt;/iframe&gt;&lt;p&gt;&lt;a href=&#34;https://giphy.com/gifs/RobertEBlackmon-bye-go-away-anna-wintour-cLlVn5zC5UOSmQZKJ7&#34;&gt;via GIPHY&lt;/a&gt;&lt;/p&gt;&lt;/center&gt;
+&lt;h3 id=&#34;24-drawbacks-and-todo&#34;&gt;2.4. Drawbacks and TODO&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Drawbacks&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The configuration steps is way too complicated, many manual steps have to be done.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;TODO&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Simplify strategy, might need a service discovery.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Linh Tinh</title>
+      <link>https://ntk148v.github.io/blog/gallery/linh-tinh/</link>
+      <pubDate>Wed, 01 May 2019 23:23:13 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/gallery/linh-tinh/</guid>
+      <description>&lt;p&gt;Thỉnh thoảng chụp xong cũng không nhớ chụp hôm nào, chụp về chủ đề gì, tại sao lại chụp. Thôi để tạm đây vậy&amp;hellip;&lt;/p&gt;
+</description>
     </item>
     
   </channel>
