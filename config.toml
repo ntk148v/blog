@@ -1,43 +1,16 @@
 baseurl = "https://ntk148v.github.io/blog"
 languageCode = "en-us"
-theme = "hugo-notepadium"
+theme = "book"
 pygmentsCodefences = true
 enableEmoji = true
+enableGitInfo = false
 
 [params]
-style = "light"
-logoText = "/home/kiennt"
-license = "CC License"
-slogan = "Kiennt's ramblings"
-
-[params.math]
-enable = true # optional: true, false. Enable globally, default: false. You can always enable math on per page.
-use = "katex" # option: "katex", "mathjax". default: "katex"
-
-[params.syntax]
-use = "none" # builtin: "prismjs", "hljs". "none" means Chroma
-theme = "dracula"
-darkTheme = "xcode-dark" # apply this theme in dark mode
-
-[params.share]
-enable = false
-addThisId = ""
-inlineToolId = ""
-
-[params.nav]
-showCategories = false # /categories/
-showTags = true # /tags/
-
-[[params.nav.custom]]
-title = "Gallery"
-url = "/gallery"
-
-[[params.nav.custom]]
-title = "RSS"
-url = "/index.xml"
-
-[params.assets]
-css = ["css/custom.css", "css/font.css"]
+BookTheme = 'auto'
+BookRepo = 'https://github.com/ntk148v/blog'
+BookComments = true
+BookServiceWorker = true
+BookMenuBundle = '/menu'
 
 # set all headings to their default size (depending on browser settings)
 # it's set to `true` by default
@@ -54,8 +27,3 @@ unsafe = true
 [languages.en]
 languageName = "English"
 title = "/home/kiennt"
-
-[imaging]
-resampleFilter = "box"
-quality = 100
-anchor = "smart"
