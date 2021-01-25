@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" dir=>
+
+<head>
+  <meta name="generator" content="Hugo 0.80.0" />
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="NOTE: This is my perspective aggregation. You can easily find these such of knowledges in the references.
+ 1. Context #  Etcd Version v3.4.0.
+2. Requirements #  2.1. Number of nodes #   &gt;= 3 nodes. A etcd cluster needs a majority of nodes, a quorum to agree on updates to the cluster state. For a cluster with n-members, quorum is (n/2)&#43;1.  2.2. CPUs #   Etcd doesn&rsquo;t require a lot of CPU capacity.">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="Operate Etcd cluster" />
+<meta property="og:description" content="NOTE: This is my perspective aggregation. You can easily find these such of knowledges in the references.
+ 1. Context #  Etcd Version v3.4.0.
+2. Requirements #  2.1. Number of nodes #   &gt;= 3 nodes. A etcd cluster needs a majority of nodes, a quorum to agree on updates to the cluster state. For a cluster with n-members, quorum is (n/2)&#43;1.  2.2. CPUs #   Etcd doesn&rsquo;t require a lot of CPU capacity." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ntk148v.github.io/blog/posts/operate-etcd-cluster/" />
+<meta property="article:published_time" content="2020-04-28T11:24:04+07:00" />
+<meta property="article:modified_time" content="2020-04-28T11:24:04+07:00" /><meta property="og:site_name" content="/home/kiennt" />
+<title>Operate Etcd cluster | /home/kiennt</title>
+<link rel="manifest" href="/blog/manifest.json">
+<link rel="icon" href="/blog/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/blog/book.min.5ca2df5b20a7e4a8337b9d188be38d0ada50d667cf0965aa47b5dc5064923270.css" integrity="sha256-XKLfWyCn5Kgze50Yi&#43;ONCtpQ1mfPCWWqR7XcUGSSMnA=">
+<script defer src="/blog/en.search.min.a079338db8fd48f238863eeba3deae1ffbc297059015eb8f2bd3948b1e0fd07f.js" integrity="sha256-oHkzjbj9SPI4hj7ro96uH/vClwWQFeuPK9OUix4P0H8="></script>
+
+<script defer src="/blog/sw.min.be1e3b3f88e332c359acd5e967344f6f6c1d04e690ab8dda0c12abe7c950a1d2.js" integrity="sha256-vh47P4jjMsNZrNXpZzRPb2wdBOaQq43aDBKr58lQodI="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body dir=>
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/blog"><span>/home/kiennt</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  <ul>
+<li><a href="/blog/authors/kiennt/">About</a></li>
+<li><a href="/blog/posts/">Blog</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/blog/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Operate Etcd cluster</strong>
+
+  <label for="toc-control">
+    
+    <img src="/blog/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-context">1. Context</a></li>
+    <li><a href="#2-requirements">2. Requirements</a>
+      <ul>
+        <li><a href="#21-number-of-nodes">2.1. Number of nodes</a></li>
+        <li><a href="#22-cpus">2.2. CPUs</a></li>
+        <li><a href="#23-memory">2.3. Memory</a></li>
+        <li><a href="#24-disk">2.4. Disk</a></li>
+        <li><a href="#25-network">2.5. Network</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-tuning">3. Tuning</a>
+      <ul>
+        <li><a href="#31-time-parameters">3.1. Time parameters</a></li>
+        <li><a href="#32-disk">3.2. Disk</a></li>
+        <li><a href="#33-snapshot">3.3. Snapshot</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-maintenance">4. Maintenance</a>
+      <ul>
+        <li><a href="#41-history-compaction">4.1. History compaction</a></li>
+        <li><a href="#42-defragmentation">4.2. Defragmentation</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-references">5. References</a></li>
+  </ul>
+</nav>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+<article class="markdown">
+  <h1>
+    <a href="/blog/posts/operate-etcd-cluster/">Operate Etcd cluster</a>
+  </h1>
+  
+  <h5>April 28, 2020</h5>
+
+
+
+  
+
+  
+  <div>
+    
+      <a href="/blog/tags/tech/">tech</a>, 
+      <a href="/blog/tags/etcd/">etcd</a>
+  </div>
+  
+
+
+  <p><blockquote>
+<p><strong>NOTE</strong>: This is my perspective aggregation. You can easily find these such of knowledges in <a href="#5-references">the references</a>.</p>
+</blockquote>
+<h2 id="1-context">
+  1. Context
+  <a class="anchor" href="#1-context">#</a>
+</h2>
+<p>Etcd Version <code>v3.4.0</code>.</p>
+<h2 id="2-requirements">
+  2. Requirements
+  <a class="anchor" href="#2-requirements">#</a>
+</h2>
+<h3 id="21-number-of-nodes">
+  2.1. Number of nodes
+  <a class="anchor" href="#21-number-of-nodes">#</a>
+</h3>
+<ul>
+<li>&gt;= 3 nodes. A etcd cluster needs a majority of nodes, a quorum to agree on updates to the cluster state. For a cluster with <strong>n-members</strong>, quorum is <strong>(n/2)+1</strong>.</li>
+</ul>
+<h3 id="22-cpus">
+  2.2. CPUs
+  <a class="anchor" href="#22-cpus">#</a>
+</h3>
+<ul>
+<li>Etcd doesn&rsquo;t require a lot of CPU capacity.</li>
+<li>Typical clusters need <strong>2-4 cores</strong> to run smoothly.</li>
+</ul>
+<h3 id="23-memory">
+  2.3. Memory
+  <a class="anchor" href="#23-memory">#</a>
+</h3>
+<ul>
+<li>Etcd performance depends on having enough memory (cache key-value data, tracking watchers&hellip;).</li>
+<li>Typical <strong>8GB</strong> is enough.</li>
+</ul>
+<h3 id="24-disk">
+  2.4. Disk
+  <a class="anchor" href="#24-disk">#</a>
+</h3>
+<ul>
+<li>An etcd cluster is very sensitive to disk latencies. Since etcd must persist proposals to its log, disk activity from other processes may cause long <code>fsync</code> latencies. The upshot is etcd may miss heartbeats, causing request timeouts and temporary leader loss. An etcd server can sometimes stably run alongside these processes when given a high disk priority.</li>
+<li>Check whether a disk is fast enough for etcd using <a href="https://github.com/axboe/fio">fio</a>. If the 99th percentile of fdatasync is <strong>&lt;10ms</strong>, your storage is ok.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ fio --rw<span style="color:#f92672">=</span>write --ioengine<span style="color:#f92672">=</span>sync --fdatasync<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> --directory<span style="color:#f92672">=</span>test-data <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --size<span style="color:#f92672">=</span>22m --bs<span style="color:#f92672">=</span><span style="color:#ae81ff">2300</span> --name<span style="color:#f92672">=</span>mytest
+</code></pre></div><ul>
+<li><strong>SSD</strong> is recommended.</li>
+</ul>
+<h3 id="25-network">
+  2.5. Network
+  <a class="anchor" href="#25-network">#</a>
+</h3>
+<ul>
+<li>Etcd cluster should be deployed in a fast and reliable network. Low latency ensures etcd members can communicate fast. High bandwidth can reduce the time to recover a failed etcd member.</li>
+<li><strong>1GbE</strong> is sufficient for common etcd.</li>
+<li>Note that the network isn&rsquo;t the only source of latency. Each request and response may be impacted by slow disks on both the leader and followers.</li>
+</ul>
+<h2 id="3-tuning">
+  3. Tuning
+  <a class="anchor" href="#3-tuning">#</a>
+</h2>
+<h3 id="31-time-parameters">
+  3.1. Time parameters
+  <a class="anchor" href="#31-time-parameters">#</a>
+</h3>
+<ul>
+<li><code>Heartbeat interval</code>.
+<ul>
+<li>The frequency with which the leader will notify followers that it is still the leader.</li>
+<li>Default: <strong>100ms</strong>.</li>
+<li>Best practice: <strong>Around 0.5-1.5 x round-trip time (RTT) between members</strong>. Measure RTT with <code>ping</code>.</li>
+<li>Tradeoff: Too low -&gt; etcd will send unnecessary messages -&gt; increase the usage of CPU and network resources. Too high -&gt; leads to high election timeout.</li>
+</ul>
+</li>
+<li><code>Election timeout</code>.
+<ul>
+<li>How long a follower node will go without hearing a heartbeat before attempting to become leader itself.</li>
+<li>Default: <strong>1000ms</strong>.</li>
+<li>Best practice: <strong>&gt;= 10 x RTT and &lt; 50s</strong>.</li>
+</ul>
+</li>
+<li>The heartbeat interval and election timeout value should be <strong>the same for all members in one cluster</strong>.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Command line arguments:</span>
+$ etcd --heartbeat-interval<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span> --election-timeout<span style="color:#f92672">=</span><span style="color:#ae81ff">500</span>
+
+<span style="color:#75715e"># Environment variables:</span>
+$ ETCD_HEARTBEAT_INTERVAL<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span> ETCD_ELECTION_TIMEOUT<span style="color:#f92672">=</span><span style="color:#ae81ff">500</span> etcd
+</code></pre></div><h3 id="32-disk">
+  3.2. Disk
+  <a class="anchor" href="#32-disk">#</a>
+</h3>
+<ul>
+<li>An etcd server can sometimes stably run alongside these processes when given a high disk priority using <a href="https://linux.die.net/man/1/ionice">ionice</a>.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># best effort, highest priority</span>
+$ sudo ionice -c2 -n0 -p <span style="color:#e6db74">`</span>pgrep etcd<span style="color:#e6db74">`</span>
+</code></pre></div><h3 id="33-snapshot">
+  3.3. Snapshot
+  <a class="anchor" href="#33-snapshot">#</a>
+</h3>
+<ul>
+<li>etcd appends all key changes to a log file -&gt; huge log that grows forever ☝️</li>
+<li>Solution: Make periodic snapshots (save the current and remove old logs).</li>
+<li>Default: make snapshots after every <strong>10 000 changes</strong>.</li>
+<li>Tuning: Just in case that etcd&rsquo;s memory and disk usage is too high, lower threshold.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Command line arguments:</span>
+$ etcd --snapshot-count<span style="color:#f92672">=</span><span style="color:#ae81ff">5000</span>
+
+<span style="color:#75715e"># Environment variables:</span>
+$ ETCD_SNAPSHOT_COUNT<span style="color:#f92672">=</span><span style="color:#ae81ff">5000</span> etcd
+</code></pre></div><h2 id="4-maintenance">
+  4. Maintenance
+  <a class="anchor" href="#4-maintenance">#</a>
+</h2>
+<h3 id="41-history-compaction">
+  4.1. History compaction
+  <a class="anchor" href="#41-history-compaction">#</a>
+</h3>
+<ul>
+<li>Etcd keeps an exact history of its keyspace, the history should be periodically compacted to avoid performance degradation and eventual storage space exhaustion.</li>
+<li>Etcd can be set to automatically compact the keyspace with the <code>--auto-compaction-*</code> option with a period of hours.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># keep one hour of history</span>
+$ etcd --auto-compaction-retention<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> --auto-compaction-mode<span style="color:#f92672">=</span>periodic
+</code></pre></div><ul>
+<li>Compaction modes:
+<ul>
+<li>Revision-based: <code>--auto-compaction-mode=revision --auto-compaction-retention=1000</code> automatically Compact on &ldquo;latest revision&rdquo; - 1000 every 5-minute (when latest revision is 30000, compact on revision 29000). Use this when having a large keyspace.</li>
+<li>Periodic: <code>--auto-compaction-mode=periodic --auto-compaction-retention=72h</code> automatically Compact with 72-hour retention window every 1-hour. Use this when having a huge number of revisions for a key-value pair.</li>
+</ul>
+</li>
+</ul>
+<h3 id="42-defragmentation">
+  4.2. Defragmentation
+  <a class="anchor" href="#42-defragmentation">#</a>
+</h3>
+<ul>
+<li>Compacting old revisions internally fragments etcd by leaving gaps in backend database - <code>internal fragmentation</code>.</li>
+<li>Internal fragmentation space is available for use by etcd but unavailable to the host filesystem.</li>
+<li>Solution: Release this space back to the filesystem with defrag.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ etcdctl defrag
+</code></pre></div><ul>
+<li>It should be run rather infrequently, as there is always going to be an unavoidable pause.</li>
+</ul>
+<h2 id="5-references">
+  5. References
+  <a class="anchor" href="#5-references">#</a>
+</h2>
+<ul>
+<li>Etcd hardware: <a href="https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/hardware.md">https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/hardware.md</a></li>
+<li>Etcd tuning: <a href="https://github.com/etcd-io/etcd/blob/master/Documentation/tuning.md">https://github.com/etcd-io/etcd/blob/master/Documentation/tuning.md</a></li>
+<li>Etcd maintainence: <a href="https://etcd.io/docs/v3.4.0/op-guide/maintenance/">https://etcd.io/docs/v3.4.0/op-guide/maintenance/</a></li>
+</ul>
+</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"><section class="article discussion">
+    <script src="https://utteranc.es/client.js" repo="ntk148v/blog" issue-term="pathname" theme="github-light"
+        crossorigin="anonymous" async>
+    </script>
+</section></div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-context">1. Context</a></li>
+    <li><a href="#2-requirements">2. Requirements</a>
+      <ul>
+        <li><a href="#21-number-of-nodes">2.1. Number of nodes</a></li>
+        <li><a href="#22-cpus">2.2. CPUs</a></li>
+        <li><a href="#23-memory">2.3. Memory</a></li>
+        <li><a href="#24-disk">2.4. Disk</a></li>
+        <li><a href="#25-network">2.5. Network</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-tuning">3. Tuning</a>
+      <ul>
+        <li><a href="#31-time-parameters">3.1. Time parameters</a></li>
+        <li><a href="#32-disk">3.2. Disk</a></li>
+        <li><a href="#33-snapshot">3.3. Snapshot</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-maintenance">4. Maintenance</a>
+      <ul>
+        <li><a href="#41-history-compaction">4.1. History compaction</a></li>
+        <li><a href="#42-defragmentation">4.2. Defragmentation</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-references">5. References</a></li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

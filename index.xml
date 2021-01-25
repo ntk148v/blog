@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>About on /home/kiennt</title>
+    <link>https://ntk148v.github.io/blog/</link>
+    <description>Recent content in About on /home/kiennt</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 Sep 2018 11:22:22 +0700</lastBuildDate><atom:link href="https://ntk148v.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Set Animated Gif as Wallpaper</title>
+      <link>https://ntk148v.github.io/blog/posts/set-animated-gif-as-wallpaper/</link>
+      <pubDate>Thu, 14 Jan 2021 09:36:34 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/set-animated-gif-as-wallpaper/</guid>
+      <description>NOTE: Environment Ubuntu 20.04
+ Dependencies #   Xwinwrap:  sudo apt-get install xorg-dev build-essential libx11-dev x11proto-xext-dev libxrender-dev libxext-dev git clone https://github.com/ujjwal96/xwinwrap.git cd xwinwrap make sudo make install make clean  Gifsicle:  sudo apt install gifsicle The helper script #  A helper script to setup animated .gif in dual monitors.
+#!/bin/bash # Uses xwinwrap to display given animated .gif in dual monitors. if [ $# -ne 1 ]; then echo 1&amp;gt;&amp;amp;2 Usage: $0 image.</description>
+    </item>
+    
+    <item>
+      <title>Swap space note</title>
+      <link>https://ntk148v.github.io/blog/posts/linux-swap-space-note/</link>
+      <pubDate>Wed, 20 May 2020 09:30:28 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/linux-swap-space-note/</guid>
+      <description>1. What is Swap? #  Swap file systems support virtual memory, data is written to a swap file system when there is not enough RAM to store the data your system is processing.
+2. Swap partition size #  2.1. Old rule of thumb #  swap = 2 * the-amount-of-RAM So if a computer had 64KB of RAM, a swap partition of 128KB would be an optimum size. This rule took into the facts that RAM sizes were typically quite small at the time.</description>
+    </item>
+    
+    <item>
+      <title>Ansitheus</title>
+      <link>https://ntk148v.github.io/blog/posts/ansitheus/</link>
+      <pubDate>Tue, 05 May 2020 13:51:59 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/ansitheus/</guid>
+      <description>Ansitheus = Ansible + Prometheus 1. Prometheus overview #   NOTE: Checkout the Prometheus official documentation.
+ Prometheus is an open-source systems monitoring &amp;amp; alerting toolkit originally built at SoundCloud.
+1.1. Features #   a multi-dimensional data model with time series data identified by metric name &amp;amp; key/value pairs PromQL, a flexible query language to leverage this dimensionality no reliance on distributed storage; single server nodes are autonomous time series collection happens via a pull model over HTTP pushing time series is supported via an intermediary gateway targets are discovered via service discovery or static configuration multiple modes of graphing &amp;amp; dashboarding support  1.</description>
+    </item>
+    
+    <item>
+      <title>Operate Etcd cluster</title>
+      <link>https://ntk148v.github.io/blog/posts/operate-etcd-cluster/</link>
+      <pubDate>Tue, 28 Apr 2020 11:24:04 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/operate-etcd-cluster/</guid>
+      <description>NOTE: This is my perspective aggregation. You can easily find these such of knowledges in the references.
+ 1. Context #  Etcd Version v3.4.0.
+2. Requirements #  2.1. Number of nodes #   &amp;gt;= 3 nodes. A etcd cluster needs a majority of nodes, a quorum to agree on updates to the cluster state. For a cluster with n-members, quorum is (n/2)+1.  2.2. CPUs #   Etcd doesn&amp;rsquo;t require a lot of CPU capacity.</description>
+    </item>
+    
+    <item>
+      <title>Golang: Block forever</title>
+      <link>https://ntk148v.github.io/blog/posts/golang-block-forever/</link>
+      <pubDate>Mon, 27 Apr 2020 15:59:21 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/golang-block-forever/</guid>
+      <description>Sometimes, you want to block the current goroutine when allowing others to continue. Here is some tricks I&amp;rsquo;ve collected:
+1. References #  Firstly give them some credits:
+ https://blog.sgmansfield.com/2016/06/how-to-block-forever-in-go/ https://pliutau.com/different-ways-to-block-go-runtime-forever/   NOTE: I run these with Golang 1.12
+ 2. The original #  package main import &amp;#34;fmt&amp;#34; func show() { for i := 1; i &amp;lt; 9696969; i++ { time.Sleep(1000) fmt.Println(i) } } func main() { go show() // The main goroutine is exited before the show() be done.</description>
+    </item>
+    
+    <item>
+      <title>Rest In Peace Kobe Bryant</title>
+      <link>https://ntk148v.github.io/blog/posts/rip-kobe-bryant/</link>
+      <pubDate>Mon, 27 Jan 2020 22:15:07 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/rip-kobe-bryant/</guid>
+      <description>Source: The Undefeated
+I am not Kobe fan honestly but just like him, basketball is something I love. I hope he&amp;rsquo;s at peace because although his journey in life is over, the legacy he left behind is etched in all our souls.
+Rest In Peace Mamba 🏀</description>
+    </item>
+    
+    <item>
+      <title>Mục tiêu 2020</title>
+      <link>https://ntk148v.github.io/blog/posts/target-2020/</link>
+      <pubDate>Fri, 24 Jan 2020 23:34:23 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/target-2020/</guid>
+      <description>Tổng kết 2019 #  Mục tiêu 2019:
+ Viết mục tiêu cho 2019 Kỹ năng:  Sử dụng thành thạo và ứng dụng Golang vào project thực tết. &amp;gt;=1000 commits trên Github. Hey yooooooo! 🎉 Học về cách thiết kế một hệ thống phân tán giải quyết bài toán thật -&amp;gt; Vẫn nửa vời :( Đưa Kubernetes vào ứng dụng thực tế. Củng cố thêm kiến thức đã có hiện tại, nhưng chưa đủ 😢 Thất bại hoàn toàn: Dành thêm thời gian OpenStack (Kolla-Ansible, Zun,&amp;hellip;)   Sách: 20-30 cuốn sách (sách gì cũng được, truyện trinh thám, văn học kinh điển, tech book).</description>
+    </item>
+    
+    <item>
+      <title>Blog Guideline</title>
+      <link>https://ntk148v.github.io/blog/posts/blog-guideline/</link>
+      <pubDate>Thu, 22 Aug 2019 14:40:59 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/blog-guideline/</guid>
+      <description>In the beginning, I supposed that I&amp;rsquo;m the only one who write-up thing in this blog. But now thing was change, this blog might have multiple bloggers. So it needs a guideline to describe how to contribute.
+1. How to submit a new content #   Here is the source repo. Fork it &amp;amp; start writing. Create a pull request to submit your content. Make sure to create your author page.</description>
+    </item>
+    
+    <item>
+      <title>Openstack Autoscaling New Approach</title>
+      <link>https://ntk148v.github.io/blog/posts/openstack-autoscaling-new-approach/</link>
+      <pubDate>Mon, 19 Aug 2019 21:19:38 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/openstack-autoscaling-new-approach/</guid>
+      <description>NOTE(kiennt): There is a legacy Faythe guideline. The new version is coming soon, check its repository for status.
+ This guide describes how to automatically scale out your Compute instances in response to heavy system usage. By combining with Prometheus pre-defined rules that consider factors such as CPU or memory usage, you can configure OpenStack Orchestration (Heat) to add and remove additional instances automatically, when they are needed.
+1. The standard OpenStack Autoscaling approach #  Let&amp;rsquo;s talk about the standard OpenStack Autoscaling approach before goes to the new approach.</description>
+    </item>
+    
+    <item>
+      <title>Linh Tinh</title>
+      <link>https://ntk148v.github.io/blog/gallery/linh-tinh/</link>
+      <pubDate>Wed, 01 May 2019 23:23:13 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/gallery/linh-tinh/</guid>
+      <description>Thỉnh thoảng chụp xong cũng không nhớ chụp hôm nào, chụp về chủ đề gì, tại sao lại chụp. Thôi để tạm đây vậy&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Sapa 2019</title>
+      <link>https://ntk148v.github.io/blog/gallery/sapa-2019/</link>
+      <pubDate>Sat, 13 Apr 2019 10:22:43 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/gallery/sapa-2019/</guid>
+      <description>Have been friends for a long time but there is the first trip together.</description>
+    </item>
+    
+    <item>
+      <title>Mục tiêu 2019</title>
+      <link>https://ntk148v.github.io/blog/posts/target-2019/</link>
+      <pubDate>Mon, 04 Feb 2019 23:16:47 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/target-2019/</guid>
+      <description>Đến hẹn lại lên, thời điểm Tết đến xuân về, tui lại ngồi copy &amp;amp; paste viết mục tiêu phấn đấu cho năm mới. Tui khá là lười và dễ xao nhãng nên việc viết lên các mục tiêu năm mới đơn giản là một cách tự thúc ép bản thân. &amp;ldquo;Mày đã viết ra những điều này, cố mà làm&amp;rdquo;, kiểu vậy. À khoan, hay không viết nữa nhỉ? Lười quá&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Xuân 2019: 29 Tết</title>
+      <link>https://ntk148v.github.io/blog/gallery/xuan-2019/</link>
+      <pubDate>Sun, 03 Feb 2019 22:53:21 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/gallery/xuan-2019/</guid>
+      <description>Một chiều lang thang trên phố Tràng Thi.</description>
+    </item>
+    
+    <item>
+      <title>Hà Nội: Cầu Long Biên - Hồ Hoàn Kiêm</title>
+      <link>https://ntk148v.github.io/blog/gallery/hanoi-longbien-hoankiem/</link>
+      <pubDate>Thu, 31 Jan 2019 10:22:43 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/gallery/hanoi-longbien-hoankiem/</guid>
+      <description>Lang thang quanh hồ Hoàn Kiếm, cầu Long Biên&amp;hellip; Vào một ngày hè, cụ thể ngày nào thì quên mất rồi 🙈</description>
+    </item>
+    
+    <item>
+      <title>Lets Comment</title>
+      <link>https://ntk148v.github.io/blog/posts/lets-comment/</link>
+      <pubDate>Tue, 02 Oct 2018 09:47:11 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/lets-comment/</guid>
+      <description>Hugo ships with support for Disqus, a third-party service that provides comment and community capabilities to websites via JavaScript. But Disqus generates a shit load of page requests and heavy contents&amp;hellip; which even with the benefits that come with having Disqus in place. People just want something that can be used to post a comment, that is.
+That&amp;rsquo;s why I choose a Disqus alternative - Utterances. Utterances is a lightweight comments widget built on Github issues.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://ntk148v.github.io/blog/authors/donghm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/authors/donghm/</guid>
+      <description>Đông Hiếp secret page.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://ntk148v.github.io/blog/authors/kiennt/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/authors/kiennt/</guid>
+      <description>Brief #   Devops Golang developer Python developer 🐍. Basketball junkie 🏀. Love taking lifestyle photos 📷 &amp;amp; drawing ✏️. OpenStack contributor &amp;amp; lover. Linux lover 😘 &amp;amp; Window hater 🙅‍♀️.   A computer is like air conditioning - it becomes useless when you open Windows. -- Linus Torvalds &amp;ndash;
+ Getting in touch #  Email is probably best, get me directly on kiennt2609@gmail.com or reach me out on my online profiles 👇</description>
+    </item>
+    
+  </channel>
+</rss>
