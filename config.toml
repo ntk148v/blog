@@ -11,6 +11,7 @@ BookRepo = 'https://github.com/ntk148v/blog'
 BookComments = true
 BookServiceWorker = true
 BookMenuBundle = '/menu'
+BookDateFormat = 'Jan 02, 2006'
 
 # set all headings to their default size (depending on browser settings)
 # it's set to `true` by default

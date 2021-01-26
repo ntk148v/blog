@@ -1,45 +1,45 @@
 .contact-container {
-    font-style: normal;
-    text-align: center;
-    align-items: center;
-    padding: 0 30px 30px;
+  font-style: normal;
+  text-align: center;
+  align-items: center;
+  padding: 0 30px 30px;
 }
 
 .contact-container img {
-    width: 150px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+  width: 150px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .contact-container h1 {
-    text-align: center;
-    margin-bottom: 0 !important;
+  text-align: center;
+  margin-bottom: 0 !important;
 }
 
 .contact-container ul {
-    list-style: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .contact-container ul li {
-    display: inline-block;
-    zoom: 1;
+  display: inline-block;
+  zoom: 1;
 }
 
 .contact-container ul li:before {
-    display: none;
+  display: none;
 }
 
 .contact-container ul li a {
-    display: block;
-    font-size: 2em;
-    margin: 5px 5px;
-    text-decoration: none;
-    color: rgba(0, 32, 22, .75);
+  display: block;
+  font-size: 2em;
+  margin: 5px 5px;
+  text-decoration: none;
+  color: rgba(0, 32, 22, 0.75);
 }
 
 .contact-container a:hover {
-    color: #406599;
+  color: #406599;
 }
