@@ -20,6 +20,9 @@ BookDateFormat = 'Jan 02, 2006'
 codeFences = true
 noClasses = false
 
+[markup.highlight]
+style = "github"
+
 [markup.goldmark.renderer]
 unsafe = true
 
