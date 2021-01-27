@@ -19,8 +19,8 @@
 <title>Set Animated Gif as Wallpaper | /home/kiennt</title>
 <link rel="manifest" href="/blog/manifest.json">
 <link rel="icon" href="/blog/favicon.png" type="image/x-icon">
-<link rel="stylesheet" href="/blog/book.min.5ca2df5b20a7e4a8337b9d188be38d0ada50d667cf0965aa47b5dc5064923270.css" integrity="sha256-XKLfWyCn5Kgze50Yi&#43;ONCtpQ1mfPCWWqR7XcUGSSMnA=">
-<script defer src="/blog/en.search.min.a079338db8fd48f238863eeba3deae1ffbc297059015eb8f2bd3948b1e0fd07f.js" integrity="sha256-oHkzjbj9SPI4hj7ro96uH/vClwWQFeuPK9OUix4P0H8="></script>
+<link rel="stylesheet" href="/blog/book.min.6c4e93c5a0c8000c9a7e327f9af36416ff4edfecc01274b0d8cb3de7e0414075.css" integrity="sha256-bE6TxaDIAAyafjJ/mvNkFv9O3&#43;zAEnSw2Ms95&#43;BBQHU=">
+<script defer src="/blog/en.search.min.3c232408a2a5acafabe96e194e310836a897740c088dca3f25182191087655d2.js" integrity="sha256-PCMkCKKlrK&#43;r6W4ZTjEINqiXdAwIjco/JRghkQh2VdI="></script>
 
 <script defer src="/blog/sw.min.be1e3b3f88e332c359acd5e967344f6f6c1d04e690ab8dda0c12abe7c950a1d2.js" integrity="sha256-vh47P4jjMsNZrNXpZzRPb2wdBOaQq43aDBKr58lQodI="></script>
 <!--
@@ -38,7 +38,8 @@ https://github.com/alex-shpak/hugo-book
   <input type="checkbox" class="hidden toggle" id="toc-control" />
   <main class="container flex">
     <aside class="book-menu">
-      
+      <div class="book-menu-content">
+        
   <nav>
 <h2 class="book-brand">
   <a href="/blog"><span>/home/kiennt</span>
@@ -85,6 +86,7 @@ https://github.com/alex-shpak/hugo-book
 
 
  
+      </div>
     </aside>
 
     <div class="book-page">
@@ -108,12 +110,14 @@ https://github.com/alex-shpak/hugo-book
   
   <aside class="hidden clearfix">
     
-  <nav id="TableOfContents">
+  
+<nav id="TableOfContents">
   <ul>
     <li><a href="#dependencies">Dependencies</a></li>
     <li><a href="#the-helper-script">The helper script</a></li>
   </ul>
 </nav>
+
 
 
   </aside>
@@ -149,38 +153,38 @@ https://github.com/alex-shpak/hugo-book
 <ul>
 <li><a href="https://github.com/ujjwal96/xwinwrap">Xwinwrap</a>:</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install xorg-dev build-essential libx11-dev x11proto-xext-dev libxrender-dev libxext-dev
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install xorg-dev build-essential libx11-dev x11proto-xext-dev libxrender-dev libxext-dev
 git clone https://github.com/ujjwal96/xwinwrap.git
-cd xwinwrap
+<span style="color:#0086b3">cd</span> xwinwrap
 make
 sudo make install
 make clean
 </code></pre></div><ul>
 <li>Gifsicle:</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt install gifsicle
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt install gifsicle
 </code></pre></div><h2 id="the-helper-script">
   The helper script
   <a class="anchor" href="#the-helper-script">#</a>
 </h2>
 <p>A helper script to setup animated .gif in dual monitors.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
-</span><span style="color:#75715e"></span><span style="color:#75715e"># Uses xwinwrap to display given animated .gif in dual monitors.</span>
-<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $# -ne <span style="color:#ae81ff">1</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
-    echo 1&gt;&amp;<span style="color:#ae81ff">2</span> Usage: $0 image.gif
-    exit <span style="color:#ae81ff">1</span>
-<span style="color:#66d9ef">fi</span>
-gif<span style="color:#f92672">=</span>$1
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#999;font-weight:bold;font-style:italic">#!/bin/bash
+</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#998;font-style:italic"># Uses xwinwrap to display given animated .gif in dual monitors.</span>
+<span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">[</span> <span style="color:#008080">$#</span> -ne <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">]</span>; <span style="color:#000;font-weight:bold">then</span>
+    <span style="color:#0086b3">echo</span> 1&gt;&amp;<span style="color:#099">2</span> Usage: <span style="color:#008080">$0</span> image.gif
+    <span style="color:#0086b3">exit</span> <span style="color:#099">1</span>
+<span style="color:#000;font-weight:bold">fi</span>
+<span style="color:#008080">gif</span><span style="color:#000;font-weight:bold">=</span><span style="color:#008080">$1</span>
 killall -9 xwinwrap
 killall -9 gifview
-<span style="color:#75715e"># Get monitors resolution</span>
-SCR1<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>xrandr | awk <span style="color:#e6db74">&#39;/primary/ &amp;&amp; /connected/ { print $4 }&#39;</span><span style="color:#e6db74">`</span>
-SCR2<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>xrandr | awk <span style="color:#e6db74">&#39;!/primary/ &amp;&amp; /connected/ { print $3 }&#39;</span><span style="color:#e6db74">`</span>
+<span style="color:#998;font-style:italic"># Get monitors resolution</span>
+<span style="color:#008080">SCR1</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">`</span>xrandr | awk <span style="color:#d14">&#39;/primary/ &amp;&amp; /connected/ { print $4 }&#39;</span><span style="color:#d14">`</span>
+<span style="color:#008080">SCR2</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">`</span>xrandr | awk <span style="color:#d14">&#39;!/primary/ &amp;&amp; /connected/ { print $3 }&#39;</span><span style="color:#d14">`</span>
 
-xwinwrap -g $SCR1 -ov -ni -s -nf -- gifview -w WID $gif -a &amp;
-xwinwrap -g $SCR2 -ov -ni -s -nf -- gifview -w WID $gif -a &amp;
+xwinwrap -g <span style="color:#008080">$SCR1</span> -ov -ni -s -nf -- gifview -w WID <span style="color:#008080">$gif</span> -a &amp;
+xwinwrap -g <span style="color:#008080">$SCR2</span> -ov -ni -s -nf -- gifview -w WID <span style="color:#008080">$gif</span> -a &amp;
 </code></pre></div><p>If you want to run xwinwrap by yourself, here is the example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">xwinwrap -g 1920x1080 -ov -ni -s -nf -- gifview -w WID /full/path/to/gif -a
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">xwinwrap -g 1920x1080 -ov -ni -s -nf -- gifview -w WID /full/path/to/gif -a
 </code></pre></div></p>
 </article>
  
@@ -211,15 +215,19 @@ xwinwrap -g $SCR2 -ov -ni -s -nf -- gifview -w WID $gif -a &amp;
 
     
     <aside class="book-toc">
-      
-  <nav id="TableOfContents">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
   <ul>
     <li><a href="#dependencies">Dependencies</a></li>
     <li><a href="#the-helper-script">The helper script</a></li>
   </ul>
 </nav>
 
+
  
+      </div>
     </aside>
     
   </main>

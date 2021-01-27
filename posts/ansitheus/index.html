@@ -19,8 +19,8 @@
 <title>Ansitheus | /home/kiennt</title>
 <link rel="manifest" href="/blog/manifest.json">
 <link rel="icon" href="/blog/favicon.png" type="image/x-icon">
-<link rel="stylesheet" href="/blog/book.min.5ca2df5b20a7e4a8337b9d188be38d0ada50d667cf0965aa47b5dc5064923270.css" integrity="sha256-XKLfWyCn5Kgze50Yi&#43;ONCtpQ1mfPCWWqR7XcUGSSMnA=">
-<script defer src="/blog/en.search.min.a079338db8fd48f238863eeba3deae1ffbc297059015eb8f2bd3948b1e0fd07f.js" integrity="sha256-oHkzjbj9SPI4hj7ro96uH/vClwWQFeuPK9OUix4P0H8="></script>
+<link rel="stylesheet" href="/blog/book.min.6c4e93c5a0c8000c9a7e327f9af36416ff4edfecc01274b0d8cb3de7e0414075.css" integrity="sha256-bE6TxaDIAAyafjJ/mvNkFv9O3&#43;zAEnSw2Ms95&#43;BBQHU=">
+<script defer src="/blog/en.search.min.3c232408a2a5acafabe96e194e310836a897740c088dca3f25182191087655d2.js" integrity="sha256-PCMkCKKlrK&#43;r6W4ZTjEINqiXdAwIjco/JRghkQh2VdI="></script>
 
 <script defer src="/blog/sw.min.be1e3b3f88e332c359acd5e967344f6f6c1d04e690ab8dda0c12abe7c950a1d2.js" integrity="sha256-vh47P4jjMsNZrNXpZzRPb2wdBOaQq43aDBKr58lQodI="></script>
 <!--
@@ -38,7 +38,8 @@ https://github.com/alex-shpak/hugo-book
   <input type="checkbox" class="hidden toggle" id="toc-control" />
   <main class="container flex">
     <aside class="book-menu">
-      
+      <div class="book-menu-content">
+        
   <nav>
 <h2 class="book-brand">
   <a href="/blog"><span>/home/kiennt</span>
@@ -85,6 +86,7 @@ https://github.com/alex-shpak/hugo-book
 
 
  
+      </div>
     </aside>
 
     <div class="book-page">
@@ -108,7 +110,8 @@ https://github.com/alex-shpak/hugo-book
   
   <aside class="hidden clearfix">
     
-  <nav id="TableOfContents">
+  
+<nav id="TableOfContents">
   <ul>
     <li><a href="#1-prometheus-overview">1. Prometheus overview</a>
       <ul>
@@ -127,6 +130,7 @@ https://github.com/alex-shpak/hugo-book
     </li>
   </ul>
 </nav>
+
 
 
   </aside>
@@ -152,7 +156,7 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  <p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Ansitheus <span style="color:#f92672">=</span> Ansible + Prometheus
+  <p><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008080">Ansitheus</span> <span style="color:#000;font-weight:bold">=</span> Ansible + Prometheus
 </code></pre></div><h2 id="1-prometheus-overview">
   1. Prometheus overview
   <a class="anchor" href="#1-prometheus-overview">#</a>
@@ -257,24 +261,24 @@ https://github.com/alex-shpak/hugo-book
 </li>
 <li>
 <p>Create configuration directory, default path <code>/etc/ansitheus</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo mkdir -p /etc/ansitheus
-sudo chown $USER:$USER /etc/ansitheus
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo mkdir -p /etc/ansitheus
+sudo chown <span style="color:#008080">$USER</span>:<span style="color:#008080">$USER</span> /etc/ansitheus
 </code></pre></div></li>
 <li>
 <p>Copy <code>config.yml</code> to <code>/etc/ansitheus</code> directory - this is the main configuration for Ansible monitoring tool.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cp /path/to/ansitheus/repository/etc/ansitheus/config.yml <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    /etc/ansitheus/config.yml
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cp /path/to/ansitheus/repository/etc/ansitheus/config.yml <span style="color:#d14">\
+</span><span style="color:#d14"></span>    /etc/ansitheus/config.yml
 </code></pre></div></li>
 <li>
 <p>Copy inventory files to the current directory.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cp /path/to/ansitheus/repository/ansible/inventory/* .
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cp /path/to/ansitheus/repository/ansible/inventory/* .
 </code></pre></div></li>
 <li>
 <p>Modify inventory &amp; <code>/etc/ansitheus/config.yml</code>.</p>
 </li>
 <li>
 <p>Run <a href="./tools/ansitheus">tools/ansitheus</a>, figure out yourself:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Usage: ./tools/ansitheus COMMAND <span style="color:#f92672">[</span>option<span style="color:#f92672">]</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Usage: ./tools/ansitheus COMMAND <span style="color:#000;font-weight:bold">[</span>option<span style="color:#000;font-weight:bold">]</span>
 
 Options:
     --inventory, -i &lt;inventory_path&gt; Specify path to ansible inventory file
@@ -283,12 +287,12 @@ Options:
     --tags, -t &lt;tags&gt;                Only run plays &amp; tasks tagged with these values
     --help, -h                       Show this usage information
     --skip-common                    Skip common role
-    --ask-vault-pass                 Ask <span style="color:#66d9ef">for</span> vault password
+    --ask-vault-pass                 Ask <span style="color:#000;font-weight:bold">for</span> vault password
 
 Commands:
-    precheck                         Do pre-deployment checks <span style="color:#66d9ef">for</span> hosts
+    precheck                         Do pre-deployment checks <span style="color:#000;font-weight:bold">for</span> hosts
     deploy                           Deploy &amp; start all ansitheus containers
-    pull                             Pull all images <span style="color:#66d9ef">for</span> containers <span style="color:#f92672">(</span>only pull, no running containers<span style="color:#f92672">)</span>
+    pull                             Pull all images <span style="color:#000;font-weight:bold">for</span> containers <span style="color:#000;font-weight:bold">(</span>only pull, no running containers<span style="color:#000;font-weight:bold">)</span>
     destroy                          Destroy Prometheus containers &amp; service configuration
                                         --include-images to also destroy Prometheus images
                                         --include-volumes to also destroy Prometheus volumes
@@ -339,8 +343,10 @@ Commands:
 
     
     <aside class="book-toc">
-      
-  <nav id="TableOfContents">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
   <ul>
     <li><a href="#1-prometheus-overview">1. Prometheus overview</a>
       <ul>
@@ -360,7 +366,9 @@ Commands:
   </ul>
 </nav>
 
+
  
+      </div>
     </aside>
     
   </main>
