@@ -87,7 +87,7 @@ So what makes `Ansitheus` be different with others?
 - [Haproxy](http://www.haproxy.org/)
 - [Keepalived](https://www.keepalived.org/)
 - [Fluentd](https://github.com/fluent/fluentd)
-- [Grafana](https://github.com/grafana/grafana) - **TODO**
+- [Grafana](https://github.com/grafana/grafana)
 - Other Prometheus exporters - **TODO**
 
 ### 2.4. Getting started
