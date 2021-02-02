@@ -1,9 +1,0 @@
-{{ range $taxonomy, $_ := .Site.Taxonomies }}
-{{ with $terms := $.GetTerms $taxonomy }}
-<div>
-    {{ range $n, $term := $terms }}{{ if $n }}, {{ end }}
-    <a href="{{ $term.RelPermalink }}"><i>#{{ $term.Title }}</i></a>
-    {{- end -}}
-</div>
-{{ end }}
-{{ end }}

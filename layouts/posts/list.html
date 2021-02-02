@@ -1,40 +1,19 @@
 {{ define "main" }}
-{{ range sort .Paginator.Pages }}
-<article class="markdown">
-  <div class="row">
-    <div class="col-xs-12
-                col-sm-8
-                col-md-6
-                col-lg-3">
-      {{ with .Date}}
-      <h4>{{ partial "docs/date" (dict "Date" . "Format" $.Site.Params.BookDateFormat) }}</h4>
-      {{ end }}
-    </div>
-    <div class="col-xs-12
-                col-sm-8
-                col-md-6
-                col-lg-9">
-      <h4><a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a></h4>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12
-                col-sm-8
-                col-md-6
-                col-lg-3"></div>
-    <div class="col-xs-12
-                col-sm-8
-                col-md-6
-                col-lg-8">
-      {{ partial "docs/post-meta" . }}
-    </div>
-  </div>
-</article>
-{{ end }}
 
-{{ template "_internal/pagination.html" . }}
-{{ end }}
+{{- range .Data.Pages.GroupByDate "2006" }}
+<div class="posts-group">
+  <div class="post-year" id="{{ .Key }}">{{ .Key }}</div>
+  <ul class="posts-list">
+    {{- range .Pages }}
+    <li class="post-item">
+      <a href="{{ .Permalink }}">
+        <span class="post-title">{{ .Title | markdownify  }}</span>
+        <span class="post-day">{{ .Date.Format .Site.Params.BookDateFormat }}</span>
+      </a>
+    </li>
+    {{- end }}
+  </ul>
+</div>
+{{- end }}
 
-{{ define "toc" }}
-{{ partial "docs/taxonomy" . }}
-{{ end }}
+{{- end }}
