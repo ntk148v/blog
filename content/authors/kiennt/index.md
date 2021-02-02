@@ -1,11 +1,11 @@
 ---
 name: "Kien Nguyen-Tuan"
 contact:
-    twitter: "@kiennt26"
-    facebook: "kiennt2609"
-    github: "ntk148v"
-    email: "kiennt2609@gmail.com"
-    telegram: "kiennt26"
+  twitter: "@kiennt26"
+  facebook: "kiennt2609"
+  github: "ntk148v"
+  email: "kiennt2609@gmail.com"
+  telegram: "kiennt26"
 website: "https://ntk148v.github.io/blog/"
 ---
 
@@ -13,13 +13,13 @@ website: "https://ntk148v.github.io/blog/"
 
 ![basketball](https://ntk148v.github.io/blog/gallery/linh-tinh/DSCF2637.JPG)
 
--   Devops
--   Golang developer
--   Python developer :snake:.
--   Basketball junkie :basketball:.
--   Love taking lifestyle photos :camera: & drawing :pencil2:.
--   OpenStack contributor & lover.
--   Linux lover :kissing_heart: & Window hater :no_good:.
+- Devops
+- Golang developer
+- Python developer :snake:.
+- Basketball junkie :basketball:.
+- Love taking lifestyle photos :camera: & drawing :pencil2:.
+- OpenStack contributor & lover.
+- Linux lover :kissing_heart: & Window hater :no_good:.
 
 > A computer is like air conditioning - it becomes useless when you open Windows.
 > \-- Linus Torvalds --
