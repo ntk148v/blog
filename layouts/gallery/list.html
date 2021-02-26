@@ -1,0 +1,23 @@
+{{ define "main" }}
+<article class="markdown">
+    {{ range .Data.Pages.GroupByDate "2006" }}
+    <div class="posts-group">
+        <div class="post-year" id="{{ .Key }}">{{ .Key }}</div>
+        <ul class="posts-list">
+            {{ range .Pages }}
+            <li class="post-item">
+                <a href="{{ .Permalink }}">
+                    <span class="post-title">{{ .Title | markdownify  }}</span>
+                    <span class="post-day">{{ .Date.Format .Site.Params.BookDateFormat }}</span>
+                </a>
+            </li>
+            {{ end }}
+        </ul>
+    </div>
+    {{ end }}
+</article>
+{{ template "_internal/pagination.html" . }}
+{{ end }}
+{{ define "toc" }}
+{{ partial "docs/taxonomy" . }}
+{{ end }}
