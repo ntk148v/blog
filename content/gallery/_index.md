@@ -6,4 +6,3 @@ comments: false
 ---
 
 Stores my photos and pictures that I love!
-
