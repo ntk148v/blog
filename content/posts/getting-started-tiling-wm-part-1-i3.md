@@ -12,7 +12,7 @@ comments = false
 justify = false  # text-align: justify;
 single = false  # display as a single page, hide navigation on bottom, like as about page.
 license = ""  # CC License
-draft = true
+draft = false
 +++
 
 > **Disclaimer**: I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I've gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.
@@ -38,35 +38,11 @@ We'll begin by showing how the Linux graphical desktop is layered. There are bas
   - May not be particularly customizable.
   - Gret if you don't want to customize everything.
 
-```
-+-------------------------------------+
-|                                     |
-|                                     |
-|         Desktop Environment         |
-|                                     |
-|                                     |
-+-----------------+-------------------+
-                  |
-                  |
-                  |
-+-----------------v-------------------+
-|                                     |
-|                                     |
-|           Window Manager            |
-|                                     |
-|                                     |
-+-----------------+-------------------+
-                  |
-                  |
-+-----------------v--------------------+
-|                                      |
-|                                      |
-|                                      |
-|             X Windows                |
-|                                      |
-|                                      |
-+--------------------------------------+
-```
+{{<mermaid>}}
+graph TD;
+A[Desktop Environment] --> B[Window Manager];
+B --> C[X Windows];
+{{</mermaid>}}
 
 ### 1.2. Types of Window Manager
 
@@ -82,9 +58,19 @@ We'll begin by showing how the Linux graphical desktop is layered. There are bas
 
 ## 2. Overview I3
 
+- [i3wm](https://i3wm.org) is a tiling window manager designed for [X11](https://en.wikipedia.org/wiki/X_Window_System).
+- It supports tiling, stacking, and tabbing layouts, which it handles dynamically.
+- Configuration is achieved via plain text file.
+- Keyboard navigation: Hall full control with keyboard navigation.
+- Minimalistic: no window decorations or nonsense icons floating around. But you can fully customize it.
+- Window management: is left to the user. Windows are held inside containers, which can be split veritically or horizontally. They can also optionally be resized. There are also options for stacking the windows, as well as tabbing them.
+- Floating pop-up windows.
+- Want more, check [this](https://i3wm.org/docs/userguide.html).
+
 ## 3. I3 Basic Use & Configuration
 
 ## 4. References
 
 1. https://www.lifewire.com/window-manager-vs-the-desktop-environment-in-linux-4588338
 2. https://en.wikipedia.org/wiki/X_window_manager
+3. https://i3wm.org/docs
