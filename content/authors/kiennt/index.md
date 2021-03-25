@@ -11,18 +11,14 @@ website: "https://ntk148v.github.io/blog/"
 
 ## Brief
 
-![basketball](https://ntk148v.github.io/blog/gallery/linh-tinh/DSCF2637.JPG)
+{{< figure src="/photos/linh-tinh/DSCF2637.JPG" >}}
 
 - Devops
 - Golang developer
-- Python developer :snake:.
-- Basketball junkie :basketball:.
-- Love taking lifestyle photos :camera: & drawing :pencil2:.
-- OpenStack contributor & lover.
-- Linux lover :kissing_heart: & Window hater :no_good:.
-
-> A computer is like air conditioning - it becomes useless when you open Windows.
-> \-- Linus Torvalds --
+- Python developer :snake:
+- Basketball junkie :basketball:
+- Love taking lifestyle photos :camera: & drawing :pencil2:
+- OpenSource contributor & lover
 
 ## Getting in touch
 
