@@ -2,6 +2,7 @@
 title: "Linux tools that you never knew you needed"
 date: 2021-04-07T09:45:59+07:00
 draft: false
+tags = ["linux", "tips", "tech"]
 ---
 
 ## 1. bat - (cat alternative)

@@ -2,7 +2,7 @@
 title = "Getting Started Tiling Wm Part 1 Polybar"
 date = 2020-05-22T17:10:28+07:00
 lastmod = 2020-05-22T17:10:28+07:00
-tags = []
+tags = ["tiling-wm", "linux", "tech", "polybar"]
 categories = []
 imgs = []
 cover = ""  # image show on top
@@ -14,4 +14,6 @@ single = false  # display as a single page, hide navigation on bottom, like as a
 license = ""  # CC License
 draft = true
 +++
+
+> WIP
 

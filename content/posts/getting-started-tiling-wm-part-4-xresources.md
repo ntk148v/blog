@@ -2,7 +2,7 @@
 title = "Getting Started Tiling Wm Part 1 Xresources"
 date = 2020-05-22T17:10:35+07:00
 lastmod = 2020-05-22T17:10:35+07:00
-tags = []
+tags = ["tiling-wm", "linux", "tech", "xresources"]
 categories = []
 imgs = []
 cover = ""  # image show on top
@@ -15,3 +15,4 @@ license = ""  # CC License
 draft = true
 +++
 
+> WIP

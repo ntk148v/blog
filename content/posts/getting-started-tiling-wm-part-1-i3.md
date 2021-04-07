@@ -2,7 +2,7 @@
 title = "Getting Started with Tiling Window Manager [Part 1]: I3"
 date = 2020-05-22T17:10:04+07:00
 lastmod = 2020-05-22T17:10:04+07:00
-tags = ["tiling-wm", "i3"]
+tags = ["tiling-wm", "linux", "tech", "i3"]
 categories = []
 imgs = []
 cover = ""  # image show on top
@@ -68,6 +68,8 @@ B --> C[X Windows];
 - Want more, check [this](https://i3wm.org/docs/userguide.html).
 
 ## 3. I3 Basic Use & Configuration
+
+> WIP
 
 ## 4. References
 

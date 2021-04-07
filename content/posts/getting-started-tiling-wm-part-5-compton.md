@@ -2,7 +2,7 @@
 title = "Getting Started Tiling Wm Part 5 Compton"
 date = 2020-05-22T17:11:20+07:00
 lastmod = 2020-05-22T17:11:20+07:00
-tags = []
+tags = ["tiling-wm", "linux", "tech", "compton"]
 categories = []
 imgs = []
 cover = ""  # image show on top
@@ -15,3 +15,4 @@ license = ""  # CC License
 draft = true
 +++
 
+> WIP
