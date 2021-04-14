@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta name="generator" content="Hugo 0.80.0" />
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Disclaimer: I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I&rsquo;ve gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.
+ 1. Overview Window Manager #  First of all, you have to know the basic concepts.">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="Getting Started with Tiling Window Manager [Part 1]: I3" />
+<meta property="og:description" content="Disclaimer: I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I&rsquo;ve gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.
+ 1. Overview Window Manager #  First of all, you have to know the basic concepts." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-1-i3/" />
+<meta property="article:published_time" content="2020-05-22T17:10:04+07:00" />
+<meta property="article:modified_time" content="2020-05-22T17:10:04+07:00" /><meta property="og:site_name" content="/home/kiennt" />
+<title>Getting Started with Tiling Window Manager [Part 1]: I3 | /home/kiennt</title>
+<link rel="manifest" href="/blog/manifest.json">
+<link rel="icon" href="/blog/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/blog/book.min.8224bfb5c5905e66c92b7026f6d1699fe25298595551a7ef9cc0e2d2b3a0f427.css" integrity="sha256-giS/tcWQXmbJK3Am9tFpn&#43;JSmFlVUafvnMDi0rOg9Cc=">
+<script defer src="/blog/en.search.min.561c9a42157c95ad869ed0f150ef33dc24240711067b4c3411f0726111054a46.js" integrity="sha256-VhyaQhV8la2GntDxUO8z3CQkBxEGe0w0EfByYREFSkY="></script>
+
+<script defer src="/blog/sw.min.be1e3b3f88e332c359acd5e967344f6f6c1d04e690ab8dda0c12abe7c950a1d2.js" integrity="sha256-vh47P4jjMsNZrNXpZzRPb2wdBOaQq43aDBKr58lQodI="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css"
+    type="text/css">
+
+</head>
+
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a href="/blog"><span>/home/kiennt</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  <ul>
+<li><a href="/blog/authors/kiennt/">About</a></li>
+<li><a href="/blog/posts/">Blog</a></li>
+<li><a href="https://ntk148v.github.io/notes">Notes</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/blog/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Getting Started with Tiling Window Manager [Part 1]: I3</strong>
+
+  <label for="toc-control">
+    
+    <img src="/blog/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-overview-window-manager">1. Overview Window Manager</a>
+      <ul>
+        <li><a href="#11-desktop-environment-vs-window-manager">1.1. Desktop Environment vs. Window Manager</a></li>
+        <li><a href="#12-types-of-window-manager">1.2. Types of Window Manager</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-overview-i3">2. Overview I3</a></li>
+    <li><a href="#3-i3-basic-use--configuration">3. I3 Basic Use &amp; Configuration</a></li>
+    <li><a href="#4-references">4. References</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+<article class="markdown">
+  <h1>
+    <a href="/blog/posts/getting-started-tiling-wm-part-1-i3/">Getting Started with Tiling Window Manager [Part 1]: I3</a>
+  </h1>
+  
+<h5>May 22, 2020</h5>
+
+
+
+
+
+
+<div>
+    
+    <a href="/blog/tags/tiling-wm/">#tiling-wm</a>
+     
+    <a href="/blog/tags/linux/">#linux</a>
+     
+    <a href="/blog/tags/tech/">#tech</a>
+     
+    <a href="/blog/tags/i3/">#i3</a>
+    
+</div>
+
+
+  <p><blockquote>
+<p><strong>Disclaimer</strong>: I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I&rsquo;ve gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.</p>
+</blockquote>
+<h2 id="1-overview-window-manager">
+  1. Overview Window Manager
+  <a class="anchor" href="#1-overview-window-manager">#</a>
+</h2>
+<p>First of all, you have to know the basic concepts.</p>
+<h3 id="11-desktop-environment-vs-window-manager">
+  1.1. Desktop Environment vs. Window Manager
+  <a class="anchor" href="#11-desktop-environment-vs-window-manager">#</a>
+</h3>
+<p>We&rsquo;ll begin by showing how the Linux graphical desktop is layered. There are basically 3 layers that can be included in the Linux desktop:</p>
+<ul>
+<li><strong>X Window</strong>: All GUIs require an X Window System layer, which draws graphic elements on the display. Without the X server, neither a WM nor a DE could create images on a Linux display. X also creates a framework for moving windows and performing tasks using a mouse and keyboard.</li>
+<li><strong>Window manager</strong>:
+<ul>
+<li>A WM controls the placement and appearance of screen elements. Popular WMs: i3, awesome, dwm&hellip;</li>
+<li>Requires configuration to get what you want.</li>
+<li>Tends to be flexible and highly customizable.</li>
+<li>Customizes most aspects of a Linux experience.</li>
+<li>For Nerd: not user-friendly out of the box, need to edit configuration files&hellip;</li>
+</ul>
+</li>
+<li><strong>Desktop environment</strong>:
+<ul>
+<li>A DE requires both X and a WM. It also adds the deeper and seemless integration with applications, panels, system menus, status applets, drag-and-drop functionality,&hellip; The most popular DEs: KDE Plasma, GNOME, Pantheon, Cinnamon,&hellip; Sounds familiar, right?</li>
+<li>Excellent default configurations.</li>
+<li>May not be particularly customizable.</li>
+<li>Gret if you don&rsquo;t want to customize everything.</li>
+</ul>
+</li>
+</ul>
+
+
+<script src="/blog/mermaid.min.js"></script>
+
+  <script>mermaid.initialize({
+  "flowchart": {
+    "useMaxWidth":true
+  },
+  "theme": "default"
+}
+)</script>
+
+
+
+
+<p class="mermaid" align="center">
+graph TD;
+A[Desktop Environment] --> B[Window Manager];
+B --> C[X Windows];
+</p>
+
+<h3 id="12-types-of-window-manager">
+  1.2. Types of Window Manager
+  <a class="anchor" href="#12-types-of-window-manager">#</a>
+</h3>
+<ul>
+<li><strong>Stack window manager</strong>:
+<ul>
+<li>A stack window manager renders the window one-by-one onto the screen at specific co-orinates. If one window&rsquo;s area overlaps another, then the window &ldquo;on top&rdquo; overwites part of the other&rsquo;s visible appearance. This results in the appearance familiar to many users in which windows act a little like pieces of paper on a desktop, which can be moved around and allowed to overlap.</li>
+<li>Openbox, Fluxbox, Enlightenment&hellip;</li>
+</ul>
+</li>
+<li><strong>Tiling window manager</strong>:
+<ul>
+<li>A window manager with an organization of the screen into mutually non-overlapping frames (hence the name tiling), as opposed to the traditional approach of coordinate-based stacking of objects (windows) that tries to emulate the desk paradigm.</li>
+<li>Awesome,<strong>i3</strong> (here we go), dwm, bspwm&hellip;</li>
+</ul>
+</li>
+<li><strong>Compositing window manager</strong>:
+<ul>
+<li>A compositing window manager may appear to the user similar to a stacking window manager. However, the individual windows are first renders in individual buffers, and then theirs images are composited onto the screen buffer; this two-step process means that visual effects (such as shadows, translucency) can be applied.</li>
+<li>Mutter (GNOME), Xfwm (XFCE), Compiz (Unity), KWin (KDE)</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-overview-i3">
+  2. Overview I3
+  <a class="anchor" href="#2-overview-i3">#</a>
+</h2>
+<ul>
+<li><a href="https://i3wm.org">i3wm</a> is a tiling window manager designed for <a href="https://en.wikipedia.org/wiki/X_Window_System">X11</a>.</li>
+<li>It supports tiling, stacking, and tabbing layouts, which it handles dynamically.</li>
+<li>Configuration is achieved via plain text file.</li>
+<li>Keyboard navigation: Hall full control with keyboard navigation.</li>
+<li>Minimalistic: no window decorations or nonsense icons floating around. But you can fully customize it.</li>
+<li>Window management: is left to the user. Windows are held inside containers, which can be split veritically or horizontally. They can also optionally be resized. There are also options for stacking the windows, as well as tabbing them.</li>
+<li>Floating pop-up windows.</li>
+<li>Want more, check <a href="https://i3wm.org/docs/userguide.html">this</a>.</li>
+</ul>
+<h2 id="3-i3-basic-use--configuration">
+  3. I3 Basic Use &amp; Configuration
+  <a class="anchor" href="#3-i3-basic-use--configuration">#</a>
+</h2>
+<blockquote>
+<p>WIP</p>
+</blockquote>
+<h2 id="4-references">
+  4. References
+  <a class="anchor" href="#4-references">#</a>
+</h2>
+<ol>
+<li><a href="https://www.lifewire.com/window-manager-vs-the-desktop-environment-in-linux-4588338">https://www.lifewire.com/window-manager-vs-the-desktop-environment-in-linux-4588338</a></li>
+<li><a href="https://en.wikipedia.org/wiki/X_window_manager">https://en.wikipedia.org/wiki/X_window_manager</a></li>
+<li><a href="https://i3wm.org/docs">https://i3wm.org/docs</a></li>
+</ol>
+</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments"></div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-overview-window-manager">1. Overview Window Manager</a>
+      <ul>
+        <li><a href="#11-desktop-environment-vs-window-manager">1.1. Desktop Environment vs. Window Manager</a></li>
+        <li><a href="#12-types-of-window-manager">1.2. Types of Window Manager</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-overview-i3">2. Overview I3</a></li>
+    <li><a href="#3-i3-basic-use--configuration">3. I3 Basic Use &amp; Configuration</a></li>
+    <li><a href="#4-references">4. References</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
