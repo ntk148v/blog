@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>xresources on /home/kiennt</title>
+    <link>https://ntk148v.github.io/blog/tags/xresources/</link>
+    <description>Recent content in xresources on /home/kiennt</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 22 May 2020 17:10:35 +0700</lastBuildDate><atom:link href="https://ntk148v.github.io/blog/tags/xresources/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Getting Started with Tiling WM [Part 4] - Xresources</title>
+      <link>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-4-xresources/</link>
+      <pubDate>Fri, 22 May 2020 17:10:35 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-4-xresources/</guid>
+      <description>WIP  </description>
+    </item>
+    
+  </channel>
+</rss>

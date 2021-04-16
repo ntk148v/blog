@@ -35,20 +35,56 @@
     </item>
     
     <item>
-      <title>i3</title>
-      <link>https://ntk148v.github.io/blog/tags/i3/</link>
-      <pubDate>Fri, 22 May 2020 17:10:04 +0700</pubDate>
+      <title>compton</title>
+      <link>https://ntk148v.github.io/blog/tags/compton/</link>
+      <pubDate>Fri, 22 May 2020 17:11:20 +0700</pubDate>
       
-      <guid>https://ntk148v.github.io/blog/tags/i3/</guid>
+      <guid>https://ntk148v.github.io/blog/tags/compton/</guid>
       <description></description>
     </item>
     
     <item>
       <title>tiling-wm</title>
       <link>https://ntk148v.github.io/blog/tags/tiling-wm/</link>
-      <pubDate>Fri, 22 May 2020 17:10:04 +0700</pubDate>
+      <pubDate>Fri, 22 May 2020 17:11:20 +0700</pubDate>
       
       <guid>https://ntk148v.github.io/blog/tags/tiling-wm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>xresources</title>
+      <link>https://ntk148v.github.io/blog/tags/xresources/</link>
+      <pubDate>Fri, 22 May 2020 17:10:35 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/tags/xresources/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>polybar</title>
+      <link>https://ntk148v.github.io/blog/tags/polybar/</link>
+      <pubDate>Fri, 22 May 2020 17:10:28 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/tags/polybar/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rofi</title>
+      <link>https://ntk148v.github.io/blog/tags/rofi/</link>
+      <pubDate>Fri, 22 May 2020 17:10:21 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/tags/rofi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>i3</title>
+      <link>https://ntk148v.github.io/blog/tags/i3/</link>
+      <pubDate>Fri, 22 May 2020 17:10:04 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/tags/i3/</guid>
       <description></description>
     </item>
     

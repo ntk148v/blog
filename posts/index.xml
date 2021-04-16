@@ -28,12 +28,49 @@
     </item>
     
     <item>
-      <title>Getting Started with Tiling Window Manager [Part 1]: I3</title>
+      <title>Getting Started with Tiling WM [Part 5] - Compton</title>
+      <link>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-5-compton/</link>
+      <pubDate>Fri, 22 May 2020 17:11:20 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-5-compton/</guid>
+      <description>WIP  </description>
+    </item>
+    
+    <item>
+      <title>Getting Started with Tiling WM [Part 4] - Xresources</title>
+      <link>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-4-xresources/</link>
+      <pubDate>Fri, 22 May 2020 17:10:35 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-4-xresources/</guid>
+      <description>WIP  </description>
+    </item>
+    
+    <item>
+      <title>Getting Started with Tiling WM [Part 3] - Polybar</title>
+      <link>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-3-polybar/</link>
+      <pubDate>Fri, 22 May 2020 17:10:28 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-3-polybar/</guid>
+      <description>WIP  </description>
+    </item>
+    
+    <item>
+      <title>Getting Started with Tiling WM [Part 2] - Rofi</title>
+      <link>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-2-rofi/</link>
+      <pubDate>Fri, 22 May 2020 17:10:21 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-2-rofi/</guid>
+      <description>WIP  </description>
+    </item>
+    
+    <item>
+      <title>Getting Started with Tiling WM [Part 1] - I3</title>
       <link>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-1-i3/</link>
       <pubDate>Fri, 22 May 2020 17:10:04 +0700</pubDate>
       
       <guid>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-1-i3/</guid>
-      <description>Disclaimer: I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I&amp;rsquo;ve gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.
+      <description>Disclaimer
+I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I&amp;rsquo;ve gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.
  1. Overview Window Manager #  First of all, you have to know the basic concepts.</description>
     </item>
     

@@ -5,20 +5,22 @@
   <meta name="generator" content="Hugo 0.80.0" />
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Disclaimer: I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I&rsquo;ve gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.
+<meta name="description" content="Disclaimer
+I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I&rsquo;ve gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.
  1. Overview Window Manager #  First of all, you have to know the basic concepts.">
-<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="Getting Started with Tiling Window Manager [Part 1]: I3" />
-<meta property="og:description" content="Disclaimer: I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I&rsquo;ve gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="Getting Started with Tiling WM [Part 1] - I3" />
+<meta property="og:description" content="Disclaimer
+I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I&rsquo;ve gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.
  1. Overview Window Manager #  First of all, you have to know the basic concepts." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-1-i3/" />
 <meta property="article:published_time" content="2020-05-22T17:10:04+07:00" />
 <meta property="article:modified_time" content="2020-05-22T17:10:04+07:00" /><meta property="og:site_name" content="/home/kiennt" />
-<title>Getting Started with Tiling Window Manager [Part 1]: I3 | /home/kiennt</title>
+<title>Getting Started with Tiling WM [Part 1] - I3 | /home/kiennt</title>
 <link rel="manifest" href="/blog/manifest.json">
 <link rel="icon" href="/blog/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/blog/book.min.8224bfb5c5905e66c92b7026f6d1699fe25298595551a7ef9cc0e2d2b3a0f427.css" integrity="sha256-giS/tcWQXmbJK3Am9tFpn&#43;JSmFlVUafvnMDi0rOg9Cc=">
-<script defer src="/blog/en.search.min.561c9a42157c95ad869ed0f150ef33dc24240711067b4c3411f0726111054a46.js" integrity="sha256-VhyaQhV8la2GntDxUO8z3CQkBxEGe0w0EfByYREFSkY="></script>
+<script defer src="/blog/en.search.min.d6d8d04d8122fdbfbb16b5bf7104ec5bfef68f151ae4a1ceb59f37010461f070.js" integrity="sha256-1tjQTYEi/b&#43;7FrW/cQTsW/72jxUa5KHOtZ83AQRh8HA="></script>
 
 <script defer src="/blog/sw.min.be1e3b3f88e332c359acd5e967344f6f6c1d04e690ab8dda0c12abe7c950a1d2.js" integrity="sha256-vh47P4jjMsNZrNXpZzRPb2wdBOaQq43aDBKr58lQodI="></script>
 <!--
@@ -97,7 +99,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/blog/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Getting Started with Tiling Window Manager [Part 1]: I3</strong>
+  <strong>Getting Started with Tiling WM [Part 1] - I3</strong>
 
   <label for="toc-control">
     
@@ -120,7 +122,14 @@ https://github.com/alex-shpak/hugo-book
       </ul>
     </li>
     <li><a href="#2-overview-i3">2. Overview I3</a></li>
-    <li><a href="#3-i3-basic-use--configuration">3. I3 Basic Use &amp; Configuration</a></li>
+    <li><a href="#3-minimal-ubuntu-i3-setup">3. Minimal Ubuntu I3 setup</a>
+      <ul>
+        <li><a href="#31-ubuntu-server">3.1. Ubuntu Server</a></li>
+        <li><a href="#32-desktop">3.2. Desktop</a></li>
+        <li><a href="#33-tiling-window-manager---i3">3.3. Tiling Window Manager - I3</a></li>
+        <li><a href="#34-configure-i3">3.4. Configure I3</a></li>
+      </ul>
+    </li>
     <li><a href="#4-references">4. References</a></li>
   </ul>
 </nav>
@@ -136,7 +145,7 @@ https://github.com/alex-shpak/hugo-book
       
 <article class="markdown">
   <h1>
-    <a href="/blog/posts/getting-started-tiling-wm-part-1-i3/">Getting Started with Tiling Window Manager [Part 1]: I3</a>
+    <a href="/blog/posts/getting-started-tiling-wm-part-1-i3/">Getting Started with Tiling WM [Part 1] - I3</a>
   </h1>
   
 <h5>May 22, 2020</h5>
@@ -159,9 +168,12 @@ https://github.com/alex-shpak/hugo-book
 </div>
 
 
-  <p><blockquote>
-<p><strong>Disclaimer</strong>: I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I&rsquo;ve gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.</p>
+  <p><blockquote class="book-hint info">
+  <p><strong>Disclaimer</strong></p>
+<p>I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I&rsquo;ve gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.</p>
+
 </blockquote>
+
 <h2 id="1-overview-window-manager">
   1. Overview Window Manager
   <a class="anchor" href="#1-overview-window-manager">#</a>
@@ -251,13 +263,324 @@ B --> C[X Windows];
 <li>Floating pop-up windows.</li>
 <li>Want more, check <a href="https://i3wm.org/docs/userguide.html">this</a>.</li>
 </ul>
-<h2 id="3-i3-basic-use--configuration">
-  3. I3 Basic Use &amp; Configuration
-  <a class="anchor" href="#3-i3-basic-use--configuration">#</a>
+<h2 id="3-minimal-ubuntu-i3-setup">
+  3. Minimal Ubuntu I3 setup
+  <a class="anchor" href="#3-minimal-ubuntu-i3-setup">#</a>
 </h2>
-<blockquote>
-<p>WIP</p>
-</blockquote>
+<h3 id="31-ubuntu-server">
+  3.1. Ubuntu Server
+  <a class="anchor" href="#31-ubuntu-server">#</a>
+</h3>
+<ul>
+<li>Download the <a href="https://ubuntu.com/download/server">installer</a> and install Ubuntu server by walking through installer. If you&rsquo;re completely new to it, you can follow <a href="https://ubuntu.com/server/docs/installation">official documentation</a>.</li>
+<li>The version <code>20.04.2</code>.</li>
+</ul>
+<h3 id="32-desktop">
+  3.2. Desktop
+  <a class="anchor" href="#32-desktop">#</a>
+</h3>
+<ul>
+<li>We&rsquo;ll need a display server so let&rsquo;s install X Window System (<a href="https://wiki.archlinux.org/index.php/Xorg">Xorg</a>)</li>
+</ul>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt install xinit
+<span style="color:#998;font-style:italic"># The configuration files are stored in /etc/X11/xinit</span>
+<span style="color:#998;font-style:italic"># You can override it by creating and modifying ~/.xinitrc</span>
+</code></pre></div><h3 id="33-tiling-window-manager---i3">
+  3.3. Tiling Window Manager - I3
+  <a class="anchor" href="#33-tiling-window-manager---i3">#</a>
+</h3>
+<ul>
+<li>You can install i3 from <a href="https://packages.ubuntu.com/search?keywords=i3">Ubuntu repository</a>.</li>
+</ul>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt install i3
+</code></pre></div><ul>
+<li>Or build from source, I have a personal fork - <a href="https://github.com/ntk148v/i3">Rounded i3-gaps</a>.</li>
+</ul>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#998;font-style:italic"># Dependencies</span>
+sudo apt install git libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev <span style="color:#d14">\
+</span><span style="color:#d14"></span>    libxcb-util0-dev libxcb-icccm4-dev libyajl-dev <span style="color:#d14">\
+</span><span style="color:#d14"></span>    libstartup-notification0-dev libxcb-randr0-dev <span style="color:#d14">\
+</span><span style="color:#d14"></span>    libev-dev libxcb-cursor-dev libxcb-xinerama0-dev <span style="color:#d14">\
+</span><span style="color:#d14"></span>    libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev <span style="color:#d14">\
+</span><span style="color:#d14"></span>    autoconf libxcb-xrm0 libxcb-xrm-dev automake i3status <span style="color:#d14">\
+</span><span style="color:#d14"></span>    ninja-build meson libxcb-shape0-dev build-essential -y
+git clone https://github.com/ntk148v/i3.git
+<span style="color:#0086b3">cd</span> i3/
+<span style="color:#998;font-style:italic"># Compile</span>
+mkdir -p build <span style="color:#000;font-weight:bold">&amp;&amp;</span> <span style="color:#0086b3">cd</span> build
+meson ..
+ninja
+sudo ninja install
+</code></pre></div><ul>
+<li>
+<p>Reboot. After reboot, choose i3 as your WM/DE.</p>
+</li>
+<li>
+<p>A prompt will be shown to create a config file, just hit <code>&lt;Enter&gt;</code>.</p>
+</li>
+</ul>
+
+<link rel="stylesheet" href="https://ntk148v.github.io/blog/css/hugo-easy-gallery.css" />
+<div class="box" >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img">
+      <img itemprop="thumbnail" src="/blog/photos/getting-started-tiling-wm-part-1/i3-prompt.png" />
+    </div>
+    <a href="photos/getting-started-tiling-wm-part-1/i3-prompt.png" itemprop="contentUrl"></a>
+  </figure>
+</div>
+
+<ul>
+<li><code>&lt;mod&gt;</code> key is <code>Window</code> now. Hit <code>&lt;mod&gt;+Enter</code> to start terminal emulator.</li>
+</ul>
+<h3 id="34-configure-i3">
+  3.4. Configure I3
+  <a class="anchor" href="#34-configure-i3">#</a>
+</h3>
+<ul>
+<li>We have i3 first setup here with the default configuration. As mentioned before, configuration is achieved via plain text file.</li>
+</ul>
+
+
+<div class="box" >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img">
+      <img itemprop="thumbnail" src="/blog/photos/getting-started-tiling-wm-part-1/i3-default-config-file.png" />
+    </div>
+    <a href="photos/getting-started-tiling-wm-part-1/i3-default-config-file.png" itemprop="contentUrl"></a>
+  </figure>
+</div>
+
+<ul>
+<li>You can use my minimal configuration. It requires some extra packages.</li>
+</ul>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt install hsetroot rofi compton -y
+</code></pre></div>
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>Expand</span>
+      <span>↕</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <h2 id="minimal-configuration-file">Minimal configuration file</h2>
+<pre><code># i3 config file
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+
+# Set modifier
+set $mod Mod4
+set $alt Mod1
+
+default_orientation auto
+
+# Font for window titles.
+font pango:DejaVu Sans Mono 0
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Here is the trick to disable titlebar completely
+for_window [class=&quot;^.*&quot;] border pixel 0
+
+# Autostart
+exec --no-startup-id hsetroot -solid &quot;#F1CCBB&quot;
+exec --no-startup-id xsettingsd &amp;
+exec --no-startup-id compton -b
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id nm-applet
+
+# Keybindings
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+# kill focused window
+bindsym $mod+Shift+q kill
+bindsym $alt+F4 kill
+# start rofi
+bindsym $mod+Shift+d exec i3-dmenu-desktop --dmenu=&quot;dmenu -i -fn 'DejaVu Sans:size=8'&quot;
+bindsym $mod+d exec rofi -lines 12 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font 'DejaVu Sans 8'
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% &amp;&amp; $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% &amp;&amp; $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle &amp;&amp; $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle &amp;&amp; $refresh_i3status
+
+# change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 &quot;1&quot;
+set $ws2 &quot;2&quot;
+set $ws3 &quot;3&quot;
+set $ws4 &quot;4&quot;
+set $ws5 &quot;5&quot;
+set $ws6 &quot;6&quot;
+set $ws7 &quot;7&quot;
+set $ws8 &quot;8&quot;
+set $ws9 &quot;9&quot;
+set $ws10 &quot;10&quot;
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec &quot;i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'&quot;
+
+# resize window (you can also use the mouse for that)
+mode &quot;resize&quot; {
+        bindsym Left resize shrink width 5 px or 5 ppt
+        bindsym Down resize grow height 5 px or 5 ppt
+        bindsym Up resize shrink height 5 px or 5 ppt
+        bindsym Right resize grow width 5 px or 5 ppt
+        bindsym Return mode &quot;default&quot;
+}
+bindsym $mod+r mode &quot;resize&quot;
+
+# panel
+bar {
+        colors {
+        background #2f343f
+        statusline #2f343f
+        separator #4b5262
+
+        # colour of border, background, and text
+        focused_workspace       #2f343f #bf616a #d8dee8
+        active_workspace        #2f343f #2f343f #d8dee8
+        inactive_workspace      #2f343f #2f343f #d8dee8
+        urgent_workspacei       #2f343f #ebcb8b #2f343f
+    }
+        status_command i3status
+}
+
+# gaps
+gaps top    20
+gaps left   10
+gaps right  10
+gaps bottom 10
+gaps inner  25
+border_radius 10
+
+# Hide edge borders only if there is one window with no gaps
+hide_edge_borders smart_no_gaps
+
+# reload
+exec_always hsetroot -solid &quot;#F1CCBB&quot;
+</code></pre>
+    </div>
+  </label>
+</div>
+
+<ul>
+<li>A trick with terminal emulator:
+<ul>
+<li>Disable scrollbar and menubar.</li>
+</ul>
+</li>
+</ul>
+
+
+<div class="box" >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img">
+      <img itemprop="thumbnail" src="/blog/photos/getting-started-tiling-wm-part-1/terminal-trick-1.png" />
+    </div>
+    <a href="photos/getting-started-tiling-wm-part-1/terminal-trick-1.png" itemprop="contentUrl"></a>
+  </figure>
+</div>
+
+
+
+<div class="box" >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img">
+      <img itemprop="thumbnail" src="/blog/photos/getting-started-tiling-wm-part-1/terminal-trick-2.png" />
+    </div>
+    <a href="photos/getting-started-tiling-wm-part-1/terminal-trick-2.png" itemprop="contentUrl"></a>
+  </figure>
+</div>
+
+<ul>
+<li>Configure padding for vte-terminal.</li>
+</ul>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir -p ~/.config/gtk-3.0
+cat <span style="color:#d14">&lt;&lt;EOT &gt;&gt; ~/.config/gtk-3.0/gtk.css
+</span><span style="color:#d14">vte-terminal {
+</span><span style="color:#d14">    padding: 30px;
+</span><span style="color:#d14">}
+</span><span style="color:#d14">EOT</span>
+</code></pre></div><ul>
+<li>Result.</li>
+</ul>
+
+
+<div class="box" >
+  <figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <div class="img">
+      <img itemprop="thumbnail" src="/blog/photos/getting-started-tiling-wm-part-1/i3-gaps-config.png" />
+    </div>
+    <a href="photos/getting-started-tiling-wm-part-1/i3-gaps-config.png" itemprop="contentUrl"></a>
+  </figure>
+</div>
+
 <h2 id="4-references">
   4. References
   <a class="anchor" href="#4-references">#</a>
@@ -280,6 +603,13 @@ B --> C[X Windows];
 
 
 
+  <div>
+    <a class="flex align-center" href="https://github.com/ntk148v/blog/edit/master/content/posts/getting-started-tiling-wm-part-1-i3.md" target="_blank" rel="noopener">
+      <img src="/blog/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
 </div>
 
  
@@ -288,7 +618,11 @@ B --> C[X Windows];
 
       
   
-  <div class="book-comments"></div>
+  <div class="book-comments"><section class="article discussion">
+    <script src="https://utteranc.es/client.js" repo="ntk148v/blog" issue-term="pathname" theme="github-light"
+        crossorigin="anonymous" async>
+    </script>
+</section></div>
   
  
 
@@ -309,7 +643,14 @@ B --> C[X Windows];
       </ul>
     </li>
     <li><a href="#2-overview-i3">2. Overview I3</a></li>
-    <li><a href="#3-i3-basic-use--configuration">3. I3 Basic Use &amp; Configuration</a></li>
+    <li><a href="#3-minimal-ubuntu-i3-setup">3. Minimal Ubuntu I3 setup</a>
+      <ul>
+        <li><a href="#31-ubuntu-server">3.1. Ubuntu Server</a></li>
+        <li><a href="#32-desktop">3.2. Desktop</a></li>
+        <li><a href="#33-tiling-window-manager---i3">3.3. Tiling Window Manager - I3</a></li>
+        <li><a href="#34-configure-i3">3.4. Configure I3</a></li>
+      </ul>
+    </li>
     <li><a href="#4-references">4. References</a></li>
   </ul>
 </nav>
