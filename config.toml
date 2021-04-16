@@ -12,6 +12,7 @@ BookComments = true
 BookServiceWorker = true
 BookMenuBundle = '/menu'
 BookDateFormat = 'Jan 02, 2006'
+BookEditPath = 'edit/master'
 
 # set all headings to their default size (depending on browser settings)
 # it's set to `true` by default
