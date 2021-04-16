@@ -1,21 +1,17 @@
 +++
-title = "Getting Started with Tiling Window Manager [Part 1]: I3"
+title = "Getting Started with Tiling WM [Part 1] - I3"
 date = 2020-05-22T17:10:04+07:00
-lastmod = 2020-05-22T17:10:04+07:00
 tags = ["tiling-wm", "linux", "tech", "i3"]
-categories = []
-imgs = []
-cover = ""  # image show on top
 readingTime = true  # show reading time after article date
-toc = true
-comments = false
-justify = false  # text-align: justify;
-single = false  # display as a single page, hide navigation on bottom, like as about page.
-license = ""  # CC License
+comments = true
 draft = false
 +++
 
-> **Disclaimer**: I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I've gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.
+{{< hint info >}}
+**Disclaimer**
+
+I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I've gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.
+{{< /hint >}}
 
 ## 1. Overview Window Manager
 
@@ -67,9 +63,65 @@ B --> C[X Windows];
 - Floating pop-up windows.
 - Want more, check [this](https://i3wm.org/docs/userguide.html).
 
-## 3. I3 Basic Use & Configuration
+## 3. Minimal Ubuntu I3 setup
 
-> WIP
+### 3.1. Ubuntu Server
+
+- Download the [installer](https://ubuntu.com/download/server) and install Ubuntu server by walking through installer. If you're completely new to it, you can follow [official documentation](https://ubuntu.com/server/docs/installation).
+- The version `20.04.2`.
+
+### 3.2. Desktop
+
+- We'll need a display server so let's install X Window System ([Xorg](https://wiki.archlinux.org/index.php/Xorg))
+
+```bash
+sudo apt install xinit
+# The configuration files are stored in /etc/X11/xinit
+# You can override it by creating and modifying ~/.xinitrc
+```
+
+### 3.3. Terminal emulator
+
+- We need to install a terminal emulator to use a terminal in a GUI environment.
+- My choice is [tilix](https://github.com/gnunn1/tilix).
+
+```bash
+sudo apt install tilix
+```
+
+### 3.4. Tiling Window Manager - I3
+
+- You can install i3 from [Ubuntu repository](https://packages.ubuntu.com/search?keywords=i3).
+
+```bash
+sudo apt install i3
+```
+
+- Or build from source, I have a personal fork - [Rounded i3-gaps](https://github.com/ntk148v/i3).
+
+```bash
+# Dependencies
+sudo apt install git libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev \
+    libxcb-util0-dev libxcb-icccm4-dev libyajl-dev \
+    libstartup-notification0-dev libxcb-randr0-dev \
+    libev-dev libxcb-cursor-dev libxcb-xinerama0-dev \
+    libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev \
+    autoconf libxcb-xrm0 libxcb-xrm-dev automake \
+    ninja-build meson libxcb-shape0-dev build-essential -y
+    git clone https://github.com/ntk148v/i3.git
+cd i3/
+# Compile
+mkdir -p build && cd build
+meson ..
+ninja
+sudo ninja install
+```
+
+- Start `X`. A prompt will be shown to create a config file, just use the default key.
+
+```bash
+startx
+```
 
 ## 4. References
 
