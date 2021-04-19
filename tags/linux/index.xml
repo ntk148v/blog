@@ -6,7 +6,54 @@
     <description>Recent content in linux on /home/kiennt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Apr 2021 09:45:59 +0700</lastBuildDate><atom:link href="https://ntk148v.github.io/blog/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 19 Apr 2021 10:10:21 +0700</lastBuildDate><atom:link href="https://ntk148v.github.io/blog/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Getting Started with Tiling WM [Part 1] - I3</title>
+      <link>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-1-i3/</link>
+      <pubDate>Mon, 19 Apr 2021 10:10:21 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-1-i3/</guid>
+      <description>Disclaimer
+I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I&amp;rsquo;ve gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.
+ 1. Overview Window Manager #  First of all, you have to know the basic concepts.</description>
+    </item>
+    
+    <item>
+      <title>Getting Started with Tiling WM [Part 2] - Rofi</title>
+      <link>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-2-rofi/</link>
+      <pubDate>Mon, 19 Apr 2021 10:10:21 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-2-rofi/</guid>
+      <description>In the part1, I&amp;rsquo;ve used rofi instead of dmenu. This part will show you how to start with rofi.  1. Introduction #   Rofi is a window switcher, application launcher and dmenu replacement. Features:  Fully configurable keyboard navigation. Type to filer. Built-in modes:  Window switcher mode. Application laucher. Desktop file application launcher. SSH laucher mode.   History-based ordering. &amp;hellip;    2. Getting started #   Installing rofi is quite easy.</description>
+    </item>
+    
+    <item>
+      <title>Getting Started with Tiling WM [Part 3] - Polybar</title>
+      <link>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-3-polybar/</link>
+      <pubDate>Mon, 19 Apr 2021 10:10:21 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-3-polybar/</guid>
+      <description>WIP  </description>
+    </item>
+    
+    <item>
+      <title>Getting Started with Tiling WM [Part 4] - Xresources</title>
+      <link>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-4-xresources/</link>
+      <pubDate>Mon, 19 Apr 2021 10:10:21 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-4-xresources/</guid>
+      <description>WIP  </description>
+    </item>
+    
+    <item>
+      <title>Getting Started with Tiling WM [Part 5] - Compton</title>
+      <link>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-5-compton/</link>
+      <pubDate>Mon, 19 Apr 2021 10:10:21 +0700</pubDate>
+      
+      <guid>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-5-compton/</guid>
+      <description>WIP  </description>
+    </item>
+    
     <item>
       <title>Linux tools that you never knew you needed</title>
       <link>https://ntk148v.github.io/blog/posts/linux-tools-that-you-never-knew-you-needed/</link>
@@ -25,53 +72,6 @@
       <description>NOTE: Environment Ubuntu 20.04
  Dependencies #   Xwinwrap:  sudo apt-get install xorg-dev build-essential libx11-dev x11proto-xext-dev libxrender-dev libxext-dev git clone https://github.com/ujjwal96/xwinwrap.git cd xwinwrap make sudo make install make clean  Gifsicle:  sudo apt install gifsicle The helper script #  A helper script to setup animated .gif in dual monitors.
 #!/bin/bash # Uses xwinwrap to display given animated .gif in dual monitors. if [ $# -ne 1 ]; then echo 1&amp;gt;&amp;amp;2 Usage: $0 image.</description>
-    </item>
-    
-    <item>
-      <title>Getting Started with Tiling WM [Part 5] - Compton</title>
-      <link>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-5-compton/</link>
-      <pubDate>Fri, 22 May 2020 17:11:20 +0700</pubDate>
-      
-      <guid>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-5-compton/</guid>
-      <description>WIP  </description>
-    </item>
-    
-    <item>
-      <title>Getting Started with Tiling WM [Part 4] - Xresources</title>
-      <link>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-4-xresources/</link>
-      <pubDate>Fri, 22 May 2020 17:10:35 +0700</pubDate>
-      
-      <guid>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-4-xresources/</guid>
-      <description>WIP  </description>
-    </item>
-    
-    <item>
-      <title>Getting Started with Tiling WM [Part 3] - Polybar</title>
-      <link>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-3-polybar/</link>
-      <pubDate>Fri, 22 May 2020 17:10:28 +0700</pubDate>
-      
-      <guid>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-3-polybar/</guid>
-      <description>WIP  </description>
-    </item>
-    
-    <item>
-      <title>Getting Started with Tiling WM [Part 2] - Rofi</title>
-      <link>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-2-rofi/</link>
-      <pubDate>Fri, 22 May 2020 17:10:21 +0700</pubDate>
-      
-      <guid>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-2-rofi/</guid>
-      <description>In the part1, I&amp;rsquo;ve used rofi instead of dmenu. This part will show you how to start with rofi.  1. Introduction #   Rofi is a window switcher, application launcher and dmenu replacement. Features:  Fully configurable keyboard navigation. Type to filer. Built-in modes:  Window switcher mode. Application laucher. Desktop file application launcher. SSH laucher mode.   History-based ordering. &amp;hellip;    2. Getting started #   Installing rofi is quite easy.</description>
-    </item>
-    
-    <item>
-      <title>Getting Started with Tiling WM [Part 1] - I3</title>
-      <link>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-1-i3/</link>
-      <pubDate>Fri, 22 May 2020 17:10:04 +0700</pubDate>
-      
-      <guid>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-1-i3/</guid>
-      <description>Disclaimer
-I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I&amp;rsquo;ve gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.
- 1. Overview Window Manager #  First of all, you have to know the basic concepts.</description>
     </item>
     
     <item>

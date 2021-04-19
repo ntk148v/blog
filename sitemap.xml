@@ -3,22 +3,77 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://ntk148v.github.io/blog/tags/linux/</loc>
-    <lastmod>2021-04-07T09:45:59+07:00</lastmod>
+    <loc>https://ntk148v.github.io/blog/tags/compton/</loc>
+    <lastmod>2021-04-19T10:10:21+07:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ntk148v.github.io/blog/posts/linux-tools-that-you-never-knew-you-needed/</loc>
-    <lastmod>2021-04-07T09:45:59+07:00</lastmod>
+    <loc>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-1-i3/</loc>
+    <lastmod>2021-04-19T10:10:21+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-2-rofi/</loc>
+    <lastmod>2021-04-19T10:10:21+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-3-polybar/</loc>
+    <lastmod>2021-04-19T10:10:21+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-4-xresources/</loc>
+    <lastmod>2021-04-19T10:10:21+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-5-compton/</loc>
+    <lastmod>2021-04-19T10:10:21+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ntk148v.github.io/blog/tags/i3/</loc>
+    <lastmod>2021-04-19T10:10:21+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ntk148v.github.io/blog/tags/linux/</loc>
+    <lastmod>2021-04-19T10:10:21+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ntk148v.github.io/blog/tags/polybar/</loc>
+    <lastmod>2021-04-19T10:10:21+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ntk148v.github.io/blog/tags/rofi/</loc>
+    <lastmod>2021-04-19T10:10:21+07:00</lastmod>
   </url>
   
   <url>
     <loc>https://ntk148v.github.io/blog/tags/</loc>
-    <lastmod>2021-04-07T09:45:59+07:00</lastmod>
+    <lastmod>2021-04-19T10:10:21+07:00</lastmod>
   </url>
   
   <url>
     <loc>https://ntk148v.github.io/blog/tags/tech/</loc>
+    <lastmod>2021-04-19T10:10:21+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ntk148v.github.io/blog/tags/tiling-wm/</loc>
+    <lastmod>2021-04-19T10:10:21+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ntk148v.github.io/blog/tags/xresources/</loc>
+    <lastmod>2021-04-19T10:10:21+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ntk148v.github.io/blog/posts/linux-tools-that-you-never-knew-you-needed/</loc>
     <lastmod>2021-04-07T09:45:59+07:00</lastmod>
   </url>
   
@@ -30,61 +85,6 @@
   <url>
     <loc>https://ntk148v.github.io/blog/posts/set-animated-gif-as-wallpaper/</loc>
     <lastmod>2021-01-14T09:36:34+07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ntk148v.github.io/blog/tags/compton/</loc>
-    <lastmod>2020-05-22T17:11:20+07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-5-compton/</loc>
-    <lastmod>2020-05-22T17:11:20+07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ntk148v.github.io/blog/tags/tiling-wm/</loc>
-    <lastmod>2020-05-22T17:11:20+07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-4-xresources/</loc>
-    <lastmod>2020-05-22T17:10:35+07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ntk148v.github.io/blog/tags/xresources/</loc>
-    <lastmod>2020-05-22T17:10:35+07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-3-polybar/</loc>
-    <lastmod>2020-05-22T17:10:28+07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ntk148v.github.io/blog/tags/polybar/</loc>
-    <lastmod>2020-05-22T17:10:28+07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-2-rofi/</loc>
-    <lastmod>2020-05-22T17:10:21+07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ntk148v.github.io/blog/tags/rofi/</loc>
-    <lastmod>2020-05-22T17:10:21+07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-1-i3/</loc>
-    <lastmod>2020-05-22T17:10:04+07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ntk148v.github.io/blog/tags/i3/</loc>
-    <lastmod>2020-05-22T17:10:04+07:00</lastmod>
   </url>
   
   <url>
