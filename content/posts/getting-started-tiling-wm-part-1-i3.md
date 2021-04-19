@@ -161,7 +161,7 @@ exec --no-startup-id nm-applet
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+c kill
 bindsym $alt+F4 kill
 # start rofi
 bindsym $mod+Shift+d exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'DejaVu Sans:size=8'"
