@@ -60,7 +60,7 @@
       <pubDate>Fri, 22 May 2020 17:10:21 +0700</pubDate>
       
       <guid>https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-2-rofi/</guid>
-      <description>WIP  </description>
+      <description>In the part1, I&amp;rsquo;ve used rofi instead of dmenu. This part will show you how to start with rofi.  1. Introduction #   Rofi is a window switcher, application launcher and dmenu replacement. Features:  Fully configurable keyboard navigation. Type to filer. Built-in modes:  Window switcher mode. Application laucher. Desktop file application launcher. SSH laucher mode.   History-based ordering. &amp;hellip;    2. Getting started #   Installing rofi is quite easy.</description>
     </item>
     
     <item>
