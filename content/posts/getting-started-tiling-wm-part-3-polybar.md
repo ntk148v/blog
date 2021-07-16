@@ -6,6 +6,11 @@ comments = false
 draft = false
 +++
 
+## 1. Overview
+
+[According to Polybar frontpage](https://polybar.github.io/), `Polybar is A fast and easy to use tool for creating status bars `.
+
 {{< hint warning >}}
 **WIP**
 {{< /hint >}}
+
