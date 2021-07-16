@@ -3,7 +3,7 @@ languageCode = "en-us"
 theme = "book"
 pygmentsCodefences = true
 enableEmoji = true
-enableGitInfo = false
+enableGitInfo = true
 
 [params]
 BookTheme = 'auto'
@@ -13,6 +13,7 @@ BookServiceWorker = true
 BookMenuBundle = '/menu'
 BookDateFormat = 'Jan 02, 2006'
 BookEditPath = 'edit/master'
+BookCommitPath = 'commit'
 
 # set all headings to their default size (depending on browser settings)
 # it's set to `true` by default
