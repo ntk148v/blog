@@ -13,9 +13,7 @@ website: "https://ntk148v.github.io/blog/"
 
 {{< figure src="/photos/linh-tinh/DSCF2637.JPG" >}}
 
-- Devops
-- Golang developer
-- Python developer :snake:
+- Engineer <a class="github-button" href="https://github.com/ntk148v" data-color-scheme="no-preference: dark; light: dark; dark: dark;" aria-label="Follow @ntk148v on GitHub">Follow @ntk148v</a>
 - Basketball junkie :basketball:
 - Love taking lifestyle photos :camera: & drawing :pencil2:
 - OpenSource contributor & lover
