@@ -1,15 +1,129 @@
-<!doctype html><html lang=en dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="In the part1, I&rsquo;ve used rofi instead of dmenu. This part will show you how to start with rofi.  1. Introduction #   Rofi is a window switcher, application launcher and dmenu replacement. Features:  Fully configurable keyboard navigation. Type to filer. Built-in modes:  Window switcher mode. Application laucher. Desktop file application launcher. SSH laucher mode.   History-based ordering. &mldr;    2. Getting started #   Installing rofi is quite easy."><meta name=theme-color content="#FFFFFF"><meta property="og:title" content="Getting Started with Tiling WM [Part 2] - Rofi"><meta property="og:description" content="In the part1, I&rsquo;ve used rofi instead of dmenu. This part will show you how to start with rofi.  1. Introduction #   Rofi is a window switcher, application launcher and dmenu replacement. Features:  Fully configurable keyboard navigation. Type to filer. Built-in modes:  Window switcher mode. Application laucher. Desktop file application launcher. SSH laucher mode.   History-based ordering. &mldr;    2. Getting started #   Installing rofi is quite easy."><meta property="og:type" content="article"><meta property="og:url" content="https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-2-rofi/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-04-19T10:10:21+07:00"><meta property="article:modified_time" content="2021-04-19T10:50:52+07:00"><meta property="og:site_name" content="/home/kiennt"><title>Getting Started with Tiling WM [Part 2] - Rofi | /home/kiennt</title><link rel=manifest href=/blog/manifest.json><link rel=icon href=/blog/favicon.png type=image/x-icon><link rel=stylesheet href=/blog/book.min.9e054825fe83a7fe54ce020754d54f7f86b172a2db5babcef21a04cd23e53cb7.css integrity="sha256-ngVIJf6Dp/5UzgIHVNVPf4axcqLbW6vO8hoEzSPlPLc=" crossorigin=anonymous><script defer src=/blog/flexsearch.min.js></script><script defer src=/blog/en.search.min.b112a83234b80afd7d8de84eee7e3c16199e31fb373d0177b6ab062a3b326465.js integrity="sha256-sRKoMjS4Cv19jehO7n48FhmeMfs3PQF3tqsGKjsyZGU=" crossorigin=anonymous></script><script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a href=/blog/><span>/home/kiennt</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><a href=/blog/authors/kiennt/>About</a></li><li><a href=/blog/posts/>Posts</a></li><li><a href=https://ntk148v.github.io/notes>Notes</a></li></ul></nav><script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/blog/svg/menu.svg class=book-icon alt=Menu></label>
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="In the part1, I&rsquo;ve used rofi instead of dmenu. This part will show you how to start with rofi.  1. Introduction #   Rofi is a window switcher, application launcher and dmenu replacement. Features:  Fully configurable keyboard navigation. Type to filer. Built-in modes:  Window switcher mode. Application laucher. Desktop file application launcher. SSH laucher mode.   History-based ordering. &mldr;    2. Getting started #   Installing rofi is quite easy.">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="Getting Started with Tiling WM [Part 2] - Rofi">
+<meta property="og:description" content="In the part1, I&rsquo;ve used rofi instead of dmenu. This part will show you how to start with rofi.  1. Introduction #   Rofi is a window switcher, application launcher and dmenu replacement. Features:  Fully configurable keyboard navigation. Type to filer. Built-in modes:  Window switcher mode. Application laucher. Desktop file application launcher. SSH laucher mode.   History-based ordering. &mldr;    2. Getting started #   Installing rofi is quite easy.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-2-rofi/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-04-19T10:10:21+07:00">
+<meta property="article:modified_time" content="2021-04-19T10:50:52+07:00"><meta property="og:site_name" content="/home/kiennt">
+<title>Getting Started with Tiling WM [Part 2] - Rofi | /home/kiennt</title>
+<link rel=manifest href=/blog/manifest.json>
+<link rel=icon href=/blog/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/blog/book.min.9e054825fe83a7fe54ce020754d54f7f86b172a2db5babcef21a04cd23e53cb7.css integrity="sha256-ngVIJf6Dp/5UzgIHVNVPf4axcqLbW6vO8hoEzSPlPLc=" crossorigin=anonymous>
+<script defer src=/blog/flexsearch.min.js></script>
+<script defer src=/blog/en.search.min.d7c83a7fd065a85210ea2e64818a0c161472b6b3eb65467f9ed1f5ed11f6c31c.js integrity="sha256-18g6f9BlqFIQ6i5kgYoMFhRytrPrZUZ/ntH17RH2wxw=" crossorigin=anonymous></script>
+<script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a href=/blog/><span>/home/kiennt</span>
+</a>
+</h2>
+<div class=book-search>
+<input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/>
+<div class="book-search-spinner hidden"></div>
+<ul id=book-search-results></ul>
+</div>
+<ul>
+<li><a href=/blog/authors/kiennt/>About</a></li>
+<li><a href=/blog/posts/>Posts</a></li>
+<li><a href=https://ntk148v.github.io/notes>Notes</a></li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/blog/svg/menu.svg class=book-icon alt=Menu>
+</label>
 <strong>Getting Started with Tiling WM [Part 2] - Rofi</strong>
-<label for=toc-control><img src=/blog/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#1-introduction>1. Introduction</a></li><li><a href=#2-getting-started>2. Getting started</a></li><li><a href=#3-tweaking>3. Tweaking</a></li></ul></nav></aside></header><article class=markdown><h1><a href=/blog/posts/getting-started-tiling-wm-part-2-rofi/>Getting Started with Tiling WM [Part 2] - Rofi</a></h1><h5>Apr 19, 2021</h5><div><a href=/blog/tags/tiling-wm/>#tiling-wm</a>
+<label for=toc-control>
+<img src=/blog/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#1-introduction>1. Introduction</a></li>
+<li><a href=#2-getting-started>2. Getting started</a></li>
+<li><a href=#3-tweaking>3. Tweaking</a></li>
+</ul>
+</nav>
+</aside>
+</header>
+<article class=markdown>
+<h1>
+<a href=/blog/posts/getting-started-tiling-wm-part-2-rofi/>Getting Started with Tiling WM [Part 2] - Rofi</a>
+</h1>
+<h5>Apr 19, 2021</h5>
+<div>
+<a href=/blog/tags/tiling-wm/>#tiling-wm</a>
 <a href=/blog/tags/linux/>#linux</a>
 <a href=/blog/tags/tech/>#tech</a>
-<a href=/blog/tags/rofi/>#rofi</a></div><blockquote class="book-hint info">In the <a href=https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-1-i3/>part1</a>, I&rsquo;ve used <code>rofi</code> instead of <code>dmenu</code>. This part will show you how to start with <code>rofi</code>.</blockquote><h2 id=1-introduction>1. Introduction
-<a class=anchor href=#1-introduction>#</a></h2><ul><li><a href=https://github.com/davatorium/rofi>Rofi</a> is a window switcher, application launcher and dmenu replacement.</li><li>Features:<ul><li>Fully configurable keyboard navigation.</li><li>Type to filer.</li><li>Built-in modes:<ul><li>Window switcher mode.</li><li>Application laucher.</li><li>Desktop file application launcher.</li><li>SSH laucher mode.</li></ul></li><li>History-based ordering.</li><li>&mldr;</li></ul></li></ul><h2 id=2-getting-started>2. Getting started
-<a class=anchor href=#2-getting-started>#</a></h2><ul><li>Installing <code>rofi</code> is quite easy.</li></ul><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sudo apt install rofi -y
-</code></pre></div><ul><li>Run it for the first time.</li></ul><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>rofi -lines <span style=color:#099>12</span> -padding <span style=color:#099>18</span> -width <span style=color:#099>60</span> -location <span style=color:#099>0</span> -show drun -sidebar-mode -columns <span style=color:#099>3</span> -font <span style=color:#d14>&#39;DejaVu Sans 8&#39;</span>
-</code></pre></div><div class=book-expand><label><div class="book-expand-head flex justify-between"><span>Expand</span>
-<span>↕</span></div><input type=checkbox class=hidden><div class="book-expand-content markdown-inner"><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>       -show mode
+<a href=/blog/tags/rofi/>#rofi</a>
+</div>
+<blockquote class="book-hint info">
+In the <a href=https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-1-i3/>part1</a>, I&rsquo;ve used <code>rofi</code> instead of <code>dmenu</code>. This part will show you how to start with <code>rofi</code>.
+</blockquote>
+<h2 id=1-introduction>
+1. Introduction
+<a class=anchor href=#1-introduction>#</a>
+</h2>
+<ul>
+<li><a href=https://github.com/davatorium/rofi>Rofi</a> is a window switcher, application launcher and dmenu replacement.</li>
+<li>Features:
+<ul>
+<li>Fully configurable keyboard navigation.</li>
+<li>Type to filer.</li>
+<li>Built-in modes:
+<ul>
+<li>Window switcher mode.</li>
+<li>Application laucher.</li>
+<li>Desktop file application launcher.</li>
+<li>SSH laucher mode.</li>
+</ul>
+</li>
+<li>History-based ordering.</li>
+<li>&mldr;</li>
+</ul>
+</li>
+</ul>
+<h2 id=2-getting-started>
+2. Getting started
+<a class=anchor href=#2-getting-started>#</a>
+</h2>
+<ul>
+<li>Installing <code>rofi</code> is quite easy.</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sudo apt install rofi -y
+</code></pre></div><ul>
+<li>Run it for the first time.</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>rofi -lines <span style=color:#099>12</span> -padding <span style=color:#099>18</span> -width <span style=color:#099>60</span> -location <span style=color:#099>0</span> -show drun -sidebar-mode -columns <span style=color:#099>3</span> -font <span style=color:#d14>&#39;DejaVu Sans 8&#39;</span>
+</code></pre></div>
+<div class=book-expand>
+<label>
+<div class="book-expand-head flex justify-between">
+<span>Expand</span>
+<span>↕</span>
+</div>
+<input type=checkbox class=hidden>
+<div class="book-expand-content markdown-inner">
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>       -show mode
 
        Open  rofi in a certain mode. Available modes are window, run, drun, ssh, combi. The
        special argument keys can be used to open a searchable list of supported  key  bind‐
@@ -51,10 +165,52 @@
 
            rofi -show run -sidebar-mode -lines <span style=color:#099>0</span>
 
-</code></pre></div></div></label></div><link rel=stylesheet href=https://ntk148v.github.io/blog/css/hugo-easy-gallery.css><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/rofi-default.png></div><a href=/photos/getting-started-tiling-wm-part-1/rofi-default.png itemprop=contentUrl></a></figure></div><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/rofi-default-2.png></div><a href=/photos/getting-started-tiling-wm-part-1/rofi-default-2.png itemprop=contentUrl></a></figure></div><ul><li>Press hot key (defined in i3 configuration file) <code>&lt;Window>+d</code> to start rofi. Use <code>&lt;Shift>+&lt;left/right></code> to switch between mode.</li><li>More details you can found in <a href=https://github.com/davatorium/rofi>rofi github</a>.</li></ul><h2 id=3-tweaking>3. Tweaking
-<a class=anchor href=#3-tweaking>#</a></h2><ul><li>The default setup looks quite boring. Let&rsquo;s tweak a bit!</li><li>There are currently three methods of setting configuration options:<ul><li><em>Local configuration. Normally, depending on XDG, in ~/.config/rofi/config. This uses the Xresources format</em>.</li><li>Xresources: A method of storing key values in the Xserver. See here for more information.</li><li>Command line options: Arguments are passed to Rofi.</li></ul></li><li>We will use configuration file.</li></ul><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>mkdir -p ~/.config/rofi/themes
+</code></pre></div>
+</div>
+</label>
+</div>
+<link rel=stylesheet href=https://ntk148v.github.io/blog/css/hugo-easy-gallery.css>
+<div class=box>
+<figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
+<div class=img>
+<img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/rofi-default.png>
+</div>
+<a href=/photos/getting-started-tiling-wm-part-1/rofi-default.png itemprop=contentUrl></a>
+</figure>
+</div>
+<div class=box>
+<figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
+<div class=img>
+<img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/rofi-default-2.png>
+</div>
+<a href=/photos/getting-started-tiling-wm-part-1/rofi-default-2.png itemprop=contentUrl></a>
+</figure>
+</div>
+<ul>
+<li>Press hot key (defined in i3 configuration file) <code>&lt;Window>+d</code> to start rofi. Use <code>&lt;Shift>+&lt;left/right></code> to switch between mode.</li>
+<li>More details you can found in <a href=https://github.com/davatorium/rofi>rofi github</a>.</li>
+</ul>
+<h2 id=3-tweaking>
+3. Tweaking
+<a class=anchor href=#3-tweaking>#</a>
+</h2>
+<ul>
+<li>The default setup looks quite boring. Let&rsquo;s tweak a bit!</li>
+<li>There are currently three methods of setting configuration options:
+<ul>
+<li><em>Local configuration. Normally, depending on XDG, in ~/.config/rofi/config. This uses the Xresources format</em>.</li>
+<li>Xresources: A method of storing key values in the Xserver. See here for more information.</li>
+<li>Command line options: Arguments are passed to Rofi.</li>
+</ul>
+</li>
+<li>We will use configuration file.</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>mkdir -p ~/.config/rofi/themes
 touch ~/.config/rofi/themes/onedark.theme
-</code></pre></div><ul><li>Copy the follow content into <code>~/.config/rofi/themes/onedark.theme</code>:</li></ul><pre><code>configuration {
+</code></pre></div><ul>
+<li>Copy the follow content into <code>~/.config/rofi/themes/onedark.theme</code>:</li>
+</ul>
+<pre tabindex=0><code>configuration {
   show-icons: true;
   font: &quot;DejaVu Sans Mono 10&quot;;
   modi: &quot;window,run,drun&quot;;
@@ -115,8 +271,54 @@ entry {
   padding: 12;
   text-color: @selected-urgent-background;
 }
-</code></pre><ul><li>Run it and you can see the magic!</li></ul><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>rofi -theme ~/.config/rofi/themes/onedark.theme -show drun
-</code></pre></div><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/rofi-custom.png></div><a href=/photos/getting-started-tiling-wm-part-1/rofi-custom.png itemprop=contentUrl></a></figure></div><ul><li>Don&rsquo;t forget to update hotkey in i3 configuration file.</li></ul><pre><code>bindsym $mod+d exec rofi -theme ~/.config/rofi/themes/onedark.theme -show drun
-</code></pre></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/1ec8c1eed2d05d73ef00e7d588e831fcf917c428 title="Last modified by Kien Nguyen | Apr 19, 2021" target=_blank rel=noopener><img src=/blog/svg/calendar.svg class=book-icon alt=Calendar>
-<span>Apr 19, 2021</span></a></div><div><a class="flex align-center" href=https://github.com/ntk148v/blog/edit/master/content/posts/getting-started-tiling-wm-part-2-rofi.md target=_blank rel=noopener><img src=/blog/svg/edit.svg class=book-icon alt=Edit>
-<span>Edit this page</span></a></div></div><script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#1-introduction>1. Introduction</a></li><li><a href=#2-getting-started>2. Getting started</a></li><li><a href=#3-tweaking>3. Tweaking</a></li></ul></nav></div></aside></main></body></html>
+</code></pre><ul>
+<li>Run it and you can see the magic!</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>rofi -theme ~/.config/rofi/themes/onedark.theme -show drun
+</code></pre></div>
+<div class=box>
+<figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
+<div class=img>
+<img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/rofi-custom.png>
+</div>
+<a href=/photos/getting-started-tiling-wm-part-1/rofi-custom.png itemprop=contentUrl></a>
+</figure>
+</div>
+<ul>
+<li>Don&rsquo;t forget to update hotkey in i3 configuration file.</li>
+</ul>
+<pre tabindex=0><code>bindsym $mod+d exec rofi -theme ~/.config/rofi/themes/onedark.theme -show drun
+</code></pre></article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+<div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/1ec8c1eed2d05d73ef00e7d588e831fcf917c428 title="Last modified by Kien Nguyen | Apr 19, 2021" target=_blank rel=noopener>
+<img src=/blog/svg/calendar.svg class=book-icon alt=Calendar>
+<span>Apr 19, 2021</span>
+</a>
+</div>
+<div>
+<a class="flex align-center" href=https://github.com/ntk148v/blog/edit/master/content/posts/getting-started-tiling-wm-part-2-rofi.md target=_blank rel=noopener>
+<img src=/blog/svg/edit.svg class=book-icon alt=Edit>
+<span>Edit this page</span>
+</a>
+</div>
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments></div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#1-introduction>1. Introduction</a></li>
+<li><a href=#2-getting-started>2. Getting started</a></li>
+<li><a href=#3-tweaking>3. Tweaking</a></li>
+</ul>
+</nav>
+</div>
+</aside>
+</main>
+</body>
+</html>

@@ -1,28 +1,211 @@
-<!doctype html><html lang=en dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Disclaimer
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Disclaimer
 I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I&rsquo;ve gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.
- 1. Overview Window Manager #  First of all, you have to know the basic concepts."><meta name=theme-color content="#FFFFFF"><meta property="og:title" content="Getting Started with Tiling WM [Part 1] - I3"><meta property="og:description" content="Disclaimer
+ 1. Overview Window Manager #  First of all, you have to know the basic concepts.">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="Getting Started with Tiling WM [Part 1] - I3">
+<meta property="og:description" content="Disclaimer
 I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I&rsquo;ve gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.
- 1. Overview Window Manager #  First of all, you have to know the basic concepts."><meta property="og:type" content="article"><meta property="og:url" content="https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-1-i3/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-04-19T10:10:21+07:00"><meta property="article:modified_time" content="2021-04-19T10:50:52+07:00"><meta property="og:site_name" content="/home/kiennt"><title>Getting Started with Tiling WM [Part 1] - I3 | /home/kiennt</title><link rel=manifest href=/blog/manifest.json><link rel=icon href=/blog/favicon.png type=image/x-icon><link rel=stylesheet href=/blog/book.min.9e054825fe83a7fe54ce020754d54f7f86b172a2db5babcef21a04cd23e53cb7.css integrity="sha256-ngVIJf6Dp/5UzgIHVNVPf4axcqLbW6vO8hoEzSPlPLc=" crossorigin=anonymous><script defer src=/blog/flexsearch.min.js></script><script defer src=/blog/en.search.min.b112a83234b80afd7d8de84eee7e3c16199e31fb373d0177b6ab062a3b326465.js integrity="sha256-sRKoMjS4Cv19jehO7n48FhmeMfs3PQF3tqsGKjsyZGU=" crossorigin=anonymous></script><script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a href=/blog/><span>/home/kiennt</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><a href=/blog/authors/kiennt/>About</a></li><li><a href=/blog/posts/>Posts</a></li><li><a href=https://ntk148v.github.io/notes>Notes</a></li></ul></nav><script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/blog/svg/menu.svg class=book-icon alt=Menu></label>
+ 1. Overview Window Manager #  First of all, you have to know the basic concepts.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-1-i3/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-04-19T10:10:21+07:00">
+<meta property="article:modified_time" content="2021-04-19T10:50:52+07:00"><meta property="og:site_name" content="/home/kiennt">
+<title>Getting Started with Tiling WM [Part 1] - I3 | /home/kiennt</title>
+<link rel=manifest href=/blog/manifest.json>
+<link rel=icon href=/blog/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/blog/book.min.9e054825fe83a7fe54ce020754d54f7f86b172a2db5babcef21a04cd23e53cb7.css integrity="sha256-ngVIJf6Dp/5UzgIHVNVPf4axcqLbW6vO8hoEzSPlPLc=" crossorigin=anonymous>
+<script defer src=/blog/flexsearch.min.js></script>
+<script defer src=/blog/en.search.min.d7c83a7fd065a85210ea2e64818a0c161472b6b3eb65467f9ed1f5ed11f6c31c.js integrity="sha256-18g6f9BlqFIQ6i5kgYoMFhRytrPrZUZ/ntH17RH2wxw=" crossorigin=anonymous></script>
+<script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a href=/blog/><span>/home/kiennt</span>
+</a>
+</h2>
+<div class=book-search>
+<input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/>
+<div class="book-search-spinner hidden"></div>
+<ul id=book-search-results></ul>
+</div>
+<ul>
+<li><a href=/blog/authors/kiennt/>About</a></li>
+<li><a href=/blog/posts/>Posts</a></li>
+<li><a href=https://ntk148v.github.io/notes>Notes</a></li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/blog/svg/menu.svg class=book-icon alt=Menu>
+</label>
 <strong>Getting Started with Tiling WM [Part 1] - I3</strong>
-<label for=toc-control><img src=/blog/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#1-overview-window-manager>1. Overview Window Manager</a><ul><li><a href=#11-desktop-environment-vs-window-manager>1.1. Desktop Environment vs. Window Manager</a></li><li><a href=#12-types-of-window-manager>1.2. Types of Window Manager</a></li></ul></li><li><a href=#2-overview-i3>2. Overview I3</a></li><li><a href=#3-minimal-ubuntu-i3-setup>3. Minimal Ubuntu I3 setup</a><ul><li><a href=#31-ubuntu-server>3.1. Ubuntu Server</a></li><li><a href=#32-desktop>3.2. Desktop</a></li><li><a href=#33-tiling-window-manager---i3>3.3. Tiling Window Manager - I3</a></li><li><a href=#34-configure-i3>3.4. Configure I3</a></li></ul></li><li><a href=#4-references>4. References</a></li></ul></nav></aside></header><article class=markdown><h1><a href=/blog/posts/getting-started-tiling-wm-part-1-i3/>Getting Started with Tiling WM [Part 1] - I3</a></h1><h5>Apr 19, 2021</h5><div><a href=/blog/tags/tiling-wm/>#tiling-wm</a>
+<label for=toc-control>
+<img src=/blog/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#1-overview-window-manager>1. Overview Window Manager</a>
+<ul>
+<li><a href=#11-desktop-environment-vs-window-manager>1.1. Desktop Environment vs. Window Manager</a></li>
+<li><a href=#12-types-of-window-manager>1.2. Types of Window Manager</a></li>
+</ul>
+</li>
+<li><a href=#2-overview-i3>2. Overview I3</a></li>
+<li><a href=#3-minimal-ubuntu-i3-setup>3. Minimal Ubuntu I3 setup</a>
+<ul>
+<li><a href=#31-ubuntu-server>3.1. Ubuntu Server</a></li>
+<li><a href=#32-desktop>3.2. Desktop</a></li>
+<li><a href=#33-tiling-window-manager---i3>3.3. Tiling Window Manager - I3</a></li>
+<li><a href=#34-configure-i3>3.4. Configure I3</a></li>
+</ul>
+</li>
+<li><a href=#4-references>4. References</a></li>
+</ul>
+</nav>
+</aside>
+</header>
+<article class=markdown>
+<h1>
+<a href=/blog/posts/getting-started-tiling-wm-part-1-i3/>Getting Started with Tiling WM [Part 1] - I3</a>
+</h1>
+<h5>Apr 19, 2021</h5>
+<div>
+<a href=/blog/tags/tiling-wm/>#tiling-wm</a>
 <a href=/blog/tags/linux/>#linux</a>
 <a href=/blog/tags/tech/>#tech</a>
-<a href=/blog/tags/i3/>#i3</a></div><blockquote class="book-hint info"><p><strong>Disclaimer</strong></p><p>I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I&rsquo;ve gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.</p></blockquote><h2 id=1-overview-window-manager>1. Overview Window Manager
-<a class=anchor href=#1-overview-window-manager>#</a></h2><p>First of all, you have to know the basic concepts.</p><h3 id=11-desktop-environment-vs-window-manager>1.1. Desktop Environment vs. Window Manager
-<a class=anchor href=#11-desktop-environment-vs-window-manager>#</a></h3><p>We&rsquo;ll begin by showing how the Linux graphical desktop is layered. There are basically 3 layers that can be included in the Linux desktop:</p><ul><li><strong>X Window</strong>: All GUIs require an X Window System layer, which draws graphic elements on the display. Without the X server, neither a WM nor a DE could create images on a Linux display. X also creates a framework for moving windows and performing tasks using a mouse and keyboard.</li><li><strong>Window manager</strong>:<ul><li>A WM controls the placement and appearance of screen elements. Popular WMs: i3, awesome, dwm&mldr;</li><li>Requires configuration to get what you want.</li><li>Tends to be flexible and highly customizable.</li><li>Customizes most aspects of a Linux experience.</li><li>For Nerd: not user-friendly out of the box, need to edit configuration files&mldr;</li></ul></li><li><strong>Desktop environment</strong>:<ul><li>A DE requires both X and a WM. It also adds the deeper and seemless integration with applications, panels, system menus, status applets, drag-and-drop functionality,&mldr; The most popular DEs: KDE Plasma, GNOME, Pantheon, Cinnamon,&mldr; Sounds familiar, right?</li><li>Excellent default configurations.</li><li>May not be particularly customizable.</li><li>Gret if you don&rsquo;t want to customize everything.</li></ul></li></ul><script src=/blog/mermaid.min.js></script><script>mermaid.initialize({flowchart:{useMaxWidth:!0},theme:"default"})</script><p class=mermaid align=center>graph TD;
+<a href=/blog/tags/i3/>#i3</a>
+</div>
+<blockquote class="book-hint info">
+<p><strong>Disclaimer</strong></p>
+<p>I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I&rsquo;ve gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.</p>
+</blockquote>
+<h2 id=1-overview-window-manager>
+1. Overview Window Manager
+<a class=anchor href=#1-overview-window-manager>#</a>
+</h2>
+<p>First of all, you have to know the basic concepts.</p>
+<h3 id=11-desktop-environment-vs-window-manager>
+1.1. Desktop Environment vs. Window Manager
+<a class=anchor href=#11-desktop-environment-vs-window-manager>#</a>
+</h3>
+<p>We&rsquo;ll begin by showing how the Linux graphical desktop is layered. There are basically 3 layers that can be included in the Linux desktop:</p>
+<ul>
+<li><strong>X Window</strong>: All GUIs require an X Window System layer, which draws graphic elements on the display. Without the X server, neither a WM nor a DE could create images on a Linux display. X also creates a framework for moving windows and performing tasks using a mouse and keyboard.</li>
+<li><strong>Window manager</strong>:
+<ul>
+<li>A WM controls the placement and appearance of screen elements. Popular WMs: i3, awesome, dwm&mldr;</li>
+<li>Requires configuration to get what you want.</li>
+<li>Tends to be flexible and highly customizable.</li>
+<li>Customizes most aspects of a Linux experience.</li>
+<li>For Nerd: not user-friendly out of the box, need to edit configuration files&mldr;</li>
+</ul>
+</li>
+<li><strong>Desktop environment</strong>:
+<ul>
+<li>A DE requires both X and a WM. It also adds the deeper and seemless integration with applications, panels, system menus, status applets, drag-and-drop functionality,&mldr; The most popular DEs: KDE Plasma, GNOME, Pantheon, Cinnamon,&mldr; Sounds familiar, right?</li>
+<li>Excellent default configurations.</li>
+<li>May not be particularly customizable.</li>
+<li>Gret if you don&rsquo;t want to customize everything.</li>
+</ul>
+</li>
+</ul>
+<script src=/blog/mermaid.min.js></script>
+<script>mermaid.initialize({flowchart:{useMaxWidth:!0},theme:"default"})</script>
+<p class=mermaid align=center>
+graph TD;
 A[Desktop Environment] --> B[Window Manager];
-B --> C[X Windows];</p><h3 id=12-types-of-window-manager>1.2. Types of Window Manager
-<a class=anchor href=#12-types-of-window-manager>#</a></h3><ul><li><strong>Stack window manager</strong>:<ul><li>A stack window manager renders the window one-by-one onto the screen at specific co-orinates. If one window&rsquo;s area overlaps another, then the window &ldquo;on top&rdquo; overwites part of the other&rsquo;s visible appearance. This results in the appearance familiar to many users in which windows act a little like pieces of paper on a desktop, which can be moved around and allowed to overlap.</li><li>Openbox, Fluxbox, Enlightenment&mldr;</li></ul></li><li><strong>Tiling window manager</strong>:<ul><li>A window manager with an organization of the screen into mutually non-overlapping frames (hence the name tiling), as opposed to the traditional approach of coordinate-based stacking of objects (windows) that tries to emulate the desk paradigm.</li><li>Awesome,<strong>i3</strong> (here we go), dwm, bspwm&mldr;</li></ul></li><li><strong>Compositing window manager</strong>:<ul><li>A compositing window manager may appear to the user similar to a stacking window manager. However, the individual windows are first renders in individual buffers, and then theirs images are composited onto the screen buffer; this two-step process means that visual effects (such as shadows, translucency) can be applied.</li><li>Mutter (GNOME), Xfwm (XFCE), Compiz (Unity), KWin (KDE)</li></ul></li></ul><h2 id=2-overview-i3>2. Overview I3
-<a class=anchor href=#2-overview-i3>#</a></h2><ul><li><a href=https://i3wm.org>i3wm</a> is a tiling window manager designed for <a href=https://en.wikipedia.org/wiki/X_Window_System>X11</a>.</li><li>It supports tiling, stacking, and tabbing layouts, which it handles dynamically.</li><li>Configuration is achieved via plain text file.</li><li>Keyboard navigation: Hall full control with keyboard navigation.</li><li>Minimalistic: no window decorations or nonsense icons floating around. But you can fully customize it.</li><li>Window management: is left to the user. Windows are held inside containers, which can be split veritically or horizontally. They can also optionally be resized. There are also options for stacking the windows, as well as tabbing them.</li><li>Floating pop-up windows.</li><li>Want more, check <a href=https://i3wm.org/docs/userguide.html>this</a>.</li></ul><h2 id=3-minimal-ubuntu-i3-setup>3. Minimal Ubuntu I3 setup
-<a class=anchor href=#3-minimal-ubuntu-i3-setup>#</a></h2><h3 id=31-ubuntu-server>3.1. Ubuntu Server
-<a class=anchor href=#31-ubuntu-server>#</a></h3><ul><li>Download the <a href=https://ubuntu.com/download/server>installer</a> and install Ubuntu server by walking through installer. If you&rsquo;re completely new to it, you can follow <a href=https://ubuntu.com/server/docs/installation>official documentation</a>.</li><li>The version <code>20.04.2</code>.</li></ul><h3 id=32-desktop>3.2. Desktop
-<a class=anchor href=#32-desktop>#</a></h3><ul><li>We&rsquo;ll need a display server so let&rsquo;s install X Window System (<a href=https://wiki.archlinux.org/index.php/Xorg>Xorg</a>)</li></ul><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sudo apt install xinit
+B --> C[X Windows];
+</p>
+<h3 id=12-types-of-window-manager>
+1.2. Types of Window Manager
+<a class=anchor href=#12-types-of-window-manager>#</a>
+</h3>
+<ul>
+<li><strong>Stack window manager</strong>:
+<ul>
+<li>A stack window manager renders the window one-by-one onto the screen at specific co-orinates. If one window&rsquo;s area overlaps another, then the window &ldquo;on top&rdquo; overwites part of the other&rsquo;s visible appearance. This results in the appearance familiar to many users in which windows act a little like pieces of paper on a desktop, which can be moved around and allowed to overlap.</li>
+<li>Openbox, Fluxbox, Enlightenment&mldr;</li>
+</ul>
+</li>
+<li><strong>Tiling window manager</strong>:
+<ul>
+<li>A window manager with an organization of the screen into mutually non-overlapping frames (hence the name tiling), as opposed to the traditional approach of coordinate-based stacking of objects (windows) that tries to emulate the desk paradigm.</li>
+<li>Awesome,<strong>i3</strong> (here we go), dwm, bspwm&mldr;</li>
+</ul>
+</li>
+<li><strong>Compositing window manager</strong>:
+<ul>
+<li>A compositing window manager may appear to the user similar to a stacking window manager. However, the individual windows are first renders in individual buffers, and then theirs images are composited onto the screen buffer; this two-step process means that visual effects (such as shadows, translucency) can be applied.</li>
+<li>Mutter (GNOME), Xfwm (XFCE), Compiz (Unity), KWin (KDE)</li>
+</ul>
+</li>
+</ul>
+<h2 id=2-overview-i3>
+2. Overview I3
+<a class=anchor href=#2-overview-i3>#</a>
+</h2>
+<ul>
+<li><a href=https://i3wm.org>i3wm</a> is a tiling window manager designed for <a href=https://en.wikipedia.org/wiki/X_Window_System>X11</a>.</li>
+<li>It supports tiling, stacking, and tabbing layouts, which it handles dynamically.</li>
+<li>Configuration is achieved via plain text file.</li>
+<li>Keyboard navigation: Hall full control with keyboard navigation.</li>
+<li>Minimalistic: no window decorations or nonsense icons floating around. But you can fully customize it.</li>
+<li>Window management: is left to the user. Windows are held inside containers, which can be split veritically or horizontally. They can also optionally be resized. There are also options for stacking the windows, as well as tabbing them.</li>
+<li>Floating pop-up windows.</li>
+<li>Want more, check <a href=https://i3wm.org/docs/userguide.html>this</a>.</li>
+</ul>
+<h2 id=3-minimal-ubuntu-i3-setup>
+3. Minimal Ubuntu I3 setup
+<a class=anchor href=#3-minimal-ubuntu-i3-setup>#</a>
+</h2>
+<h3 id=31-ubuntu-server>
+3.1. Ubuntu Server
+<a class=anchor href=#31-ubuntu-server>#</a>
+</h3>
+<ul>
+<li>Download the <a href=https://ubuntu.com/download/server>installer</a> and install Ubuntu server by walking through installer. If you&rsquo;re completely new to it, you can follow <a href=https://ubuntu.com/server/docs/installation>official documentation</a>.</li>
+<li>The version <code>20.04.2</code>.</li>
+</ul>
+<h3 id=32-desktop>
+3.2. Desktop
+<a class=anchor href=#32-desktop>#</a>
+</h3>
+<ul>
+<li>We&rsquo;ll need a display server so let&rsquo;s install X Window System (<a href=https://wiki.archlinux.org/index.php/Xorg>Xorg</a>)</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sudo apt install xinit
 <span style=color:#998;font-style:italic># The configuration files are stored in /etc/X11/xinit</span>
 <span style=color:#998;font-style:italic># You can override it by creating and modifying ~/.xinitrc</span>
-</code></pre></div><h3 id=33-tiling-window-manager---i3>3.3. Tiling Window Manager - I3
-<a class=anchor href=#33-tiling-window-manager---i3>#</a></h3><ul><li>You can install i3 from <a href="https://packages.ubuntu.com/search?keywords=i3">Ubuntu repository</a>.</li></ul><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sudo apt install i3
-</code></pre></div><ul><li>Or build from source, I have a personal fork - <a href=https://github.com/ntk148v/i3>Rounded i3-gaps</a>.</li></ul><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#998;font-style:italic># Dependencies</span>
+</code></pre></div><h3 id=33-tiling-window-manager---i3>
+3.3. Tiling Window Manager - I3
+<a class=anchor href=#33-tiling-window-manager---i3>#</a>
+</h3>
+<ul>
+<li>You can install i3 from <a href="https://packages.ubuntu.com/search?keywords=i3">Ubuntu repository</a>.</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sudo apt install i3
+</code></pre></div><ul>
+<li>Or build from source, I have a personal fork - <a href=https://github.com/ntk148v/i3>Rounded i3-gaps</a>.</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#998;font-style:italic># Dependencies</span>
 sudo apt install git libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev <span style=color:#d14>\
 </span><span style=color:#d14></span>    libxcb-util0-dev libxcb-icccm4-dev libyajl-dev <span style=color:#d14>\
 </span><span style=color:#d14></span>    libstartup-notification0-dev libxcb-randr0-dev <span style=color:#d14>\
@@ -37,10 +220,56 @@ mkdir -p build <span style=color:#000;font-weight:700>&amp;&amp;</span> <span st
 meson ..
 ninja
 sudo ninja install
-</code></pre></div><ul><li><p>Reboot. After reboot, choose i3 as your WM/DE.</p></li><li><p>A prompt will be shown to create a config file, just hit <code>&lt;Enter></code>.</p></li></ul><link rel=stylesheet href=https://ntk148v.github.io/blog/css/hugo-easy-gallery.css><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/i3-prompt.png></div><a href=photos/getting-started-tiling-wm-part-1/i3-prompt.png itemprop=contentUrl></a></figure></div><ul><li><code>&lt;mod></code> key is <code>Window</code> now. Hit <code>&lt;mod>+Enter</code> to start terminal emulator.</li></ul><h3 id=34-configure-i3>3.4. Configure I3
-<a class=anchor href=#34-configure-i3>#</a></h3><ul><li>We have i3 first setup here with the default configuration. As mentioned before, configuration is achieved via plain text file.</li></ul><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/i3-default-config-file.png></div><a href=photos/getting-started-tiling-wm-part-1/i3-default-config-file.png itemprop=contentUrl></a></figure></div><ul><li>You can use my minimal configuration. It requires some extra packages.</li></ul><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sudo apt install hsetroot rofi compton -y
-</code></pre></div><div class=book-expand><label><div class="book-expand-head flex justify-between"><span>Expand</span>
-<span>↕</span></div><input type=checkbox class=hidden><div class="book-expand-content markdown-inner"><h2 id=minimal-configuration-file>Minimal configuration file</h2><pre><code># i3 config file
+</code></pre></div><ul>
+<li>
+<p>Reboot. After reboot, choose i3 as your WM/DE.</p>
+</li>
+<li>
+<p>A prompt will be shown to create a config file, just hit <code>&lt;Enter></code>.</p>
+</li>
+</ul>
+<link rel=stylesheet href=https://ntk148v.github.io/blog/css/hugo-easy-gallery.css>
+<div class=box>
+<figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
+<div class=img>
+<img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/i3-prompt.png>
+</div>
+<a href=photos/getting-started-tiling-wm-part-1/i3-prompt.png itemprop=contentUrl></a>
+</figure>
+</div>
+<ul>
+<li><code>&lt;mod></code> key is <code>Window</code> now. Hit <code>&lt;mod>+Enter</code> to start terminal emulator.</li>
+</ul>
+<h3 id=34-configure-i3>
+3.4. Configure I3
+<a class=anchor href=#34-configure-i3>#</a>
+</h3>
+<ul>
+<li>We have i3 first setup here with the default configuration. As mentioned before, configuration is achieved via plain text file.</li>
+</ul>
+<div class=box>
+<figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
+<div class=img>
+<img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/i3-default-config-file.png>
+</div>
+<a href=photos/getting-started-tiling-wm-part-1/i3-default-config-file.png itemprop=contentUrl></a>
+</figure>
+</div>
+<ul>
+<li>You can use my minimal configuration. It requires some extra packages.</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sudo apt install hsetroot rofi compton -y
+</code></pre></div>
+<div class=book-expand>
+<label>
+<div class="book-expand-head flex justify-between">
+<span>Expand</span>
+<span>↕</span>
+</div>
+<input type=checkbox class=hidden>
+<div class="book-expand-content markdown-inner">
+<h2 id=minimal-configuration-file>Minimal configuration file</h2>
+<pre tabindex=0><code># i3 config file
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 # Set modifier
@@ -199,13 +428,108 @@ hide_edge_borders smart_no_gaps
 
 # reload
 exec_always hsetroot -solid &quot;#F1CCBB&quot;
-</code></pre></div></label></div><ul><li>A trick with terminal emulator:<ul><li>Disable scrollbar and menubar.</li></ul></li></ul><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/terminal-trick-1.png></div><a href=photos/getting-started-tiling-wm-part-1/terminal-trick-1.png itemprop=contentUrl></a></figure></div><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/terminal-trick-2.png></div><a href=photos/getting-started-tiling-wm-part-1/terminal-trick-2.png itemprop=contentUrl></a></figure></div><ul><li>Configure padding for vte-terminal.</li></ul><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>mkdir -p ~/.config/gtk-3.0
+</code></pre>
+</div>
+</label>
+</div>
+<ul>
+<li>A trick with terminal emulator:
+<ul>
+<li>Disable scrollbar and menubar.</li>
+</ul>
+</li>
+</ul>
+<div class=box>
+<figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
+<div class=img>
+<img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/terminal-trick-1.png>
+</div>
+<a href=photos/getting-started-tiling-wm-part-1/terminal-trick-1.png itemprop=contentUrl></a>
+</figure>
+</div>
+<div class=box>
+<figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
+<div class=img>
+<img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/terminal-trick-2.png>
+</div>
+<a href=photos/getting-started-tiling-wm-part-1/terminal-trick-2.png itemprop=contentUrl></a>
+</figure>
+</div>
+<ul>
+<li>Configure padding for vte-terminal.</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>mkdir -p ~/.config/gtk-3.0
 cat <span style=color:#d14>&lt;&lt;EOT &gt;&gt; ~/.config/gtk-3.0/gtk.css
 </span><span style=color:#d14>vte-terminal {
 </span><span style=color:#d14>    padding: 30px;
 </span><span style=color:#d14>}
 </span><span style=color:#d14>EOT</span>
-</code></pre></div><ul><li>Result.</li></ul><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/i3-gaps-config.png></div><a href=photos/getting-started-tiling-wm-part-1/i3-gaps-config.png itemprop=contentUrl></a></figure></div><h2 id=4-references>4. References
-<a class=anchor href=#4-references>#</a></h2><ol><li><a href=https://www.lifewire.com/window-manager-vs-the-desktop-environment-in-linux-4588338>https://www.lifewire.com/window-manager-vs-the-desktop-environment-in-linux-4588338</a></li><li><a href=https://en.wikipedia.org/wiki/X_window_manager>https://en.wikipedia.org/wiki/X_window_manager</a></li><li><a href=https://i3wm.org/docs>https://i3wm.org/docs</a></li></ol></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/1ec8c1eed2d05d73ef00e7d588e831fcf917c428 title="Last modified by Kien Nguyen | Apr 19, 2021" target=_blank rel=noopener><img src=/blog/svg/calendar.svg class=book-icon alt=Calendar>
-<span>Apr 19, 2021</span></a></div><div><a class="flex align-center" href=https://github.com/ntk148v/blog/edit/master/content/posts/getting-started-tiling-wm-part-1-i3.md target=_blank rel=noopener><img src=/blog/svg/edit.svg class=book-icon alt=Edit>
-<span>Edit this page</span></a></div></div><script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script></footer><div class=book-comments><section class="article discussion"><script src=https://utteranc.es/client.js repo=ntk148v/blog issue-term=pathname theme=github-light crossorigin=anonymous async></script></section></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#1-overview-window-manager>1. Overview Window Manager</a><ul><li><a href=#11-desktop-environment-vs-window-manager>1.1. Desktop Environment vs. Window Manager</a></li><li><a href=#12-types-of-window-manager>1.2. Types of Window Manager</a></li></ul></li><li><a href=#2-overview-i3>2. Overview I3</a></li><li><a href=#3-minimal-ubuntu-i3-setup>3. Minimal Ubuntu I3 setup</a><ul><li><a href=#31-ubuntu-server>3.1. Ubuntu Server</a></li><li><a href=#32-desktop>3.2. Desktop</a></li><li><a href=#33-tiling-window-manager---i3>3.3. Tiling Window Manager - I3</a></li><li><a href=#34-configure-i3>3.4. Configure I3</a></li></ul></li><li><a href=#4-references>4. References</a></li></ul></nav></div></aside></main></body></html>
+</code></pre></div><ul>
+<li>Result.</li>
+</ul>
+<div class=box>
+<figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
+<div class=img>
+<img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/i3-gaps-config.png>
+</div>
+<a href=photos/getting-started-tiling-wm-part-1/i3-gaps-config.png itemprop=contentUrl></a>
+</figure>
+</div>
+<h2 id=4-references>
+4. References
+<a class=anchor href=#4-references>#</a>
+</h2>
+<ol>
+<li><a href=https://www.lifewire.com/window-manager-vs-the-desktop-environment-in-linux-4588338>https://www.lifewire.com/window-manager-vs-the-desktop-environment-in-linux-4588338</a></li>
+<li><a href=https://en.wikipedia.org/wiki/X_window_manager>https://en.wikipedia.org/wiki/X_window_manager</a></li>
+<li><a href=https://i3wm.org/docs>https://i3wm.org/docs</a></li>
+</ol>
+</article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+<div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/1ec8c1eed2d05d73ef00e7d588e831fcf917c428 title="Last modified by Kien Nguyen | Apr 19, 2021" target=_blank rel=noopener>
+<img src=/blog/svg/calendar.svg class=book-icon alt=Calendar>
+<span>Apr 19, 2021</span>
+</a>
+</div>
+<div>
+<a class="flex align-center" href=https://github.com/ntk148v/blog/edit/master/content/posts/getting-started-tiling-wm-part-1-i3.md target=_blank rel=noopener>
+<img src=/blog/svg/edit.svg class=book-icon alt=Edit>
+<span>Edit this page</span>
+</a>
+</div>
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments><section class="article discussion">
+<script src=https://utteranc.es/client.js repo=ntk148v/blog issue-term=pathname theme=github-light crossorigin=anonymous async></script>
+</section></div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#1-overview-window-manager>1. Overview Window Manager</a>
+<ul>
+<li><a href=#11-desktop-environment-vs-window-manager>1.1. Desktop Environment vs. Window Manager</a></li>
+<li><a href=#12-types-of-window-manager>1.2. Types of Window Manager</a></li>
+</ul>
+</li>
+<li><a href=#2-overview-i3>2. Overview I3</a></li>
+<li><a href=#3-minimal-ubuntu-i3-setup>3. Minimal Ubuntu I3 setup</a>
+<ul>
+<li><a href=#31-ubuntu-server>3.1. Ubuntu Server</a></li>
+<li><a href=#32-desktop>3.2. Desktop</a></li>
+<li><a href=#33-tiling-window-manager---i3>3.3. Tiling Window Manager - I3</a></li>
+<li><a href=#34-configure-i3>3.4. Configure I3</a></li>
+</ul>
+</li>
+<li><a href=#4-references>4. References</a></li>
+</ul>
+</nav>
+</div>
+</aside>
+</main>
+</body>
+</html>

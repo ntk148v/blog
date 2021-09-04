@@ -1,12 +1,128 @@
-<!doctype html><html lang=en dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="1. bat - (cat alternative) #   bat: A cat(1) clone with syntax highlighting and Git integration. Example:      2. fd - (find alternative) #   fd: a simple, fast and user-friendly alternative to find. Examples:      3. httpie - (wget/curl alternative) #   httpie: a user-friendly command-line HTTP client for the API era. It comes with JSON support, syntax highlighting, persistent sessions, wget-like downloads, plugins, and more."><meta name=theme-color content="#FFFFFF"><meta property="og:title" content="Linux tools that you never knew you needed"><meta property="og:description" content="1. bat - (cat alternative) #   bat: A cat(1) clone with syntax highlighting and Git integration. Example:      2. fd - (find alternative) #   fd: a simple, fast and user-friendly alternative to find. Examples:      3. httpie - (wget/curl alternative) #   httpie: a user-friendly command-line HTTP client for the API era. It comes with JSON support, syntax highlighting, persistent sessions, wget-like downloads, plugins, and more."><meta property="og:type" content="article"><meta property="og:url" content="https://ntk148v.github.io/blog/posts/linux-tools-that-you-never-knew-you-needed/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-04-07T09:45:59+07:00"><meta property="article:modified_time" content="2021-04-14T16:09:38+07:00"><meta property="og:site_name" content="/home/kiennt"><title>Linux tools that you never knew you needed | /home/kiennt</title><link rel=manifest href=/blog/manifest.json><link rel=icon href=/blog/favicon.png type=image/x-icon><link rel=stylesheet href=/blog/book.min.9e054825fe83a7fe54ce020754d54f7f86b172a2db5babcef21a04cd23e53cb7.css integrity="sha256-ngVIJf6Dp/5UzgIHVNVPf4axcqLbW6vO8hoEzSPlPLc=" crossorigin=anonymous><script defer src=/blog/flexsearch.min.js></script><script defer src=/blog/en.search.min.b112a83234b80afd7d8de84eee7e3c16199e31fb373d0177b6ab062a3b326465.js integrity="sha256-sRKoMjS4Cv19jehO7n48FhmeMfs3PQF3tqsGKjsyZGU=" crossorigin=anonymous></script><script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a href=/blog/><span>/home/kiennt</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><a href=/blog/authors/kiennt/>About</a></li><li><a href=/blog/posts/>Posts</a></li><li><a href=https://ntk148v.github.io/notes>Notes</a></li></ul></nav><script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/blog/svg/menu.svg class=book-icon alt=Menu></label>
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="1. bat - (cat alternative) #   bat: A cat(1) clone with syntax highlighting and Git integration. Example:      2. fd - (find alternative) #   fd: a simple, fast and user-friendly alternative to find. Examples:      3. httpie - (wget/curl alternative) #   httpie: a user-friendly command-line HTTP client for the API era. It comes with JSON support, syntax highlighting, persistent sessions, wget-like downloads, plugins, and more.">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="Linux tools that you never knew you needed">
+<meta property="og:description" content="1. bat - (cat alternative) #   bat: A cat(1) clone with syntax highlighting and Git integration. Example:      2. fd - (find alternative) #   fd: a simple, fast and user-friendly alternative to find. Examples:      3. httpie - (wget/curl alternative) #   httpie: a user-friendly command-line HTTP client for the API era. It comes with JSON support, syntax highlighting, persistent sessions, wget-like downloads, plugins, and more.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ntk148v.github.io/blog/posts/linux-tools-that-you-never-knew-you-needed/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-04-07T09:45:59+07:00">
+<meta property="article:modified_time" content="2021-04-14T16:09:38+07:00"><meta property="og:site_name" content="/home/kiennt">
+<title>Linux tools that you never knew you needed | /home/kiennt</title>
+<link rel=manifest href=/blog/manifest.json>
+<link rel=icon href=/blog/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/blog/book.min.9e054825fe83a7fe54ce020754d54f7f86b172a2db5babcef21a04cd23e53cb7.css integrity="sha256-ngVIJf6Dp/5UzgIHVNVPf4axcqLbW6vO8hoEzSPlPLc=" crossorigin=anonymous>
+<script defer src=/blog/flexsearch.min.js></script>
+<script defer src=/blog/en.search.min.d7c83a7fd065a85210ea2e64818a0c161472b6b3eb65467f9ed1f5ed11f6c31c.js integrity="sha256-18g6f9BlqFIQ6i5kgYoMFhRytrPrZUZ/ntH17RH2wxw=" crossorigin=anonymous></script>
+<script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a href=/blog/><span>/home/kiennt</span>
+</a>
+</h2>
+<div class=book-search>
+<input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/>
+<div class="book-search-spinner hidden"></div>
+<ul id=book-search-results></ul>
+</div>
+<ul>
+<li><a href=/blog/authors/kiennt/>About</a></li>
+<li><a href=/blog/posts/>Posts</a></li>
+<li><a href=https://ntk148v.github.io/notes>Notes</a></li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/blog/svg/menu.svg class=book-icon alt=Menu>
+</label>
 <strong>Linux tools that you never knew you needed</strong>
-<label for=toc-control><img src=/blog/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#1-bat---cat-alternative>1. bat - (cat alternative)</a></li><li><a href=#2-fd---find-alternative>2. fd - (find alternative)</a></li><li><a href=#3-httpie---wgetcurl-alternative>3. httpie - (wget/curl alternative)</a></li><li><a href=#4-ripgrep---grep-alternative>4. ripgrep - (grep alternative)</a></li><li><a href=#5-delta>5. delta</a></li><li><a href=#6-z>6. z</a></li><li><a href=#7-fzf>7. fzf</a></li><li><a href=#8-thefuck>8. thefuck</a></li><li><a href=#9-exa---ls-alternative>9. exa - (ls alternative)</a></li></ul></nav></aside></header><article class=markdown><h1><a href=/blog/posts/linux-tools-that-you-never-knew-you-needed/>Linux tools that you never knew you needed</a></h1><h5>Apr 07, 2021</h5><div><a href=/blog/tags/linux/>#linux</a>
+<label for=toc-control>
+<img src=/blog/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#1-bat---cat-alternative>1. bat - (cat alternative)</a></li>
+<li><a href=#2-fd---find-alternative>2. fd - (find alternative)</a></li>
+<li><a href=#3-httpie---wgetcurl-alternative>3. httpie - (wget/curl alternative)</a></li>
+<li><a href=#4-ripgrep---grep-alternative>4. ripgrep - (grep alternative)</a></li>
+<li><a href=#5-delta>5. delta</a></li>
+<li><a href=#6-z>6. z</a></li>
+<li><a href=#7-fzf>7. fzf</a></li>
+<li><a href=#8-thefuck>8. thefuck</a></li>
+<li><a href=#9-exa---ls-alternative>9. exa - (ls alternative)</a></li>
+</ul>
+</nav>
+</aside>
+</header>
+<article class=markdown>
+<h1>
+<a href=/blog/posts/linux-tools-that-you-never-knew-you-needed/>Linux tools that you never knew you needed</a>
+</h1>
+<h5>Apr 07, 2021</h5>
+<div>
+<a href=/blog/tags/linux/>#linux</a>
 <a href=/blog/tags/tips/>#tips</a>
-<a href=/blog/tags/tech/>#tech</a></div><h2 id=1-bat---cat-alternative>1. bat - (cat alternative)
-<a class=anchor href=#1-bat---cat-alternative>#</a></h2><ul><li><a href=https://github.com/sharkdp/bat>bat</a>: A cat(1) clone with syntax highlighting and Git integration.</li><li>Example:</li></ul><link rel=stylesheet href=https://ntk148v.github.io/blog/css/hugo-easy-gallery.css><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/linux-tools-that-you-never-knew-you-needed/bat.png></div><a href=/photos/linux-tools-that-you-never-knew-you-needed/bat.png itemprop=contentUrl></a></figure></div><h2 id=2-fd---find-alternative>2. fd - (find alternative)
-<a class=anchor href=#2-fd---find-alternative>#</a></h2><ul><li><a href=https://github.com/sharkdp/fd>fd</a>: a simple, fast and user-friendly alternative to <code>find</code>.</li><li>Examples:</li></ul><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=https://raw.githubusercontent.com/sharkdp/fd/master/doc/screencast.svg></div><a href=https://raw.githubusercontent.com/sharkdp/fd/master/doc/screencast.svg itemprop=contentUrl></a></figure></div><h2 id=3-httpie---wgetcurl-alternative>3. httpie - (wget/curl alternative)
-<a class=anchor href=#3-httpie---wgetcurl-alternative>#</a></h2><ul><li><a href=https://httpie.io>httpie</a>: a user-friendly command-line HTTP client for the API era. It comes with JSON support, syntax highlighting, persistent sessions, wget-like downloads, plugins, and more.</li><li>Examples:</li></ul><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#998;font-style:italic># Hello world</span>
+<a href=/blog/tags/tech/>#tech</a>
+</div>
+<h2 id=1-bat---cat-alternative>
+1. bat - (cat alternative)
+<a class=anchor href=#1-bat---cat-alternative>#</a>
+</h2>
+<ul>
+<li><a href=https://github.com/sharkdp/bat>bat</a>: A cat(1) clone with syntax highlighting and Git integration.</li>
+<li>Example:</li>
+</ul>
+<link rel=stylesheet href=https://ntk148v.github.io/blog/css/hugo-easy-gallery.css>
+<div class=box>
+<figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
+<div class=img>
+<img itemprop=thumbnail src=/blog/photos/linux-tools-that-you-never-knew-you-needed/bat.png>
+</div>
+<a href=/photos/linux-tools-that-you-never-knew-you-needed/bat.png itemprop=contentUrl></a>
+</figure>
+</div>
+<h2 id=2-fd---find-alternative>
+2. fd - (find alternative)
+<a class=anchor href=#2-fd---find-alternative>#</a>
+</h2>
+<ul>
+<li><a href=https://github.com/sharkdp/fd>fd</a>: a simple, fast and user-friendly alternative to <code>find</code>.</li>
+<li>Examples:</li>
+</ul>
+<div class=box>
+<figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
+<div class=img>
+<img itemprop=thumbnail src=https://raw.githubusercontent.com/sharkdp/fd/master/doc/screencast.svg>
+</div>
+<a href=https://raw.githubusercontent.com/sharkdp/fd/master/doc/screencast.svg itemprop=contentUrl></a>
+</figure>
+</div>
+<h2 id=3-httpie---wgetcurl-alternative>
+3. httpie - (wget/curl alternative)
+<a class=anchor href=#3-httpie---wgetcurl-alternative>#</a>
+</h2>
+<ul>
+<li><a href=https://httpie.io>httpie</a>: a user-friendly command-line HTTP client for the API era. It comes with JSON support, syntax highlighting, persistent sessions, wget-like downloads, plugins, and more.</li>
+<li>Examples:</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#998;font-style:italic># Hello world</span>
 $ http httpie.io/hello
 <span style=color:#998;font-style:italic># Custom HTTP method, HTTP headers and JSON data</span>
 $ http PUT pie.dev/put X-API-Token:123 <span style=color:teal>name</span><span style=color:#000;font-weight:700>=</span>John
@@ -16,8 +132,16 @@ $ http -f POST pie.dev/post <span style=color:teal>hello</span><span style=color
 $ http pie.dev/post &lt; files/data.json
 <span style=color:#998;font-style:italic># ...</span>
 <span style=color:#998;font-style:italic># For more examples, check out: https://httpie.io</span>
-</code></pre></div><h2 id=4-ripgrep---grep-alternative>4. ripgrep - (grep alternative)
-<a class=anchor href=#4-ripgrep---grep-alternative>#</a></h2><ul><li><a href=https://github.com/BurntSushi/ripgrep>ripgrep</a>: a faster <code>grep</code>. ripgrep is a line-oriented search tool that recursively searches your current directory for a regex pattern. By default, ripgrep will respect your .gitignore and automatically skip hidden files/directories and binary files.</li><li><a href=https://github.com/BurntSushi/ripgrep#quick-examples-comparing-tools>Benchmark</a>.</li><li>Examples:</li></ul><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#998;font-style:italic># Basic use</span>
+</code></pre></div><h2 id=4-ripgrep---grep-alternative>
+4. ripgrep - (grep alternative)
+<a class=anchor href=#4-ripgrep---grep-alternative>#</a>
+</h2>
+<ul>
+<li><a href=https://github.com/BurntSushi/ripgrep>ripgrep</a>: a faster <code>grep</code>. ripgrep is a line-oriented search tool that recursively searches your current directory for a regex pattern. By default, ripgrep will respect your .gitignore and automatically skip hidden files/directories and binary files.</li>
+<li><a href=https://github.com/BurntSushi/ripgrep#quick-examples-comparing-tools>Benchmark</a>.</li>
+<li>Examples:</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#998;font-style:italic># Basic use</span>
 $ rg fast README.md
 <span style=color:#998;font-style:italic># Regular expressions</span>
 $ rg <span style=color:#d14>&#39;fast\w+&#39;</span> README.md
@@ -25,8 +149,48 @@ $ rg <span style=color:#d14>&#39;fast\w+&#39;</span> README.md
 $ rg <span style=color:#d14>&#39;fn write\(&#39;</span>
 <span style=color:#998;font-style:italic># ...</span>
 <span style=color:#998;font-style:italic># For more examples, checkout: https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md</span>
-</code></pre></div><h2 id=5-delta>5. delta
-<a class=anchor href=#5-delta>#</a></h2><ul><li><a href=https://github.com/dandavison/delta>delta</a>: Code evolves, and we all spend time studying diffs. Delta aims to make this both efficient and enjoyable: it allows you to make extensive changes to the layout and styling of diffs, as well as allowing you to stay arbitrarily close to the default git/diff output.</li><li>Diff/git diff doesn&rsquo;t show you exactly what was changed.</li></ul><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/linux-tools-that-you-never-knew-you-needed/git-diff.png></div><a href=/photos/linux-tools-that-you-never-knew-you-needed/git-diff.png itemprop=contentUrl></a></figure></div><ul><li>Delta shows within-line highlights based on a Levenshtein edit inference algorithm.</li></ul><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/linux-tools-that-you-never-knew-you-needed/delta.png></div><a href=/photos/linux-tools-that-you-never-knew-you-needed/delta.png itemprop=contentUrl></a></figure></div><ul><li>By default, delta restructures the git output slightly to make the hunk markers human-readable:</li></ul><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=https://user-images.githubusercontent.com/52205/81059276-254cf980-8e9e-11ea-95c3-8b757a4c11b5.png></div><a href=https://user-images.githubusercontent.com/52205/81059276-254cf980-8e9e-11ea-95c3-8b757a4c11b5.png itemprop=contentUrl></a></figure></div><ul><li>Example config:</li></ul><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#000;font-weight:700>[</span>core<span style=color:#000;font-weight:700>]</span>
+</code></pre></div><h2 id=5-delta>
+5. delta
+<a class=anchor href=#5-delta>#</a>
+</h2>
+<ul>
+<li><a href=https://github.com/dandavison/delta>delta</a>: Code evolves, and we all spend time studying diffs. Delta aims to make this both efficient and enjoyable: it allows you to make extensive changes to the layout and styling of diffs, as well as allowing you to stay arbitrarily close to the default git/diff output.</li>
+<li>Diff/git diff doesn&rsquo;t show you exactly what was changed.</li>
+</ul>
+<div class=box>
+<figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
+<div class=img>
+<img itemprop=thumbnail src=/blog/photos/linux-tools-that-you-never-knew-you-needed/git-diff.png>
+</div>
+<a href=/photos/linux-tools-that-you-never-knew-you-needed/git-diff.png itemprop=contentUrl></a>
+</figure>
+</div>
+<ul>
+<li>Delta shows within-line highlights based on a Levenshtein edit inference algorithm.</li>
+</ul>
+<div class=box>
+<figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
+<div class=img>
+<img itemprop=thumbnail src=/blog/photos/linux-tools-that-you-never-knew-you-needed/delta.png>
+</div>
+<a href=/photos/linux-tools-that-you-never-knew-you-needed/delta.png itemprop=contentUrl></a>
+</figure>
+</div>
+<ul>
+<li>By default, delta restructures the git output slightly to make the hunk markers human-readable:</li>
+</ul>
+<div class=box>
+<figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
+<div class=img>
+<img itemprop=thumbnail src=https://user-images.githubusercontent.com/52205/81059276-254cf980-8e9e-11ea-95c3-8b757a4c11b5.png>
+</div>
+<a href=https://user-images.githubusercontent.com/52205/81059276-254cf980-8e9e-11ea-95c3-8b757a4c11b5.png itemprop=contentUrl></a>
+</figure>
+</div>
+<ul>
+<li>Example config:</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#000;font-weight:700>[</span>core<span style=color:#000;font-weight:700>]</span>
     <span style=color:teal>pager</span> <span style=color:#000;font-weight:700>=</span> delta
 
 <span style=color:#000;font-weight:700>[</span>delta<span style=color:#000;font-weight:700>]</span>
@@ -38,12 +202,31 @@ $ rg <span style=color:#d14>&#39;fn write\(&#39;</span>
 
 <span style=color:#000;font-weight:700>[</span>interactive<span style=color:#000;font-weight:700>]</span>
     <span style=color:teal>diffFilter</span> <span style=color:#000;font-weight:700>=</span> delta --color-only
-</code></pre></div><ul><li>Completely replace <code>diff</code> with <code>delta</code>:</li></ul><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#0086b3>alias</span> <span style=color:teal>diff</span><span style=color:#000;font-weight:700>=</span><span style=color:#d14>&#34;delta&#34;</span>
-</code></pre></div><h2 id=6-z>6. z
-<a class=anchor href=#6-z>#</a></h2><ul><li>Tired for <code>cd</code>ing into the same directories over and over? Save your time with <code>z</code> command!</li><li><a href=https://github.com/rupa/z>z</a>: jump around. Z is a shell script that makes jumping around your file directory pleasantly simple. Instead of trying to remember the exact path of where you need to go, or worse, <code>cd</code>ing into the next directory followed by <code>ls</code>ing and then cding again over and over (we’ve all been there), Z allows you to “lazy type” where you want to go and it’ll handle the rest.</li><li>Examples:</li></ul><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#998;font-style:italic># Takes me to my workspace folder from anywhere.</span>
+</code></pre></div><ul>
+<li>Completely replace <code>diff</code> with <code>delta</code>:</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#0086b3>alias</span> <span style=color:teal>diff</span><span style=color:#000;font-weight:700>=</span><span style=color:#d14>&#34;delta&#34;</span>
+</code></pre></div><h2 id=6-z>
+6. z
+<a class=anchor href=#6-z>#</a>
+</h2>
+<ul>
+<li>Tired for <code>cd</code>ing into the same directories over and over? Save your time with <code>z</code> command!</li>
+<li><a href=https://github.com/rupa/z>z</a>: jump around. Z is a shell script that makes jumping around your file directory pleasantly simple. Instead of trying to remember the exact path of where you need to go, or worse, <code>cd</code>ing into the next directory followed by <code>ls</code>ing and then cding again over and over (we’ve all been there), Z allows you to “lazy type” where you want to go and it’ll handle the rest.</li>
+<li>Examples:</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#998;font-style:italic># Takes me to my workspace folder from anywhere.</span>
 $ z workspace
-</code></pre></div><h2 id=7-fzf>7. fzf
-<a class=anchor href=#7-fzf>#</a></h2><ul><li><a href=https://github.com/junegunn/fzf>fzf</a>: fzf is a general-purpose command-line fuzzy finder.</li><li>It&rsquo;s an interactive Unix filter for command-line that can be used with any list; files, command history, processes, hostnames, bookmarks, git commits, etc.</li><li>Examples:</li></ul><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#998;font-style:italic># Read the list from STDIN and write the selected item to STDOUT</span>
+</code></pre></div><h2 id=7-fzf>
+7. fzf
+<a class=anchor href=#7-fzf>#</a>
+</h2>
+<ul>
+<li><a href=https://github.com/junegunn/fzf>fzf</a>: fzf is a general-purpose command-line fuzzy finder.</li>
+<li>It&rsquo;s an interactive Unix filter for command-line that can be used with any list; files, command history, processes, hostnames, bookmarks, git commits, etc.</li>
+<li>Examples:</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#998;font-style:italic># Read the list from STDIN and write the selected item to STDOUT</span>
 $ find * -type f | fzf &gt; selected
 $ vim <span style=color:#000;font-weight:700>$(</span>fzf<span style=color:#000;font-weight:700>)</span>
 <span style=color:#998;font-style:italic># COMMAND **&lt;TAB&gt;</span>
@@ -75,8 +258,42 @@ $ <span style=color:#0086b3>export</span> **&lt;TAB&gt;
 $ <span style=color:#0086b3>unalias</span> **&lt;TAB&gt;
 <span style=color:#998;font-style:italic># ...</span>
 <span style=color:#998;font-style:italic># For more examples, checkout: https://github.com/junegunn/fzf</span>
-</code></pre></div><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/linux-tools-that-you-never-knew-you-needed/fzf-vim.png></div><a href=/photos/linux-tools-that-you-never-knew-you-needed/fzf-vim.png itemprop=contentUrl></a></figure></div><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/linux-tools-that-you-never-knew-you-needed/fzf-cd.png></div><a href=/photos/linux-tools-that-you-never-knew-you-needed/fzf-cd.png itemprop=contentUrl></a></figure></div><h2 id=8-thefuck>8. thefuck
-<a class=anchor href=#8-thefuck>#</a></h2><ul><li><a href=https://github.com/nvbn/thefuck>thefuck</a>: Magnificent app which corrects your previous console command.</li></ul><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=https://raw.githubusercontent.com/nvbn/thefuck/master/example.gif></div><a href=https://raw.githubusercontent.com/nvbn/thefuck/master/example.gif itemprop=contentUrl></a></figure></div><ul><li>Examples:</li></ul><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ apt-get install vim
+</code></pre></div>
+<div class=box>
+<figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
+<div class=img>
+<img itemprop=thumbnail src=/blog/photos/linux-tools-that-you-never-knew-you-needed/fzf-vim.png>
+</div>
+<a href=/photos/linux-tools-that-you-never-knew-you-needed/fzf-vim.png itemprop=contentUrl></a>
+</figure>
+</div>
+<div class=box>
+<figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
+<div class=img>
+<img itemprop=thumbnail src=/blog/photos/linux-tools-that-you-never-knew-you-needed/fzf-cd.png>
+</div>
+<a href=/photos/linux-tools-that-you-never-knew-you-needed/fzf-cd.png itemprop=contentUrl></a>
+</figure>
+</div>
+<h2 id=8-thefuck>
+8. thefuck
+<a class=anchor href=#8-thefuck>#</a>
+</h2>
+<ul>
+<li><a href=https://github.com/nvbn/thefuck>thefuck</a>: Magnificent app which corrects your previous console command.</li>
+</ul>
+<div class=box>
+<figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
+<div class=img>
+<img itemprop=thumbnail src=https://raw.githubusercontent.com/nvbn/thefuck/master/example.gif>
+</div>
+<a href=https://raw.githubusercontent.com/nvbn/thefuck/master/example.gif itemprop=contentUrl></a>
+</figure>
+</div>
+<ul>
+<li>Examples:</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ apt-get install vim
 E: Could not open lock file /var/lib/dpkg/lock - open <span style=color:#000;font-weight:700>(</span>13: Permission denied<span style=color:#000;font-weight:700>)</span>
 E: Unable to lock the administration directory <span style=color:#000;font-weight:700>(</span>/var/lib/dpkg/<span style=color:#000;font-weight:700>)</span>, are you root?
 
@@ -86,8 +303,72 @@ Reading package lists... Done
 ...
 <span style=color:#998;font-style:italic># ...</span>
 <span style=color:#998;font-style:italic># For more examples, check out: https://github.com/nvbn/thefuck</span>
-</code></pre></div><h2 id=9-exa---ls-alternative>9. exa - (ls alternative)
-<a class=anchor href=#9-exa---ls-alternative>#</a></h2><ul><li><a href=https://the.exa.website>exa</a>: A modern replacement for ls. <code>exa</code> is an improved file lister with more features and better defaults. It uses colours to distinguish file types and metadata. It knows about symlinks, extended attributes, and Git. And it’s small, fast, and just one single binary.</li><li>Examples:</li></ul><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/linux-tools-that-you-never-knew-you-needed/exa.png></div><a href=/photos/linux-tools-that-you-never-knew-you-needed/exa.png itemprop=contentUrl></a></figure></div><ul><li>Completely replace <code>ls</code> with <code>exa</code>:</li></ul><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#0086b3>alias</span> <span style=color:teal>ls</span><span style=color:#000;font-weight:700>=</span><span style=color:#d14>&#34;exa&#34;</span>
-</code></pre></div><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/linux-tools-that-you-never-knew-you-needed/exa-ls.png></div><a href=/photos/linux-tools-that-you-never-knew-you-needed/exa-ls.png itemprop=contentUrl></a></figure></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/c6ebdcc09ad106fbf7ee43c3163f92a85f34cf2e title="Last modified by Kien Nguyen | Apr 14, 2021" target=_blank rel=noopener><img src=/blog/svg/calendar.svg class=book-icon alt=Calendar>
-<span>Apr 14, 2021</span></a></div><div><a class="flex align-center" href=https://github.com/ntk148v/blog/edit/master/content/posts/linux-tools-that-you-never-knew-you-needed.md target=_blank rel=noopener><img src=/blog/svg/edit.svg class=book-icon alt=Edit>
-<span>Edit this page</span></a></div></div><script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#1-bat---cat-alternative>1. bat - (cat alternative)</a></li><li><a href=#2-fd---find-alternative>2. fd - (find alternative)</a></li><li><a href=#3-httpie---wgetcurl-alternative>3. httpie - (wget/curl alternative)</a></li><li><a href=#4-ripgrep---grep-alternative>4. ripgrep - (grep alternative)</a></li><li><a href=#5-delta>5. delta</a></li><li><a href=#6-z>6. z</a></li><li><a href=#7-fzf>7. fzf</a></li><li><a href=#8-thefuck>8. thefuck</a></li><li><a href=#9-exa---ls-alternative>9. exa - (ls alternative)</a></li></ul></nav></div></aside></main></body></html>
+</code></pre></div><h2 id=9-exa---ls-alternative>
+9. exa - (ls alternative)
+<a class=anchor href=#9-exa---ls-alternative>#</a>
+</h2>
+<ul>
+<li><a href=https://the.exa.website>exa</a>: A modern replacement for ls. <code>exa</code> is an improved file lister with more features and better defaults. It uses colours to distinguish file types and metadata. It knows about symlinks, extended attributes, and Git. And it’s small, fast, and just one single binary.</li>
+<li>Examples:</li>
+</ul>
+<div class=box>
+<figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
+<div class=img>
+<img itemprop=thumbnail src=/blog/photos/linux-tools-that-you-never-knew-you-needed/exa.png>
+</div>
+<a href=/photos/linux-tools-that-you-never-knew-you-needed/exa.png itemprop=contentUrl></a>
+</figure>
+</div>
+<ul>
+<li>Completely replace <code>ls</code> with <code>exa</code>:</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#0086b3>alias</span> <span style=color:teal>ls</span><span style=color:#000;font-weight:700>=</span><span style=color:#d14>&#34;exa&#34;</span>
+</code></pre></div>
+<div class=box>
+<figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
+<div class=img>
+<img itemprop=thumbnail src=/blog/photos/linux-tools-that-you-never-knew-you-needed/exa-ls.png>
+</div>
+<a href=/photos/linux-tools-that-you-never-knew-you-needed/exa-ls.png itemprop=contentUrl></a>
+</figure>
+</div>
+</article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+<div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/c6ebdcc09ad106fbf7ee43c3163f92a85f34cf2e title="Last modified by Kien Nguyen | Apr 14, 2021" target=_blank rel=noopener>
+<img src=/blog/svg/calendar.svg class=book-icon alt=Calendar>
+<span>Apr 14, 2021</span>
+</a>
+</div>
+<div>
+<a class="flex align-center" href=https://github.com/ntk148v/blog/edit/master/content/posts/linux-tools-that-you-never-knew-you-needed.md target=_blank rel=noopener>
+<img src=/blog/svg/edit.svg class=book-icon alt=Edit>
+<span>Edit this page</span>
+</a>
+</div>
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments></div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#1-bat---cat-alternative>1. bat - (cat alternative)</a></li>
+<li><a href=#2-fd---find-alternative>2. fd - (find alternative)</a></li>
+<li><a href=#3-httpie---wgetcurl-alternative>3. httpie - (wget/curl alternative)</a></li>
+<li><a href=#4-ripgrep---grep-alternative>4. ripgrep - (grep alternative)</a></li>
+<li><a href=#5-delta>5. delta</a></li>
+<li><a href=#6-z>6. z</a></li>
+<li><a href=#7-fzf>7. fzf</a></li>
+<li><a href=#8-thefuck>8. thefuck</a></li>
+<li><a href=#9-exa---ls-alternative>9. exa - (ls alternative)</a></li>
+</ul>
+</nav>
+</div>
+</aside>
+</main>
+</body>
+</html>

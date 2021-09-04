@@ -1,21 +1,168 @@
-<!doctype html><html lang=en dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="NOTE(kiennt): There is a legacy Faythe guideline. The new version is coming soon, check its repository for status.
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="NOTE(kiennt): There is a legacy Faythe guideline. The new version is coming soon, check its repository for status.
  This guide describes how to automatically scale out your Compute instances in response to heavy system usage. By combining with Prometheus pre-defined rules that consider factors such as CPU or memory usage, you can configure OpenStack Orchestration (Heat) to add and remove additional instances automatically, when they are needed.
-1. The standard OpenStack Autoscaling approach #  Let&rsquo;s talk about the standard OpenStack Autoscaling approach before goes to the new approach."><meta name=theme-color content="#FFFFFF"><meta property="og:title" content="Openstack Autoscaling New Approach"><meta property="og:description" content="NOTE(kiennt): There is a legacy Faythe guideline. The new version is coming soon, check its repository for status.
+1. The standard OpenStack Autoscaling approach #  Let&rsquo;s talk about the standard OpenStack Autoscaling approach before goes to the new approach.">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="Openstack Autoscaling New Approach">
+<meta property="og:description" content="NOTE(kiennt): There is a legacy Faythe guideline. The new version is coming soon, check its repository for status.
  This guide describes how to automatically scale out your Compute instances in response to heavy system usage. By combining with Prometheus pre-defined rules that consider factors such as CPU or memory usage, you can configure OpenStack Orchestration (Heat) to add and remove additional instances automatically, when they are needed.
-1. The standard OpenStack Autoscaling approach #  Let&rsquo;s talk about the standard OpenStack Autoscaling approach before goes to the new approach."><meta property="og:type" content="article"><meta property="og:url" content="https://ntk148v.github.io/blog/posts/openstack-autoscaling-new-approach/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2019-08-19T21:19:38+07:00"><meta property="article:modified_time" content="2020-04-28T15:18:38+07:00"><meta property="og:site_name" content="/home/kiennt"><title>Openstack Autoscaling New Approach | /home/kiennt</title><link rel=manifest href=/blog/manifest.json><link rel=icon href=/blog/favicon.png type=image/x-icon><link rel=stylesheet href=/blog/book.min.9e054825fe83a7fe54ce020754d54f7f86b172a2db5babcef21a04cd23e53cb7.css integrity="sha256-ngVIJf6Dp/5UzgIHVNVPf4axcqLbW6vO8hoEzSPlPLc=" crossorigin=anonymous><script defer src=/blog/flexsearch.min.js></script><script defer src=/blog/en.search.min.b112a83234b80afd7d8de84eee7e3c16199e31fb373d0177b6ab062a3b326465.js integrity="sha256-sRKoMjS4Cv19jehO7n48FhmeMfs3PQF3tqsGKjsyZGU=" crossorigin=anonymous></script><script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a href=/blog/><span>/home/kiennt</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><a href=/blog/authors/kiennt/>About</a></li><li><a href=/blog/posts/>Posts</a></li><li><a href=https://ntk148v.github.io/notes>Notes</a></li></ul></nav><script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/blog/svg/menu.svg class=book-icon alt=Menu></label>
+1. The standard OpenStack Autoscaling approach #  Let&rsquo;s talk about the standard OpenStack Autoscaling approach before goes to the new approach.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ntk148v.github.io/blog/posts/openstack-autoscaling-new-approach/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2019-08-19T21:19:38+07:00">
+<meta property="article:modified_time" content="2020-04-28T15:18:38+07:00"><meta property="og:site_name" content="/home/kiennt">
+<title>Openstack Autoscaling New Approach | /home/kiennt</title>
+<link rel=manifest href=/blog/manifest.json>
+<link rel=icon href=/blog/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/blog/book.min.9e054825fe83a7fe54ce020754d54f7f86b172a2db5babcef21a04cd23e53cb7.css integrity="sha256-ngVIJf6Dp/5UzgIHVNVPf4axcqLbW6vO8hoEzSPlPLc=" crossorigin=anonymous>
+<script defer src=/blog/flexsearch.min.js></script>
+<script defer src=/blog/en.search.min.d7c83a7fd065a85210ea2e64818a0c161472b6b3eb65467f9ed1f5ed11f6c31c.js integrity="sha256-18g6f9BlqFIQ6i5kgYoMFhRytrPrZUZ/ntH17RH2wxw=" crossorigin=anonymous></script>
+<script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a href=/blog/><span>/home/kiennt</span>
+</a>
+</h2>
+<div class=book-search>
+<input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/>
+<div class="book-search-spinner hidden"></div>
+<ul id=book-search-results></ul>
+</div>
+<ul>
+<li><a href=/blog/authors/kiennt/>About</a></li>
+<li><a href=/blog/posts/>Posts</a></li>
+<li><a href=https://ntk148v.github.io/notes>Notes</a></li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/blog/svg/menu.svg class=book-icon alt=Menu>
+</label>
 <strong>Openstack Autoscaling New Approach</strong>
-<label for=toc-control><img src=/blog/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#1-the-standard-openstack-autoscaling-approach>1. The standard OpenStack Autoscaling approach</a><ul><li><a href=#11-main-components>1.1. Main components</a></li><li><a href=#12-autoscaling-process>1.2. Autoscaling process</a></li><li><a href=#13-drawbacks>1.3. Drawbacks</a></li></ul></li><li><a href=#2-the-new-approach-with-faythe>2. The new approach with Faythe</a><ul><li><a href=#21-the-idea>2.1. The idea</a></li><li><a href=#22-the-implementation>2.2. The implementation</a></li><li><a href=#23-guideline>2.3. Guideline</a></li><li><a href=#24-drawbacks-and-todo>2.4. Drawbacks and TODO</a></li></ul></li></ul></nav></aside></header><article class=markdown><h1><a href=/blog/posts/openstack-autoscaling-new-approach/>Openstack Autoscaling New Approach</a></h1><h5>Aug 19, 2019</h5><div><a href=/blog/tags/openstack/>#openstack</a>
+<label for=toc-control>
+<img src=/blog/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#1-the-standard-openstack-autoscaling-approach>1. The standard OpenStack Autoscaling approach</a>
+<ul>
+<li><a href=#11-main-components>1.1. Main components</a></li>
+<li><a href=#12-autoscaling-process>1.2. Autoscaling process</a></li>
+<li><a href=#13-drawbacks>1.3. Drawbacks</a></li>
+</ul>
+</li>
+<li><a href=#2-the-new-approach-with-faythe>2. The new approach with Faythe</a>
+<ul>
+<li><a href=#21-the-idea>2.1. The idea</a></li>
+<li><a href=#22-the-implementation>2.2. The implementation</a></li>
+<li><a href=#23-guideline>2.3. Guideline</a></li>
+<li><a href=#24-drawbacks-and-todo>2.4. Drawbacks and TODO</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</aside>
+</header>
+<article class=markdown>
+<h1>
+<a href=/blog/posts/openstack-autoscaling-new-approach/>Openstack Autoscaling New Approach</a>
+</h1>
+<h5>Aug 19, 2019</h5>
+<div>
+<a href=/blog/tags/openstack/>#openstack</a>
 <a href=/blog/tags/prometheus/>#prometheus</a>
 <a href=/blog/tags/faythe/>#faythe</a>
-<a href=/blog/tags/tech/>#tech</a></div><blockquote><p>NOTE(kiennt): There is a <a href=https://github.com/vCloud-DFTBA/faythe/blob/legacy/docs/autoscaling.md>legacy Faythe guideline</a>. The new version is coming soon, check <a href=https://github.com/vCloud-DFTBA/faythe>its repository</a> for status.</p></blockquote><p>This guide describes how to automatically scale out your Compute instances in response to heavy system usage. By combining with Prometheus pre-defined rules that consider factors such as CPU or memory usage, you can configure OpenStack Orchestration (Heat) to add and remove additional instances automatically, when they are needed.</p><h2 id=1-the-standard-openstack-autoscaling-approach>1. The standard OpenStack Autoscaling approach
-<a class=anchor href=#1-the-standard-openstack-autoscaling-approach>#</a></h2><p>Let&rsquo;s talk about the standard OpenStack Autoscaling approach before goes to the new approach.</p><h3 id=11-main-components>1.1. Main components
-<a class=anchor href=#11-main-components>#</a></h3><ul><li><p>Orchestration: The core component providing automatic scaling is Orchestration (heat). Orchestration allows you to define rules using human-readable YAML templates. These rules are applied to evaluate system load based on Telemetry data to find out whether there is need to more instances into the stack. Once the load has dropped, Orchestration can automatically remove the unused instances again.</p></li><li><p>Telemetry: Telemetry does performance monitoring of your OpenStack environment, collecting data on CPU, storage and memory utilization for instances and physical hosts. Orchestration templates examine Telemetry data to access whether any pre-defined action should start.</p><ul><li>Ceilometer: a data collection service that provides the ability to normalise and transform data across all current OpenStack core components with work underway to support future OpenStack components.</li><li>Gnocchi: provides a time-series resource indexing, metric storage service with enables users to capture OpenStack resources and the metrics associated with them.</li><li>Aodh: enables the abiltity to trigger actions based on defined rules against sample or event data collected by Ceilometer.</li></ul></li></ul><h3 id=12-autoscaling-process>1.2. Autoscaling process
-<a class=anchor href=#12-autoscaling-process>#</a></h3><p>For more details, you could check <a href=https://ibm-blue-box-help.github.io/help-documentation/heat/autoscaling-with-heat/>IBM help documentation</a></p><h3 id=13-drawbacks>1.3. Drawbacks
-<a class=anchor href=#13-drawbacks>#</a></h3><ul><li>Ceilometer, Aodh are lacking of contribution. Ceilometer API was <a href=https://review.opendev.org/#/c/512286/>deprecated</a>. Either Transform and pipeline was <a href=https://review.opendev.org/#/c/560854/>the same state</a>, it means cpu_util will be unusable soon. In the commit message, @sileht - Ceilometer Core reviewer wrote that &ldquo;Also backend like Gnocchi offers a better alternative to compute them&rdquo;. But Aodh still <a href=https://github.com/openstack/aodh/blob/master/aodh/evaluator/gnocchi.py#L140>deprecated Gnocchi aggregation API</a> which doesn&rsquo;t support <code>rate:mean</code>. For more details, you can follow the <a href=https://github.com/gnocchixyz/gnocchi/issues/999>issue I&rsquo;ve opened before</a>. Be honest, I was gave up on it - 3 projects which was tightly related together, one change might cause a sequence and break the whole stack, how can I handle that?</li><li>Aodh has its own formula to define rule based on Ceilometer metrics (that were stored in Gnocchi). But it isn&rsquo;t correct sometimes cause the wrong scaling action.</li><li>In reality, I face the case that Rabbitmq was under heavy load due to Ceilometer workload.</li><li>IMO, Gnocchi documentation is not good enough. It might be a bias personal opinion.</li></ul><h2 id=2-the-new-approach-with-faythe>2. The new approach with Faythe
-<a class=anchor href=#2-the-new-approach-with-faythe>#</a></h2><h3 id=21-the-idea>2.1. The idea
-<a class=anchor href=#21-the-idea>#</a></h3><p>Actually, this isn&rsquo;t a complete new approach, it still leverages Orchestration (heat) to do scaling action. The different comes from Monitor service.</p><p>Take a look at <a href=https://www.slideshare.net/GuanYuLin1/autoscale-a-selfhealing-cluster-in-openstack-with-heat>Rico Lin - Heat&rsquo;s PTL, autoscale slide</a>, basically, Autoscaling is the combination of 3 steps:</p><ul><li>Metering.</li><li>Alarm.</li><li>Scale.</li></ul><p><img src="https://image.slidesharecdn.com/auto-scaleaself-healingclusterinopenstack1-180824033106/95/autoscale-a-selfhealing-cluster-in-openstack-with-heat-21-638.jpg?cb=1536873751" alt></p><p>OpenStack Telemetry takes care of <code>Metering</code> and <code>Alarm</code>. Ok, the new approach is simply using <em>another service that can take Telemetry roles</em>.</p><p>The <em>another service</em> is <a href=https://prometheus.io/>Prometheus stack</a>. The question here is why I chose this?</p><ul><li>Nice query language: Prometheus provides a functional query language called PromQL (Prometheus Query Language) that lets the user select and aggregate time series data in real time.</li><li>A wide range of exporter: The more exporter the more metrics I can collect and evaluate.</li><li>Flexibile: Beside the system factor like CPU/Memory usage, I can evaluate any metrics I can collect, for example: JVM metrics.</li><li>// Take time to investigate about Prometheus and fill it here by yourself</li></ul><h3 id=22-the-implementation>2.2. The implementation
-<a class=anchor href=#22-the-implementation>#</a></h3><p><strong>The ideal architecture</strong></p><pre><code>                                               +--------------------------------------------------+
+<a href=/blog/tags/tech/>#tech</a>
+</div>
+<blockquote>
+<p>NOTE(kiennt): There is a <a href=https://github.com/vCloud-DFTBA/faythe/blob/legacy/docs/autoscaling.md>legacy Faythe guideline</a>. The new version is coming soon, check <a href=https://github.com/vCloud-DFTBA/faythe>its repository</a> for status.</p>
+</blockquote>
+<p>This guide describes how to automatically scale out your Compute instances in response to heavy system usage. By combining with Prometheus pre-defined rules that consider factors such as CPU or memory usage, you can configure OpenStack Orchestration (Heat) to add and remove additional instances automatically, when they are needed.</p>
+<h2 id=1-the-standard-openstack-autoscaling-approach>
+1. The standard OpenStack Autoscaling approach
+<a class=anchor href=#1-the-standard-openstack-autoscaling-approach>#</a>
+</h2>
+<p>Let&rsquo;s talk about the standard OpenStack Autoscaling approach before goes to the new approach.</p>
+<h3 id=11-main-components>
+1.1. Main components
+<a class=anchor href=#11-main-components>#</a>
+</h3>
+<ul>
+<li>
+<p>Orchestration: The core component providing automatic scaling is Orchestration (heat). Orchestration allows you to define rules using human-readable YAML templates. These rules are applied to evaluate system load based on Telemetry data to find out whether there is need to more instances into the stack. Once the load has dropped, Orchestration can automatically remove the unused instances again.</p>
+</li>
+<li>
+<p>Telemetry: Telemetry does performance monitoring of your OpenStack environment, collecting data on CPU, storage and memory utilization for instances and physical hosts. Orchestration templates examine Telemetry data to access whether any pre-defined action should start.</p>
+<ul>
+<li>Ceilometer: a data collection service that provides the ability to normalise and transform data across all current OpenStack core components with work underway to support future OpenStack components.</li>
+<li>Gnocchi: provides a time-series resource indexing, metric storage service with enables users to capture OpenStack resources and the metrics associated with them.</li>
+<li>Aodh: enables the abiltity to trigger actions based on defined rules against sample or event data collected by Ceilometer.</li>
+</ul>
+</li>
+</ul>
+<h3 id=12-autoscaling-process>
+1.2. Autoscaling process
+<a class=anchor href=#12-autoscaling-process>#</a>
+</h3>
+<p>For more details, you could check <a href=https://ibm-blue-box-help.github.io/help-documentation/heat/autoscaling-with-heat/>IBM help documentation</a></p>
+<h3 id=13-drawbacks>
+1.3. Drawbacks
+<a class=anchor href=#13-drawbacks>#</a>
+</h3>
+<ul>
+<li>Ceilometer, Aodh are lacking of contribution. Ceilometer API was <a href=https://review.opendev.org/#/c/512286/>deprecated</a>. Either Transform and pipeline was <a href=https://review.opendev.org/#/c/560854/>the same state</a>, it means cpu_util will be unusable soon. In the commit message, @sileht - Ceilometer Core reviewer wrote that &ldquo;Also backend like Gnocchi offers a better alternative to compute them&rdquo;. But Aodh still <a href=https://github.com/openstack/aodh/blob/master/aodh/evaluator/gnocchi.py#L140>deprecated Gnocchi aggregation API</a> which doesn&rsquo;t support <code>rate:mean</code>. For more details, you can follow the <a href=https://github.com/gnocchixyz/gnocchi/issues/999>issue I&rsquo;ve opened before</a>. Be honest, I was gave up on it - 3 projects which was tightly related together, one change might cause a sequence and break the whole stack, how can I handle that?</li>
+<li>Aodh has its own formula to define rule based on Ceilometer metrics (that were stored in Gnocchi). But it isn&rsquo;t correct sometimes cause the wrong scaling action.</li>
+<li>In reality, I face the case that Rabbitmq was under heavy load due to Ceilometer workload.</li>
+<li>IMO, Gnocchi documentation is not good enough. It might be a bias personal opinion.</li>
+</ul>
+<h2 id=2-the-new-approach-with-faythe>
+2. The new approach with Faythe
+<a class=anchor href=#2-the-new-approach-with-faythe>#</a>
+</h2>
+<h3 id=21-the-idea>
+2.1. The idea
+<a class=anchor href=#21-the-idea>#</a>
+</h3>
+<p>Actually, this isn&rsquo;t a complete new approach, it still leverages Orchestration (heat) to do scaling action. The different comes from Monitor service.</p>
+<p>Take a look at <a href=https://www.slideshare.net/GuanYuLin1/autoscale-a-selfhealing-cluster-in-openstack-with-heat>Rico Lin - Heat&rsquo;s PTL, autoscale slide</a>, basically, Autoscaling is the combination of 3 steps:</p>
+<ul>
+<li>Metering.</li>
+<li>Alarm.</li>
+<li>Scale.</li>
+</ul>
+<p><img src="https://image.slidesharecdn.com/auto-scaleaself-healingclusterinopenstack1-180824033106/95/autoscale-a-selfhealing-cluster-in-openstack-with-heat-21-638.jpg?cb=1536873751" alt></p>
+<p>OpenStack Telemetry takes care of <code>Metering</code> and <code>Alarm</code>. Ok, the new approach is simply using <em>another service that can take Telemetry roles</em>.</p>
+<p>The <em>another service</em> is <a href=https://prometheus.io/>Prometheus stack</a>. The question here is why I chose this?</p>
+<ul>
+<li>Nice query language: Prometheus provides a functional query language called PromQL (Prometheus Query Language) that lets the user select and aggregate time series data in real time.</li>
+<li>A wide range of exporter: The more exporter the more metrics I can collect and evaluate.</li>
+<li>Flexibile: Beside the system factor like CPU/Memory usage, I can evaluate any metrics I can collect, for example: JVM metrics.</li>
+<li>// Take time to investigate about Prometheus and fill it here by yourself</li>
+</ul>
+<h3 id=22-the-implementation>
+2.2. The implementation
+<a class=anchor href=#22-the-implementation>#</a>
+</h3>
+<p><strong>The ideal architecture</strong></p>
+<pre tabindex=0><code>                                               +--------------------------------------------------+
                                                |                                                  |
                                                |     +-----------------+  +-----------------+     |
 +---------------------+                        |     |   Instance 1    |  |   Instance 2    |     |
@@ -37,7 +184,22 @@
                                                |                                                  |
                                                |                     Heat Stack                   |
                                                +--------------------------------------------------+
-</code></pre><ul><li>Prometheus server scrapes metrics from exporters that launch inside Instance.</li><li>Prometheus server evaluates metrics with pre-defined rules.</li><li>Prometheus server fires alert to Prometheus alertmanager.</li><li>Prometheus alertmanager sends POST Scale request to Heat Scaling policy with webhook configuration.</li></ul><p>It&rsquo;s a piece of cake, right? But <em>where is Faythe, I don&rsquo;t see it?</em> Let&rsquo;s talk about the solution problems:</p><ul><li>Prometheus Alertmanager webhook config doesn&rsquo;t <a href=https://github.com/prometheus/common/issues/140>support additional HTTP headers</a>. And they won&rsquo;t! 😢 Heat Scaling Policy signal url requires <code>X-Auth-Token</code> in header and Prometheus can&rsquo;t generate a token itself, either.</li><li>Heat doesn&rsquo;t recognize the resolved alerts from Prometheus Alertmanager to execute scale in action.</li><li>How to connect these components together?</li></ul><p>We need a 3rd service to solve these problems - <code>Faythe does some magic</code>.</p><center><iframe src=https://giphy.com/embed/12NUbkX6p4xOO4 width=480 height=440 frameborder=0 class=giphy-embed allowfullscreen></iframe><p><a href=https://giphy.com/gifs/shia-labeouf-12NUbkX6p4xOO4>via GIPHY</a></p></center><p><strong>The reality architecture</strong></p><pre><code>                                              ++-------------------------------------------------+
+</code></pre><ul>
+<li>Prometheus server scrapes metrics from exporters that launch inside Instance.</li>
+<li>Prometheus server evaluates metrics with pre-defined rules.</li>
+<li>Prometheus server fires alert to Prometheus alertmanager.</li>
+<li>Prometheus alertmanager sends POST Scale request to Heat Scaling policy with webhook configuration.</li>
+</ul>
+<p>It&rsquo;s a piece of cake, right? But <em>where is Faythe, I don&rsquo;t see it?</em> Let&rsquo;s talk about the solution problems:</p>
+<ul>
+<li>Prometheus Alertmanager webhook config doesn&rsquo;t <a href=https://github.com/prometheus/common/issues/140>support additional HTTP headers</a>. And they won&rsquo;t! 😢 Heat Scaling Policy signal url requires <code>X-Auth-Token</code> in header and Prometheus can&rsquo;t generate a token itself, either.</li>
+<li>Heat doesn&rsquo;t recognize the resolved alerts from Prometheus Alertmanager to execute scale in action.</li>
+<li>How to connect these components together?</li>
+</ul>
+<p>We need a 3rd service to solve these problems - <code>Faythe does some magic</code>.</p>
+<center><iframe src=https://giphy.com/embed/12NUbkX6p4xOO4 width=480 height=440 frameborder=0 class=giphy-embed allowfullscreen></iframe><p><a href=https://giphy.com/gifs/shia-labeouf-12NUbkX6p4xOO4>via GIPHY</a></p></center>
+<p><strong>The reality architecture</strong></p>
+<pre tabindex=0><code>                                              ++-------------------------------------------------+
                                                |                                                  +
                                                |     +-----------------+  +-----------------+     |
 +---------------------+                        |     |   Instance 1    |  |   Instance 2    |     |
@@ -66,8 +228,29 @@
 |                       |       Send actual scale request
 +-----------------------+
 
-</code></pre><blockquote><p>NOTE: The stack leverages OpenStack instance metadata and Prometheus labels.</p></blockquote><ul><li>Prometheus server scrapes metrics from exporters that launch inside Instance.</li><li>Prometheus server evaluates metrics with pre-defined rules.</li><li>Prometheus server fires alert to Prometheus alertmanager.</li><li>Prometheus alertmanager sends Alerts via pre-configured webhook URL - Faythe endpoint.</li><li>Faythe receives and processes Alerts (dedup, group alert and generate a Heat signal URL) and creates a POST request to scale endpoint.</li></ul><h3 id=23-guideline>2.3. Guideline
-<a class=anchor href=#23-guideline>#</a></h3><p>The current aprroach requires some further setup and configuration from Prometheus and Heat stack. You will see that it&rsquo;s quite complicated.</p><p><strong>The simplify in logic is paid by the complex config steps.</strong></p><p><strong>Step 1:</strong> Create a stack - the following is the sample template. It has several requirements:</p><ul><li>OS::Heat::ScalingPolicy has to be named as <code>scaleout_policy</code> and <code>scalein_policy</code>.</li><li>OS::Heat::AutoScalingGroup&rsquo;s instance metadata has to contain <code>stack_asg_name</code> and <code>stack_asg_id</code>. It will be used to generate signal URL.</li><li>Instance should have a cloud init script to enable and start Prometheus exporters automatically.</li></ul><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#555>---</span><span style=color:#bbb>
+</code></pre><blockquote>
+<p>NOTE: The stack leverages OpenStack instance metadata and Prometheus labels.</p>
+</blockquote>
+<ul>
+<li>Prometheus server scrapes metrics from exporters that launch inside Instance.</li>
+<li>Prometheus server evaluates metrics with pre-defined rules.</li>
+<li>Prometheus server fires alert to Prometheus alertmanager.</li>
+<li>Prometheus alertmanager sends Alerts via pre-configured webhook URL - Faythe endpoint.</li>
+<li>Faythe receives and processes Alerts (dedup, group alert and generate a Heat signal URL) and creates a POST request to scale endpoint.</li>
+</ul>
+<h3 id=23-guideline>
+2.3. Guideline
+<a class=anchor href=#23-guideline>#</a>
+</h3>
+<p>The current aprroach requires some further setup and configuration from Prometheus and Heat stack. You will see that it&rsquo;s quite complicated.</p>
+<p><strong>The simplify in logic is paid by the complex config steps.</strong></p>
+<p><strong>Step 1:</strong> Create a stack - the following is the sample template. It has several requirements:</p>
+<ul>
+<li>OS::Heat::ScalingPolicy has to be named as <code>scaleout_policy</code> and <code>scalein_policy</code>.</li>
+<li>OS::Heat::AutoScalingGroup&rsquo;s instance metadata has to contain <code>stack_asg_name</code> and <code>stack_asg_id</code>. It will be used to generate signal URL.</li>
+<li>Instance should have a cloud init script to enable and start Prometheus exporters automatically.</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#555>---</span><span style=color:#bbb>
 </span><span style=color:#bbb></span><span style=color:navy>resources</span>:<span style=color:#bbb>
 </span><span style=color:#bbb>  </span><span style=color:navy>asg</span>:<span style=color:#bbb>
 </span><span style=color:#bbb>    </span><span style=color:navy>type</span>:<span style=color:#bbb> </span>OS::Heat::AutoScalingGroup<span style=color:#bbb>
@@ -105,7 +288,8 @@
 </span><span style=color:#bbb>      </span><span style=color:navy>auto_scaling_group_id</span>:<span style=color:#bbb> </span>{<span style=color:#bbb> </span><span style=color:navy>get_resource</span>:<span style=color:#bbb> </span>asg }<span style=color:#bbb>
 </span><span style=color:#bbb>      </span><span style=color:navy>cooldown</span>:<span style=color:#bbb> </span>{<span style=color:#bbb> </span><span style=color:navy>get_param</span>:<span style=color:#bbb> </span>scale_in_cooldown }<span style=color:#bbb>
 </span><span style=color:#bbb>      </span><span style=color:navy>scaling_adjustment</span>:<span style=color:#bbb> </span>{<span style=color:#bbb> </span><span style=color:navy>get_param</span>:<span style=color:#bbb> </span>scaling_in_adjustment }<span style=color:#bbb>
-</span></code></pre></div><p><strong>Step 2:</strong> Configure Prometheus openstack discovery</p><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>- <span style=color:navy>job_name</span>:<span style=color:#bbb> </span>openstack_scale_test<span style=color:#bbb>
+</span></code></pre></div><p><strong>Step 2:</strong> Configure Prometheus openstack discovery</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>- <span style=color:navy>job_name</span>:<span style=color:#bbb> </span>openstack_scale_test<span style=color:#bbb>
 </span><span style=color:#bbb>  </span><span style=color:navy>openstack_sd_configs</span>:<span style=color:#bbb>
 </span><span style=color:#bbb>    </span>- <span style=color:navy>role</span>:<span style=color:#bbb> </span>instance<span style=color:#bbb>
 </span><span style=color:#bbb>      </span><span style=color:navy>identity_endpoint</span>:<span style=color:#bbb> </span><span style=color:#d14>&#34;&lt;openstackendpoint&gt;&#34;</span><span style=color:#bbb>
@@ -139,7 +323,8 @@
 </span><span style=color:#bbb>    </span>- <span style=color:navy>source_labels</span>:<span style=color:#bbb> </span>[__meta_openstack_tag_stack_asg_id]<span style=color:#bbb>
 </span><span style=color:#bbb>      </span><span style=color:navy>target_label</span>:<span style=color:#bbb> </span>stack_asg_id<span style=color:#bbb>
 </span><span style=color:#bbb>      </span><span style=color:navy>replacement</span>:<span style=color:#bbb> </span>$1<span style=color:#bbb>
-</span></code></pre></div><p><strong>Step 3:</strong> Define a Prometheus rule, for example:</p><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:navy>groups</span>:<span style=color:#bbb>
+</span></code></pre></div><p><strong>Step 3:</strong> Define a Prometheus rule, for example:</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:navy>groups</span>:<span style=color:#bbb>
 </span><span style=color:#bbb>  </span>- <span style=color:navy>name</span>:<span style=color:#bbb> </span>targets<span style=color:#bbb>
 </span><span style=color:#bbb>    </span><span style=color:navy>rules</span>:<span style=color:#bbb>
 </span><span style=color:#bbb>      </span>- <span style=color:navy>alert</span>:<span style=color:#bbb> </span>high_memory_load<span style=color:#bbb>
@@ -150,7 +335,8 @@
 </span><span style=color:#bbb>        </span><span style=color:navy>annotations</span>:<span style=color:#bbb>
 </span><span style=color:#bbb>          </span><span style=color:navy>summary</span>:<span style=color:#bbb> </span><span style=color:#d14>&#34;High memory&#34;</span><span style=color:#bbb>
 </span><span style=color:#bbb>          </span><span style=color:navy>description</span>:<span style=color:#bbb> </span><span style=color:#d14>&#34;Instance {{ $labels.instance }} of job {{ $labels.job }} (stack {{ $labels.stack_id }} has been high af for 5m&#34;</span><span style=color:#bbb>
-</span></code></pre></div><p><strong>Step 4:</strong> Configure Prometheus Alertmanager webhook, for example:</p><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:navy>route</span>:<span style=color:#bbb>
+</span></code></pre></div><p><strong>Step 4:</strong> Configure Prometheus Alertmanager webhook, for example:</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:navy>route</span>:<span style=color:#bbb>
 </span><span style=color:#bbb>  </span><span style=color:navy>receiver</span>:<span style=color:#bbb> </span><span style=color:#d14>&#34;custom_alert&#34;</span><span style=color:#bbb>
 </span><span style=color:#bbb>  </span><span style=color:navy>group_wait</span>:<span style=color:#bbb> </span>20s<span style=color:#bbb>
 </span><span style=color:#bbb>  </span><span style=color:navy>group_interval</span>:<span style=color:#bbb> </span>3m<span style=color:#bbb>
@@ -164,7 +350,9 @@
 </span><span style=color:#bbb>          </span><span style=color:navy>basic_auth</span>:<span style=color:#bbb>
 </span><span style=color:#bbb>            </span><span style=color:navy>username</span>:<span style=color:#bbb> </span><span style=color:#d14>&#34;admin&#34;</span><span style=color:#bbb>
 </span><span style=color:#bbb>            </span><span style=color:navy>password</span>:<span style=color:#bbb> </span><span style=color:#d14>&#34;password&#34;</span><span style=color:#bbb>
-</span></code></pre></div><p>Note that, <code>openstack-1f</code> has to be the name of OpenStack configuration group in Faythe config file. It helps Faythe to work with multiple OpenStack.</p><p><strong>Step 5:</strong> Configure Faythe</p><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#998;font-style:italic>## OpenStackConfiguration.</span><span style=color:#bbb>
+</span></code></pre></div><p>Note that, <code>openstack-1f</code> has to be the name of OpenStack configuration group in Faythe config file. It helps Faythe to work with multiple OpenStack.</p>
+<p><strong>Step 5:</strong> Configure Faythe</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#998;font-style:italic>## OpenStackConfiguration.</span><span style=color:#bbb>
 </span><span style=color:#bbb></span><span style=color:navy>openstack_configs</span>:<span style=color:#bbb>
 </span><span style=color:#bbb>  </span><span style=color:navy>openstack-1f</span>:<span style=color:#bbb>
 </span><span style=color:#bbb>    </span><span style=color:navy>region_name</span>:<span style=color:#bbb> </span><span style=color:#d14>&#34;RegionOne&#34;</span><span style=color:#bbb>
@@ -183,7 +371,70 @@
 </span><span style=color:#bbb>    </span><span style=color:navy>username</span>:<span style=color:#bbb> </span><span style=color:#d14>&#34;admin&#34;</span><span style=color:#bbb>
 </span><span style=color:#bbb>    </span><span style=color:navy>password</span>:<span style=color:#bbb> </span><span style=color:#d14>&#34;password&#34;</span><span style=color:#bbb>
 </span><span style=color:#bbb>  </span><span style=color:navy>log_dir</span>:<span style=color:#bbb> </span><span style=color:#d14>&#34;/whatever/directory/faythe-logs&#34;</span><span style=color:#bbb>
-</span></code></pre></div><p><strong>Step 6:</strong> Let&rsquo;s make them work:</p><ul><li>Prometheus server.</li><li>Prometheus alertmanager.</li><li>Faythe.</li></ul><center><iframe src=https://giphy.com/embed/cLlVn5zC5UOSmQZKJ7 width=480 height=270 frameborder=0 class=giphy-embed allowfullscreen></iframe><p><a href=https://giphy.com/gifs/RobertEBlackmon-bye-go-away-anna-wintour-cLlVn5zC5UOSmQZKJ7>via GIPHY</a></p></center><h3 id=24-drawbacks-and-todo>2.4. Drawbacks and TODO
-<a class=anchor href=#24-drawbacks-and-todo>#</a></h3><p><strong>Drawbacks</strong></p><ul><li>The configuration steps is way too complicated, many manual steps have to be done.</li></ul><p><strong>TODO</strong></p><ul><li>Simplify strategy, might need a service discovery.</li></ul></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/c5f6f38139a5ed65208fc4ecdde8eb810a6a2ecc title="Last modified by Kien Nguyen | Apr 28, 2020" target=_blank rel=noopener><img src=/blog/svg/calendar.svg class=book-icon alt=Calendar>
-<span>Apr 28, 2020</span></a></div><div><a class="flex align-center" href=https://github.com/ntk148v/blog/edit/master/content/posts/openstack-autoscaling-new-approach.md target=_blank rel=noopener><img src=/blog/svg/edit.svg class=book-icon alt=Edit>
-<span>Edit this page</span></a></div></div><script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script></footer><div class=book-comments><section class="article discussion"><script src=https://utteranc.es/client.js repo=ntk148v/blog issue-term=pathname theme=github-light crossorigin=anonymous async></script></section></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#1-the-standard-openstack-autoscaling-approach>1. The standard OpenStack Autoscaling approach</a><ul><li><a href=#11-main-components>1.1. Main components</a></li><li><a href=#12-autoscaling-process>1.2. Autoscaling process</a></li><li><a href=#13-drawbacks>1.3. Drawbacks</a></li></ul></li><li><a href=#2-the-new-approach-with-faythe>2. The new approach with Faythe</a><ul><li><a href=#21-the-idea>2.1. The idea</a></li><li><a href=#22-the-implementation>2.2. The implementation</a></li><li><a href=#23-guideline>2.3. Guideline</a></li><li><a href=#24-drawbacks-and-todo>2.4. Drawbacks and TODO</a></li></ul></li></ul></nav></div></aside></main></body></html>
+</span></code></pre></div><p><strong>Step 6:</strong> Let&rsquo;s make them work:</p>
+<ul>
+<li>Prometheus server.</li>
+<li>Prometheus alertmanager.</li>
+<li>Faythe.</li>
+</ul>
+<center><iframe src=https://giphy.com/embed/cLlVn5zC5UOSmQZKJ7 width=480 height=270 frameborder=0 class=giphy-embed allowfullscreen></iframe><p><a href=https://giphy.com/gifs/RobertEBlackmon-bye-go-away-anna-wintour-cLlVn5zC5UOSmQZKJ7>via GIPHY</a></p></center>
+<h3 id=24-drawbacks-and-todo>
+2.4. Drawbacks and TODO
+<a class=anchor href=#24-drawbacks-and-todo>#</a>
+</h3>
+<p><strong>Drawbacks</strong></p>
+<ul>
+<li>The configuration steps is way too complicated, many manual steps have to be done.</li>
+</ul>
+<p><strong>TODO</strong></p>
+<ul>
+<li>Simplify strategy, might need a service discovery.</li>
+</ul>
+</article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+<div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/c5f6f38139a5ed65208fc4ecdde8eb810a6a2ecc title="Last modified by Kien Nguyen | Apr 28, 2020" target=_blank rel=noopener>
+<img src=/blog/svg/calendar.svg class=book-icon alt=Calendar>
+<span>Apr 28, 2020</span>
+</a>
+</div>
+<div>
+<a class="flex align-center" href=https://github.com/ntk148v/blog/edit/master/content/posts/openstack-autoscaling-new-approach.md target=_blank rel=noopener>
+<img src=/blog/svg/edit.svg class=book-icon alt=Edit>
+<span>Edit this page</span>
+</a>
+</div>
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments><section class="article discussion">
+<script src=https://utteranc.es/client.js repo=ntk148v/blog issue-term=pathname theme=github-light crossorigin=anonymous async></script>
+</section></div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#1-the-standard-openstack-autoscaling-approach>1. The standard OpenStack Autoscaling approach</a>
+<ul>
+<li><a href=#11-main-components>1.1. Main components</a></li>
+<li><a href=#12-autoscaling-process>1.2. Autoscaling process</a></li>
+<li><a href=#13-drawbacks>1.3. Drawbacks</a></li>
+</ul>
+</li>
+<li><a href=#2-the-new-approach-with-faythe>2. The new approach with Faythe</a>
+<ul>
+<li><a href=#21-the-idea>2.1. The idea</a></li>
+<li><a href=#22-the-implementation>2.2. The implementation</a></li>
+<li><a href=#23-guideline>2.3. Guideline</a></li>
+<li><a href=#24-drawbacks-and-todo>2.4. Drawbacks and TODO</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</aside>
+</main>
+</body>
+</html>
