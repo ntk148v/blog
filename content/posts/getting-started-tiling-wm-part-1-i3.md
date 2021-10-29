@@ -178,7 +178,7 @@ graph TD;
 sudo apt install hsetroot rofi compton -y
 ```
 
-{{< expand >}}
+{{< details "Minimal I3 configuration" [open] >}}
 
 ## Cheat sheat shortcut
 
@@ -360,7 +360,7 @@ hide_edge_borders smart_no_gaps
 exec_always hsetroot -solid "#F1CCBB"
 ```
 
-{{< /expand >}}
+{{< /details >}}
 
 ## 6. Some tricks and tips
 
