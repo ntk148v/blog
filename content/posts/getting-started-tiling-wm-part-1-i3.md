@@ -178,7 +178,7 @@ graph TD;
 sudo apt install hsetroot rofi compton -y
 ```
 
-{{< details "Minimal I3 configuration" [open] >}}
+{{< details title="Minimal I3 configuration" open=true >}}
 
 ## Cheat sheat shortcut
 
