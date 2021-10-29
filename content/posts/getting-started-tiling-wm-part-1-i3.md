@@ -172,7 +172,7 @@ graph TD;
 
 ## 5. Configuration
 
-- You can use my minimal configuration (click to expand). It requires some extra packages.
+- You can use my minimal configuration (*click to expand*). It requires some extra packages.
 
 ```bash
 sudo apt install hsetroot rofi compton -y
