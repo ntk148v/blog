@@ -13,13 +13,13 @@ I love customizing desktop. I make changes in my desktop everyday, make it look 
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-1-i3/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2021-04-19T10:10:21+07:00">
-<meta property="article:modified_time" content="2021-10-29T11:30:10+07:00"><meta property="og:site_name" content="/home/kiennt">
+<meta property="article:modified_time" content="2021-10-29T11:38:16+07:00"><meta property="og:site_name" content="/home/kiennt">
 <title>Getting Started with Tiling WM [Part 1] - I3 | /home/kiennt</title>
 <link rel=manifest href=/blog/manifest.json>
 <link rel=icon href=/blog/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/blog/book.min.d69f323ec95ccf635b076a124afa79b220b9c8fea4cb150f9ef10356398a9920.css integrity="sha256-1p8yPslcz2NbB2oSSvp5siC5yP6kyxUPnvEDVjmKmSA=" crossorigin=anonymous>
 <script defer src=/blog/flexsearch.min.js></script>
-<script defer src=/blog/en.search.min.dd059be199175198870c2f0f4f379e263a2ed95c2c1d5bebb76a2b7d8c748f3e.js integrity="sha256-3QWb4ZkXUZiHDC8PTzeeJjou2VwsHVvrt2orfYx0jz4=" crossorigin=anonymous></script>
+<script defer src=/blog/en.search.min.cde854ed1f7ee436f508889351311b4095ec0eceb9d66369456871fc75c607de.js integrity="sha256-zehU7R9+5Db1CIiTUTEbQJXsDs651mNpRWhx/HXGB94=" crossorigin=anonymous></script>
 <script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css>
@@ -331,16 +331,12 @@ style Container3 fill:#6fa8dc;
 <li>You can use my minimal configuration (<em>click to expand</em>). It requires some extra packages.</li>
 </ul>
 <div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sudo apt install hsetroot rofi compton -y
-</code></pre></div>
-<div class=book-expand>
-<label>
-<div class="book-expand-head flex justify-between">
-<span>Expand</span>
-<span>↕</span>
-</div>
-<input type=checkbox class=hidden>
-<div class="book-expand-content markdown-inner">
-<h2 id=cheat-sheat-shortcut>Cheat sheat shortcut</h2>
+</code></pre></div><details open><summary>Minimal I3 configuration</summary>
+<div class=markdown-inner>
+<h2 id=cheat-sheat-shortcut>
+Cheat sheat shortcut
+<a class=anchor href=#cheat-sheat-shortcut>#</a>
+</h2>
 <table>
 <thead>
 <tr>
@@ -395,7 +391,10 @@ style Container3 fill:#6fa8dc;
 </tr>
 </tbody>
 </table>
-<h2 id=minimal-configuration-file>Minimal configuration file</h2>
+<h2 id=minimal-configuration-file>
+Minimal configuration file
+<a class=anchor href=#minimal-configuration-file>#</a>
+</h2>
 <pre tabindex=0><code># i3 config file
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
@@ -557,8 +556,7 @@ hide_edge_borders smart_no_gaps
 exec_always hsetroot -solid &quot;#F1CCBB&quot;
 </code></pre>
 </div>
-</label>
-</div>
+</details>
 <h2 id=6-some-tricks-and-tips>
 6. Some tricks and tips
 <a class=anchor href=#6-some-tricks-and-tips>#</a>
@@ -620,7 +618,7 @@ cat <span style=color:#d14>&lt;&lt;EOT &gt;&gt; ~/.config/gtk-3.0/gtk.css
 </article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
-<div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/eed672fc8f9cf0c93b854996a27f7bd8d26c3690 title="Last modified by Kien Nguyen | Oct 29, 2021" target=_blank rel=noopener>
+<div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/11e7739c8beace853b777eb899912521296cd6bc title="Last modified by Kien Nguyen | Oct 29, 2021" target=_blank rel=noopener>
 <img src=/blog/svg/calendar.svg class=book-icon alt=Calendar>
 <span>Oct 29, 2021</span>
 </a>
