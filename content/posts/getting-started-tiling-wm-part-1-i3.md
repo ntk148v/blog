@@ -34,11 +34,11 @@ We'll begin by showing how the Linux graphical desktop is layered. There are bas
   - May not be particularly customizable.
   - Gret if you don't want to customize everything.
 
-{{<mermaid>}}
+{{< mermaid >}}
 graph TD;
 A[Desktop Environment] --> B[Window Manager];
 B --> C[X Windows];
-{{</mermaid>}}
+{{< /mermaid >}}
 
 ### 1.2. Types of Window Manager
 
@@ -63,16 +63,12 @@ B --> C[X Windows];
 - Floating pop-up windows.
 - Want more, check [this](https://i3wm.org/docs/userguide.html).
 
-## 3. Minimal Ubuntu I3 setup
+## 3. Minimal I3 setup
 
-### 3.1. Ubuntu Server
+### 3.1. Operating System
 
-- Download the [installer](https://ubuntu.com/download/server) and install Ubuntu server by walking through installer. If you're completely new to it, you can follow [official documentation](https://ubuntu.com/server/docs/installation).
-- The version `20.04.2`.
-
-### 3.2. Desktop
-
-- We'll need a display server so let's install X Window System ([Xorg](https://wiki.archlinux.org/index.php/Xorg))
+- Ubuntu 20.04 (Desktop/Server), download the [installer](https://ubuntu.com/download/) and install Ubuntu by walking through installer.
+- If you choose Ubuntu Server, you'll need a display server so let's install X Window System ([Xorg](https://wiki.archlinux.org/index.php/Xorg)).
 
 ```bash
 sudo apt install xinit
@@ -80,9 +76,13 @@ sudo apt install xinit
 # You can override it by creating and modifying ~/.xinitrc
 ```
 
-### 3.3. Tiling Window Manager - I3
+### 3.2. Install I3
 
-- You can install i3 from [Ubuntu repository](https://packages.ubuntu.com/search?keywords=i3).
+- You can install i3 from [Ubuntu repository](https://packages.ubuntu.com/search?keywords=i3). It includes the window manager, a screen locker and two programs which write a status line to i3bar through stdout.
+
+{{< hint warning >}}
+Note that, i3-wm conflicts with [i3-gaps](https://github.com/Airblader/i3) (a fork of i3 with gaps and other features).
+{{< /hint >}}
 
 ```bash
 sudo apt install i3
@@ -116,19 +116,86 @@ sudo ninja install
 
 - `<mod>` key is `Window` now. Hit `<mod>+Enter` to start terminal emulator.
 
-### 3.4. Configure I3
-
 - We have i3 first setup here with the default configuration. As mentioned before, configuration is achieved via plain text file.
 
 {{< figure src="photos/getting-started-tiling-wm-part-1/i3-default-config-file.png" >}}
 
-- You can use my minimal configuration. It requires some extra packages.
+## 4. Usage
+
+This post doesn't aim to cover everything about i3, see the [official documentation](https://i3wm.org/docs/userguide.html) for more information.
+
+### 4.1. Keybindings
+
+- In i3, commands are invoked with a modifier key, referred to as `$mod`. This is `Alt (Mod1)` by default, with `Super (Mod4)` being a popular alternative. Super is the key usually represented on a keyboard as a Windows icon, or on an Apple keyboard as a Command key.
+- See [i3 reference card](https://i3wm.org/docs/refcard.html) and [Using i3](https://i3wm.org/docs/userguide.html#_using_i3) for defaults.
+
+{{< figure src="photos/getting-started-tiling-wm-part-1/i3-refcard.png" >}}
+
+### 4.2. Workspace, Container and Window
+
+{{< mermaid >}}
+
+graph TD;
+  i3-->Workspace1;
+  i3-->Workspace2;
+  Workspace1-->Container1;
+  Workspace1-->Container2;
+  Container1-->Window1;
+  Container2-->Window2;
+  Workspace2-->Container3;
+  Container3-->Window3;
+  Container3-->Window4;
+
+  style i3 fill:#33ddaa;
+  style Workspace1 fill:#ea9999;
+  style Workspace2 fill:#ea9999;
+  style Container1 fill:#6fa8dc;
+  style Container2 fill:#6fa8dc;
+  style Container3 fill:#6fa8dc;
+
+{{</ mermaid >}}
+
+- In i3, **workspace** is simply the equivalent of a [virtual desktop](https://en.wikipedia.org/wiki/Virtual_desktop). You can have as many workspaces as you want.
+- i3 manages windows in a tree structure, with **containers** as building blocks.
+- A container contains one or multiple **windows**. Its windows will be positioned depending on the container's layout.
+- There are 3 different layouts possible:
+  - **Split**: Each window share the container space and are split horizontally (*splith*) or vertically (*splitv*). This is the default layout.
+  - **Stacked** - The focused window is visible and the other ones are stacked behind. You can change the window’s focus via keystrokes easily. You have access to the list of windows open too, at the top of the container itself.
+  - **Tabbed** - This layout is similar as the stacked layout, except that the windows’ list is vertically split, and not horizontally.
+- A window, where an application is running, can be created in a container. It will automatically position itself and be in focus, depending on the container’s layout. You can move them around or even change the layout of the container using keystrokes.
+- There are two different sorts of windows: **fixed window**s (by default) and **floating windows**.
+
+### 4.3. Application launcher
+
+- i3 uses [dmenu](https://wiki.archlinux.org/title/Dmenu) as an application launcher, which is bound by default to `$mod+d`.
+- [rofi]({{< ref "/posts/getting-started-tiling-wm-part-2-rofi.md" >}}) is a popular dmenu replacement and more that can list dekstop entries.
+
+## 5. Configuration
+
+- You can use my minimal configuration (click to expand). It requires some extra packages.
 
 ```bash
 sudo apt install hsetroot rofi compton -y
 ```
 
 {{< expand >}}
+
+## Cheat sheat shortcut
+
+| Shortcut                                                           | Description                                    |
+| ------------------------------------------------------------------ | ---------------------------------------------- |
+| <kbd>$mod</kbd> + <kbd>Enter</kbd>                                 | Open a terminal                                |
+| <kbd>$mod</kbd> + <kbd>d</kbd>                                     | Open application launcher                      |
+| <kbd>$mod</kbd> + <kbd>c</kbd>                                     | Kill focused window                            |
+| <kbd>$mod</kbd> + <kbd>right/left/up/down</kbd>                    | Change focus                                   |
+| <kbd>$mod</kbd> + <kbd>Shift</kbd> + <kbd>right/left/up/down</kbd> | Move focused window in direction               |
+| <kbd>$mod</kbd> + <kbd>1/2/3...</kbd>                              | Switch workspace                               |
+| <kbd>$mod</kbd> + <kbd>Shift</kbd> + <kbd>1/2/3...</kbd>           | Move focused window to the specified workspace |
+| <kbd>$mod</kbd> + <kbd>space</kbd>                                 | Change between focus and floating mode         |
+| <kbd>$mod</kbd> + <kbd>Shift</kbd> + <kbd>r</kbd>                  | Restart i3                                     |
+| <kbd>$mod</kbd> + <kbd>Shift</kbd> + <kbd>c</kbd>                  | Reload config i3                               |
+| <kbd>$mod</kbd> + <kbd>q</kbd>                                     | Quit i3                                        |
+
 ## Minimal configuration file
 
 ```
@@ -295,12 +362,14 @@ exec_always hsetroot -solid "#F1CCBB"
 
 {{< /expand >}}
 
+## 6. Some tricks and tips
+
 - A trick with terminal emulator:
   - Disable scrollbar and menubar.
 
-{{< figure src="photos/getting-started-tiling-wm-part-1/terminal-trick-1.png" >}}
+  {{< figure src="photos/getting-started-tiling-wm-part-1/terminal-trick-1.png" >}}
 
-{{< figure src="photos/getting-started-tiling-wm-part-1/terminal-trick-2.png" >}}
+  {{< figure src="photos/getting-started-tiling-wm-part-1/terminal-trick-2.png" >}}
 
   - Configure padding for vte-terminal.
 
@@ -317,8 +386,9 @@ EOT
 
 {{< figure src="photos/getting-started-tiling-wm-part-1/i3-gaps-config.png" >}}
 
-## 4. References
+## 7. References
 
 1. https://www.lifewire.com/window-manager-vs-the-desktop-environment-in-linux-4588338
 2. https://en.wikipedia.org/wiki/X_window_manager
 3. https://i3wm.org/docs
+4. https://wiki.archlinux.org/title/i3
