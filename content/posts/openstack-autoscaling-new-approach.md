@@ -65,7 +65,7 @@ The _another service_ is [Prometheus stack](https://prometheus.io/). The questio
 
 **The ideal architecture**
 
-```
+<pre>
                                                +--------------------------------------------------+
                                                |                                                  |
                                                |     +-----------------+  +-----------------+     |
@@ -88,7 +88,7 @@ The _another service_ is [Prometheus stack](https://prometheus.io/). The questio
                                                |                                                  |
                                                |                     Heat Stack                   |
                                                +--------------------------------------------------+
-```
+</pre>
 
 - Prometheus server scrapes metrics from exporters that launch inside Instance.
 - Prometheus server evaluates metrics with pre-defined rules.
@@ -107,7 +107,7 @@ We need a 3rd service to solve these problems - `Faythe does some magic`.
 
 **The reality architecture**
 
-```
+<pre>
                                               ++-------------------------------------------------+
                                                |                                                  +
                                                |     +-----------------+  +-----------------+     |
@@ -137,7 +137,7 @@ We need a 3rd service to solve these problems - `Faythe does some magic`.
 |                       |       Send actual scale request
 +-----------------------+
 
-```
+</pre>
 
 > NOTE: The stack leverages OpenStack instance metadata and Prometheus labels.
 
