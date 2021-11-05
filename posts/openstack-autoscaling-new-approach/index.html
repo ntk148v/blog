@@ -13,13 +13,13 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ntk148v.github.io/blog/posts/openstack-autoscaling-new-approach/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2019-08-19T21:19:38+07:00">
-<meta property="article:modified_time" content="2020-04-28T15:18:38+07:00"><meta property="og:site_name" content="/home/kiennt">
+<meta property="article:modified_time" content="2021-11-05T15:30:00+07:00"><meta property="og:site_name" content="/home/kiennt">
 <title>Openstack Autoscaling New Approach | /home/kiennt</title>
 <link rel=manifest href=/blog/manifest.json>
 <link rel=icon href=/blog/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/blog/book.min.d69f323ec95ccf635b076a124afa79b220b9c8fea4cb150f9ef10356398a9920.css integrity="sha256-1p8yPslcz2NbB2oSSvp5siC5yP6kyxUPnvEDVjmKmSA=" crossorigin=anonymous>
 <script defer src=/blog/flexsearch.min.js></script>
-<script defer src=/blog/en.search.min.4fd27518c97668549a6294870956c95a9ae8db9adb4b5ccbd39d5fddfeb303ec.js integrity="sha256-T9J1GMl2aFSaYpSHCVbJWpro25rbS1zL051f3f6zA+w=" crossorigin=anonymous></script>
+<script defer src=/blog/en.search.min.93d0ee9b635f9b70e6a01d934e0a8aef5db8cbfe4bde8df555e29a1046ed8b1d.js integrity="sha256-k9Dum2Nfm3DmoB2TTgqK7124y/5L3o31VeKaEEbtix0=" crossorigin=anonymous></script>
 <script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css>
@@ -164,13 +164,14 @@
 <a class=anchor href=#22-the-implementation>#</a>
 </h3>
 <p><strong>The ideal architecture</strong></p>
-<pre tabindex=0><code>                                               +--------------------------------------------------+
+<pre>
+                                               +--------------------------------------------------+
                                                |                                                  |
                                                |     +-----------------+  +-----------------+     |
 +---------------------+                        |     |   Instance 1    |  |   Instance 2    |     |
 |                     |                        |     |                 |  |                 |     |
 |                     |            Scrape Metrics    |  +-----------+  |  |  +-----------+  |     |
-|  Prometheus server  &lt;------------------------+--------+Exporter(s)|  |  |  |Exporter(s)|  |     |
+|  Prometheus server  <------------------------+--------+Exporter(s)|  |  |  |Exporter(s)|  |     |
 |                     |                        |     |  +-----------+  |  |  +-----------+  |     |
 |                     |                        |     +-----------------+  +-----------------+     |
 +----------+----------+                        |     +--------------------------------------+     |
@@ -180,13 +181,14 @@
            |                                   |                                                  |
 +----------v------------+                      |     +--------------------------------------+     |
 |                       |         Send scale request |                                      |     |
-|Prometheus Alertmanager+----------------------+-----&gt;          Scaling Policy              |     |
+|Prometheus Alertmanager+----------------------+----->          Scaling Policy              |     |
 |                       |                      |     |                                      |     |
 +-----------------------+                      |     +--------------------------------------+     |
                                                |                                                  |
                                                |                     Heat Stack                   |
                                                +--------------------------------------------------+
-</code></pre><ul>
+</pre>
+<ul>
 <li>Prometheus server scrapes metrics from exporters that launch inside Instance.</li>
 <li>Prometheus server evaluates metrics with pre-defined rules.</li>
 <li>Prometheus server fires alert to Prometheus alertmanager.</li>
@@ -201,13 +203,14 @@
 <p>We need a 3rd service to solve these problems - <code>Faythe does some magic</code>.</p>
 <center><iframe src=https://giphy.com/embed/12NUbkX6p4xOO4 width=480 height=440 frameborder=0 class=giphy-embed allowfullscreen></iframe><p><a href=https://giphy.com/gifs/shia-labeouf-12NUbkX6p4xOO4>via GIPHY</a></p></center>
 <p><strong>The reality architecture</strong></p>
-<pre tabindex=0><code>                                              ++-------------------------------------------------+
+<pre>
+                                              ++-------------------------------------------------+
                                                |                                                  +
                                                |     +-----------------+  +-----------------+     |
 +---------------------+                        |     |   Instance 1    |  |   Instance 2    |     |
 |                     |                        +     |                 |  |                 |     |
 |                     |            Scrape Metrics    |  +-----------+  |  |  +-----------+  |     |
-|  Prometheus server  &lt;------------------------+--------+Exporter(s)|  |  |  |Exporter(s)|  |     |
+|  Prometheus server  <------------------------+--------+Exporter(s)|  |  |  |Exporter(s)|  |     |
 |                     |                        |     |  +-----------+  |  |  +-----------+  |     |
 |                     |                        |     +-----------------+  +-----------------+     |
 +----------+----------+                        |     +--------------------------------------+     |
@@ -230,7 +233,8 @@
 |                       |       Send actual scale request
 +-----------------------+
 
-</code></pre><blockquote>
+</pre>
+<blockquote>
 <p>NOTE: The stack leverages OpenStack instance metadata and Prometheus labels.</p>
 </blockquote>
 <ul>
@@ -395,9 +399,9 @@
 </article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
-<div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/c5f6f38139a5ed65208fc4ecdde8eb810a6a2ecc title="Last modified by Kien Nguyen | Apr 28, 2020" target=_blank rel=noopener>
+<div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/4a2cdf393549afb9851b13a15c09d0fe8c54e6c4 title="Last modified by Kien Nguyen | Nov 05, 2021" target=_blank rel=noopener>
 <img src=/blog/svg/calendar.svg class=book-icon alt=Calendar>
-<span>Apr 28, 2020</span>
+<span>Nov 05, 2021</span>
 </a>
 </div>
 <div>
