@@ -22,8 +22,21 @@ BookCommitPath = 'commit'
 codeFences = true
 noClasses = false
 
+[markup.tableOfContents]
+endLevel = 4
+ordered = false
+startLevel = 2
+
 [markup.highlight]
-style = "github"
+codeFences = true
+guessSyntax = false
+hl_Lines = ""
+lineNoStart = 1
+lineNos = true
+lineNumbersInTable = false
+noClasses = true
+style = "dracula"
+tabWidth = 4
 
 [markup.goldmark.renderer]
 unsafe = true
