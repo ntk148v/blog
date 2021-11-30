@@ -35,7 +35,7 @@ lineNoStart = 1
 lineNos = true
 lineNumbersInTable = false
 noClasses = true
-style = "dracula"
+style = "algol_nu"
 tabWidth = 4
 
 [markup.goldmark.renderer]
