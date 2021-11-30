@@ -97,3 +97,10 @@
     }
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  @import 'syntax-dark'
+}
+@media (prefers-color-scheme: light) {
+  @import 'syntax-light'
+}

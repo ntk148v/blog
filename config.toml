@@ -28,14 +28,13 @@ ordered = false
 startLevel = 2
 
 [markup.highlight]
+noClasses = false
 codeFences = true
 guessSyntax = false
 hl_Lines = ""
 lineNoStart = 1
 lineNos = true
 lineNumbersInTable = false
-noClasses = true
-style = "algol_nu"
 tabWidth = 4
 
 [markup.goldmark.renderer]
