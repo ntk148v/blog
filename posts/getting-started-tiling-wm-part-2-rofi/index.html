@@ -9,13 +9,13 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-2-rofi/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2021-04-19T10:10:21+07:00">
-<meta property="article:modified_time" content="2021-04-19T10:50:52+07:00"><meta property="og:site_name" content="/home/kiennt">
+<meta property="article:modified_time" content="2021-11-30T15:01:30+07:00"><meta property="og:site_name" content="/home/kiennt">
 <title>Getting Started with Tiling WM [Part 2] - Rofi | /home/kiennt</title>
 <link rel=manifest href=/blog/manifest.json>
 <link rel=icon href=/blog/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/blog/book.min.d69f323ec95ccf635b076a124afa79b220b9c8fea4cb150f9ef10356398a9920.css integrity="sha256-1p8yPslcz2NbB2oSSvp5siC5yP6kyxUPnvEDVjmKmSA=" crossorigin=anonymous>
 <script defer src=/blog/flexsearch.min.js></script>
-<script defer src=/blog/en.search.min.0d46886fee6ece405ec9aa85f6b8b11fd9a08976a5d8ddc6a7f783e1e8a23f1e.js integrity="sha256-DUaIb+5uzkBeyaqF9rixH9mgiXal2N3Gp/eD4eiiPx4=" crossorigin=anonymous></script>
+<script defer src=/blog/en.search.min.c9e4ae930cc8ac80d1badea9dc4abfee0c5aecf56c4cd15c163a910a5725169a.js integrity="sha256-yeSukwzIrIDRut6p3Eq/7gxa7PVsTNFcFjqRClclFpo=" crossorigin=anonymous></script>
 <script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css>
@@ -111,25 +111,18 @@ In the <a href=https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-pa
 <ul>
 <li>Installing <code>rofi</code> is quite easy.</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>sudo apt install rofi -y
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>sudo apt install rofi -y
 </code></pre></div><ul>
 <li>Run it for the first time.</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>rofi -lines <span style=color:#bd93f9>12</span> -padding <span style=color:#bd93f9>18</span> -width <span style=color:#bd93f9>60</span> -location <span style=color:#bd93f9>0</span> -show drun -sidebar-mode -columns <span style=color:#bd93f9>3</span> -font <span style=color:#f1fa8c>&#39;DejaVu Sans 8&#39;</span>
-</code></pre></div>
-<div class=book-expand>
-<label>
-<div class="book-expand-head flex justify-between">
-<span>Expand</span>
-<span>↕</span>
-</div>
-<input type=checkbox class=hidden>
-<div class="book-expand-content markdown-inner">
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>       -show mode
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>rofi -lines 12 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font <span style=color:#666;font-style:italic>&#39;DejaVu Sans 8&#39;</span>
+</code></pre></div><details><summary></summary>
+<div class=markdown-inner>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>       -show mode
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>       Open  rofi in a certain mode. Available modes are window, run, drun, ssh, combi. The
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>       special argument keys can be used to open a searchable list of supported  key  bind‐
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>       ings <span style=color:#ff79c6>(</span>see KEY BINDINGS<span style=color:#ff79c6>)</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>       ings (see KEY BINDINGS)
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>       To show the run-dialog:
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>
@@ -139,38 +132,37 @@ In the <a href=https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-pa
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>       Maximum number of lines to show before scrolling.
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>           rofi -lines <span style=color:#bd93f9>25</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>           rofi -lines 25
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>       Default: <span style=color:#bd93f9>15</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>       Default: 15
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span>       -location
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>       Specify  where  the window should be located. The numbers map to the following loca‐
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span>       tions on screen:
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>             <span style=color:#bd93f9>1</span> <span style=color:#bd93f9>2</span> <span style=color:#bd93f9>3</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span>             <span style=color:#bd93f9>8</span> <span style=color:#bd93f9>0</span> <span style=color:#bd93f9>4</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>             <span style=color:#bd93f9>7</span> <span style=color:#bd93f9>6</span> <span style=color:#bd93f9>5</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>             1 2 3
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span>             8 0 4
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>             7 6 5
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span>       Default: <span style=color:#bd93f9>0</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span>       Default: 0
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span>       -padding
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31</span>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32</span>       Define the inner margin of the window.
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34</span>       Default: <span style=color:#bd93f9>5</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34</span>       Default: 5
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35</span>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36</span>       -sidebar-mode
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37</span>
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38</span>       Open in sidebar-mode. In this mode a list of all enabled modes is shown at the  bot‐
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39</span>       tom. <span style=color:#ff79c6>(</span>See -modi option<span style=color:#ff79c6>)</span> To show sidebar, use:
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39</span>       tom. (See -modi option) To show sidebar, use:
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41</span>           rofi -show run -sidebar-mode -lines <span style=color:#bd93f9>0</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41</span>           rofi -show run -sidebar-mode -lines 0
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42</span>
 </code></pre></div>
 </div>
-</label>
-</div>
+</details>
 <link rel=stylesheet href=https://ntk148v.github.io/blog/css/hugo-easy-gallery.css>
 <div class=box>
 <figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
@@ -207,7 +199,7 @@ In the <a href=https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-pa
 </li>
 <li>We will use configuration file.</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>mkdir -p ~/.config/rofi/themes
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>mkdir -p ~/.config/rofi/themes
 <span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>touch ~/.config/rofi/themes/onedark.theme
 </code></pre></div><ul>
 <li>Copy the follow content into <code>~/.config/rofi/themes/onedark.theme</code>:</li>
@@ -276,7 +268,7 @@ entry {
 </code></pre><ul>
 <li>Run it and you can see the magic!</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>rofi -theme ~/.config/rofi/themes/onedark.theme -show drun
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>rofi -theme ~/.config/rofi/themes/onedark.theme -show drun
 </code></pre></div>
 <div class=box>
 <figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
@@ -293,9 +285,9 @@ entry {
 </code></pre></article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
-<div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/1ec8c1eed2d05d73ef00e7d588e831fcf917c428 title="Last modified by Kien Nguyen | Apr 19, 2021" target=_blank rel=noopener>
+<div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/7a63a92c304543f07c428b957b40105447feaa72 title="Last modified by Kien Nguyen | Nov 30, 2021" target=_blank rel=noopener>
 <img src=/blog/svg/calendar.svg class=book-icon alt=Calendar>
-<span>Apr 19, 2021</span>
+<span>Nov 30, 2021</span>
 </a>
 </div>
 <div>
