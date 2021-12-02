@@ -1,12 +1,5 @@
 ---
-name: "Kien Nguyen-Tuan"
-contact:
-  twitter: "@kiennt26"
-  facebook: "kiennt2609"
-  github: "ntk148v"
-  email: "kiennt2609@gmail.com"
-  telegram: "kiennt26"
-website: "https://ntk148v.github.io/blog/"
+title: "About me"
 ---
 
 ## Brief
