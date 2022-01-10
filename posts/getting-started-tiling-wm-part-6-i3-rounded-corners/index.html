@@ -1,0 +1,195 @@
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="According to Reddis post and i3-gaps issue, it seems like a lot of people would like this. But Airblade - i3-gaps maintainer doesn&rsquo;t like it. But nevermind, we still have two ways to achieve it.
+1. Rounded i3-gaps #  Resloved have an awesome fork to implement rounded corners. I fork it again to keep it up-to-date with the upstream i3-gaps. You can check it here.
+ Install i3-gaps.  1# Dependencies 2sudo apt install git libxcb1-dev libxcb-keysyms1-dev libpango1.">
+<meta name=theme-color content="#FFFFFF">
+<meta name=color-scheme content="light dark"><meta property="og:title" content="Getting Started Tiling Wm [Part 6] I3 Rounded Corners">
+<meta property="og:description" content="According to Reddis post and i3-gaps issue, it seems like a lot of people would like this. But Airblade - i3-gaps maintainer doesn&rsquo;t like it. But nevermind, we still have two ways to achieve it.
+1. Rounded i3-gaps #  Resloved have an awesome fork to implement rounded corners. I fork it again to keep it up-to-date with the upstream i3-gaps. You can check it here.
+ Install i3-gaps.  1# Dependencies 2sudo apt install git libxcb1-dev libxcb-keysyms1-dev libpango1.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-6-i3-rounded-corners/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-01-10T13:45:01+07:00">
+<meta property="article:modified_time" content="2022-01-10T14:31:39+07:00"><meta property="og:site_name" content="/home/kiennt">
+<title>Getting Started Tiling Wm [Part 6] I3 Rounded Corners | /home/kiennt</title>
+<link rel=manifest href=/blog/manifest.json>
+<link rel=icon href=/blog/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/blog/book.min.87e3b3b23039551af0ebb57bf5364cb1c30c772eaa251636d013de4697ccec43.css integrity="sha256-h+OzsjA5VRrw67V79TZMscMMdy6qJRY20BPeRpfM7EM=" crossorigin=anonymous>
+<script defer src=/blog/flexsearch.min.js></script>
+<script defer src=/blog/en.search.min.67f8e34fd4f00d6f64dfdbb746de5ce334241e5b1ebfe6d93f7bc3fd3871c128.js integrity="sha256-Z/jjT9TwDW9k39u3Rt5c4zQkHlsev+bZP3vD/ThxwSg=" crossorigin=anonymous></script>
+<script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css>
+<script async defer src=https://buttons.github.io/buttons.js></script>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a class="flex align-center" href=/blog/><span>/home/kiennt</span>
+</a>
+</h2>
+<div class=book-search>
+<input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/>
+<div class="book-search-spinner hidden"></div>
+<ul id=book-search-results></ul>
+</div>
+<ul>
+<li><a href=/blog/about/>About</a></li>
+<li><a href=/blog/posts/>Posts</a></li>
+<li><a href=https://ntk148v.github.io/notes>Notes</a></li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/blog/svg/menu.svg class=book-icon alt=Menu>
+</label>
+<strong>Getting Started Tiling Wm [Part 6] I3 Rounded Corners</strong>
+<label for=toc-control>
+<img src=/blog/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#1-rounded-i3-gaps>1. Rounded i3-gaps</a></li>
+<li><a href=#2-picom>2. picom</a></li>
+</ul>
+</nav>
+</aside>
+</header>
+<article class=markdown>
+<h1>
+<a href=/blog/posts/getting-started-tiling-wm-part-6-i3-rounded-corners/>Getting Started Tiling Wm [Part 6] I3 Rounded Corners</a>
+</h1>
+<h5>Jan 10, 2022</h5>
+<div>
+<a href=/blog/tags/tech/>#tech</a>
+<a href=/blog/tags/tiling-vm/>#tiling-vm</a>
+<a href=/blog/tags/linux/>#linux</a>
+</div>
+<p>According to <a href=https://www.reddit.com/r/unixporn/comments/7h0rm0/what_would_you_want_in_a_wm/>Reddis post</a> and <a href=https://github.com/Airblader/i3/issues/167>i3-gaps issue</a>, it seems like a lot of people would like this. But Airblade - i3-gaps maintainer <a href=https://github.com/Airblader/i3/issues/167#issuecomment-328562433>doesn&rsquo;t like it</a>. But nevermind, we still have two ways to achieve it.</p>
+<h2 id=1-rounded-i3-gaps>
+1. Rounded i3-gaps
+<a class=anchor href=#1-rounded-i3-gaps>#</a>
+</h2>
+<p><a href=https://github.com/resloved>Resloved</a> have an awesome <a href=https://github.com/resloved/i3>fork</a> to implement rounded corners. I fork it again to keep it up-to-date with the upstream i3-gaps. You can check it <a href=https://github.com/ntk148v/i3>here</a>.</p>
+<ul>
+<li>Install i3-gaps.</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=ln> 1</span><span class=c1># Dependencies</span>
+<span class=ln> 2</span>sudo apt install git libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev <span class=se>\
+</span><span class=ln> 3</span><span class=se></span>    libxcb-util0-dev libxcb-icccm4-dev libyajl-dev <span class=se>\
+</span><span class=ln> 4</span><span class=se></span>    libstartup-notification0-dev libxcb-randr0-dev <span class=se>\
+</span><span class=ln> 5</span><span class=se></span>    libev-dev libxcb-cursor-dev libxcb-xinerama0-dev <span class=se>\
+</span><span class=ln> 6</span><span class=se></span>    libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev <span class=se>\
+</span><span class=ln> 7</span><span class=se></span>    autoconf libxcb-xrm0 libxcb-xrm-dev automake i3status <span class=se>\
+</span><span class=ln> 8</span><span class=se></span>    ninja-build meson libxcb-shape0-dev build-essential -y
+<span class=ln> 9</span>git clone https://github.com/ntk148v/i3.git
+<span class=ln>10</span><span class=nb>cd</span> i3/
+<span class=ln>11</span><span class=c1># Compile</span>
+<span class=ln>12</span>mkdir -p build <span class=o>&amp;&amp;</span> <span class=nb>cd</span> build
+<span class=ln>13</span>meson ..
+<span class=ln>14</span>ninja
+<span class=ln>15</span>sudo ninja install
+</code></pre></div><ul>
+<li>Configure rounded corners by adding this to your config.</li>
+</ul>
+<pre tabindex=0><code>border_radius 10
+</code></pre><ul>
+<li>Result, but you can see that these corners look so jagged (check out this <a href=https://github.com/Airblader/i3/issues/167#issuecomment-485263770>comment</a>).</li>
+</ul>
+<link rel=stylesheet href=https://ntk148v.github.io/blog/css/hugo-easy-gallery.css>
+<div class=box>
+<figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
+<div class=img>
+<img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-6/rounded-corners-1.png>
+</div>
+<a href=photos/getting-started-tiling-wm-part-6/rounded-corners-1.png itemprop=contentUrl></a>
+</figure>
+</div>
+<div class=box>
+<figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
+<div class=img>
+<img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-6/rounded-corners-4.png>
+</div>
+<a href=photos/getting-started-tiling-wm-part-6/rounded-corners-4.png itemprop=contentUrl></a>
+</figure>
+</div>
+<h2 id=2-picom>
+2. picom
+<a class=anchor href=#2-picom>#</a>
+</h2>
+<ul>
+<li>You can also achieve rounded corners by using <a href=https://github.com/yshui/picom>picom</a>.</li>
+<li>Install picom.</li>
+<li>Configure rounded corners by changing <code>corner_radius</code> value.</li>
+</ul>
+<pre tabindex=0><code># Path ~/.config/picom.conf
+corner_radius = 10;
+</code></pre><ul>
+<li>Result looks much smoother.</li>
+</ul>
+<div class=box>
+<figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
+<div class=img>
+<img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-6/rounded-corners-2.png>
+</div>
+<a href=photos/getting-started-tiling-wm-part-6/rounded-corners-2.png itemprop=contentUrl></a>
+</figure>
+</div>
+<div class=box>
+<figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
+<div class=img>
+<img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-6/rounded-corners-3.png>
+</div>
+<a href=photos/getting-started-tiling-wm-part-6/rounded-corners-3.png itemprop=contentUrl></a>
+</figure>
+</div>
+</article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+<div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/a008075e54083fd5085e365742abc3a8c01c2a6a title="Last modified by Kien Nguyen | Jan 10, 2022" target=_blank rel=noopener>
+<img src=/blog/svg/calendar.svg class=book-icon alt=Calendar>
+<span>Jan 10, 2022</span>
+</a>
+</div>
+<div>
+<a class="flex align-center" href=https://github.com/ntk148v/blog/edit/master/content/posts/getting-started-tiling-wm-part-6-i3-rounded-corners.md target=_blank rel=noopener>
+<img src=/blog/svg/edit.svg class=book-icon alt=Edit>
+<span>Edit this page</span>
+</a>
+</div>
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments><section class="article discussion">
+<script src=https://utteranc.es/client.js repo=ntk148v/blog issue-term=pathname theme=github-light crossorigin=anonymous async></script>
+</section></div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#1-rounded-i3-gaps>1. Rounded i3-gaps</a></li>
+<li><a href=#2-picom>2. picom</a></li>
+</ul>
+</nav>
+</div>
+</aside>
+</main>
+</body>
+</html>
