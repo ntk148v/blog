@@ -11,7 +11,7 @@ draft = false
 
 ```bash
 # Rename files with suffix .yaml to yml
-for f in *.yaml; do mv -- "$f" "${f%.yaml}.yml"
+for f in *.yaml; do mv -- "$f" "${f%.yaml}.yml" done
 ```
 
 - Rename multiple files with `rename`.
