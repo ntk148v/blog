@@ -2,20 +2,20 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="Rename a single file with mv. Just a basic thing. Rename multiple files with mv.  1# Rename files with suffix .yaml to yml 2for f in *.yaml; do mv -- &#34;$f&#34; &#34;${f%.yaml}.yml&#34;  Rename multiple files with rename.  1# Install rename command 2# Ubuntu/Debian-derived distros 3sudo apt install rename 4# RedHat-derived distros 5sudo yum install prename 6# The follow examples are performed in Ubuntu/Debian-derived distros 7rename 's/.yaml/.yml/' *.">
+<meta name=description content="Rename a single file with mv. Just a basic thing. Rename multiple files with mv.  1# Rename files with suffix .yaml to yml 2for f in *.yaml; do mv -- &#34;$f&#34; &#34;${f%.yaml}.yml&#34; done  Rename multiple files with rename.  1# Install rename command 2# Ubuntu/Debian-derived distros 3sudo apt install rename 4# RedHat-derived distros 5sudo yum install prename 6# The follow examples are performed in Ubuntu/Debian-derived distros 7rename 's/.">
 <meta name=theme-color content="#FFFFFF">
 <meta name=color-scheme content="light dark"><meta property="og:title" content="Rename Files in Linux">
-<meta property="og:description" content="Rename a single file with mv. Just a basic thing. Rename multiple files with mv.  1# Rename files with suffix .yaml to yml 2for f in *.yaml; do mv -- &#34;$f&#34; &#34;${f%.yaml}.yml&#34;  Rename multiple files with rename.  1# Install rename command 2# Ubuntu/Debian-derived distros 3sudo apt install rename 4# RedHat-derived distros 5sudo yum install prename 6# The follow examples are performed in Ubuntu/Debian-derived distros 7rename 's/.yaml/.yml/' *.">
+<meta property="og:description" content="Rename a single file with mv. Just a basic thing. Rename multiple files with mv.  1# Rename files with suffix .yaml to yml 2for f in *.yaml; do mv -- &#34;$f&#34; &#34;${f%.yaml}.yml&#34; done  Rename multiple files with rename.  1# Install rename command 2# Ubuntu/Debian-derived distros 3sudo apt install rename 4# RedHat-derived distros 5sudo yum install prename 6# The follow examples are performed in Ubuntu/Debian-derived distros 7rename 's/.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ntk148v.github.io/blog/posts/rename-files-in-linux/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2021-12-16T10:22:05+07:00">
-<meta property="article:modified_time" content="2021-12-16T10:38:30+07:00"><meta property="og:site_name" content="/home/kiennt">
+<meta property="article:modified_time" content="2022-01-24T15:59:31+07:00"><meta property="og:site_name" content="/home/kiennt">
 <title>Rename Files in Linux | /home/kiennt</title>
 <link rel=manifest href=/blog/manifest.json>
 <link rel=icon href=/blog/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/blog/book.min.af53ed4972121f7d02a399e742d2a002eed9d146afb7802ddc0e5cd7ecf13ffc.css integrity="sha256-r1PtSXISH30Co5nnQtKgAu7Z0Uavt4At3A5c1+zxP/w=" crossorigin=anonymous>
 <script defer src=/blog/flexsearch.min.js></script>
-<script defer src=/blog/en.search.min.67f8e34fd4f00d6f64dfdbb746de5ce334241e5b1ebfe6d93f7bc3fd3871c128.js integrity="sha256-Z/jjT9TwDW9k39u3Rt5c4zQkHlsev+bZP3vD/ThxwSg=" crossorigin=anonymous></script>
+<script defer src=/blog/en.search.min.8be5a9eaea48d64bbe6bd651e99a356e668957f4a804d9fd32cb5d0aa90705cf.js integrity="sha256-i+Wp6upI1ku+a9ZR6Zo1bmaJV/SoBNn9MstdCqkHBc8=" crossorigin=anonymous></script>
 <script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css>
@@ -75,7 +75,7 @@
 <li>Rename multiple files with <code>mv</code>.</li>
 </ul>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=ln>1</span><span class=c1># Rename files with suffix .yaml to yml</span>
-<span class=ln>2</span><span class=k>for</span> f in *.yaml<span class=p>;</span> <span class=k>do</span> mv -- <span class=s2>&#34;</span><span class=nv>$f</span><span class=s2>&#34;</span> <span class=s2>&#34;</span><span class=si>${</span><span class=nv>f</span><span class=p>%.yaml</span><span class=si>}</span><span class=s2>.yml&#34;</span>
+<span class=ln>2</span><span class=k>for</span> f in *.yaml<span class=p>;</span> <span class=k>do</span> mv -- <span class=s2>&#34;</span><span class=nv>$f</span><span class=s2>&#34;</span> <span class=s2>&#34;</span><span class=si>${</span><span class=nv>f</span><span class=p>%.yaml</span><span class=si>}</span><span class=s2>.yml&#34;</span> <span class=k>done</span>
 </code></pre></div><ul>
 <li>Rename multiple files with <code>rename</code>.</li>
 </ul>
@@ -104,9 +104,9 @@
 </code></pre></div></article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
-<div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/51f49e78178875b5c9c5cade8e29d076e43c814a title="Last modified by Kien Nguyen | Dec 16, 2021" target=_blank rel=noopener>
+<div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/4f7228c6dcde63ae273764bca6b3be420bb296a1 title="Last modified by Kien Nguyen-Tuan | Jan 24, 2022" target=_blank rel=noopener>
 <img src=/blog/svg/calendar.svg class=book-icon alt=Calendar>
-<span>Dec 16, 2021</span>
+<span>Jan 24, 2022</span>
 </a>
 </div>
 <div>
