@@ -28,7 +28,8 @@ ordered = false
 startLevel = 2
 
 [markup.highlight]
-noClasses = false
+style = 'monokailight'
+noClasses = true
 codeFences = true
 guessSyntax = false
 hl_Lines = ""
