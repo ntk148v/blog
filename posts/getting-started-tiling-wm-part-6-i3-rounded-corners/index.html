@@ -19,7 +19,7 @@
 <link rel=icon href=/blog/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/blog/book.min.af53ed4972121f7d02a399e742d2a002eed9d146afb7802ddc0e5cd7ecf13ffc.css integrity="sha256-r1PtSXISH30Co5nnQtKgAu7Z0Uavt4At3A5c1+zxP/w=" crossorigin=anonymous>
 <script defer src=/blog/flexsearch.min.js></script>
-<script defer src=/blog/en.search.min.8be5a9eaea48d64bbe6bd651e99a356e668957f4a804d9fd32cb5d0aa90705cf.js integrity="sha256-i+Wp6upI1ku+a9ZR6Zo1bmaJV/SoBNn9MstdCqkHBc8=" crossorigin=anonymous></script>
+<script defer src=/blog/en.search.min.8a5cb3d08e0182690aa877c0a6c012a1fa3712868ce05a49295f0f4b810f5f65.js integrity="sha256-ilyz0I4BgmkKqHfApsASofo3EoaM4FpJKV8PS4EPX2U=" crossorigin=anonymous></script>
 <script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css>
@@ -89,21 +89,21 @@
 <ul>
 <li>Install i3-gaps.</li>
 </ul>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=ln> 1</span><span class=c1># Dependencies</span>
-<span class=ln> 2</span>sudo apt install git libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev <span class=se>\
-</span><span class=ln> 3</span><span class=se></span>    libxcb-util0-dev libxcb-icccm4-dev libyajl-dev <span class=se>\
-</span><span class=ln> 4</span><span class=se></span>    libstartup-notification0-dev libxcb-randr0-dev <span class=se>\
-</span><span class=ln> 5</span><span class=se></span>    libev-dev libxcb-cursor-dev libxcb-xinerama0-dev <span class=se>\
-</span><span class=ln> 6</span><span class=se></span>    libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev <span class=se>\
-</span><span class=ln> 7</span><span class=se></span>    autoconf libxcb-xrm0 libxcb-xrm-dev automake i3status <span class=se>\
-</span><span class=ln> 8</span><span class=se></span>    ninja-build meson libxcb-shape0-dev build-essential -y
-<span class=ln> 9</span>git clone https://github.com/ntk148v/i3.git
-<span class=ln>10</span><span class=nb>cd</span> i3/
-<span class=ln>11</span><span class=c1># Compile</span>
-<span class=ln>12</span>mkdir -p build <span class=o>&amp;&amp;</span> <span class=nb>cd</span> build
-<span class=ln>13</span>meson ..
-<span class=ln>14</span>ninja
-<span class=ln>15</span>sudo ninja install
+<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#75715e># Dependencies</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>sudo apt install git libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev <span style=color:#8045ff>\
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#8045ff></span>    libxcb-util0-dev libxcb-icccm4-dev libyajl-dev <span style=color:#8045ff>\
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#8045ff></span>    libstartup-notification0-dev libxcb-randr0-dev <span style=color:#8045ff>\
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#8045ff></span>    libev-dev libxcb-cursor-dev libxcb-xinerama0-dev <span style=color:#8045ff>\
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#8045ff></span>    libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev <span style=color:#8045ff>\
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#8045ff></span>    autoconf libxcb-xrm0 libxcb-xrm-dev automake i3status <span style=color:#8045ff>\
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#8045ff></span>    ninja-build meson libxcb-shape0-dev build-essential -y
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>git clone https://github.com/ntk148v/i3.git
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#111>cd</span> i3/
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#75715e># Compile</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>mkdir -p build <span style=color:#f92672>&amp;&amp;</span> <span style=color:#111>cd</span> build
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>meson ..
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>ninja
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>sudo ninja install
 </code></pre></div><ul>
 <li>Configure rounded corners by adding this to your config.</li>
 </ul>

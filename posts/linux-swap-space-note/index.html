@@ -17,7 +17,7 @@
 <link rel=icon href=/blog/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/blog/book.min.af53ed4972121f7d02a399e742d2a002eed9d146afb7802ddc0e5cd7ecf13ffc.css integrity="sha256-r1PtSXISH30Co5nnQtKgAu7Z0Uavt4At3A5c1+zxP/w=" crossorigin=anonymous>
 <script defer src=/blog/flexsearch.min.js></script>
-<script defer src=/blog/en.search.min.8be5a9eaea48d64bbe6bd651e99a356e668957f4a804d9fd32cb5d0aa90705cf.js integrity="sha256-i+Wp6upI1ku+a9ZR6Zo1bmaJV/SoBNn9MstdCqkHBc8=" crossorigin=anonymous></script>
+<script defer src=/blog/en.search.min.8a5cb3d08e0182690aa877c0a6c012a1fa3712868ce05a49295f0f4b810f5f65.js integrity="sha256-ilyz0I4BgmkKqHfApsASofo3EoaM4FpJKV8PS4EPX2U=" crossorigin=anonymous></script>
 <script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css>
@@ -171,12 +171,12 @@
 </code></pre></li>
 <li>
 <p>Useful commands:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=ln>1</span><span class=c1># Check the current value</span>
-<span class=ln>2</span>sysctl vm.swappiness
-<span class=ln>3</span><span class=c1># Adjust the value</span>
-<span class=ln>4</span><span class=nb>echo</span> <span class=m>10</span> &gt; /proc/sys/vm/swappiness
-<span class=ln>5</span>sysctl -w vm.swappiness<span class=o>=</span><span class=m>10</span>
-<span class=ln>6</span><span class=nb>echo</span> <span class=s2>&#34;vm.swappiness = 10&#34;</span> &gt;&gt; /etc/sysctl.conf
+<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#75715e># Check the current value</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>sysctl vm.swappiness
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#75715e># Adjust the value</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span style=color:#111>echo</span> <span style=color:#ae81ff>10</span> &gt; /proc/sys/vm/swappiness
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>sysctl -w vm.swappiness<span style=color:#f92672>=</span><span style=color:#ae81ff>10</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span><span style=color:#111>echo</span> <span style=color:#d88200>&#34;vm.swappiness = 10&#34;</span> &gt;&gt; /etc/sysctl.conf
 </code></pre></div></li>
 <li>
 <p>On SSDs, swapping out anonymous pages and reclaiming file pages are essentially equivalent in terms of performance/latency. On older spinning disks, swap reads are slower due to random reads, so a lower vm.swappiness setting makes sense there.</p>

@@ -15,7 +15,7 @@
 <link rel=icon href=/blog/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/blog/book.min.af53ed4972121f7d02a399e742d2a002eed9d146afb7802ddc0e5cd7ecf13ffc.css integrity="sha256-r1PtSXISH30Co5nnQtKgAu7Z0Uavt4At3A5c1+zxP/w=" crossorigin=anonymous>
 <script defer src=/blog/flexsearch.min.js></script>
-<script defer src=/blog/en.search.min.8be5a9eaea48d64bbe6bd651e99a356e668957f4a804d9fd32cb5d0aa90705cf.js integrity="sha256-i+Wp6upI1ku+a9ZR6Zo1bmaJV/SoBNn9MstdCqkHBc8=" crossorigin=anonymous></script>
+<script defer src=/blog/en.search.min.8a5cb3d08e0182690aa877c0a6c012a1fa3712868ce05a49295f0f4b810f5f65.js integrity="sha256-ilyz0I4BgmkKqHfApsASofo3EoaM4FpJKV8PS4EPX2U=" crossorigin=anonymous></script>
 <script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css>
@@ -124,16 +124,16 @@
 <li><a href=https://httpie.io>httpie</a>: a user-friendly command-line HTTP client for the API era. It comes with JSON support, syntax highlighting, persistent sessions, wget-like downloads, plugins, and more.</li>
 <li>Examples:</li>
 </ul>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=ln> 1</span><span class=c1># Hello world</span>
-<span class=ln> 2</span>$ http httpie.io/hello
-<span class=ln> 3</span><span class=c1># Custom HTTP method, HTTP headers and JSON data</span>
-<span class=ln> 4</span>$ http PUT pie.dev/put X-API-Token:123 <span class=nv>name</span><span class=o>=</span>John
-<span class=ln> 5</span><span class=c1># Submitting forms</span>
-<span class=ln> 6</span>$ http -f POST pie.dev/post <span class=nv>hello</span><span class=o>=</span>World
-<span class=ln> 7</span><span class=c1># Upload a file using redirect input</span>
-<span class=ln> 8</span>$ http pie.dev/post &lt; files/data.json
-<span class=ln> 9</span><span class=c1># ...</span>
-<span class=ln>10</span><span class=c1># For more examples, check out: https://httpie.io</span>
+<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#75715e># Hello world</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>$ http httpie.io/hello
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#75715e># Custom HTTP method, HTTP headers and JSON data</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>$ http PUT pie.dev/put X-API-Token:123 <span style=color:#111>name</span><span style=color:#f92672>=</span>John
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#75715e># Submitting forms</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>$ http -f POST pie.dev/post <span style=color:#111>hello</span><span style=color:#f92672>=</span>World
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#75715e># Upload a file using redirect input</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>$ http pie.dev/post &lt; files/data.json
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#75715e># ...</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#75715e># For more examples, check out: https://httpie.io</span>
 </code></pre></div><h2 id=4-ripgrep---grep-alternative>
 4. ripgrep - (grep alternative)
 <a class=anchor href=#4-ripgrep---grep-alternative>#</a>
@@ -143,14 +143,14 @@
 <li><a href=https://github.com/BurntSushi/ripgrep#quick-examples-comparing-tools>Benchmark</a>.</li>
 <li>Examples:</li>
 </ul>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=ln>1</span><span class=c1># Basic use</span>
-<span class=ln>2</span>$ rg fast README.md
-<span class=ln>3</span><span class=c1># Regular expressions</span>
-<span class=ln>4</span>$ rg <span class=s1>&#39;fast\w+&#39;</span> README.md
-<span class=ln>5</span><span class=c1># Recursive search - recursively searching the directory (current directory is default)</span>
-<span class=ln>6</span>$ rg <span class=s1>&#39;fn write\(&#39;</span>
-<span class=ln>7</span><span class=c1># ...</span>
-<span class=ln>8</span><span class=c1># For more examples, checkout: https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md</span>
+<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#75715e># Basic use</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>$ rg fast README.md
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#75715e># Regular expressions</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>$ rg <span style=color:#d88200>&#39;fast\w+&#39;</span> README.md
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span><span style=color:#75715e># Recursive search - recursively searching the directory (current directory is default)</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span>$ rg <span style=color:#d88200>&#39;fn write\(&#39;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7</span><span style=color:#75715e># ...</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8</span><span style=color:#75715e># For more examples, checkout: https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md</span>
 </code></pre></div><h2 id=5-delta>
 5. delta
 <a class=anchor href=#5-delta>#</a>
@@ -192,22 +192,22 @@
 <ul>
 <li>Example config:</li>
 </ul>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=ln> 1</span><span class=o>[</span>core<span class=o>]</span>
-<span class=ln> 2</span>    <span class=nv>pager</span> <span class=o>=</span> delta
-<span class=ln> 3</span>
-<span class=ln> 4</span><span class=o>[</span>delta<span class=o>]</span>
-<span class=ln> 5</span>    plus-style <span class=o>=</span> <span class=s2>&#34;syntax #98c379&#34;</span>
-<span class=ln> 6</span>    minus-style <span class=o>=</span> <span class=s2>&#34;syntax #e06c75&#34;</span>
-<span class=ln> 7</span>    syntax-theme <span class=o>=</span> OneHalfDark
-<span class=ln> 8</span>    <span class=nv>navigate</span> <span class=o>=</span> <span class=nb>true</span>
-<span class=ln> 9</span>    <span class=nv>features</span> <span class=o>=</span> line-numbers decorations
-<span class=ln>10</span>
-<span class=ln>11</span><span class=o>[</span>interactive<span class=o>]</span>
-<span class=ln>12</span>    <span class=nv>diffFilter</span> <span class=o>=</span> delta --color-only
+<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#f92672>[</span>core<span style=color:#f92672>]</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>    <span style=color:#111>pager</span> <span style=color:#f92672>=</span> delta
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#f92672>[</span>delta<span style=color:#f92672>]</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>    plus-style <span style=color:#f92672>=</span> <span style=color:#d88200>&#34;syntax #98c379&#34;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>    minus-style <span style=color:#f92672>=</span> <span style=color:#d88200>&#34;syntax #e06c75&#34;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>    syntax-theme <span style=color:#f92672>=</span> OneHalfDark
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>    <span style=color:#111>navigate</span> <span style=color:#f92672>=</span> <span style=color:#111>true</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>    <span style=color:#111>features</span> <span style=color:#f92672>=</span> line-numbers decorations
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#f92672>[</span>interactive<span style=color:#f92672>]</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>    <span style=color:#111>diffFilter</span> <span style=color:#f92672>=</span> delta --color-only
 </code></pre></div><ul>
 <li>Completely replace <code>diff</code> with <code>delta</code>:</li>
 </ul>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=ln>1</span><span class=nb>alias</span> <span class=nv>diff</span><span class=o>=</span><span class=s2>&#34;delta&#34;</span>
+<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#111>alias</span> <span style=color:#111>diff</span><span style=color:#f92672>=</span><span style=color:#d88200>&#34;delta&#34;</span>
 </code></pre></div><h2 id=6-z>
 6. z
 <a class=anchor href=#6-z>#</a>
@@ -217,8 +217,8 @@
 <li><a href=https://github.com/rupa/z>z</a>: jump around. Z is a shell script that makes jumping around your file directory pleasantly simple. Instead of trying to remember the exact path of where you need to go, or worse, <code>cd</code>ing into the next directory followed by <code>ls</code>ing and then cding again over and over (we’ve all been there), Z allows you to “lazy type” where you want to go and it’ll handle the rest.</li>
 <li>Examples:</li>
 </ul>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=ln>1</span><span class=c1># Takes me to my workspace folder from anywhere.</span>
-<span class=ln>2</span>$ z workspace
+<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#75715e># Takes me to my workspace folder from anywhere.</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>$ z workspace
 </code></pre></div><h2 id=7-fzf>
 7. fzf
 <a class=anchor href=#7-fzf>#</a>
@@ -228,38 +228,38 @@
 <li>It&rsquo;s an interactive Unix filter for command-line that can be used with any list; files, command history, processes, hostnames, bookmarks, git commits, etc.</li>
 <li>Examples:</li>
 </ul>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=ln> 1</span><span class=c1># Read the list from STDIN and write the selected item to STDOUT</span>
-<span class=ln> 2</span>$ find * -type f <span class=p>|</span> fzf &gt; selected
-<span class=ln> 3</span>$ vim <span class=k>$(</span>fzf<span class=k>)</span>
-<span class=ln> 4</span><span class=c1># COMMAND **&lt;TAB&gt;</span>
-<span class=ln> 5</span><span class=c1># Files under the current directory</span>
-<span class=ln> 6</span><span class=c1># - You can select multiple items with TAB key</span>
-<span class=ln> 7</span>$ vim **&lt;TAB&gt;
-<span class=ln> 8</span>
-<span class=ln> 9</span><span class=c1># Files under parent directory</span>
-<span class=ln>10</span>$ vim ../**&lt;TAB&gt;
-<span class=ln>11</span>
-<span class=ln>12</span><span class=c1># Files under parent directory that match `fzf`</span>
-<span class=ln>13</span>$ vim ../fzf**&lt;TAB&gt;
-<span class=ln>14</span>
-<span class=ln>15</span><span class=c1># Files under your home directory</span>
-<span class=ln>16</span>$ vim ~/**&lt;TAB&gt;
-<span class=ln>17</span>
-<span class=ln>18</span>
-<span class=ln>19</span><span class=c1># Directories under current directory (single-selection)</span>
-<span class=ln>20</span>$ <span class=nb>cd</span> **&lt;TAB&gt;
-<span class=ln>21</span>
-<span class=ln>22</span><span class=c1># Directories under ~/github that match `fzf`</span>
-<span class=ln>23</span>$ <span class=nb>cd</span> ~/github/fzf**&lt;TAB&gt;
-<span class=ln>24</span>
-<span class=ln>25</span><span class=c1># Can select multiple processes with &lt;TAB&gt; or &lt;Shift-TAB&gt; keys</span>
-<span class=ln>26</span>$ <span class=nb>kill</span> -9 &lt;TAB&gt;
-<span class=ln>27</span>
-<span class=ln>28</span>$ <span class=nb>unset</span> **&lt;TAB&gt;
-<span class=ln>29</span>$ <span class=nb>export</span> **&lt;TAB&gt;
-<span class=ln>30</span>$ <span class=nb>unalias</span> **&lt;TAB&gt;
-<span class=ln>31</span><span class=c1># ...</span>
-<span class=ln>32</span><span class=c1># For more examples, checkout: https://github.com/junegunn/fzf</span>
+<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#75715e># Read the list from STDIN and write the selected item to STDOUT</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>$ find * -type f <span style=color:#111>|</span> fzf &gt; selected
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>$ vim <span style=color:#00a8c8>$(</span>fzf<span style=color:#00a8c8>)</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#75715e># COMMAND **&lt;TAB&gt;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#75715e># Files under the current directory</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#75715e># - You can select multiple items with TAB key</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>$ vim **&lt;TAB&gt;
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#75715e># Files under parent directory</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>$ vim ../**&lt;TAB&gt;
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#75715e># Files under parent directory that match `fzf`</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>$ vim ../fzf**&lt;TAB&gt;
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span><span style=color:#75715e># Files under your home directory</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>$ vim ~/**&lt;TAB&gt;
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#75715e># Directories under current directory (single-selection)</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span>$ <span style=color:#111>cd</span> **&lt;TAB&gt;
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span><span style=color:#75715e># Directories under ~/github that match `fzf`</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span>$ <span style=color:#111>cd</span> ~/github/fzf**&lt;TAB&gt;
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span><span style=color:#75715e># Can select multiple processes with &lt;TAB&gt; or &lt;Shift-TAB&gt; keys</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>$ <span style=color:#111>kill</span> -9 &lt;TAB&gt;
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28</span>$ <span style=color:#111>unset</span> **&lt;TAB&gt;
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29</span>$ <span style=color:#111>export</span> **&lt;TAB&gt;
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30</span>$ <span style=color:#111>unalias</span> **&lt;TAB&gt;
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31</span><span style=color:#75715e># ...</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32</span><span style=color:#75715e># For more examples, checkout: https://github.com/junegunn/fzf</span>
 </code></pre></div>
 <div class=box>
 <figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
@@ -295,16 +295,16 @@
 <ul>
 <li>Examples:</li>
 </ul>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=ln> 1</span>$ apt-get install vim
-<span class=ln> 2</span>E: Could not open lock file /var/lib/dpkg/lock - open <span class=o>(</span>13: Permission denied<span class=o>)</span>
-<span class=ln> 3</span>E: Unable to lock the administration directory <span class=o>(</span>/var/lib/dpkg/<span class=o>)</span>, are you root?
-<span class=ln> 4</span>
-<span class=ln> 5</span>$ fuck
-<span class=ln> 6</span>sudo apt-get install vim <span class=o>[</span>enter/↑/↓/ctrl+c<span class=o>]</span>
-<span class=ln> 7</span>Reading package lists... Done
-<span class=ln> 8</span>...
-<span class=ln> 9</span><span class=c1># ...</span>
-<span class=ln>10</span><span class=c1># For more examples, check out: https://github.com/nvbn/thefuck</span>
+<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>$ apt-get install vim
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>E: Could not open lock file /var/lib/dpkg/lock - open <span style=color:#f92672>(</span>13: Permission denied<span style=color:#f92672>)</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>E: Unable to lock the administration directory <span style=color:#f92672>(</span>/var/lib/dpkg/<span style=color:#f92672>)</span>, are you root?
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>$ fuck
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>sudo apt-get install vim <span style=color:#f92672>[</span>enter/↑/↓/ctrl+c<span style=color:#f92672>]</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>Reading package lists... Done
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>...
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#75715e># ...</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#75715e># For more examples, check out: https://github.com/nvbn/thefuck</span>
 </code></pre></div><h2 id=9-exa---ls-alternative>
 9. exa - (ls alternative)
 <a class=anchor href=#9-exa---ls-alternative>#</a>
@@ -324,7 +324,7 @@
 <ul>
 <li>Completely replace <code>ls</code> with <code>exa</code>:</li>
 </ul>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=ln>1</span><span class=nb>alias</span> <span class=nv>ls</span><span class=o>=</span><span class=s2>&#34;exa&#34;</span>
+<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#111>alias</span> <span style=color:#111>ls</span><span style=color:#f92672>=</span><span style=color:#d88200>&#34;exa&#34;</span>
 </code></pre></div>
 <div class=box>
 <figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>

@@ -17,7 +17,7 @@
 <link rel=icon href=/blog/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/blog/book.min.af53ed4972121f7d02a399e742d2a002eed9d146afb7802ddc0e5cd7ecf13ffc.css integrity="sha256-r1PtSXISH30Co5nnQtKgAu7Z0Uavt4At3A5c1+zxP/w=" crossorigin=anonymous>
 <script defer src=/blog/flexsearch.min.js></script>
-<script defer src=/blog/en.search.min.8be5a9eaea48d64bbe6bd651e99a356e668957f4a804d9fd32cb5d0aa90705cf.js integrity="sha256-i+Wp6upI1ku+a9ZR6Zo1bmaJV/SoBNn9MstdCqkHBc8=" crossorigin=anonymous></script>
+<script defer src=/blog/en.search.min.8a5cb3d08e0182690aa877c0a6c012a1fa3712868ce05a49295f0f4b810f5f65.js integrity="sha256-ilyz0I4BgmkKqHfApsASofo3EoaM4FpJKV8PS4EPX2U=" crossorigin=anonymous></script>
 <script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css>
@@ -108,33 +108,33 @@
 <p>Directory structure.</p>
 </li>
 </ul>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=ln> 1</span>~/Documents/blog master <span class=nv>$?</span> via ⬢ v8.10.0 took 6s tree content/authors    
-<span class=ln> 2</span>content/authors
-<span class=ln> 3</span>├── donghm
-<span class=ln> 4</span>│   ├── avatar.jpg
-<span class=ln> 5</span>│   └── index.md
-<span class=ln> 6</span>├── _index.md
-<span class=ln> 7</span>└── kiennt
-<span class=ln> 8</span>    ├── avatar.jpg
-<span class=ln> 9</span>    └── index.md
-<span class=ln>10</span>└── amazingblogger <span class=c1>## Here</span>
-<span class=ln>11</span>    ├── avatar.jpg
-<span class=ln>12</span>    └── index.md
+<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>~/Documents/blog master <span style=color:#111>$?</span> via ⬢ v8.10.0 took 6s tree content/authors    
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>content/authors
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>├── donghm
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>│   ├── avatar.jpg
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>│   └── index.md
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>├── _index.md
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>└── kiennt
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>    ├── avatar.jpg
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>    └── index.md
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>└── amazingblogger <span style=color:#75715e>## Here</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>    ├── avatar.jpg
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>    └── index.md
 </code></pre></div><ul>
 <li>Write about yourself in <code>index.md</code>.</li>
 </ul>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=ln> 1</span><span class=nn>---</span><span class=w>
-</span><span class=ln> 2</span><span class=w></span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;Amazing Blogger&#34;</span><span class=w>
-</span><span class=ln> 3</span><span class=w></span><span class=nt>contact</span><span class=p>:</span><span class=w>
-</span><span class=ln> 4</span><span class=w>    </span><span class=nt>twitter</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;@blogger&#34;</span><span class=w>
-</span><span class=ln> 5</span><span class=w>    </span><span class=nt>facebook</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;blogger&#34;</span><span class=w>
-</span><span class=ln> 6</span><span class=w>    </span><span class=nt>github</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;blogger&#34;</span><span class=w>
-</span><span class=ln> 7</span><span class=w>    </span><span class=nt>email</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;blogger@gmail.com&#34;</span><span class=w>
-</span><span class=ln> 8</span><span class=w></span><span class=nt>website</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;https://blogger.io/&#34;</span><span class=w>
-</span><span class=ln> 9</span><span class=w></span><span class=nn>---</span><span class=w>
-</span><span class=ln>10</span><span class=w>
-</span><span class=ln>11</span><span class=w></span><span class=l>Your amazing personal page here</span><span class=w>
-</span></code></pre></div><ul>
+<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#111>---</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#f92672>name</span><span style=color:#111>:</span> <span style=color:#d88200>&#34;Amazing Blogger&#34;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#f92672>contact</span><span style=color:#111>:</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>    <span style=color:#f92672>twitter</span><span style=color:#111>:</span> <span style=color:#d88200>&#34;@blogger&#34;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>    <span style=color:#f92672>facebook</span><span style=color:#111>:</span> <span style=color:#d88200>&#34;blogger&#34;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>    <span style=color:#f92672>github</span><span style=color:#111>:</span> <span style=color:#d88200>&#34;blogger&#34;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>    <span style=color:#f92672>email</span><span style=color:#111>:</span> <span style=color:#d88200>&#34;blogger@gmail.com&#34;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#f92672>website</span><span style=color:#111>:</span> <span style=color:#d88200>&#34;https://blogger.io/&#34;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#111>---</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#ae81ff>Your amazing personal page here</span>
+</code></pre></div><ul>
 <li>Don&rsquo;t forget to place your avatar in directory. The picture format should be <code>jpg</code> or <code>png</code>, no name restriction.</li>
 </ul>
 <h2 id=3-write-a-post>
@@ -144,20 +144,20 @@
 <ul>
 <li>Very similar with author page, just place your post under <a href=https://github.com/ntk148v/blog/tree/master/content/posts>content/posts</a>.</li>
 </ul>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=ln>1</span>$ hugo new content/posts/a-new-post.md -t sam
+<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>$ hugo new content/posts/a-new-post.md -t sam
 </code></pre></div><ul>
 <li>A sample post.</li>
 </ul>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=ln>1</span><span class=nn>---</span><span class=w>
-</span><span class=ln>2</span><span class=w></span><span class=nt>title</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;Blog Guideline&#34;</span><span class=w>
-</span><span class=ln>3</span><span class=w></span><span class=nt>date</span><span class=p>:</span><span class=w> </span><span class=ld>2019-08-22T14:40:59</span><span class=m>+07</span><span class=p>:</span><span class=m>00</span><span class=w>
-</span><span class=ln>4</span><span class=w></span><span class=nt>comments</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
-</span><span class=ln>5</span><span class=w></span><span class=nt>authors</span><span class=p>:</span><span class=w>
-</span><span class=ln>6</span><span class=w>    </span>- <span class=l>kiennt</span><span class=w>
-</span><span class=ln>7</span><span class=w></span><span class=nt>showDate</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
-</span><span class=ln>8</span><span class=w></span><span class=nt>tags</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&#34;blog&#34;</span><span class=p>,</span><span class=w> </span><span class=s2>&#34;tech&#34;</span><span class=p>]</span><span class=w>
-</span><span class=ln>9</span><span class=w></span><span class=nn>---</span><span class=w>
-</span></code></pre></div><ul>
+<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#111>---</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span style=color:#f92672>title</span><span style=color:#111>:</span> <span style=color:#d88200>&#34;Blog Guideline&#34;</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#f92672>date</span><span style=color:#111>:</span> <span style=color:#d88200>2019-08-22T14:40:59</span><span style=color:#ae81ff>+07</span><span style=color:#111>:</span><span style=color:#ae81ff>00</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span style=color:#f92672>comments</span><span style=color:#111>:</span> <span style=color:#00a8c8>true</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span><span style=color:#f92672>authors</span><span style=color:#111>:</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span>    - <span style=color:#ae81ff>kiennt</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">7</span><span style=color:#f92672>showDate</span><span style=color:#111>:</span> <span style=color:#00a8c8>true</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">8</span><span style=color:#f92672>tags</span><span style=color:#111>:</span> <span style=color:#111>[</span><span style=color:#d88200>&#34;blog&#34;</span><span style=color:#111>,</span> <span style=color:#d88200>&#34;tech&#34;</span><span style=color:#111>]</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">9</span><span style=color:#111>---</span>
+</code></pre></div><ul>
 <li>Multiple authors feature is supported.</li>
 <li>You can disable or enable comment section with <code>comment</code> option. You might want to take look at <a href=https://ntk148v.github.io/blog/posts/lets-comment/>how I create comment section</a>.</li>
 <li>Don&rsquo;t forget to add a tag.</li>

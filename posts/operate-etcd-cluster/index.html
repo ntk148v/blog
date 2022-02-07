@@ -19,7 +19,7 @@
 <link rel=icon href=/blog/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/blog/book.min.af53ed4972121f7d02a399e742d2a002eed9d146afb7802ddc0e5cd7ecf13ffc.css integrity="sha256-r1PtSXISH30Co5nnQtKgAu7Z0Uavt4At3A5c1+zxP/w=" crossorigin=anonymous>
 <script defer src=/blog/flexsearch.min.js></script>
-<script defer src=/blog/en.search.min.8be5a9eaea48d64bbe6bd651e99a356e668957f4a804d9fd32cb5d0aa90705cf.js integrity="sha256-i+Wp6upI1ku+a9ZR6Zo1bmaJV/SoBNn9MstdCqkHBc8=" crossorigin=anonymous></script>
+<script defer src=/blog/en.search.min.8a5cb3d08e0182690aa877c0a6c012a1fa3712868ce05a49295f0f4b810f5f65.js integrity="sha256-ilyz0I4BgmkKqHfApsASofo3EoaM4FpJKV8PS4EPX2U=" crossorigin=anonymous></script>
 <script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css>
@@ -144,8 +144,8 @@
 <li>An etcd cluster is very sensitive to disk latencies. Since etcd must persist proposals to its log, disk activity from other processes may cause long <code>fsync</code> latencies. The upshot is etcd may miss heartbeats, causing request timeouts and temporary leader loss. An etcd server can sometimes stably run alongside these processes when given a high disk priority.</li>
 <li>Check whether a disk is fast enough for etcd using <a href=https://github.com/axboe/fio>fio</a>. If the 99th percentile of fdatasync is <strong>&lt;10ms</strong>, your storage is ok.</li>
 </ul>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=ln>1</span>$ fio --rw<span class=o>=</span>write --ioengine<span class=o>=</span>sync --fdatasync<span class=o>=</span><span class=m>1</span> --directory<span class=o>=</span>test-data <span class=se>\
-</span><span class=ln>2</span><span class=se></span>    --size<span class=o>=</span>22m --bs<span class=o>=</span><span class=m>2300</span> --name<span class=o>=</span>mytest
+<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>$ fio --rw<span style=color:#f92672>=</span>write --ioengine<span style=color:#f92672>=</span>sync --fdatasync<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> --directory<span style=color:#f92672>=</span>test-data <span style=color:#8045ff>\
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span style=color:#8045ff></span>    --size<span style=color:#f92672>=</span>22m --bs<span style=color:#f92672>=</span><span style=color:#ae81ff>2300</span> --name<span style=color:#f92672>=</span>mytest
 </code></pre></div><ul>
 <li><strong>SSD</strong> is recommended.</li>
 </ul>
@@ -184,11 +184,11 @@
 </li>
 <li>The heartbeat interval and election timeout value should be <strong>the same for all members in one cluster</strong>.</li>
 </ul>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=ln>1</span><span class=c1># Command line arguments:</span>
-<span class=ln>2</span>$ etcd --heartbeat-interval<span class=o>=</span><span class=m>100</span> --election-timeout<span class=o>=</span><span class=m>500</span>
-<span class=ln>3</span>
-<span class=ln>4</span><span class=c1># Environment variables:</span>
-<span class=ln>5</span>$ <span class=nv>ETCD_HEARTBEAT_INTERVAL</span><span class=o>=</span><span class=m>100</span> <span class=nv>ETCD_ELECTION_TIMEOUT</span><span class=o>=</span><span class=m>500</span> etcd
+<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#75715e># Command line arguments:</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>$ etcd --heartbeat-interval<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span> --election-timeout<span style=color:#f92672>=</span><span style=color:#ae81ff>500</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span style=color:#75715e># Environment variables:</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>$ <span style=color:#111>ETCD_HEARTBEAT_INTERVAL</span><span style=color:#f92672>=</span><span style=color:#ae81ff>100</span> <span style=color:#111>ETCD_ELECTION_TIMEOUT</span><span style=color:#f92672>=</span><span style=color:#ae81ff>500</span> etcd
 </code></pre></div><h3 id=32-disk>
 3.2. Disk
 <a class=anchor href=#32-disk>#</a>
@@ -196,8 +196,8 @@
 <ul>
 <li>An etcd server can sometimes stably run alongside these processes when given a high disk priority using <a href=https://linux.die.net/man/1/ionice>ionice</a>.</li>
 </ul>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=ln>1</span><span class=c1># best effort, highest priority</span>
-<span class=ln>2</span>$ sudo ionice -c2 -n0 -p <span class=sb>`</span>pgrep etcd<span class=sb>`</span>
+<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#75715e># best effort, highest priority</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>$ sudo ionice -c2 -n0 -p <span style=color:#d88200>`</span>pgrep etcd<span style=color:#d88200>`</span>
 </code></pre></div><h3 id=33-snapshot>
 3.3. Snapshot
 <a class=anchor href=#33-snapshot>#</a>
@@ -208,11 +208,11 @@
 <li>Default: make snapshots after every <strong>10 000 changes</strong>.</li>
 <li>Tuning: Just in case that etcd&rsquo;s memory and disk usage is too high, lower threshold.</li>
 </ul>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=ln>1</span><span class=c1># Command line arguments:</span>
-<span class=ln>2</span>$ etcd --snapshot-count<span class=o>=</span><span class=m>5000</span>
-<span class=ln>3</span>
-<span class=ln>4</span><span class=c1># Environment variables:</span>
-<span class=ln>5</span>$ <span class=nv>ETCD_SNAPSHOT_COUNT</span><span class=o>=</span><span class=m>5000</span> etcd
+<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#75715e># Command line arguments:</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>$ etcd --snapshot-count<span style=color:#f92672>=</span><span style=color:#ae81ff>5000</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span style=color:#75715e># Environment variables:</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>$ <span style=color:#111>ETCD_SNAPSHOT_COUNT</span><span style=color:#f92672>=</span><span style=color:#ae81ff>5000</span> etcd
 </code></pre></div><h2 id=4-maintenance>
 4. Maintenance
 <a class=anchor href=#4-maintenance>#</a>
@@ -225,8 +225,8 @@
 <li>Etcd keeps an exact history of its keyspace, the history should be periodically compacted to avoid performance degradation and eventual storage space exhaustion.</li>
 <li>Etcd can be set to automatically compact the keyspace with the <code>--auto-compaction-*</code> option with a period of hours.</li>
 </ul>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=ln>1</span><span class=c1># keep one hour of history</span>
-<span class=ln>2</span>$ etcd --auto-compaction-retention<span class=o>=</span><span class=m>1</span> --auto-compaction-mode<span class=o>=</span>periodic
+<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#75715e># keep one hour of history</span>
+<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>$ etcd --auto-compaction-retention<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> --auto-compaction-mode<span style=color:#f92672>=</span>periodic
 </code></pre></div><ul>
 <li>Compaction modes:
 <ul>
@@ -244,7 +244,7 @@
 <li>Internal fragmentation space is available for use by etcd but unavailable to the host filesystem.</li>
 <li>Solution: Release this space back to the filesystem with defrag.</li>
 </ul>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=ln>1</span>$ etcdctl defrag
+<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>$ etcdctl defrag
 </code></pre></div><ul>
 <li>It should be run rather infrequently, as there is always going to be an unavoidable pause.</li>
 </ul>
