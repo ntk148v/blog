@@ -39,9 +39,9 @@ border_radius 10
 
 - Result, but you can see that these corners look so jagged (check out this [comment](https://github.com/Airblader/i3/issues/167#issuecomment-485263770)).
 
-{{< figure src="photos/getting-started-tiling-wm-part-6/rounded-corners-1.png" >}}
+{{< figure src="/photos/getting-started-tiling-wm-part-6/rounded-corners-1.png" >}}
 
-{{< figure src="photos/getting-started-tiling-wm-part-6/rounded-corners-4.png" >}}
+{{< figure src="/photos/getting-started-tiling-wm-part-6/rounded-corners-4.png" >}}
 
 ## 2. picom
 
@@ -56,6 +56,6 @@ corner_radius = 10;
 
 - Result looks much smoother.
 
-{{< figure src="photos/getting-started-tiling-wm-part-6/rounded-corners-2.png" >}}
+{{< figure src="/photos/getting-started-tiling-wm-part-6/rounded-corners-2.png" >}}
 
-{{< figure src="photos/getting-started-tiling-wm-part-6/rounded-corners-3.png" >}}
+{{< figure src="/photos/getting-started-tiling-wm-part-6/rounded-corners-3.png" >}}

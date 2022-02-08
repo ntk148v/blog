@@ -20,7 +20,7 @@ References:
 - [EVE-NG](https://www.eve-ng.net/) version 2.0.3-112
 - QEMU version 2.4.0
 
-{{< figure src="/photos/bgp-ecmp-load-balancing/ecmp-bgp.png" link="/blog/photos/bgp-ecmp-load-balancing/ecmp-bgp.png">}}
+{{< figure src="/photos/bgp-ecmp-load-balancing/ecmp-bgp.png" >}}
 
 - `AS 65000`: internet service provider. In this post, we will build a BGP session between EdgeRouter and ISP router.
 - `ISPRouter` and `EdgeRouter` are [VyOS](https://vyos.io/) instances. You can use other routers as well.
