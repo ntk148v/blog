@@ -19,7 +19,7 @@ I love customizing desktop. I make changes in my desktop everyday, make it look 
 <link rel=icon href=/blog/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/blog/book.min.2625e69c6b7661c7675edd24ba686fbc2f7d3dfe3fadbf62681b4d2cf2fead9d.css integrity="sha256-JiXmnGt2YcdnXt0kumhvvC99Pf4/rb9iaBtNLPL+rZ0=" crossorigin=anonymous>
 <script defer src=/blog/flexsearch.min.js></script>
-<script defer src=/blog/en.search.min.7dd3d330013b0c89a8aeb8eb53b13cbc277c6d1a551855ff874d4952baa089c8.js integrity="sha256-fdPTMAE7DImorrjrU7E8vCd8bRpVGFX/h01JUrqgicg=" crossorigin=anonymous></script>
+<script defer src=/blog/en.search.min.5b28a70dee84eaf6f1acae9c8e95f06a6a17d8a514620c1cc4910e336625e3e1.js integrity="sha256-WyinDe6E6vbxrK6cjpXwamoX2KUUYgwcxJEOM2Yl4+E=" crossorigin=anonymous></script>
 <script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css>
@@ -193,10 +193,19 @@ B --> C[X Windows];
 <li>Ubuntu 20.04 (Desktop/Server), download the <a href=https://ubuntu.com/download/>installer</a> and install Ubuntu by walking through installer.</li>
 <li>If you choose Ubuntu Server, you&rsquo;ll need a display server so let&rsquo;s install X Window System (<a href=https://wiki.archlinux.org/index.php/Xorg>Xorg</a>).</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>sudo apt install xinit
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span style=color:#75715e># The configuration files are stored in /etc/X11/xinit</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#75715e># You can override it by creating and modifying ~/.xinitrc</span>
-</code></pre></div><h3 id=32-install-i3>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sudo apt install xinit
+<span style=color:#75715e># The configuration files are stored in /etc/X11/xinit</span>
+<span style=color:#75715e># You can override it by creating and modifying ~/.xinitrc</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=32-install-i3>
 3.2. Install I3
 <a class=anchor href=#32-install-i3>#</a>
 </h3>
@@ -206,26 +215,54 @@ B --> C[X Windows];
 <blockquote class="book-hint warning">
 Note that, i3-wm conflicts with <a href=https://github.com/Airblader/i3>i3-gaps</a> (a fork of i3 with gaps and other features).
 </blockquote>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>sudo apt install i3
-</code></pre></div><ul>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sudo apt install i3
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Or build from source, I have a personal fork - <a href=https://github.com/ntk148v/i3>Rounded i3-gaps</a>.</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#75715e># Dependencies</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>sudo apt install git libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev <span style=color:#8045ff>\
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#8045ff></span>    libxcb-util0-dev libxcb-icccm4-dev libyajl-dev <span style=color:#8045ff>\
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#8045ff></span>    libstartup-notification0-dev libxcb-randr0-dev <span style=color:#8045ff>\
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#8045ff></span>    libev-dev libxcb-cursor-dev libxcb-xinerama0-dev <span style=color:#8045ff>\
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#8045ff></span>    libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev <span style=color:#8045ff>\
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#8045ff></span>    autoconf libxcb-xrm0 libxcb-xrm-dev automake i3status <span style=color:#8045ff>\
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#8045ff></span>    ninja-build meson libxcb-shape0-dev build-essential -y
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>git clone https://github.com/ntk148v/i3.git
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#111>cd</span> i3/
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#75715e># Compile</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>mkdir -p build <span style=color:#f92672>&amp;&amp;</span> <span style=color:#111>cd</span> build
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>meson ..
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>ninja
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>sudo ninja install
-</code></pre></div><ul>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># Dependencies</span>
+sudo apt install git libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev <span style=color:#8045ff>\
+</span><span style=color:#8045ff></span>    libxcb-util0-dev libxcb-icccm4-dev libyajl-dev <span style=color:#8045ff>\
+</span><span style=color:#8045ff></span>    libstartup-notification0-dev libxcb-randr0-dev <span style=color:#8045ff>\
+</span><span style=color:#8045ff></span>    libev-dev libxcb-cursor-dev libxcb-xinerama0-dev <span style=color:#8045ff>\
+</span><span style=color:#8045ff></span>    libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev <span style=color:#8045ff>\
+</span><span style=color:#8045ff></span>    autoconf libxcb-xrm0 libxcb-xrm-dev automake i3status <span style=color:#8045ff>\
+</span><span style=color:#8045ff></span>    ninja-build meson libxcb-shape0-dev build-essential -y
+git clone https://github.com/ntk148v/i3.git
+<span style=color:#111>cd</span> i3/
+<span style=color:#75715e># Compile</span>
+mkdir -p build <span style=color:#f92672>&amp;&amp;</span> <span style=color:#111>cd</span> build
+meson ..
+ninja
+sudo ninja install
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>
 <p>Reboot. After reboot, choose i3 as your WM/DE.</p>
 </li>
@@ -330,8 +367,15 @@ style Container3 fill:#6fa8dc;
 <ul>
 <li>You can use my minimal configuration. It requires some extra packages.</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>sudo apt install hsetroot rofi compton -y
-</code></pre></div><details open><summary>Minimal I3 configuration</summary>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sudo apt install hsetroot rofi compton -y
+</code></pre></td></tr></table>
+</div>
+</div><details open><summary>Minimal I3 configuration</summary>
 <div class=markdown-inner>
 <h2 id=cheat-sheat-shortcut>
 Cheat sheat shortcut
@@ -588,13 +632,25 @@ exec_always hsetroot -solid &quot;#F1CCBB&quot;
 </ul>
 </li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>mkdir -p ~/.config/gtk-3.0
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>cat <span style=color:#d88200>&lt;&lt;EOT &gt;&gt; ~/.config/gtk-3.0/gtk.css
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#d88200>vte-terminal {
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span style=color:#d88200>    padding: 30px;
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span><span style=color:#d88200>}
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span><span style=color:#d88200>EOT</span>
-</code></pre></div><ul>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>mkdir -p ~/.config/gtk-3.0
+cat <span style=color:#d88200>&lt;&lt;EOT &gt;&gt; ~/.config/gtk-3.0/gtk.css
+</span><span style=color:#d88200>vte-terminal {
+</span><span style=color:#d88200>    padding: 30px;
+</span><span style=color:#d88200>}
+</span><span style=color:#d88200>EOT</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Result.</li>
 </ul>
 <div class=box>

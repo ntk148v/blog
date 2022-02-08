@@ -17,7 +17,7 @@
 <link rel=icon href=/blog/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/blog/book.min.2625e69c6b7661c7675edd24ba686fbc2f7d3dfe3fadbf62681b4d2cf2fead9d.css integrity="sha256-JiXmnGt2YcdnXt0kumhvvC99Pf4/rb9iaBtNLPL+rZ0=" crossorigin=anonymous>
 <script defer src=/blog/flexsearch.min.js></script>
-<script defer src=/blog/en.search.min.7dd3d330013b0c89a8aeb8eb53b13cbc277c6d1a551855ff874d4952baa089c8.js integrity="sha256-fdPTMAE7DImorrjrU7E8vCd8bRpVGFX/h01JUrqgicg=" crossorigin=anonymous></script>
+<script defer src=/blog/en.search.min.5b28a70dee84eaf6f1acae9c8e95f06a6a17d8a514620c1cc4910e336625e3e1.js integrity="sha256-WyinDe6E6vbxrK6cjpXwamoX2KUUYgwcxJEOM2Yl4+E=" crossorigin=anonymous></script>
 <script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css>
@@ -171,13 +171,25 @@
 </code></pre></li>
 <li>
 <p>Useful commands:</p>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#75715e># Check the current value</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>sysctl vm.swappiness
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span><span style=color:#75715e># Adjust the value</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span style=color:#111>echo</span> <span style=color:#ae81ff>10</span> &gt; /proc/sys/vm/swappiness
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>sysctl -w vm.swappiness<span style=color:#f92672>=</span><span style=color:#ae81ff>10</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6</span><span style=color:#111>echo</span> <span style=color:#d88200>&#34;vm.swappiness = 10&#34;</span> &gt;&gt; /etc/sysctl.conf
-</code></pre></div></li>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># Check the current value</span>
+sysctl vm.swappiness
+<span style=color:#75715e># Adjust the value</span>
+<span style=color:#111>echo</span> <span style=color:#ae81ff>10</span> &gt; /proc/sys/vm/swappiness
+sysctl -w vm.swappiness<span style=color:#f92672>=</span><span style=color:#ae81ff>10</span>
+<span style=color:#111>echo</span> <span style=color:#d88200>&#34;vm.swappiness = 10&#34;</span> &gt;&gt; /etc/sysctl.conf
+</code></pre></td></tr></table>
+</div>
+</div></li>
 <li>
 <p>On SSDs, swapping out anonymous pages and reclaiming file pages are essentially equivalent in terms of performance/latency. On older spinning disks, swap reads are slower due to random reads, so a lower vm.swappiness setting makes sense there.</p>
 </li>

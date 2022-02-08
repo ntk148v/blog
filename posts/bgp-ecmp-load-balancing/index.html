@@ -13,13 +13,13 @@ References:
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ntk148v.github.io/blog/posts/bgp-ecmp-load-balancing/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-02-07T15:35:08+07:00">
-<meta property="article:modified_time" content="2022-02-08T10:55:00+07:00"><meta property="og:site_name" content="/home/kiennt">
+<meta property="article:modified_time" content="2022-02-08T15:00:00+07:00"><meta property="og:site_name" content="/home/kiennt">
 <title>Bgp Ecmp Load Balancing | /home/kiennt</title>
 <link rel=manifest href=/blog/manifest.json>
 <link rel=icon href=/blog/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/blog/book.min.2625e69c6b7661c7675edd24ba686fbc2f7d3dfe3fadbf62681b4d2cf2fead9d.css integrity="sha256-JiXmnGt2YcdnXt0kumhvvC99Pf4/rb9iaBtNLPL+rZ0=" crossorigin=anonymous>
 <script defer src=/blog/flexsearch.min.js></script>
-<script defer src=/blog/en.search.min.7dd3d330013b0c89a8aeb8eb53b13cbc277c6d1a551855ff874d4952baa089c8.js integrity="sha256-fdPTMAE7DImorrjrU7E8vCd8bRpVGFX/h01JUrqgicg=" crossorigin=anonymous></script>
+<script defer src=/blog/en.search.min.5b28a70dee84eaf6f1acae9c8e95f06a6a17d8a514620c1cc4910e336625e3e1.js integrity="sha256-WyinDe6E6vbxrK6cjpXwamoX2KUUYgwcxJEOM2Yl4+E=" crossorigin=anonymous></script>
 <script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css>
@@ -211,42 +211,95 @@ copy running-config start-config
 <ul>
 <li>Configure <code>10.13.13.1</code> on the local loopback interface.</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>lb1$ sudo cat <span style=color:#d88200>&lt;&lt;EOF &gt; /etc/netplan/00-installer-config.yaml
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#d88200>network:
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#d88200>  ethernets:
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#d88200>    lo:
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#d88200>      addresses:
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#d88200>      - 10.13.13.1/24
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#d88200>    ens3:
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#d88200>      addresses:
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#d88200>      - 10.12.12.1/24 # change to 10.12.12.2 on lb2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#d88200>      gateway4: 10.12.12.254
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#d88200>  version: 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#d88200>EOF</span>
-</code></pre></div><div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>lb1$ sudo netplan apply
-</code></pre></div><ul>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>lb1$ sudo cat <span style=color:#d88200>&lt;&lt;EOF &gt; /etc/netplan/00-installer-config.yaml
+</span><span style=color:#d88200>network:
+</span><span style=color:#d88200>  ethernets:
+</span><span style=color:#d88200>    lo:
+</span><span style=color:#d88200>      addresses:
+</span><span style=color:#d88200>      - 10.13.13.1/24
+</span><span style=color:#d88200>    ens3:
+</span><span style=color:#d88200>      addresses:
+</span><span style=color:#d88200>      - 10.12.12.1/24 # change to 10.12.12.2 on lb2
+</span><span style=color:#d88200>      gateway4: 10.12.12.254
+</span><span style=color:#d88200>  version: 2
+</span><span style=color:#d88200>EOF</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>lb1$ sudo netplan apply
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Install nginx.</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>lb1$ sudo apt install nginx -y
-</code></pre></div><ul>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>lb1$ sudo apt install nginx -y
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Configure nginx:</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>lb1$ sudo cat <span style=color:#d88200>&lt;&lt;EOF &gt; /etc/nginx/sites-enabled/default
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#d88200>server {
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#d88200>        listen 80 default_server;
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#d88200>        listen [::]:80 default_server;
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#d88200>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#d88200>        root /tmp;
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#d88200>}
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#d88200>EOF</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#75715e># In lb1</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>lb1$ <span style=color:#111>echo</span> lb1 &gt; /tmp/file
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#75715e># In lb2</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>lb2$ <span style=color:#111>echo</span> lb2 &gt; /tmp/file
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>lb1$ sudo service nginx start
-</code></pre></div><p>Choose one of the follow configurations (Bird or ExaBGP).</p>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>lb1$ sudo cat <span style=color:#d88200>&lt;&lt;EOF &gt; /etc/nginx/sites-enabled/default
+</span><span style=color:#d88200>server {
+</span><span style=color:#d88200>        listen 80 default_server;
+</span><span style=color:#d88200>        listen [::]:80 default_server;
+</span><span style=color:#d88200>
+</span><span style=color:#d88200>        root /var/www/html;
+</span><span style=color:#d88200>}
+</span><span style=color:#d88200>EOF</span>
+
+<span style=color:#75715e># In lb1</span>
+lb1$ <span style=color:#111>echo</span> lb1 &gt; /var/www/html/hostname
+<span style=color:#75715e># In lb2</span>
+lb2$ <span style=color:#111>echo</span> lb2 &gt; /var/www/html/hostname
+
+lb1$ sudo service nginx start
+</code></pre></td></tr></table>
+</div>
+</div><p>Choose one of the follow configurations (Bird or ExaBGP).</p>
 <h4 id=341-configure-bird>
 3.4.1. Configure Bird
 <a class=anchor href=#341-configure-bird>#</a>
@@ -255,50 +308,105 @@ copy running-config start-config
 <li>We will use <a href=https://github.com/CZ-NIC/bird>Bird</a>.</li>
 <li>Install bird</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>lb1$ sudo apt install  bird -y
-</code></pre></div><ul>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>lb1$ sudo apt install  bird -y
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Configure bird.</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>lb1$ sudo cat <span style=color:#d88200>&lt;&lt;EOF &gt; /etc/bird.conf
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#d88200>protocol kernel {
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#d88200>        persist;
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#d88200>        scan time 20;
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#d88200>        export all;
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#d88200>}
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#d88200>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#d88200>protocol device {
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#d88200>        scan time 10;
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#d88200>}
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#d88200>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#d88200>protocol static {
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#d88200>}
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span><span style=color:#d88200>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span><span style=color:#d88200>protocol static static_bgp {
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#d88200>        import all;
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span><span style=color:#d88200>        route 10.13.13.1/32 reject;
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span><span style=color:#d88200>}
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#d88200>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span><span style=color:#d88200>protocol bgp {
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span><span style=color:#d88200>        local as 65500;
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span><span style=color:#d88200>        neighbor 10.12.12.254 as 65500;
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span><span style=color:#d88200>        import none;
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span><span style=color:#d88200>        export where proto = &#34;static_bgp&#34;;
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span><span style=color:#d88200>}
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span><span style=color:#d88200>EOF</span>
-</code></pre></div><ul>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>lb1$ sudo cat <span style=color:#d88200>&lt;&lt;EOF &gt; /etc/bird.conf
+</span><span style=color:#d88200>protocol kernel {
+</span><span style=color:#d88200>        persist;
+</span><span style=color:#d88200>        scan time 20;
+</span><span style=color:#d88200>        export all;
+</span><span style=color:#d88200>}
+</span><span style=color:#d88200>
+</span><span style=color:#d88200>protocol device {
+</span><span style=color:#d88200>        scan time 10;
+</span><span style=color:#d88200>}
+</span><span style=color:#d88200>
+</span><span style=color:#d88200>protocol static {
+</span><span style=color:#d88200>}
+</span><span style=color:#d88200>
+</span><span style=color:#d88200>protocol static static_bgp {
+</span><span style=color:#d88200>        import all;
+</span><span style=color:#d88200>        route 10.13.13.1/32 reject;
+</span><span style=color:#d88200>}
+</span><span style=color:#d88200>
+</span><span style=color:#d88200>protocol bgp {
+</span><span style=color:#d88200>        local as 65500;
+</span><span style=color:#d88200>        neighbor 10.12.12.254 as 65500;
+</span><span style=color:#d88200>        import none;
+</span><span style=color:#d88200>        export where proto = &#34;static_bgp&#34;;
+</span><span style=color:#d88200>}
+</span><span style=color:#d88200>EOF</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Start bird.</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>lb1$ sudo service bird start
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>lb1$ sudo service bird status
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>_ bird.service - BIRD Internet Routing Daemon <span style=color:#f92672>(</span>IPv4<span style=color:#f92672>)</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>   Loaded: loaded <span style=color:#f92672>(</span>/lib/systemd/system/bird.service<span style=color:#111>;</span> disabled<span style=color:#111>;</span> vendor preset: enabled<span style=color:#f92672>)</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>   Active: inactive <span style=color:#f92672>(</span>dead<span style=color:#f92672>)</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>Feb <span style=color:#ae81ff>07</span> 08:11:13 lb2 systemd<span style=color:#f92672>[</span>1<span style=color:#f92672>]</span>: Starting BIRD Internet Routing Daemon <span style=color:#f92672>(</span>IPv4<span style=color:#f92672>)</span>...
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>Feb <span style=color:#ae81ff>07</span> 08:11:13 lb2 systemd<span style=color:#f92672>[</span>1<span style=color:#f92672>]</span>: Started BIRD Internet Routing Daemon <span style=color:#f92672>(</span>IPv4<span style=color:#f92672>)</span>.
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>Feb <span style=color:#ae81ff>07</span> 08:11:13 lb2 bird<span style=color:#f92672>[</span>884<span style=color:#f92672>]</span>: Chosen router ID 10.12.12.2 according to interface ens3
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>Feb <span style=color:#ae81ff>07</span> 08:11:13 lb2 bird<span style=color:#f92672>[</span>884<span style=color:#f92672>]</span>: Started
-</code></pre></div><h4 id=342-configure-exabgp>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>lb1$ sudo service bird start
+lb1$ sudo service bird status
+_ bird.service - BIRD Internet Routing Daemon <span style=color:#f92672>(</span>IPv4<span style=color:#f92672>)</span>
+   Loaded: loaded <span style=color:#f92672>(</span>/lib/systemd/system/bird.service<span style=color:#111>;</span> disabled<span style=color:#111>;</span> vendor preset: enabled<span style=color:#f92672>)</span>
+   Active: inactive <span style=color:#f92672>(</span>dead<span style=color:#f92672>)</span>
+
+Feb <span style=color:#ae81ff>07</span> 08:11:13 lb2 systemd<span style=color:#f92672>[</span>1<span style=color:#f92672>]</span>: Starting BIRD Internet Routing Daemon <span style=color:#f92672>(</span>IPv4<span style=color:#f92672>)</span>...
+Feb <span style=color:#ae81ff>07</span> 08:11:13 lb2 systemd<span style=color:#f92672>[</span>1<span style=color:#f92672>]</span>: Started BIRD Internet Routing Daemon <span style=color:#f92672>(</span>IPv4<span style=color:#f92672>)</span>.
+Feb <span style=color:#ae81ff>07</span> 08:11:13 lb2 bird<span style=color:#f92672>[</span>884<span style=color:#f92672>]</span>: Chosen router ID 10.12.12.2 according to interface ens3
+Feb <span style=color:#ae81ff>07</span> 08:11:13 lb2 bird<span style=color:#f92672>[</span>884<span style=color:#f92672>]</span>: Started
+</code></pre></td></tr></table>
+</div>
+</div><h4 id=342-configure-exabgp>
 3.4.2. Configure ExaBGP
 <a class=anchor href=#342-configure-exabgp>#</a>
 </h4>
@@ -306,64 +414,136 @@ copy running-config start-config
 <li>Instead of Bird, we can also use <a href=https://github.com/Exa-Networks/exabgp>ExaBGP</a>. ExaBGP provides a convenient way to implement Software Defined Networking by transforming BGP messages into friendly plain text or JSON, which can then be easily handled by simple scripts or your BSS/OSS.</li>
 <li>Install ExaBGP</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>lb1$ sudo apt install python3-pip python3-dev -y
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>lb1$ sudo pip3 install exabgp
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>lb1$ exabgp --run healthcheck --help
-</code></pre></div><ul>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>lb1$ sudo apt install python3-pip python3-dev -y
+lb1$ sudo pip3 install exabgp
+lb1$ exabgp --run healthcheck --help
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Create <code>exabgp</code> user and group.</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>lb1$ sudo useradd exabgp
-</code></pre></div><ul>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>lb1$ sudo useradd exabgp
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Configure ExaBGP</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>lb1$ sudo cat <span style=color:#d88200>&lt;&lt;EOF &gt; /etc/exabgp/exabgp.conf
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#d88200>neighbor 10.12.12.254 {  # Remote neighbor to peer with
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#d88200>    router-id 10.12.12.254; # Local router-id
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#d88200>    local-address 10.12.12.1; # Local update-router, change to 10.12.12.2 on lb2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#d88200>    local-as 65500; # Local AS
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#d88200>    peer-as 65500; # Peer AS
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#d88200>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#d88200>    family {
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#d88200>        ipv4 unicast;
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#d88200>    }
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#d88200>}
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#d88200>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#d88200>process watch-nginx {
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span><span style=color:#d88200>    run python3 -m exabgp healthcheck --cmd &#34;curl -sf http://127.0.0.1/file&#34; --label nginx --ip 10.13.13.1/32;
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span><span style=color:#d88200>    encoder json;
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#d88200>}
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span><span style=color:#d88200>EOF</span>
-</code></pre></div><ul>
-<li>Configure ExaBGP service file</li>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>lb1$ sudo cat <span style=color:#d88200>&lt;&lt;EOF &gt; /etc/exabgp/exabgp.conf
+</span><span style=color:#d88200>neighbor 10.12.12.254 {  # Remote neighbor to peer with
+</span><span style=color:#d88200>    router-id 10.12.12.254; # Local router-id
+</span><span style=color:#d88200>    local-address 10.12.12.1; # Local update-router, change to 10.12.12.2 on lb2
+</span><span style=color:#d88200>    local-as 65500; # Local AS
+</span><span style=color:#d88200>    peer-as 65500; # Peer AS
+</span><span style=color:#d88200>
+</span><span style=color:#d88200>    family {
+</span><span style=color:#d88200>        ipv4 unicast;
+</span><span style=color:#d88200>    }
+</span><span style=color:#d88200>}
+</span><span style=color:#d88200>
+</span><span style=color:#d88200>process watch-nginx {
+</span><span style=color:#d88200>    run python3 -m exabgp healthcheck --cmd &#34;curl -sf http://127.0.0.1/hostname&#34; --label nginx --ip 10.13.13.1/32;
+</span><span style=color:#d88200>    encoder json;
+</span><span style=color:#d88200>}
+</span><span style=color:#d88200>EOF</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Configure ExaBGP service</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>lb1$ sudo cat <span style=color:#d88200>&lt;&lt;EOF &gt; /lib/systemd/system/exabgp.service
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span><span style=color:#d88200>[Unit]
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span><span style=color:#d88200>Description=ExaBGP
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span><span style=color:#d88200>Documentation=man:exabgp(1)
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span><span style=color:#d88200>Documentation=man:exabgp.conf(5)
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#d88200>Documentation=https://github.com/Exa-Networks/exabgp/wiki
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#d88200>After=network.target
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#d88200>ConditionPathExists=/etc/exabgp/exabgp.conf
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#d88200>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#d88200>[Service]
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#d88200>User=exabgp
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#d88200>Group=exabgp
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span><span style=color:#d88200>Environment=exabgp_daemon_daemonize=false
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span><span style=color:#d88200>RuntimeDirectory=exabgp
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span><span style=color:#d88200>RuntimeDirectoryMode=0750
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span><span style=color:#d88200>ExecStart=/usr/local/bin/exabgp /etc/exabgp/exabgp.conf
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span><span style=color:#d88200>ExecReload=/bin/kill -USR1 $MAINPID
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18</span><span style=color:#d88200>Restart=always
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19</span><span style=color:#d88200>CapabilityBoundingSet=CAP_NET_ADMIN
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20</span><span style=color:#d88200>AmbientCapabilities=CAP_NET_ADMIN
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21</span><span style=color:#d88200>
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22</span><span style=color:#d88200>[Install]
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23</span><span style=color:#d88200>WantedBy=multi-user.target
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24</span><span style=color:#d88200>EOF</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26</span>lb1$ sudo service exabgp start
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27</span>lb1$ sudo service exabgp status
-</code></pre></div><h2 id=4-validate>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>lb1$ sudo cat <span style=color:#d88200>&lt;&lt;EOF &gt; /lib/systemd/system/exabgp.service
+</span><span style=color:#d88200>[Unit]
+</span><span style=color:#d88200>Description=ExaBGP
+</span><span style=color:#d88200>Documentation=man:exabgp(1)
+</span><span style=color:#d88200>Documentation=man:exabgp.conf(5)
+</span><span style=color:#d88200>Documentation=https://github.com/Exa-Networks/exabgp/wiki
+</span><span style=color:#d88200>After=network.target
+</span><span style=color:#d88200>ConditionPathExists=/etc/exabgp/exabgp.conf
+</span><span style=color:#d88200>
+</span><span style=color:#d88200>[Service]
+</span><span style=color:#d88200>User=exabgp
+</span><span style=color:#d88200>Group=exabgp
+</span><span style=color:#d88200>Environment=exabgp_daemon_daemonize=false
+</span><span style=color:#d88200>RuntimeDirectory=exabgp
+</span><span style=color:#d88200>RuntimeDirectoryMode=0750
+</span><span style=color:#d88200>ExecStart=/usr/local/bin/exabgp /etc/exabgp/exabgp.conf
+</span><span style=color:#d88200>ExecReload=/bin/kill -USR1 $MAINPID
+</span><span style=color:#d88200>Restart=always
+</span><span style=color:#d88200>CapabilityBoundingSet=CAP_NET_ADMIN
+</span><span style=color:#d88200>AmbientCapabilities=CAP_NET_ADMIN
+</span><span style=color:#d88200>
+</span><span style=color:#d88200>[Install]
+</span><span style=color:#d88200>WantedBy=multi-user.target
+</span><span style=color:#d88200>EOF</span>
+
+lb1$ sudo service exabgp start
+lb1$ sudo service exabgp status
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=4-validate>
 4. Validate
 <a class=anchor href=#4-validate>#</a>
 </h2>
@@ -375,103 +555,222 @@ copy running-config start-config
 <ul>
 <li>Client check.</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>client$ curl http://10.13.13.1/file
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>lb1
-</code></pre></div><ul>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>client$ curl http://10.13.13.1/hostname
+lb1
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Change client ip. The load balancing is working.</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>client$ curl http://10.13.13.1/file
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>lb2
-</code></pre></div><ul>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>client$ curl http://10.13.13.1/hostname
+lb2
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Check EdgeRouter and ISPRouter</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#75715e># EdgeRouter</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>vyos@edgerouter:~$ show ip bgp
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>BGP table version is 36, <span style=color:#111>local</span> router ID is 172.16.42.3, vrf id <span style=color:#ae81ff>0</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>Default <span style=color:#111>local</span> pref 100, <span style=color:#111>local</span> AS <span style=color:#ae81ff>65500</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>Status codes:  s suppressed, d damped, h history, * valid, &gt; best, <span style=color:#f92672>=</span> multipath,
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>               i internal, r RIB-failure, S Stale, R Removed
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>Nexthop codes: @NNN nexthop<span style=color:#8045ff>\&#39;</span>s vrf id, &lt; announce-nh-self
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>Origin codes:  i - IGP, e - EGP, ? - incomplete
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>   Network          Next Hop            Metric LocPrf Weight Path
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>*&gt; 0.0.0.0/0        172.16.42.2              <span style=color:#ae81ff>0</span>             <span style=color:#ae81ff>0</span> <span style=color:#ae81ff>65000</span> i
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>* i10.13.13.1/32    10.12.12.2            <span style=color:#ae81ff>1000</span>    <span style=color:#ae81ff>100</span>      <span style=color:#ae81ff>0</span> i
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>*&gt;i                 10.12.12.1             <span style=color:#ae81ff>100</span>    <span style=color:#ae81ff>100</span>      <span style=color:#ae81ff>0</span> i
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>Displayed  <span style=color:#ae81ff>2</span> routes and <span style=color:#ae81ff>3</span> total paths
-</code></pre></div><div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span><span style=color:#75715e># ISPRouter</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>vyos@isprouter:~$ show ip bgp
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>BGP table version is 12, <span style=color:#111>local</span> router ID is 172.16.42.2, vrf id <span style=color:#ae81ff>0</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>Default <span style=color:#111>local</span> pref 100, <span style=color:#111>local</span> AS <span style=color:#ae81ff>65000</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>Status codes:  s suppressed, d damped, h history, * valid, &gt; best, <span style=color:#f92672>=</span> multipath,
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>               i internal, r RIB-failure, S Stale, R Removed
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>Nexthop codes: @NNN nexthop<span style=color:#8045ff>\&#39;</span>s vrf id, &lt; announce-nh-self
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>Origin codes:  i - IGP, e - EGP, ? - incomplete
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>   Network          Next Hop            Metric LocPrf Weight Path
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>*&gt; 0.0.0.0/0        0.0.0.0                  <span style=color:#ae81ff>0</span>         <span style=color:#ae81ff>32768</span> i
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>*&gt; 10.13.13.1/32    172.16.42.3                            <span style=color:#ae81ff>0</span> <span style=color:#ae81ff>65500</span> i
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>Displayed  <span style=color:#ae81ff>2</span> routes and <span style=color:#ae81ff>2</span> total paths
-</code></pre></div><h3 id=42-scenario-2-one-lb-is-down>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># EdgeRouter</span>
+vyos@edgerouter:~$ show ip bgp
+BGP table version is 36, <span style=color:#111>local</span> router ID is 172.16.42.3, vrf id <span style=color:#ae81ff>0</span>
+Default <span style=color:#111>local</span> pref 100, <span style=color:#111>local</span> AS <span style=color:#ae81ff>65500</span>
+Status codes:  s suppressed, d damped, h history, * valid, &gt; best, <span style=color:#f92672>=</span> multipath,
+               i internal, r RIB-failure, S Stale, R Removed
+Nexthop codes: @NNN nexthop<span style=color:#8045ff>\&#39;</span>s vrf id, &lt; announce-nh-self
+Origin codes:  i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight Path
+*&gt; 0.0.0.0/0        172.16.42.2              <span style=color:#ae81ff>0</span>             <span style=color:#ae81ff>0</span> <span style=color:#ae81ff>65000</span> i
+* i10.13.13.1/32    10.12.12.2            <span style=color:#ae81ff>1000</span>    <span style=color:#ae81ff>100</span>      <span style=color:#ae81ff>0</span> i
+*&gt;i                 10.12.12.1             <span style=color:#ae81ff>100</span>    <span style=color:#ae81ff>100</span>      <span style=color:#ae81ff>0</span> i
+
+Displayed  <span style=color:#ae81ff>2</span> routes and <span style=color:#ae81ff>3</span> total paths
+</code></pre></td></tr></table>
+</div>
+</div><div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># ISPRouter</span>
+vyos@isprouter:~$ show ip bgp
+BGP table version is 12, <span style=color:#111>local</span> router ID is 172.16.42.2, vrf id <span style=color:#ae81ff>0</span>
+Default <span style=color:#111>local</span> pref 100, <span style=color:#111>local</span> AS <span style=color:#ae81ff>65000</span>
+Status codes:  s suppressed, d damped, h history, * valid, &gt; best, <span style=color:#f92672>=</span> multipath,
+               i internal, r RIB-failure, S Stale, R Removed
+Nexthop codes: @NNN nexthop<span style=color:#8045ff>\&#39;</span>s vrf id, &lt; announce-nh-self
+Origin codes:  i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight Path
+*&gt; 0.0.0.0/0        0.0.0.0                  <span style=color:#ae81ff>0</span>         <span style=color:#ae81ff>32768</span> i
+*&gt; 10.13.13.1/32    172.16.42.3                            <span style=color:#ae81ff>0</span> <span style=color:#ae81ff>65500</span> i
+
+Displayed  <span style=color:#ae81ff>2</span> routes and <span style=color:#ae81ff>2</span> total paths
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=42-scenario-2-one-lb-is-down>
 4.2. Scenario 2: One lb is down
 <a class=anchor href=#42-scenario-2-one-lb-is-down>#</a>
 </h3>
 <ul>
 <li>Stop nginx on lb1 (ExaBGP only, Bird may require the complete shutdown) or stop lb1 physically.</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>lb1$ sudo service nginx stop
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>lb2$ sudo journalctl -fu exabgp
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>-- Logs begin at Thu 2022-01-27 12:07:29 UTC. --
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span>Feb <span style=color:#ae81ff>07</span> 11:12:11 lb1 healthcheck<span style=color:#f92672>[</span>13584<span style=color:#f92672>]</span>: send announces <span style=color:#00a8c8>for</span> UP state to ExaBGP
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>Feb <span style=color:#ae81ff>07</span> 11:12:11 lb1 exabgp<span style=color:#f92672>[</span>13562<span style=color:#f92672>]</span>: api             route added to neighbor 10.12.12.254 local-ip 10.12.12.1 local-as <span style=color:#ae81ff>65500</span> peer-as <span style=color:#ae81ff>65500</span> router-id 10.12.12.254 family-allowed in-open : 10.13.13.1/32 next-hop self med <span style=color:#ae81ff>100</span>
-</code></pre></div><ul>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>lb1$ sudo service nginx stop
+lb2$ sudo journalctl -fu exabgp
+-- Logs begin at Thu 2022-01-27 12:07:29 UTC. --
+Feb <span style=color:#ae81ff>07</span> 11:12:11 lb1 healthcheck<span style=color:#f92672>[</span>13584<span style=color:#f92672>]</span>: send announces <span style=color:#00a8c8>for</span> UP state to ExaBGP
+Feb <span style=color:#ae81ff>07</span> 11:12:11 lb1 exabgp<span style=color:#f92672>[</span>13562<span style=color:#f92672>]</span>: api             route added to neighbor 10.12.12.254 local-ip 10.12.12.1 local-as <span style=color:#ae81ff>65500</span> peer-as <span style=color:#ae81ff>65500</span> router-id 10.12.12.254 family-allowed in-open : 10.13.13.1/32 next-hop self med <span style=color:#ae81ff>100</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Check client</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>client$ curl 10.13.13.1/file
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>lb2
-</code></pre></div><ul>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>client$ curl 10.13.13.1/hostname
+lb2
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Check EdgeRouter, you may notice that the metric of 10.12.12.1 hop became 1000.</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>vyos@edgerouter:~$ show ip bgp
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>BGP table version is 42, <span style=color:#111>local</span> router ID is 172.16.42.3, vrf id <span style=color:#ae81ff>0</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>Default <span style=color:#111>local</span> pref 100, <span style=color:#111>local</span> AS <span style=color:#ae81ff>65500</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>Status codes:  s suppressed, d damped, h history, * valid, &gt; best, <span style=color:#f92672>=</span> multipath,
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>               i internal, r RIB-failure, S Stale, R Removed
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>Nexthop codes: @NNN nexthop<span style=color:#8045ff>\&#39;</span>s vrf id, &lt; announce-nh-self
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>Origin codes:  i - IGP, e - EGP, ? - incomplete
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>   Network          Next Hop            Metric LocPrf Weight Path
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>*&gt; 0.0.0.0/0        172.16.42.2              <span style=color:#ae81ff>0</span>             <span style=color:#ae81ff>0</span> <span style=color:#ae81ff>65000</span> i
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>*&gt;i10.13.13.1/32    10.12.12.2             <span style=color:#ae81ff>100</span>    <span style=color:#ae81ff>100</span>      <span style=color:#ae81ff>0</span> i
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>* i                 10.12.12.1            <span style=color:#ae81ff>1000</span>    <span style=color:#ae81ff>100</span>      <span style=color:#ae81ff>0</span> i
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>Displayed  <span style=color:#ae81ff>2</span> routes and <span style=color:#ae81ff>3</span> total paths
-</code></pre></div><ul>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vyos@edgerouter:~$ show ip bgp
+BGP table version is 42, <span style=color:#111>local</span> router ID is 172.16.42.3, vrf id <span style=color:#ae81ff>0</span>
+Default <span style=color:#111>local</span> pref 100, <span style=color:#111>local</span> AS <span style=color:#ae81ff>65500</span>
+Status codes:  s suppressed, d damped, h history, * valid, &gt; best, <span style=color:#f92672>=</span> multipath,
+               i internal, r RIB-failure, S Stale, R Removed
+Nexthop codes: @NNN nexthop<span style=color:#8045ff>\&#39;</span>s vrf id, &lt; announce-nh-self
+Origin codes:  i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight Path
+*&gt; 0.0.0.0/0        172.16.42.2              <span style=color:#ae81ff>0</span>             <span style=color:#ae81ff>0</span> <span style=color:#ae81ff>65000</span> i
+*&gt;i10.13.13.1/32    10.12.12.2             <span style=color:#ae81ff>100</span>    <span style=color:#ae81ff>100</span>      <span style=color:#ae81ff>0</span> i
+* i                 10.12.12.1            <span style=color:#ae81ff>1000</span>    <span style=color:#ae81ff>100</span>      <span style=color:#ae81ff>0</span> i
+
+Displayed  <span style=color:#ae81ff>2</span> routes and <span style=color:#ae81ff>3</span> total paths
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Bring it back, then check client and EdgeRouter.</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1</span>vyos@edgerouter:~$ show ip bgp
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2</span>BGP table version is 43, <span style=color:#111>local</span> router ID is 172.16.42.3, vrf id <span style=color:#ae81ff>0</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3</span>Default <span style=color:#111>local</span> pref 100, <span style=color:#111>local</span> AS <span style=color:#ae81ff>65500</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4</span>Status codes:  s suppressed, d damped, h history, * valid, &gt; best, <span style=color:#f92672>=</span> multipath,
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5</span>               i internal, r RIB-failure, S Stale, R Removed
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span>Nexthop codes: @NNN nexthop<span style=color:#8045ff>\&#39;</span>s vrf id, &lt; announce-nh-self
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span>Origin codes:  i - IGP, e - EGP, ? - incomplete
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span>   Network          Next Hop            Metric LocPrf Weight Path
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span>*&gt; 0.0.0.0/0        172.16.42.2              <span style=color:#ae81ff>0</span>             <span style=color:#ae81ff>0</span> <span style=color:#ae81ff>65000</span> i
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span>*<span style=color:#f92672>=</span>i10.13.13.1/32    10.12.12.2             <span style=color:#ae81ff>100</span>    <span style=color:#ae81ff>100</span>      <span style=color:#ae81ff>0</span> i
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span>*&gt;i                 10.12.12.1             <span style=color:#ae81ff>100</span>    <span style=color:#ae81ff>100</span>      <span style=color:#ae81ff>0</span> i
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14</span>Displayed  <span style=color:#ae81ff>2</span> routes and <span style=color:#ae81ff>3</span> total paths
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16</span>client$ curl 10.13.13.1/file
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17</span>lb1
-</code></pre></div></article>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vyos@edgerouter:~$ show ip bgp
+BGP table version is 43, <span style=color:#111>local</span> router ID is 172.16.42.3, vrf id <span style=color:#ae81ff>0</span>
+Default <span style=color:#111>local</span> pref 100, <span style=color:#111>local</span> AS <span style=color:#ae81ff>65500</span>
+Status codes:  s suppressed, d damped, h history, * valid, &gt; best, <span style=color:#f92672>=</span> multipath,
+               i internal, r RIB-failure, S Stale, R Removed
+Nexthop codes: @NNN nexthop<span style=color:#8045ff>\&#39;</span>s vrf id, &lt; announce-nh-self
+Origin codes:  i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight Path
+*&gt; 0.0.0.0/0        172.16.42.2              <span style=color:#ae81ff>0</span>             <span style=color:#ae81ff>0</span> <span style=color:#ae81ff>65000</span> i
+*<span style=color:#f92672>=</span>i10.13.13.1/32    10.12.12.2             <span style=color:#ae81ff>100</span>    <span style=color:#ae81ff>100</span>      <span style=color:#ae81ff>0</span> i
+*&gt;i                 10.12.12.1             <span style=color:#ae81ff>100</span>    <span style=color:#ae81ff>100</span>      <span style=color:#ae81ff>0</span> i
+
+Displayed  <span style=color:#ae81ff>2</span> routes and <span style=color:#ae81ff>3</span> total paths
+
+client$ curl 10.13.13.1/hostname
+lb1
+</code></pre></td></tr></table>
+</div>
+</div></article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
-<div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/f7d6eea49f0f951d64d7409e98a51de891d3f2a3 title="Last modified by Kien Nguyen | Feb 08, 2022" target=_blank rel=noopener>
+<div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/f0cfd3b4a2756221c335e43ab8922f511bd6ffeb title="Last modified by Kien Nguyen | Feb 08, 2022" target=_blank rel=noopener>
 <img src=/blog/svg/calendar.svg class=book-icon alt=Calendar>
 <span>Feb 08, 2022</span>
 </a>

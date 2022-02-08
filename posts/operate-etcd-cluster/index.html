@@ -19,7 +19,7 @@
 <link rel=icon href=/blog/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/blog/book.min.2625e69c6b7661c7675edd24ba686fbc2f7d3dfe3fadbf62681b4d2cf2fead9d.css integrity="sha256-JiXmnGt2YcdnXt0kumhvvC99Pf4/rb9iaBtNLPL+rZ0=" crossorigin=anonymous>
 <script defer src=/blog/flexsearch.min.js></script>
-<script defer src=/blog/en.search.min.7dd3d330013b0c89a8aeb8eb53b13cbc277c6d1a551855ff874d4952baa089c8.js integrity="sha256-fdPTMAE7DImorrjrU7E8vCd8bRpVGFX/h01JUrqgicg=" crossorigin=anonymous></script>
+<script defer src=/blog/en.search.min.5b28a70dee84eaf6f1acae9c8e95f06a6a17d8a514620c1cc4910e336625e3e1.js integrity="sha256-WyinDe6E6vbxrK6cjpXwamoX2KUUYgwcxJEOM2Yl4+E=" crossorigin=anonymous></script>
 <script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css>
@@ -144,9 +144,17 @@
 <li>An etcd cluster is very sensitive to disk latencies. Since etcd must persist proposals to its log, disk activity from other processes may cause long <code>fsync</code> latencies. The upshot is etcd may miss heartbeats, causing request timeouts and temporary leader loss. An etcd server can sometimes stably run alongside these processes when given a high disk priority.</li>
 <li>Check whether a disk is fast enough for etcd using <a href=https://github.com/axboe/fio>fio</a>. If the 99th percentile of fdatasync is <strong>&lt;10ms</strong>, your storage is ok.</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>$ fio --rw<span style=color:#f92672>=</span>write --ioengine<span style=color:#f92672>=</span>sync --fdatasync<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> --directory<span style=color:#f92672>=</span>test-data <span style=color:#8045ff>\
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span><span style=color:#8045ff></span>    --size<span style=color:#f92672>=</span>22m --bs<span style=color:#f92672>=</span><span style=color:#ae81ff>2300</span> --name<span style=color:#f92672>=</span>mytest
-</code></pre></div><ul>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ fio --rw<span style=color:#f92672>=</span>write --ioengine<span style=color:#f92672>=</span>sync --fdatasync<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> --directory<span style=color:#f92672>=</span>test-data <span style=color:#8045ff>\
+</span><span style=color:#8045ff></span>    --size<span style=color:#f92672>=</span>22m --bs<span style=color:#f92672>=</span><span style=color:#ae81ff>2300</span> --name<span style=color:#f92672>=</span>mytest
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li><strong>SSD</strong> is recommended.</li>
 </ul>
 <h3 id=25-network>
@@ -184,21 +192,40 @@
 </li>
 <li>The heartbeat interval and election timeout value should be <strong>the same for all members in one cluster</strong>.</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#75715e># Command line arguments:</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>$ etcd --heartbeat-interval<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span> --election-timeout<span style=color:#f92672>=</span><span style=color:#ae81ff>500</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span style=color:#75715e># Environment variables:</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>$ <span style=color:#111>ETCD_HEARTBEAT_INTERVAL</span><span style=color:#f92672>=</span><span style=color:#ae81ff>100</span> <span style=color:#111>ETCD_ELECTION_TIMEOUT</span><span style=color:#f92672>=</span><span style=color:#ae81ff>500</span> etcd
-</code></pre></div><h3 id=32-disk>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># Command line arguments:</span>
+$ etcd --heartbeat-interval<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span> --election-timeout<span style=color:#f92672>=</span><span style=color:#ae81ff>500</span>
+
+<span style=color:#75715e># Environment variables:</span>
+$ <span style=color:#111>ETCD_HEARTBEAT_INTERVAL</span><span style=color:#f92672>=</span><span style=color:#ae81ff>100</span> <span style=color:#111>ETCD_ELECTION_TIMEOUT</span><span style=color:#f92672>=</span><span style=color:#ae81ff>500</span> etcd
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=32-disk>
 3.2. Disk
 <a class=anchor href=#32-disk>#</a>
 </h3>
 <ul>
 <li>An etcd server can sometimes stably run alongside these processes when given a high disk priority using <a href=https://linux.die.net/man/1/ionice>ionice</a>.</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#75715e># best effort, highest priority</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>$ sudo ionice -c2 -n0 -p <span style=color:#d88200>`</span>pgrep etcd<span style=color:#d88200>`</span>
-</code></pre></div><h3 id=33-snapshot>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># best effort, highest priority</span>
+$ sudo ionice -c2 -n0 -p <span style=color:#d88200>`</span>pgrep etcd<span style=color:#d88200>`</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=33-snapshot>
 3.3. Snapshot
 <a class=anchor href=#33-snapshot>#</a>
 </h3>
@@ -208,12 +235,23 @@
 <li>Default: make snapshots after every <strong>10 000 changes</strong>.</li>
 <li>Tuning: Just in case that etcd&rsquo;s memory and disk usage is too high, lower threshold.</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#75715e># Command line arguments:</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>$ etcd --snapshot-count<span style=color:#f92672>=</span><span style=color:#ae81ff>5000</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4</span><span style=color:#75715e># Environment variables:</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5</span>$ <span style=color:#111>ETCD_SNAPSHOT_COUNT</span><span style=color:#f92672>=</span><span style=color:#ae81ff>5000</span> etcd
-</code></pre></div><h2 id=4-maintenance>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># Command line arguments:</span>
+$ etcd --snapshot-count<span style=color:#f92672>=</span><span style=color:#ae81ff>5000</span>
+
+<span style=color:#75715e># Environment variables:</span>
+$ <span style=color:#111>ETCD_SNAPSHOT_COUNT</span><span style=color:#f92672>=</span><span style=color:#ae81ff>5000</span> etcd
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=4-maintenance>
 4. Maintenance
 <a class=anchor href=#4-maintenance>#</a>
 </h2>
@@ -225,9 +263,17 @@
 <li>Etcd keeps an exact history of its keyspace, the history should be periodically compacted to avoid performance degradation and eventual storage space exhaustion.</li>
 <li>Etcd can be set to automatically compact the keyspace with the <code>--auto-compaction-*</code> option with a period of hours.</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span><span style=color:#75715e># keep one hour of history</span>
-<span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2</span>$ etcd --auto-compaction-retention<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> --auto-compaction-mode<span style=color:#f92672>=</span>periodic
-</code></pre></div><ul>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># keep one hour of history</span>
+$ etcd --auto-compaction-retention<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> --auto-compaction-mode<span style=color:#f92672>=</span>periodic
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>Compaction modes:
 <ul>
 <li>Revision-based: <code>--auto-compaction-mode=revision --auto-compaction-retention=1000</code> automatically Compact on &ldquo;latest revision&rdquo; - 1000 every 5-minute (when latest revision is 30000, compact on revision 29000). Use this when having a large keyspace.</li>
@@ -244,8 +290,15 @@
 <li>Internal fragmentation space is available for use by etcd but unavailable to the host filesystem.</li>
 <li>Solution: Release this space back to the filesystem with defrag.</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1</span>$ etcdctl defrag
-</code></pre></div><ul>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ etcdctl defrag
+</code></pre></td></tr></table>
+</div>
+</div><ul>
 <li>It should be run rather infrequently, as there is always going to be an unavoidable pause.</li>
 </ul>
 <h2 id=5-references>
