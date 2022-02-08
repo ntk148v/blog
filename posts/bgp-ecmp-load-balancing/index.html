@@ -13,13 +13,13 @@ References:
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ntk148v.github.io/blog/posts/bgp-ecmp-load-balancing/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-02-07T15:35:08+07:00">
-<meta property="article:modified_time" content="2022-02-08T10:39:02+07:00"><meta property="og:site_name" content="/home/kiennt">
+<meta property="article:modified_time" content="2022-02-08T10:55:00+07:00"><meta property="og:site_name" content="/home/kiennt">
 <title>Bgp Ecmp Load Balancing | /home/kiennt</title>
 <link rel=manifest href=/blog/manifest.json>
 <link rel=icon href=/blog/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/blog/book.min.2625e69c6b7661c7675edd24ba686fbc2f7d3dfe3fadbf62681b4d2cf2fead9d.css integrity="sha256-JiXmnGt2YcdnXt0kumhvvC99Pf4/rb9iaBtNLPL+rZ0=" crossorigin=anonymous>
 <script defer src=/blog/flexsearch.min.js></script>
-<script defer src=/blog/en.search.min.48ed5bca3f2f91cdfad2fe56c8695b0edce6df71dd97f67f6dbf1080ba57b81e.js integrity="sha256-SO1byj8vkc360v5WyGlbDtzm33Hdl/Z/bb8QgLpXuB4=" crossorigin=anonymous></script>
+<script defer src=/blog/en.search.min.7dd3d330013b0c89a8aeb8eb53b13cbc277c6d1a551855ff874d4952baa089c8.js integrity="sha256-fdPTMAE7DImorrjrU7E8vCd8bRpVGFX/h01JUrqgicg=" crossorigin=anonymous></script>
 <script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css>
@@ -198,7 +198,13 @@ set service dns forwarding name-server '8.8.4.4'
 <ul>
 <li>Set up mode access.</li>
 </ul>
-<h3 id=34-servers>
+<pre tabindex=0><code>configure terminal
+interface range Ethernet 0/0-2
+switchport mode access
+switchport access  vlan 2
+exit
+copy running-config start-config
+</code></pre><h3 id=34-servers>
 3.4. Servers
 <a class=anchor href=#34-servers>#</a>
 </h3>
@@ -465,7 +471,7 @@ set service dns forwarding name-server '8.8.4.4'
 </code></pre></div></article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
-<div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/0e658173c60948fca971f00d211045b2af74e903 title="Last modified by Kien Nguyen | Feb 08, 2022" target=_blank rel=noopener>
+<div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/f7d6eea49f0f951d64d7409e98a51de891d3f2a3 title="Last modified by Kien Nguyen | Feb 08, 2022" target=_blank rel=noopener>
 <img src=/blog/svg/calendar.svg class=book-icon alt=Calendar>
 <span>Feb 08, 2022</span>
 </a>
