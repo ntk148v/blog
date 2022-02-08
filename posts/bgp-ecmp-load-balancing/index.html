@@ -13,13 +13,13 @@ References:
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ntk148v.github.io/blog/posts/bgp-ecmp-load-balancing/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-02-07T15:35:08+07:00">
-<meta property="article:modified_time" content="2022-02-08T10:11:51+07:00"><meta property="og:site_name" content="/home/kiennt">
+<meta property="article:modified_time" content="2022-02-08T10:39:02+07:00"><meta property="og:site_name" content="/home/kiennt">
 <title>Bgp Ecmp Load Balancing | /home/kiennt</title>
 <link rel=manifest href=/blog/manifest.json>
 <link rel=icon href=/blog/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/blog/book.min.2625e69c6b7661c7675edd24ba686fbc2f7d3dfe3fadbf62681b4d2cf2fead9d.css integrity="sha256-JiXmnGt2YcdnXt0kumhvvC99Pf4/rb9iaBtNLPL+rZ0=" crossorigin=anonymous>
 <script defer src=/blog/flexsearch.min.js></script>
-<script defer src=/blog/en.search.min.8a5cb3d08e0182690aa877c0a6c012a1fa3712868ce05a49295f0f4b810f5f65.js integrity="sha256-ilyz0I4BgmkKqHfApsASofo3EoaM4FpJKV8PS4EPX2U=" crossorigin=anonymous></script>
+<script defer src=/blog/en.search.min.48ed5bca3f2f91cdfad2fe56c8695b0edce6df71dd97f67f6dbf1080ba57b81e.js integrity="sha256-SO1byj8vkc360v5WyGlbDtzm33Hdl/Z/bb8QgLpXuB4=" crossorigin=anonymous></script>
 <script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css>
@@ -126,7 +126,7 @@ References:
 <li><code>AS 65000</code>: internet service provider. In this post, we will build a BGP session between EdgeRouter and ISP router.</li>
 <li><code>ISPRouter</code> and <code>EdgeRouter</code> are <a href=https://vyos.io/>VyOS</a> instances. You can use other routers as well.</li>
 <li><code>Switch</code> is a Cisco switch.</li>
-<li><code>client</code>, <code>lb1</code>, and <code>lb2</code> are Ubuntu server 18.04 instances. <code>lb1</code> and <code>lb2</code> will be in the <code>10.12.12.0/24</code> private LAN. Both servers will announce the same public IP (10.13.13.1) to <code>EdgeRouter</code> using BGP. Incoming traffic from internet to this public IP will be routed to <code>lb1</code> or <code>lb2</code> depending of a hash.</li>
+<li><code>client</code>, <code>lb1</code>, and <code>lb2</code> are Ubuntu server 18.04 instances. <code>lb1</code> and <code>lb2</code> will be in the <code>10.12.12.0/24</code> private LAN, we will install nginx (LB L7) on these. Both servers will announce the same public IP (10.13.13.1) to <code>EdgeRouter</code> using BGP. Incoming traffic from internet to this public IP will be routed to <code>lb1</code> or <code>lb2</code> depending of a hash.</li>
 <li>You need to download and install device virtual images. Follow <a href=https://www.eve-ng.net/index.php/documentation/howtos/howto-add-vyos-vyatta/>EVE-NG guide</a>.</li>
 </ul>
 <h2 id=3-configure>
@@ -213,7 +213,7 @@ set service dns forwarding name-server '8.8.4.4'
 </span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6</span><span style=color:#d88200>      - 10.13.13.1/24
 </span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7</span><span style=color:#d88200>    ens3:
 </span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8</span><span style=color:#d88200>      addresses:
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#d88200>      - 10.12.12.2/24 # change to 10.12.12.1 on lb1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9</span><span style=color:#d88200>      - 10.12.12.1/24 # change to 10.12.12.2 on lb2
 </span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10</span><span style=color:#d88200>      gateway4: 10.12.12.254
 </span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11</span><span style=color:#d88200>  version: 2
 </span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12</span><span style=color:#d88200>EOF</span>
@@ -465,7 +465,7 @@ set service dns forwarding name-server '8.8.4.4'
 </code></pre></div></article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
-<div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/ae5748c686c6e96abac4f29eb85ccbf8d0ef9628 title="Last modified by Kien Nguyen | Feb 08, 2022" target=_blank rel=noopener>
+<div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/0e658173c60948fca971f00d211045b2af74e903 title="Last modified by Kien Nguyen | Feb 08, 2022" target=_blank rel=noopener>
 <img src=/blog/svg/calendar.svg class=book-icon alt=Calendar>
 <span>Feb 08, 2022</span>
 </a>
