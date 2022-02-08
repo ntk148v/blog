@@ -95,6 +95,15 @@ set service dns forwarding name-server '8.8.4.4'
 
 - Set up mode access.
 
+```
+configure terminal
+interface range Ethernet 0/0-2
+switchport mode access
+switchport access  vlan 2
+exit
+copy running-config start-config
+```
+
 ### 3.4. Servers
 
 - Configure `10.13.13.1` on the local loopback interface.
