@@ -35,7 +35,7 @@ guessSyntax = false
 hl_Lines = ""
 lineNoStart = 1
 lineNos = true
-lineNumbersInTable = false
+lineNumbersInTable = true
 tabWidth = 4
 
 [markup.goldmark.renderer]
