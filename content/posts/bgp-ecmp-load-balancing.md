@@ -141,14 +141,14 @@ server {
         listen 80 default_server;
         listen [::]:80 default_server;
 
-        root /tmp;
+        root /var/www/html;
 }
 EOF
 
 # In lb1
-lb1$ echo lb1 > /tmp/file
+lb1$ echo lb1 > /var/www/html/hostname
 # In lb2
-lb2$ echo lb2 > /tmp/file
+lb2$ echo lb2 > /var/www/html/hostname
 
 lb1$ sudo service nginx start
 ```
@@ -243,13 +243,13 @@ neighbor 10.12.12.254 {  # Remote neighbor to peer with
 }
 
 process watch-nginx {
-    run python3 -m exabgp healthcheck --cmd "curl -sf http://127.0.0.1/file" --label nginx --ip 10.13.13.1/32;
+    run python3 -m exabgp healthcheck --cmd "curl -sf http://127.0.0.1/hostname" --label nginx --ip 10.13.13.1/32;
     encoder json;
 }
 EOF
 ```
 
-- Configure ExaBGP service file
+- Configure ExaBGP service
 
 ```bash
 lb1$ sudo cat <<EOF > /lib/systemd/system/exabgp.service
@@ -290,14 +290,14 @@ To make sure everything works as expected.
 - Client check.
 
 ```bash
-client$ curl http://10.13.13.1/file
+client$ curl http://10.13.13.1/hostname
 lb1
 ```
 
 - Change client ip. The load balancing is working.
 
 ```bash
-client$ curl http://10.13.13.1/file
+client$ curl http://10.13.13.1/hostname
 lb2
 ```
 
@@ -353,7 +353,7 @@ Feb 07 11:12:11 lb1 exabgp[13562]: api             route added to neighbor 10.12
 - Check client
 
 ```bash
-client$ curl 10.13.13.1/file
+client$ curl 10.13.13.1/hostname
 lb2
 ```
 
@@ -394,6 +394,6 @@ Origin codes:  i - IGP, e - EGP, ? - incomplete
 
 Displayed  2 routes and 3 total paths
 
-client$ curl 10.13.13.1/file
+client$ curl 10.13.13.1/hostname
 lb1
 ```
