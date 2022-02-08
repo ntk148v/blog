@@ -25,7 +25,7 @@ References:
 - `AS 65000`: internet service provider. In this post, we will build a BGP session between EdgeRouter and ISP router.
 - `ISPRouter` and `EdgeRouter` are [VyOS](https://vyos.io/) instances. You can use other routers as well.
 - `Switch` is a Cisco switch.
-- `client`, `lb1`, and `lb2` are Ubuntu server 18.04 instances. `lb1` and `lb2` will be in the `10.12.12.0/24` private LAN. Both servers will announce the same public IP (10.13.13.1) to `EdgeRouter` using BGP. Incoming traffic from internet to this public IP will be routed to `lb1` or `lb2` depending of a hash.
+- `client`, `lb1`, and `lb2` are Ubuntu server 18.04 instances. `lb1` and `lb2` will be in the `10.12.12.0/24` private LAN, we will install nginx (LB L7) on these. Both servers will announce the same public IP (10.13.13.1) to `EdgeRouter` using BGP. Incoming traffic from internet to this public IP will be routed to `lb1` or `lb2` depending of a hash.
 - You need to download and install device virtual images. Follow [EVE-NG guide](https://www.eve-ng.net/index.php/documentation/howtos/howto-add-vyos-vyatta/).
 
 ## 3. Configure
@@ -108,7 +108,7 @@ network:
       - 10.13.13.1/24
     ens3:
       addresses:
-      - 10.12.12.2/24 # change to 10.12.12.1 on lb1
+      - 10.12.12.1/24 # change to 10.12.12.2 on lb2
       gateway4: 10.12.12.254
   version: 2
 EOF
