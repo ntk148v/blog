@@ -13,13 +13,13 @@ References:
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ntk148v.github.io/blog/posts/bgp-ecmp-load-balancing/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-02-07T15:35:08+07:00">
-<meta property="article:modified_time" content="2022-02-08T15:00:00+07:00"><meta property="og:site_name" content="/home/kiennt">
+<meta property="article:modified_time" content="2022-02-09T17:20:39+07:00"><meta property="og:site_name" content="/home/kiennt">
 <title>Bgp Ecmp Load Balancing | /home/kiennt</title>
 <link rel=manifest href=/blog/manifest.json>
 <link rel=icon href=/blog/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/blog/book.min.2625e69c6b7661c7675edd24ba686fbc2f7d3dfe3fadbf62681b4d2cf2fead9d.css integrity="sha256-JiXmnGt2YcdnXt0kumhvvC99Pf4/rb9iaBtNLPL+rZ0=" crossorigin=anonymous>
 <script defer src=/blog/flexsearch.min.js></script>
-<script defer src=/blog/en.search.min.5b28a70dee84eaf6f1acae9c8e95f06a6a17d8a514620c1cc4910e336625e3e1.js integrity="sha256-WyinDe6E6vbxrK6cjpXwamoX2KUUYgwcxJEOM2Yl4+E=" crossorigin=anonymous></script>
+<script defer src=/blog/en.search.min.f0760bcecc05f166c78b83842f018e96d1333cad3477561d187aab6ec051dbfd.js integrity="sha256-8HYLzswF8WbHi4OELwGOltEzPK00d1YdGHqrbsBR2/0=" crossorigin=anonymous></script>
 <script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css>
@@ -124,10 +124,10 @@ References:
 </div>
 <ul>
 <li><code>AS 65000</code>: internet service provider. In this post, we will build a BGP session between EdgeRouter and ISP router.</li>
-<li><code>ISPRouter</code> and <code>EdgeRouter</code> are <a href=https://vyos.io/>VyOS</a> instances. You can use other routers as well.</li>
+<li><code>ISPRouter</code> and <code>EdgeRouter</code> are <a href=https://docs.fortinet.com/document/fortigate/7.0.3>Fortinet Fortigate v7.0.3</a> instances. You can use other routers as well.</li>
 <li><code>Switch</code> is a Cisco switch.</li>
 <li><code>client</code>, <code>lb1</code>, and <code>lb2</code> are Ubuntu server 18.04 instances. <code>lb1</code> and <code>lb2</code> will be in the <code>10.12.12.0/24</code> private LAN, we will install nginx (LB L7) on these. Both servers will announce the same public IP (10.13.13.1) to <code>EdgeRouter</code> using BGP. Incoming traffic from internet to this public IP will be routed to <code>lb1</code> or <code>lb2</code> depending of a hash.</li>
-<li>You need to download and install device virtual images. Follow <a href=https://www.eve-ng.net/index.php/documentation/howtos/howto-add-vyos-vyatta/>EVE-NG guide</a>.</li>
+<li>You need to download and install device virtual images. Follow <a href=https://www.eve-ng.net/index.php/documentation/howtos/howto-add-fortinet-images/>EVE-NG guide</a>.</li>
 </ul>
 <h2 id=3-configure>
 3. Configure
@@ -137,74 +137,241 @@ References:
 3.1. ISPRouter
 <a class=anchor href=#31-isprouter>#</a>
 </h3>
-<p>Follow the <a href=https://docs.vyos.io/en/equuleus/quick-start.html>VyOS Quickstart</a> for the basic commands.</p>
-<pre tabindex=0><code># interfaces configurations
-set interfaces ethernet eth0 address 'dhcp'
-set interfaces ethernet eth1 address '10.0.0.254/24'
-set interfaces ethernet eth2 address '172.16.42.2/31'
+<p>Follow the <a href=https://docs.fortinet.com/document/fortigate/7.0.3>Fortigate document</a> for the basic commands.</p>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># interfaces configurations</span>
+config system interface
+    edit <span style=color:#d88200>&#34;port1&#34;</span>
+        <span style=color:#111>set</span> mode static
+        <span style=color:#111>set</span> ip 192.168.22.226 255.255.255.0
+        <span style=color:#111>set</span> allowaccess ping https ssh http telnet
+    next
+    edit <span style=color:#d88200>&#34;port2&#34;</span>
+        <span style=color:#111>set</span> mode static
+        <span style=color:#111>set</span> ip 10.0.0.254 255.255.255.0
+        <span style=color:#111>set</span> allowaccess ping https ssh http telnet
+    next
+    edit <span style=color:#d88200>&#34;port3&#34;</span>
+        <span style=color:#111>set</span> mode static
+        <span style=color:#111>set</span> ip 172.16.42.2 255.255.255.254
+        <span style=color:#111>set</span> allowaccess ping https ssh http telnet
+    next
+end
+<span style=color:#75715e># Simple BGP configuration</span>
+config router bgp
+    <span style=color:#111>set</span> as <span style=color:#ae81ff>65000</span>
+    <span style=color:#111>set</span> router-id 172.16.42.2
+    config neighbor
+        edit <span style=color:#d88200>&#34;172.16.42.3&#34;</span>
+            <span style=color:#111>set</span> capability-default-originate <span style=color:#111>enable</span>
+            <span style=color:#111>set</span> remote-as <span style=color:#ae81ff>65500</span>
+            <span style=color:#111>set</span> update-source <span style=color:#d88200>&#34;port3&#34;</span>
+        next
+    end
+end
 
-# source nat to let 'client' instance reach internet (optional)
-set nat source rule 100 outbound-interface 'eth0'
-set nat source rule 100 source address '10.0.0.0/24'
-set nat source rule 100 translation address 'masquerade'
-
-# source nat let my network reach internet (optional)
-set nat source rule 200 outbound-interface 'eth0'
-set nat source rule 200 source address '172.16.42.3/31'
-set nat source rule 200 translation address 'masquerade'
-
-# Simple BGP configuration
-set protocols bgp 65000 neighbor 172.16.42.3 remote-as '65500'
-set protocols bgp 65000 neighbor 172.16.42.3 update-source '172.16.42.2'
-set protocols bgp 65000 address-family ipv4-unicast network 0.0.0.0/0
-set protocols bgp 65000 parameters router-id '172.16.42.2'
-
-# DNS server for 'client instance'
-set service dns forwarding cache-size '0'
-set service dns forwarding listen-address '10.0.0.254'
-set service dns forwarding allow-from '10.0.0.0/24'
-set service dns forwarding name-server '8.8.8.8'
-set service dns forwarding name-server '8.8.4.4'
-</code></pre><h3 id=32-edgerouter>
+<span style=color:#75715e># Firewall policy (simple allow all)</span>
+config firewall policy
+    edit <span style=color:#ae81ff>1</span>
+        <span style=color:#111>set</span> name <span style=color:#d88200>&#34;allow&#34;</span>
+        <span style=color:#111>set</span> srcintf <span style=color:#d88200>&#34;any&#34;</span>
+        <span style=color:#111>set</span> dstintf <span style=color:#d88200>&#34;any&#34;</span>
+        <span style=color:#111>set</span> action accept
+        <span style=color:#111>set</span> srcaddr <span style=color:#d88200>&#34;all&#34;</span>
+        <span style=color:#111>set</span> dstaddr <span style=color:#d88200>&#34;all&#34;</span>
+        <span style=color:#111>set</span> schedule <span style=color:#d88200>&#34;always&#34;</span>
+        <span style=color:#111>set</span> service <span style=color:#d88200>&#34;ALL&#34;</span>
+    next
+end
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=32-edgerouter>
 3.2. EdgeRouter
 <a class=anchor href=#32-edgerouter>#</a>
 </h3>
-<pre tabindex=0><code>set interfaces ethernet eth0 address '172.16.42.3/31'
-set interfaces ethernet eth1 address '10.12.12.254/24'
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>config system interface
+    edit <span style=color:#d88200>&#34;port1&#34;</span>
+        <span style=color:#111>set</span> vdom <span style=color:#d88200>&#34;root&#34;</span>
+        <span style=color:#111>set</span> ip 172.16.42.3 255.255.255.254
+        <span style=color:#111>set</span> allowaccess ping https ssh snmp http telnet
+        <span style=color:#111>set</span> <span style=color:#111>type</span> physical
+        <span style=color:#111>set</span> snmp-index <span style=color:#ae81ff>1</span>
+    next
+    edit <span style=color:#d88200>&#34;port2&#34;</span>
+        <span style=color:#111>set</span> vdom <span style=color:#d88200>&#34;root&#34;</span>
+        <span style=color:#111>set</span> ip 10.12.12.254 255.255.255.0
+        <span style=color:#111>set</span> allowaccess ping https ssh snmp http telnet
+        <span style=color:#111>set</span> <span style=color:#111>type</span> physical
+        <span style=color:#111>set</span> snmp-index <span style=color:#ae81ff>2</span>
+    next
+end
 
-set nat source rule 100 outbound-interface 'eth0'
-set nat source rule 100 source address '10.12.12.0/24'
-set nat source rule 100 translation address 'masquerade'
+<span style=color:#75715e># BGP config</span>
+config router bgp
+    <span style=color:#111>set</span> as <span style=color:#ae81ff>65500</span>
+    <span style=color:#111>set</span> router-id 172.16.42.3
+    <span style=color:#111>set</span> ibgp-multipath <span style=color:#111>enable</span>
+    <span style=color:#111>set</span> additional-path <span style=color:#111>enable</span>
+    config neighbor
+        edit <span style=color:#d88200>&#34;10.12.12.2&#34;</span>
+            <span style=color:#111>set</span> remote-as <span style=color:#ae81ff>65500</span>
+            <span style=color:#111>set</span> update-source <span style=color:#d88200>&#34;port2&#34;</span>
+        next
+        edit <span style=color:#d88200>&#34;10.12.12.1&#34;</span>
+            <span style=color:#111>set</span> remote-as <span style=color:#ae81ff>65500</span>
+            <span style=color:#111>set</span> update-source <span style=color:#d88200>&#34;port2&#34;</span>
+        next
+        edit <span style=color:#d88200>&#34;172.16.42.2&#34;</span>
+            <span style=color:#111>set</span> remote-as <span style=color:#ae81ff>65000</span>
+            <span style=color:#111>set</span> update-source <span style=color:#d88200>&#34;port1&#34;</span>
+        next
+    end
+end
 
-set protocols bgp 65500 address-family ipv4-unicast maximum-paths ibgp '2'
-set protocols bgp 65500 neighbor 10.12.12.1 remote-as '65500'
-set protocols bgp 65500 neighbor 10.12.12.1 update-source '10.12.12.254'
-set protocols bgp 65500 neighbor 10.12.12.2 remote-as '65500'
-set protocols bgp 65500 neighbor 10.12.12.2 update-source '10.12.12.254'
-set protocols bgp 65500 neighbor 172.16.42.2 remote-as '65000'
-set protocols bgp 65500 neighbor 172.16.42.2 update-source '172.16.42.3'
-set protocols bgp 65500 parameters router-id '172.16.42.3'
-
-set service dns forwarding cache-size '0'
-set service dns forwarding listen-address '10.12.12.254'
-set service dns forwarding name-server '8.8.8.8'
-set service dns forwarding allow-from '10.12.12.0/24'
-set service dns forwarding name-server '8.8.8.8'
-set service dns forwarding name-server '8.8.4.4'
-</code></pre><h3 id=33-switch>
+<span style=color:#75715e># Firewall policy (simple allow all)</span>
+config firewall policy
+    edit <span style=color:#ae81ff>1</span>
+        <span style=color:#111>set</span> name <span style=color:#d88200>&#34;allow&#34;</span>
+        <span style=color:#111>set</span> srcintf <span style=color:#d88200>&#34;any&#34;</span>
+        <span style=color:#111>set</span> dstintf <span style=color:#d88200>&#34;any&#34;</span>
+        <span style=color:#111>set</span> action accept
+        <span style=color:#111>set</span> srcaddr <span style=color:#d88200>&#34;all&#34;</span>
+        <span style=color:#111>set</span> dstaddr <span style=color:#d88200>&#34;all&#34;</span>
+        <span style=color:#111>set</span> schedule <span style=color:#d88200>&#34;always&#34;</span>
+        <span style=color:#111>set</span> service <span style=color:#d88200>&#34;ALL&#34;</span>
+    next
+end
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=33-switch>
 3.3. Switch
 <a class=anchor href=#33-switch>#</a>
 </h3>
 <ul>
 <li>Set up mode access.</li>
 </ul>
-<pre tabindex=0><code>configure terminal
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>configure terminal
 interface range Ethernet 0/0-2
 switchport mode access
-switchport access  vlan 2
-exit
+switchport access  vlan <span style=color:#ae81ff>2</span>
+<span style=color:#111>exit</span>
 copy running-config start-config
-</code></pre><h3 id=34-servers>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=34-servers>
 3.4. Servers
 <a class=anchor href=#34-servers>#</a>
 </h3>
@@ -566,166 +733,10 @@ lb1
 </code></pre></td></tr></table>
 </div>
 </div><ul>
-<li>Change client ip. The load balancing is working.</li>
-</ul>
-<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>client$ curl http://10.13.13.1/hostname
-lb2
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>Check EdgeRouter and ISPRouter</li>
-</ul>
-<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># EdgeRouter</span>
-vyos@edgerouter:~$ show ip bgp
-BGP table version is 36, <span style=color:#111>local</span> router ID is 172.16.42.3, vrf id <span style=color:#ae81ff>0</span>
-Default <span style=color:#111>local</span> pref 100, <span style=color:#111>local</span> AS <span style=color:#ae81ff>65500</span>
-Status codes:  s suppressed, d damped, h history, * valid, &gt; best, <span style=color:#f92672>=</span> multipath,
-               i internal, r RIB-failure, S Stale, R Removed
-Nexthop codes: @NNN nexthop<span style=color:#8045ff>\&#39;</span>s vrf id, &lt; announce-nh-self
-Origin codes:  i - IGP, e - EGP, ? - incomplete
-
-   Network          Next Hop            Metric LocPrf Weight Path
-*&gt; 0.0.0.0/0        172.16.42.2              <span style=color:#ae81ff>0</span>             <span style=color:#ae81ff>0</span> <span style=color:#ae81ff>65000</span> i
-* i10.13.13.1/32    10.12.12.2            <span style=color:#ae81ff>1000</span>    <span style=color:#ae81ff>100</span>      <span style=color:#ae81ff>0</span> i
-*&gt;i                 10.12.12.1             <span style=color:#ae81ff>100</span>    <span style=color:#ae81ff>100</span>      <span style=color:#ae81ff>0</span> i
-
-Displayed  <span style=color:#ae81ff>2</span> routes and <span style=color:#ae81ff>3</span> total paths
-</code></pre></td></tr></table>
-</div>
-</div><div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># ISPRouter</span>
-vyos@isprouter:~$ show ip bgp
-BGP table version is 12, <span style=color:#111>local</span> router ID is 172.16.42.2, vrf id <span style=color:#ae81ff>0</span>
-Default <span style=color:#111>local</span> pref 100, <span style=color:#111>local</span> AS <span style=color:#ae81ff>65000</span>
-Status codes:  s suppressed, d damped, h history, * valid, &gt; best, <span style=color:#f92672>=</span> multipath,
-               i internal, r RIB-failure, S Stale, R Removed
-Nexthop codes: @NNN nexthop<span style=color:#8045ff>\&#39;</span>s vrf id, &lt; announce-nh-self
-Origin codes:  i - IGP, e - EGP, ? - incomplete
-
-   Network          Next Hop            Metric LocPrf Weight Path
-*&gt; 0.0.0.0/0        0.0.0.0                  <span style=color:#ae81ff>0</span>         <span style=color:#ae81ff>32768</span> i
-*&gt; 10.13.13.1/32    172.16.42.3                            <span style=color:#ae81ff>0</span> <span style=color:#ae81ff>65500</span> i
-
-Displayed  <span style=color:#ae81ff>2</span> routes and <span style=color:#ae81ff>2</span> total paths
-</code></pre></td></tr></table>
-</div>
-</div><h3 id=42-scenario-2-one-lb-is-down>
-4.2. Scenario 2: One lb is down
-<a class=anchor href=#42-scenario-2-one-lb-is-down>#</a>
-</h3>
-<ul>
-<li>Stop nginx on lb1 (ExaBGP only, Bird may require the complete shutdown) or stop lb1 physically.</li>
-</ul>
-<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>lb1$ sudo service nginx stop
-lb2$ sudo journalctl -fu exabgp
--- Logs begin at Thu 2022-01-27 12:07:29 UTC. --
-Feb <span style=color:#ae81ff>07</span> 11:12:11 lb1 healthcheck<span style=color:#f92672>[</span>13584<span style=color:#f92672>]</span>: send announces <span style=color:#00a8c8>for</span> UP state to ExaBGP
-Feb <span style=color:#ae81ff>07</span> 11:12:11 lb1 exabgp<span style=color:#f92672>[</span>13562<span style=color:#f92672>]</span>: api             route added to neighbor 10.12.12.254 local-ip 10.12.12.1 local-as <span style=color:#ae81ff>65500</span> peer-as <span style=color:#ae81ff>65500</span> router-id 10.12.12.254 family-allowed in-open : 10.13.13.1/32 next-hop self med <span style=color:#ae81ff>100</span>
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>Check client</li>
-</ul>
-<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>client$ curl 10.13.13.1/hostname
-lb2
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>Check EdgeRouter, you may notice that the metric of 10.12.12.1 hop became 1000.</li>
-</ul>
-<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vyos@edgerouter:~$ show ip bgp
-BGP table version is 42, <span style=color:#111>local</span> router ID is 172.16.42.3, vrf id <span style=color:#ae81ff>0</span>
-Default <span style=color:#111>local</span> pref 100, <span style=color:#111>local</span> AS <span style=color:#ae81ff>65500</span>
-Status codes:  s suppressed, d damped, h history, * valid, &gt; best, <span style=color:#f92672>=</span> multipath,
-               i internal, r RIB-failure, S Stale, R Removed
-Nexthop codes: @NNN nexthop<span style=color:#8045ff>\&#39;</span>s vrf id, &lt; announce-nh-self
-Origin codes:  i - IGP, e - EGP, ? - incomplete
-
-   Network          Next Hop            Metric LocPrf Weight Path
-*&gt; 0.0.0.0/0        172.16.42.2              <span style=color:#ae81ff>0</span>             <span style=color:#ae81ff>0</span> <span style=color:#ae81ff>65000</span> i
-*&gt;i10.13.13.1/32    10.12.12.2             <span style=color:#ae81ff>100</span>    <span style=color:#ae81ff>100</span>      <span style=color:#ae81ff>0</span> i
-* i                 10.12.12.1            <span style=color:#ae81ff>1000</span>    <span style=color:#ae81ff>100</span>      <span style=color:#ae81ff>0</span> i
-
-Displayed  <span style=color:#ae81ff>2</span> routes and <span style=color:#ae81ff>3</span> total paths
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>Bring it back, then check client and EdgeRouter.</li>
+<li></li>
+<li>
+<p>Change client ip. The load balancing works!</p>
+</li>
 </ul>
 <div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
 <table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
@@ -748,31 +759,199 @@ Displayed  <span style=color:#ae81ff>2</span> routes and <span style=color:#ae81
 </span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
 </span></code></pre></td>
 <td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>vyos@edgerouter:~$ show ip bgp
-BGP table version is 43, <span style=color:#111>local</span> router ID is 172.16.42.3, vrf id <span style=color:#ae81ff>0</span>
-Default <span style=color:#111>local</span> pref 100, <span style=color:#111>local</span> AS <span style=color:#ae81ff>65500</span>
-Status codes:  s suppressed, d damped, h history, * valid, &gt; best, <span style=color:#f92672>=</span> multipath,
-               i internal, r RIB-failure, S Stale, R Removed
-Nexthop codes: @NNN nexthop<span style=color:#8045ff>\&#39;</span>s vrf id, &lt; announce-nh-self
-Origin codes:  i - IGP, e - EGP, ? - incomplete
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># Set client&#39;s ip to 10.0.0.1</span>
+client$ ip a
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu <span style=color:#ae81ff>65536</span> qdisc noqueue state UNKNOWN group default qlen <span style=color:#ae81ff>1000</span>
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: ens3: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu <span style=color:#ae81ff>1500</span> qdisc fq_codel state UP group default qlen <span style=color:#ae81ff>1000</span>
+    link/ether 00:50:00:00:05:00 brd ff:ff:ff:ff:ff:ff
+    inet 10.0.0.1/24 brd 10.0.0.255 scope global ens3
+       valid_lft forever preferred_lft forever
+    inet6 fe80::250:ff:fe00:500/64 scope link
+       valid_lft forever preferred_lft forever
 
-   Network          Next Hop            Metric LocPrf Weight Path
-*&gt; 0.0.0.0/0        172.16.42.2              <span style=color:#ae81ff>0</span>             <span style=color:#ae81ff>0</span> <span style=color:#ae81ff>65000</span> i
-*<span style=color:#f92672>=</span>i10.13.13.1/32    10.12.12.2             <span style=color:#ae81ff>100</span>    <span style=color:#ae81ff>100</span>      <span style=color:#ae81ff>0</span> i
-*&gt;i                 10.12.12.1             <span style=color:#ae81ff>100</span>    <span style=color:#ae81ff>100</span>      <span style=color:#ae81ff>0</span> i
-
-Displayed  <span style=color:#ae81ff>2</span> routes and <span style=color:#ae81ff>3</span> total paths
-
-client$ curl 10.13.13.1/hostname
+client$ curl http://10.13.13.1/hostname
 lb1
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Change client&rsquo;s ip address to <code>10.0.0.100</code> and send another request. You can the request was sent to <code>lb2</code> instead <code>lb1</code>.</li>
+</ul>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>client$ curl http://10.13.13.1/hostname
+lb2
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Check EdgeRouter.</li>
+</ul>
+<pre tabindex=0><code>FortiGate-VM64-KVM # get router info routing-table all
+Codes: K - kernel, C - connected, S - static, R - RIP, B - BGP
+       O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default
+
+Routing table for VRF=0
+B*      0.0.0.0/0 [20/0] via 172.16.42.2 (recursive is directly connected, port1), 01:01:52
+C       10.12.12.0/24 is directly connected, port2
+B       10.13.13.1/32 [200/100] via 10.12.12.1 (recursive is directly connected, port2), 01:04:33
+                      [200/100] via 10.12.12.2 (recursive is directly connected, port2), 01:04:33
+C       172.16.42.2/31 is directly connected, port1
+
+FortiGate-VM64-KVM # get router info bgp network
+VRF 0 BGP table version is 3, local router ID is 172.16.42.3
+Status codes: s suppressed, d damped, h history, * valid, &gt; best, i - internal,
+              S Stale
+Origin codes: i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight RouteTag Path
+*&gt; 0.0.0.0/0        172.16.42.2              0             0        0 65000 i &lt;-/1&gt;
+*&gt;i10.13.13.1/32    10.12.12.2             100    100      0        0 i &lt;-/2&gt;
+*&gt;i                 10.12.12.1             100    100      0        0 i &lt;-/1&gt;
+
+Total number of prefixes 2
+</code></pre><ul>
+<li>Check ISPRouter</li>
+</ul>
+<pre tabindex=0><code>FortiGate-VM64-KVM # get router info routing-table all
+Codes: K - kernel, C - connected, S - static, R - RIP, B - BGP
+       O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default
+
+Routing table for VRF=0
+C       10.0.0.0/24 is directly connected, port2
+B       10.13.13.1/32 [20/0] via 172.16.42.3 (recursive is directly connected, port3), 01:06:48
+C       172.16.42.2/31 is directly connected, port3
+C       192.168.22.0/24 is directly connected, port1
+
+
+FortiGate-VM64-KVM # get router info bgp network
+VRF 0 BGP table version is 1, local router ID is 172.16.42.2
+Status codes: s suppressed, d damped, h history, * valid, &gt; best, i - internal,
+              S Stale
+Origin codes: i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight RouteTag Path
+*&gt; 10.13.13.1/32    172.16.42.3              0             0        0 65500 i &lt;-/1&gt;
+
+Total number of prefixes 1
+</code></pre><h3 id=42-scenario-2-one-lb-is-down>
+4.2. Scenario 2: One lb is down
+<a class=anchor href=#42-scenario-2-one-lb-is-down>#</a>
+</h3>
+<ul>
+<li>Stop nginx on lb2 (ExaBGP only, Bird may require the complete shutdown) or stop lb2 physically.</li>
+</ul>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>lb2$ sudo service nginx stop
+lb2$ sudo journalctl -fu exabgp
+-- Logs begin at Thu 2022-01-27 12:07:29 UTC. --
+Feb <span style=color:#ae81ff>07</span> 11:12:11 lb2 healthcheck<span style=color:#f92672>[</span>13584<span style=color:#f92672>]</span>: send announces <span style=color:#00a8c8>for</span> DOWN state to ExaBGP
+Feb <span style=color:#ae81ff>07</span> 11:12:11 lb2 exabgp<span style=color:#f92672>[</span>13562<span style=color:#f92672>]</span>: api             route added to neighbor 10.12.12.254 local-ip 10.12.12.2 local-as <span style=color:#ae81ff>65500</span> peer-as <span style=color:#ae81ff>65500</span> router-id 10.12.12.254 family-allowed in-open : 10.13.13.1/32 next-hop self med <span style=color:#ae81ff>1000</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Check client</li>
+</ul>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>client$ curl 10.13.13.1/hostname
+lb1
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Check EdgeRouter, you may notice that the metric of 10.12.12.2 hop became 1000.</li>
+</ul>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>FortiGate-VM64-KVM <span style=color:#75715e># get router info bgp network</span>
+VRF <span style=color:#ae81ff>0</span> BGP table version is 4, <span style=color:#111>local</span> router ID is 172.16.42.3
+Status codes: s suppressed, d damped, h history, * valid, &gt; best, i - internal,
+              S Stale
+Origin codes: i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight RouteTag Path
+*&gt; 0.0.0.0/0        172.16.42.2              <span style=color:#ae81ff>0</span>             <span style=color:#ae81ff>0</span>        <span style=color:#ae81ff>0</span> <span style=color:#ae81ff>65000</span> i &lt;-/1&gt;
+* i10.13.13.1/32    10.12.12.2            <span style=color:#ae81ff>1000</span>    <span style=color:#ae81ff>100</span>      <span style=color:#ae81ff>0</span>        <span style=color:#ae81ff>0</span> i &lt;-/-&gt;
+*&gt;i                 10.12.12.1             <span style=color:#ae81ff>100</span>    <span style=color:#ae81ff>100</span>      <span style=color:#ae81ff>0</span>        <span style=color:#ae81ff>0</span> i &lt;-/1&gt;
+
+Total number of prefixes <span style=color:#ae81ff>2</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Bring it back, then check client and EdgeRouter.</li>
+</ul>
+<pre tabindex=0><code>FortiGate-VM64-KVM # get router info bgp network
+VRF 0 BGP table version is 5, local router ID is 172.16.42.3
+Status codes: s suppressed, d damped, h history, * valid, &gt; best, i - internal,
+              S Stale
+Origin codes: i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight RouteTag Path
+*&gt; 0.0.0.0/0        172.16.42.2              0             0        0 65000 i &lt;-/1&gt;
+*&gt;i10.13.13.1/32    10.12.12.2             100    100      0        0 i &lt;-/2&gt;
+*&gt;i                 10.12.12.1             100    100      0        0 i &lt;-/1&gt;
+
+Total number of prefixes 2
+</code></pre><ul>
+<li>Check client again.</li>
+</ul>
+<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>client$ curl 10.13.13.1/hostname
+lb2
 </code></pre></td></tr></table>
 </div>
 </div></article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
-<div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/f0cfd3b4a2756221c335e43ab8922f511bd6ffeb title="Last modified by Kien Nguyen | Feb 08, 2022" target=_blank rel=noopener>
+<div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/5099f8b419a43e82b16e6f67d7cc136a1825f6db title="Last modified by Kien Nguyen | Feb 09, 2022" target=_blank rel=noopener>
 <img src=/blog/svg/calendar.svg class=book-icon alt=Calendar>
-<span>Feb 08, 2022</span>
+<span>Feb 09, 2022</span>
 </a>
 </div>
 <div>
