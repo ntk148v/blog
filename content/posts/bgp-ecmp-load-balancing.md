@@ -23,79 +23,126 @@ References:
 {{< figure src="/photos/bgp-ecmp-load-balancing/ecmp-bgp.png" >}}
 
 - `AS 65000`: internet service provider. In this post, we will build a BGP session between EdgeRouter and ISP router.
-- `ISPRouter` and `EdgeRouter` are [VyOS](https://vyos.io/) instances. You can use other routers as well.
+- `ISPRouter` and `EdgeRouter` are [Fortinet Fortigate v7.0.3](https://docs.fortinet.com/document/fortigate/7.0.3) instances. You can use other routers as well.
 - `Switch` is a Cisco switch.
 - `client`, `lb1`, and `lb2` are Ubuntu server 18.04 instances. `lb1` and `lb2` will be in the `10.12.12.0/24` private LAN, we will install nginx (LB L7) on these. Both servers will announce the same public IP (10.13.13.1) to `EdgeRouter` using BGP. Incoming traffic from internet to this public IP will be routed to `lb1` or `lb2` depending of a hash.
-- You need to download and install device virtual images. Follow [EVE-NG guide](https://www.eve-ng.net/index.php/documentation/howtos/howto-add-vyos-vyatta/).
+- You need to download and install device virtual images. Follow [EVE-NG guide](https://www.eve-ng.net/index.php/documentation/howtos/howto-add-fortinet-images/).
 
 ## 3. Configure
 
 ### 3.1. ISPRouter
 
-Follow the [VyOS Quickstart](https://docs.vyos.io/en/equuleus/quick-start.html) for the basic commands.
+Follow the [Fortigate document](https://docs.fortinet.com/document/fortigate/7.0.3) for the basic commands.
 
-```
+```bash
 # interfaces configurations
-set interfaces ethernet eth0 address 'dhcp'
-set interfaces ethernet eth1 address '10.0.0.254/24'
-set interfaces ethernet eth2 address '172.16.42.2/31'
-
-# source nat to let 'client' instance reach internet (optional)
-set nat source rule 100 outbound-interface 'eth0'
-set nat source rule 100 source address '10.0.0.0/24'
-set nat source rule 100 translation address 'masquerade'
-
-# source nat let my network reach internet (optional)
-set nat source rule 200 outbound-interface 'eth0'
-set nat source rule 200 source address '172.16.42.3/31'
-set nat source rule 200 translation address 'masquerade'
-
+config system interface
+    edit "port1"
+        set mode static
+        set ip 192.168.22.226 255.255.255.0
+        set allowaccess ping https ssh http telnet
+    next
+    edit "port2"
+        set mode static
+        set ip 10.0.0.254 255.255.255.0
+        set allowaccess ping https ssh http telnet
+    next
+    edit "port3"
+        set mode static
+        set ip 172.16.42.2 255.255.255.254
+        set allowaccess ping https ssh http telnet
+    next
+end
 # Simple BGP configuration
-set protocols bgp 65000 neighbor 172.16.42.3 remote-as '65500'
-set protocols bgp 65000 neighbor 172.16.42.3 update-source '172.16.42.2'
-set protocols bgp 65000 address-family ipv4-unicast network 0.0.0.0/0
-set protocols bgp 65000 parameters router-id '172.16.42.2'
+config router bgp
+    set as 65000
+    set router-id 172.16.42.2
+    config neighbor
+        edit "172.16.42.3"
+            set capability-default-originate enable
+            set remote-as 65500
+            set update-source "port3"
+        next
+    end
+end
 
-# DNS server for 'client instance'
-set service dns forwarding cache-size '0'
-set service dns forwarding listen-address '10.0.0.254'
-set service dns forwarding allow-from '10.0.0.0/24'
-set service dns forwarding name-server '8.8.8.8'
-set service dns forwarding name-server '8.8.4.4'
+# Firewall policy (simple allow all)
+config firewall policy
+    edit 1
+        set name "allow"
+        set srcintf "any"
+        set dstintf "any"
+        set action accept
+        set srcaddr "all"
+        set dstaddr "all"
+        set schedule "always"
+        set service "ALL"
+    next
+end
 ```
 
 ### 3.2. EdgeRouter
 
-```
-set interfaces ethernet eth0 address '172.16.42.3/31'
-set interfaces ethernet eth1 address '10.12.12.254/24'
+```bash
+config system interface
+    edit "port1"
+        set vdom "root"
+        set ip 172.16.42.3 255.255.255.254
+        set allowaccess ping https ssh snmp http telnet
+        set type physical
+        set snmp-index 1
+    next
+    edit "port2"
+        set vdom "root"
+        set ip 10.12.12.254 255.255.255.0
+        set allowaccess ping https ssh snmp http telnet
+        set type physical
+        set snmp-index 2
+    next
+end
 
-set nat source rule 100 outbound-interface 'eth0'
-set nat source rule 100 source address '10.12.12.0/24'
-set nat source rule 100 translation address 'masquerade'
+# BGP config
+config router bgp
+    set as 65500
+    set router-id 172.16.42.3
+    set ibgp-multipath enable
+    set additional-path enable
+    config neighbor
+        edit "10.12.12.2"
+            set remote-as 65500
+            set update-source "port2"
+        next
+        edit "10.12.12.1"
+            set remote-as 65500
+            set update-source "port2"
+        next
+        edit "172.16.42.2"
+            set remote-as 65000
+            set update-source "port1"
+        next
+    end
+end
 
-set protocols bgp 65500 address-family ipv4-unicast maximum-paths ibgp '2'
-set protocols bgp 65500 neighbor 10.12.12.1 remote-as '65500'
-set protocols bgp 65500 neighbor 10.12.12.1 update-source '10.12.12.254'
-set protocols bgp 65500 neighbor 10.12.12.2 remote-as '65500'
-set protocols bgp 65500 neighbor 10.12.12.2 update-source '10.12.12.254'
-set protocols bgp 65500 neighbor 172.16.42.2 remote-as '65000'
-set protocols bgp 65500 neighbor 172.16.42.2 update-source '172.16.42.3'
-set protocols bgp 65500 parameters router-id '172.16.42.3'
-
-set service dns forwarding cache-size '0'
-set service dns forwarding listen-address '10.12.12.254'
-set service dns forwarding name-server '8.8.8.8'
-set service dns forwarding allow-from '10.12.12.0/24'
-set service dns forwarding name-server '8.8.8.8'
-set service dns forwarding name-server '8.8.4.4'
+# Firewall policy (simple allow all)
+config firewall policy
+    edit 1
+        set name "allow"
+        set srcintf "any"
+        set dstintf "any"
+        set action accept
+        set srcaddr "all"
+        set dstaddr "all"
+        set schedule "always"
+        set service "ALL"
+    next
+end
 ```
 
 ### 3.3. Switch
 
 - Set up mode access.
 
-```
+```bash
 configure terminal
 interface range Ethernet 0/0-2
 switchport mode access
@@ -294,106 +341,155 @@ client$ curl http://10.13.13.1/hostname
 lb1
 ```
 
-- Change client ip. The load balancing is working.
+-
+
+- Change client ip. The load balancing works!
+
+```bash
+# Set client's ip to 10.0.0.1
+client$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: ens3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 00:50:00:00:05:00 brd ff:ff:ff:ff:ff:ff
+    inet 10.0.0.1/24 brd 10.0.0.255 scope global ens3
+       valid_lft forever preferred_lft forever
+    inet6 fe80::250:ff:fe00:500/64 scope link
+       valid_lft forever preferred_lft forever
+
+client$ curl http://10.13.13.1/hostname
+lb1
+```
+
+- Change client's ip address to `10.0.0.100` and send another request. You can the request was sent to `lb2` instead `lb1`.
 
 ```bash
 client$ curl http://10.13.13.1/hostname
 lb2
 ```
 
-- Check EdgeRouter and ISPRouter
+- Check EdgeRouter.
 
-```bash
-# EdgeRouter
-vyos@edgerouter:~$ show ip bgp
-BGP table version is 36, local router ID is 172.16.42.3, vrf id 0
-Default local pref 100, local AS 65500
-Status codes:  s suppressed, d damped, h history, * valid, > best, = multipath,
-               i internal, r RIB-failure, S Stale, R Removed
-Nexthop codes: @NNN nexthop\'s vrf id, < announce-nh-self
-Origin codes:  i - IGP, e - EGP, ? - incomplete
+```
+FortiGate-VM64-KVM # get router info routing-table all
+Codes: K - kernel, C - connected, S - static, R - RIP, B - BGP
+       O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default
 
-   Network          Next Hop            Metric LocPrf Weight Path
-*> 0.0.0.0/0        172.16.42.2              0             0 65000 i
-* i10.13.13.1/32    10.12.12.2            1000    100      0 i
-*>i                 10.12.12.1             100    100      0 i
+Routing table for VRF=0
+B*      0.0.0.0/0 [20/0] via 172.16.42.2 (recursive is directly connected, port1), 01:01:52
+C       10.12.12.0/24 is directly connected, port2
+B       10.13.13.1/32 [200/100] via 10.12.12.1 (recursive is directly connected, port2), 01:04:33
+                      [200/100] via 10.12.12.2 (recursive is directly connected, port2), 01:04:33
+C       172.16.42.2/31 is directly connected, port1
 
-Displayed  2 routes and 3 total paths
+FortiGate-VM64-KVM # get router info bgp network
+VRF 0 BGP table version is 3, local router ID is 172.16.42.3
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              S Stale
+Origin codes: i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight RouteTag Path
+*> 0.0.0.0/0        172.16.42.2              0             0        0 65000 i <-/1>
+*>i10.13.13.1/32    10.12.12.2             100    100      0        0 i <-/2>
+*>i                 10.12.12.1             100    100      0        0 i <-/1>
+
+Total number of prefixes 2
 ```
 
-```bash
-# ISPRouter
-vyos@isprouter:~$ show ip bgp
-BGP table version is 12, local router ID is 172.16.42.2, vrf id 0
-Default local pref 100, local AS 65000
-Status codes:  s suppressed, d damped, h history, * valid, > best, = multipath,
-               i internal, r RIB-failure, S Stale, R Removed
-Nexthop codes: @NNN nexthop\'s vrf id, < announce-nh-self
-Origin codes:  i - IGP, e - EGP, ? - incomplete
+- Check ISPRouter
 
-   Network          Next Hop            Metric LocPrf Weight Path
-*> 0.0.0.0/0        0.0.0.0                  0         32768 i
-*> 10.13.13.1/32    172.16.42.3                            0 65500 i
+```
+FortiGate-VM64-KVM # get router info routing-table all
+Codes: K - kernel, C - connected, S - static, R - RIP, B - BGP
+       O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default
 
-Displayed  2 routes and 2 total paths
+Routing table for VRF=0
+C       10.0.0.0/24 is directly connected, port2
+B       10.13.13.1/32 [20/0] via 172.16.42.3 (recursive is directly connected, port3), 01:06:48
+C       172.16.42.2/31 is directly connected, port3
+C       192.168.22.0/24 is directly connected, port1
+
+
+FortiGate-VM64-KVM # get router info bgp network
+VRF 0 BGP table version is 1, local router ID is 172.16.42.2
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              S Stale
+Origin codes: i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight RouteTag Path
+*> 10.13.13.1/32    172.16.42.3              0             0        0 65500 i <-/1>
+
+Total number of prefixes 1
 ```
 
 ### 4.2. Scenario 2: One lb is down
 
-- Stop nginx on lb1 (ExaBGP only, Bird may require the complete shutdown) or stop lb1 physically.
+- Stop nginx on lb2 (ExaBGP only, Bird may require the complete shutdown) or stop lb2 physically.
 
 ```bash
-lb1$ sudo service nginx stop
+lb2$ sudo service nginx stop
 lb2$ sudo journalctl -fu exabgp
 -- Logs begin at Thu 2022-01-27 12:07:29 UTC. --
-Feb 07 11:12:11 lb1 healthcheck[13584]: send announces for UP state to ExaBGP
-Feb 07 11:12:11 lb1 exabgp[13562]: api             route added to neighbor 10.12.12.254 local-ip 10.12.12.1 local-as 65500 peer-as 65500 router-id 10.12.12.254 family-allowed in-open : 10.13.13.1/32 next-hop self med 100
+Feb 07 11:12:11 lb2 healthcheck[13584]: send announces for DOWN state to ExaBGP
+Feb 07 11:12:11 lb2 exabgp[13562]: api             route added to neighbor 10.12.12.254 local-ip 10.12.12.2 local-as 65500 peer-as 65500 router-id 10.12.12.254 family-allowed in-open : 10.13.13.1/32 next-hop self med 1000
 ```
 
 - Check client
 
 ```bash
 client$ curl 10.13.13.1/hostname
-lb2
+lb1
 ```
 
-- Check EdgeRouter, you may notice that the metric of 10.12.12.1 hop became 1000.
+- Check EdgeRouter, you may notice that the metric of 10.12.12.2 hop became 1000.
 
 ```bash
-vyos@edgerouter:~$ show ip bgp
-BGP table version is 42, local router ID is 172.16.42.3, vrf id 0
-Default local pref 100, local AS 65500
-Status codes:  s suppressed, d damped, h history, * valid, > best, = multipath,
-               i internal, r RIB-failure, S Stale, R Removed
-Nexthop codes: @NNN nexthop\'s vrf id, < announce-nh-self
-Origin codes:  i - IGP, e - EGP, ? - incomplete
+FortiGate-VM64-KVM # get router info bgp network
+VRF 0 BGP table version is 4, local router ID is 172.16.42.3
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              S Stale
+Origin codes: i - IGP, e - EGP, ? - incomplete
 
-   Network          Next Hop            Metric LocPrf Weight Path
-*> 0.0.0.0/0        172.16.42.2              0             0 65000 i
-*>i10.13.13.1/32    10.12.12.2             100    100      0 i
-* i                 10.12.12.1            1000    100      0 i
+   Network          Next Hop            Metric LocPrf Weight RouteTag Path
+*> 0.0.0.0/0        172.16.42.2              0             0        0 65000 i <-/1>
+* i10.13.13.1/32    10.12.12.2            1000    100      0        0 i <-/->
+*>i                 10.12.12.1             100    100      0        0 i <-/1>
 
-Displayed  2 routes and 3 total paths
+Total number of prefixes 2
 ```
 
 - Bring it back, then check client and EdgeRouter.
 
+```
+FortiGate-VM64-KVM # get router info bgp network
+VRF 0 BGP table version is 5, local router ID is 172.16.42.3
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              S Stale
+Origin codes: i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight RouteTag Path
+*> 0.0.0.0/0        172.16.42.2              0             0        0 65000 i <-/1>
+*>i10.13.13.1/32    10.12.12.2             100    100      0        0 i <-/2>
+*>i                 10.12.12.1             100    100      0        0 i <-/1>
+
+Total number of prefixes 2
+```
+
+- Check client again.
+
 ```bash
-vyos@edgerouter:~$ show ip bgp
-BGP table version is 43, local router ID is 172.16.42.3, vrf id 0
-Default local pref 100, local AS 65500
-Status codes:  s suppressed, d damped, h history, * valid, > best, = multipath,
-               i internal, r RIB-failure, S Stale, R Removed
-Nexthop codes: @NNN nexthop\'s vrf id, < announce-nh-self
-Origin codes:  i - IGP, e - EGP, ? - incomplete
-
-   Network          Next Hop            Metric LocPrf Weight Path
-*> 0.0.0.0/0        172.16.42.2              0             0 65000 i
-*=i10.13.13.1/32    10.12.12.2             100    100      0 i
-*>i                 10.12.12.1             100    100      0 i
-
-Displayed  2 routes and 3 total paths
-
 client$ curl 10.13.13.1/hostname
-lb1
+lb2
 ```
