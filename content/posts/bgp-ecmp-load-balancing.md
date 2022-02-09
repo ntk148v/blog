@@ -139,6 +139,14 @@ config firewall policy
 end
 ```
 
+- You can change [load-balancing algorithms](https://docs.fortinet.com/document/fortigate/7.0.3/administration-guide/25967/equal-cost-multi-path). By default, it is `source-ip-based`.
+
+```bash
+config system settings
+    set v4-ecmp-mode {source-ip-based* | weight-based | usage-based | source-dest-ip-based}
+end
+```
+
 ### 3.3. Switch
 
 - Set up mode access.
