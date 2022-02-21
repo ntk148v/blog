@@ -13,13 +13,13 @@ References:
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ntk148v.github.io/blog/posts/bgp-ecmp-load-balancing/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-02-07T15:35:08+07:00">
-<meta property="article:modified_time" content="2022-02-09T17:52:54+07:00"><meta property="og:site_name" content="/home/kiennt">
+<meta property="article:modified_time" content="2022-02-21T16:01:58+07:00"><meta property="og:site_name" content="/home/kiennt">
 <title>Bgp Ecmp Load Balancing | /home/kiennt</title>
 <link rel=manifest href=/blog/manifest.json>
 <link rel=icon href=/blog/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/blog/book.min.2625e69c6b7661c7675edd24ba686fbc2f7d3dfe3fadbf62681b4d2cf2fead9d.css integrity="sha256-JiXmnGt2YcdnXt0kumhvvC99Pf4/rb9iaBtNLPL+rZ0=" crossorigin=anonymous>
 <script defer src=/blog/flexsearch.min.js></script>
-<script defer src=/blog/en.search.min.96ead61615f40503d4734bbc37bc6517638607409a8eb9eb3fd583770b063bb1.js integrity="sha256-lurWFhX0BQPUc0u8N7xlF2OGB0CajrnrP9WDdwsGO7E=" crossorigin=anonymous></script>
+<script defer src=/blog/en.search.min.b0824cd4233f745d479a23f835ffb459c17fef4b6928b9ce3007b0a5e44d9e42.js integrity="sha256-sIJM1CM/dF1HmiP4Nf+0WcF/70tpKLnOMAewpeRNnkI=" crossorigin=anonymous></script>
 <script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css>
@@ -662,7 +662,7 @@ lb1$ exabgp --run healthcheck --help
 </span><span style=color:#d88200>}
 </span><span style=color:#d88200>
 </span><span style=color:#d88200>process watch-nginx {
-</span><span style=color:#d88200>    run python3 -m exabgp healthcheck --cmd &#34;curl -sf http://127.0.0.1/hostname&#34; --label nginx --ip 10.13.13.1/32;
+</span><span style=color:#d88200>    run python3 -m exabgp healthcheck --cmd &#34;curl -sf http://10.13.13.1&#34; --label nginx --ip 10.13.13.1/32;
 </span><span style=color:#d88200>    encoder json;
 </span><span style=color:#d88200>}
 </span><span style=color:#d88200>EOF</span>
@@ -970,9 +970,9 @@ lb2
 </div></article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
-<div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/74ffe5583a911257a525e2205416656db29d817f title="Last modified by Kien Nguyen | Feb 09, 2022" target=_blank rel=noopener>
+<div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/61759e18d8e74817e97a1eb5051391872b6b2c5a title="Last modified by Kien Nguyen | Feb 21, 2022" target=_blank rel=noopener>
 <img src=/blog/svg/calendar.svg class=book-icon alt=Calendar>
-<span>Feb 09, 2022</span>
+<span>Feb 21, 2022</span>
 </a>
 </div>
 <div>
