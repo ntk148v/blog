@@ -299,7 +299,7 @@ neighbor 10.12.12.254 {  # Remote neighbor to peer with
 }
 
 process watch-nginx {
-    run python3 -m exabgp healthcheck --cmd "curl -sf http://127.0.0.1/hostname" --label nginx --ip 10.13.13.1/32;
+    run python3 -m exabgp healthcheck --cmd "curl -sf http://10.13.13.1" --label nginx --ip 10.13.13.1/32;
     encoder json;
 }
 EOF
