@@ -1,5 +1,9 @@
 ---
-title: "About me"
+title: "About"
+menu:
+  after:
+    name: about
+    weight: 1
 ---
 
 ## Brief

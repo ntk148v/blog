@@ -10,7 +10,6 @@ BookTheme = 'auto'
 BookRepo = 'https://github.com/ntk148v/blog'
 BookComments = true
 BookServiceWorker = true
-BookMenuBundle = '/menu'
 BookDateFormat = 'Jan 02, 2006'
 BookEditPath = 'edit/master'
 BookCommitPath = 'commit'
@@ -46,3 +45,9 @@ unsafe = true
 [languages.en]
 languageName = "English"
 title = "/home/kiennt"
+
+[menu]
+[[menu.after]]
+name = "Notes"
+url = "https://ntk148v.github.io/notes"
+weight = 10
