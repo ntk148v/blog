@@ -14,18 +14,16 @@ I love customizing desktop. I make changes in my desktop everyday, make it look 
 <meta property="og:url" content="https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-1-i3/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2021-04-19T10:10:21+07:00">
 <meta property="article:modified_time" content="2022-02-08T10:11:51+07:00"><meta property="og:site_name" content="/home/kiennt">
-<title>Getting Started with Tiling WM [Part 1] - I3 | /home/kiennt</title>
-<link rel=manifest href=/blog/manifest.json>
+<title>Getting Started with Tiling WM [Part 1] - I3 | /home/kiennt</title><link rel=manifest href=/blog/manifest.json>
 <link rel=icon href=/blog/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/blog/book.min.2625e69c6b7661c7675edd24ba686fbc2f7d3dfe3fadbf62681b4d2cf2fead9d.css integrity="sha256-JiXmnGt2YcdnXt0kumhvvC99Pf4/rb9iaBtNLPL+rZ0=" crossorigin=anonymous>
 <script defer src=/blog/flexsearch.min.js></script>
-<script defer src=/blog/en.search.min.b0824cd4233f745d479a23f835ffb459c17fef4b6928b9ce3007b0a5e44d9e42.js integrity="sha256-sIJM1CM/dF1HmiP4Nf+0WcF/70tpKLnOMAewpeRNnkI=" crossorigin=anonymous></script>
+<script defer src=/blog/en.search.min.84ddc4785ba1b87879a66dee280bec06787380302425536a298a5f31e2079e53.js integrity="sha256-hN3EeFuhuHh5pm3uKAvsBnhzgDAkJVNqKYpfMeIHnlM=" crossorigin=anonymous></script>
 <script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css>
 <script async defer src=https://buttons.github.io/buttons.js></script>
-</head>
-<body dir=ltr>
+</head><body dir=ltr>
 <input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control>
 <main class="container flex">
@@ -35,22 +33,11 @@ I love customizing desktop. I make changes in my desktop everyday, make it look 
 <h2 class=book-brand>
 <a class="flex align-center" href=/blog/><span>/home/kiennt</span>
 </a>
-</h2>
-<div class=book-search>
+</h2><div class=book-search>
 <input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/>
-<div class="book-search-spinner hidden"></div>
-<ul id=book-search-results></ul>
-</div>
-<ul>
-<li><a href=/blog/about/>About</a></li>
-<li><a href=/blog/posts/>Posts</a></li>
-<li><a href=https://ntk148v.github.io/notes>Notes</a></li>
-</ul>
-</nav>
-<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
-</div>
-</aside>
-<div class=book-page>
+<div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul>
+<li><a href=/blog/about/>About</a></li><li><a href=/blog/posts/>Posts</a></li><li><a href=https://ntk148v.github.io/notes>Notes</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div></aside><div class=book-page>
 <header class=book-header>
 <div class="flex align-center justify-between">
 <label for=menu-control>
@@ -60,267 +47,149 @@ I love customizing desktop. I make changes in my desktop everyday, make it look 
 <label for=toc-control>
 <img src=/blog/svg/toc.svg class=book-icon alt="Table of Contents">
 </label>
-</div>
-<aside class="hidden clearfix">
+</div><aside class="hidden clearfix">
 <nav id=TableOfContents>
 <ul>
 <li><a href=#1-overview-window-manager>1. Overview Window Manager</a>
 <ul>
-<li><a href=#11-desktop-environment-vs-window-manager>1.1. Desktop Environment vs. Window Manager</a></li>
-<li><a href=#12-types-of-window-manager>1.2. Types of Window Manager</a></li>
-</ul>
-</li>
-<li><a href=#2-overview-i3>2. Overview I3</a></li>
-<li><a href=#3-minimal-i3-setup>3. Minimal I3 setup</a>
+<li><a href=#11-desktop-environment-vs-window-manager>1.1. Desktop Environment vs. Window Manager</a></li><li><a href=#12-types-of-window-manager>1.2. Types of Window Manager</a></li></ul></li><li><a href=#2-overview-i3>2. Overview I3</a></li><li><a href=#3-minimal-i3-setup>3. Minimal I3 setup</a>
 <ul>
-<li><a href=#31-operating-system>3.1. Operating System</a></li>
-<li><a href=#32-install-i3>3.2. Install I3</a></li>
-</ul>
-</li>
-<li><a href=#4-usage>4. Usage</a>
+<li><a href=#31-operating-system>3.1. Operating System</a></li><li><a href=#32-install-i3>3.2. Install I3</a></li></ul></li><li><a href=#4-usage>4. Usage</a>
 <ul>
-<li><a href=#41-keybindings>4.1. Keybindings</a></li>
-<li><a href=#42-workspace-container-and-window>4.2. Workspace, Container and Window</a></li>
-<li><a href=#43-application-launcher>4.3. Application launcher</a></li>
-</ul>
-</li>
-<li><a href=#5-configuration>5. Configuration</a></li>
-<li><a href=#6-some-tricks-and-tips>6. Some tricks and tips</a></li>
-<li><a href=#7-references>7. References</a></li>
-</ul>
-</nav>
-</aside>
-</header>
-<article class=markdown>
+<li><a href=#41-keybindings>4.1. Keybindings</a></li><li><a href=#42-workspace-container-and-window>4.2. Workspace, Container and Window</a></li><li><a href=#43-application-launcher>4.3. Application launcher</a></li></ul></li><li><a href=#5-configuration>5. Configuration</a></li><li><a href=#6-some-tricks-and-tips>6. Some tricks and tips</a></li><li><a href=#7-references>7. References</a></li></ul></nav></aside></header><article class=markdown>
 <h1>
 <a href=/blog/posts/getting-started-tiling-wm-part-1-i3/>Getting Started with Tiling WM [Part 1] - I3</a>
-</h1>
-<h5>Apr 19, 2021</h5>
-<div>
+</h1><h5>Apr 19, 2021</h5><div>
 <a href=/blog/tags/tiling-wm/>#tiling-wm</a>
 <a href=/blog/tags/linux/>#linux</a>
 <a href=/blog/tags/tech/>#tech</a>
 <a href=/blog/tags/i3/>#i3</a>
-</div>
-<blockquote class="book-hint info">
-<p><strong>Disclaimer</strong></p>
-<p>I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I&rsquo;ve gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.</p>
-</blockquote>
-<h2 id=1-overview-window-manager>
+</div><blockquote class="book-hint info">
+<p><strong>Disclaimer</strong></p><p>I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I&rsquo;ve gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.</p></blockquote><h2 id=1-overview-window-manager>
 1. Overview Window Manager
 <a class=anchor href=#1-overview-window-manager>#</a>
-</h2>
-<p>First of all, you have to know the basic concepts.</p>
-<h3 id=11-desktop-environment-vs-window-manager>
+</h2><p>First of all, you have to know the basic concepts.</p><h3 id=11-desktop-environment-vs-window-manager>
 1.1. Desktop Environment vs. Window Manager
 <a class=anchor href=#11-desktop-environment-vs-window-manager>#</a>
-</h3>
-<p>We&rsquo;ll begin by showing how the Linux graphical desktop is layered. There are basically 3 layers that can be included in the Linux desktop:</p>
+</h3><p>We&rsquo;ll begin by showing how the Linux graphical desktop is layered. There are basically 3 layers that can be included in the Linux desktop:</p><ul>
+<li><strong>X Window</strong>: All GUIs require an X Window System layer, which draws graphic elements on the display. Without the X server, neither a WM nor a DE could create images on a Linux display. X also creates a framework for moving windows and performing tasks using a mouse and keyboard.</li><li><strong>Window manager</strong>:
 <ul>
-<li><strong>X Window</strong>: All GUIs require an X Window System layer, which draws graphic elements on the display. Without the X server, neither a WM nor a DE could create images on a Linux display. X also creates a framework for moving windows and performing tasks using a mouse and keyboard.</li>
-<li><strong>Window manager</strong>:
+<li>A WM controls the placement and appearance of screen elements. Popular WMs: i3, awesome, dwm&mldr;</li><li>Requires configuration to get what you want.</li><li>Tends to be flexible and highly customizable.</li><li>Customizes most aspects of a Linux experience.</li><li>For Nerd: not user-friendly out of the box, need to edit configuration files&mldr;</li></ul></li><li><strong>Desktop environment</strong>:
 <ul>
-<li>A WM controls the placement and appearance of screen elements. Popular WMs: i3, awesome, dwm&mldr;</li>
-<li>Requires configuration to get what you want.</li>
-<li>Tends to be flexible and highly customizable.</li>
-<li>Customizes most aspects of a Linux experience.</li>
-<li>For Nerd: not user-friendly out of the box, need to edit configuration files&mldr;</li>
-</ul>
-</li>
-<li><strong>Desktop environment</strong>:
-<ul>
-<li>A DE requires both X and a WM. It also adds the deeper and seemless integration with applications, panels, system menus, status applets, drag-and-drop functionality,&mldr; The most popular DEs: KDE Plasma, GNOME, Pantheon, Cinnamon,&mldr; Sounds familiar, right?</li>
-<li>Excellent default configurations.</li>
-<li>May not be particularly customizable.</li>
-<li>Gret if you don&rsquo;t want to customize everything.</li>
-</ul>
-</li>
-</ul>
-<script src=/blog/mermaid.min.js></script>
+<li>A DE requires both X and a WM. It also adds the deeper and seemless integration with applications, panels, system menus, status applets, drag-and-drop functionality,&mldr; The most popular DEs: KDE Plasma, GNOME, Pantheon, Cinnamon,&mldr; Sounds familiar, right?</li><li>Excellent default configurations.</li><li>May not be particularly customizable.</li><li>Gret if you don&rsquo;t want to customize everything.</li></ul></li></ul><script src=/blog/mermaid.min.js></script>
 <script>mermaid.initialize({flowchart:{useMaxWidth:!0},theme:"default"})</script>
 <p class=mermaid align=center>
 graph TD;
 A[Desktop Environment] --> B[Window Manager];
 B --> C[X Windows];
-</p>
-<h3 id=12-types-of-window-manager>
+</p><h3 id=12-types-of-window-manager>
 1.2. Types of Window Manager
 <a class=anchor href=#12-types-of-window-manager>#</a>
-</h3>
-<ul>
+</h3><ul>
 <li><strong>Stack window manager</strong>:
 <ul>
-<li>A stack window manager renders the window one-by-one onto the screen at specific co-orinates. If one window&rsquo;s area overlaps another, then the window &ldquo;on top&rdquo; overwites part of the other&rsquo;s visible appearance. This results in the appearance familiar to many users in which windows act a little like pieces of paper on a desktop, which can be moved around and allowed to overlap.</li>
-<li>Openbox, Fluxbox, Enlightenment&mldr;</li>
-</ul>
-</li>
-<li><strong>Tiling window manager</strong>:
+<li>A stack window manager renders the window one-by-one onto the screen at specific co-orinates. If one window&rsquo;s area overlaps another, then the window &ldquo;on top&rdquo; overwites part of the other&rsquo;s visible appearance. This results in the appearance familiar to many users in which windows act a little like pieces of paper on a desktop, which can be moved around and allowed to overlap.</li><li>Openbox, Fluxbox, Enlightenment&mldr;</li></ul></li><li><strong>Tiling window manager</strong>:
 <ul>
-<li>A window manager with an organization of the screen into mutually non-overlapping frames (hence the name tiling), as opposed to the traditional approach of coordinate-based stacking of objects (windows) that tries to emulate the desk paradigm.</li>
-<li>Awesome,<strong>i3</strong> (here we go), dwm, bspwm&mldr;</li>
-</ul>
-</li>
-<li><strong>Compositing window manager</strong>:
+<li>A window manager with an organization of the screen into mutually non-overlapping frames (hence the name tiling), as opposed to the traditional approach of coordinate-based stacking of objects (windows) that tries to emulate the desk paradigm.</li><li>Awesome,<strong>i3</strong> (here we go), dwm, bspwm&mldr;</li></ul></li><li><strong>Compositing window manager</strong>:
 <ul>
-<li>A compositing window manager may appear to the user similar to a stacking window manager. However, the individual windows are first renders in individual buffers, and then theirs images are composited onto the screen buffer; this two-step process means that visual effects (such as shadows, translucency) can be applied.</li>
-<li>Mutter (GNOME), Xfwm (XFCE), Compiz (Unity), KWin (KDE)</li>
-</ul>
-</li>
-</ul>
-<h2 id=2-overview-i3>
+<li>A compositing window manager may appear to the user similar to a stacking window manager. However, the individual windows are first renders in individual buffers, and then theirs images are composited onto the screen buffer; this two-step process means that visual effects (such as shadows, translucency) can be applied.</li><li>Mutter (GNOME), Xfwm (XFCE), Compiz (Unity), KWin (KDE)</li></ul></li></ul><h2 id=2-overview-i3>
 2. Overview I3
 <a class=anchor href=#2-overview-i3>#</a>
-</h2>
-<ul>
-<li><a href=https://i3wm.org>i3wm</a> is a tiling window manager designed for <a href=https://en.wikipedia.org/wiki/X_Window_System>X11</a>.</li>
-<li>It supports tiling, stacking, and tabbing layouts, which it handles dynamically.</li>
-<li>Configuration is achieved via plain text file.</li>
-<li>Keyboard navigation: Hall full control with keyboard navigation.</li>
-<li>Minimalistic: no window decorations or nonsense icons floating around. But you can fully customize it.</li>
-<li>Window management: is left to the user. Windows are held inside containers, which can be split veritically or horizontally. They can also optionally be resized. There are also options for stacking the windows, as well as tabbing them.</li>
-<li>Floating pop-up windows.</li>
-<li>Want more, check <a href=https://i3wm.org/docs/userguide.html>this</a>.</li>
-</ul>
-<h2 id=3-minimal-i3-setup>
+</h2><ul>
+<li><a href=https://i3wm.org>i3wm</a> is a tiling window manager designed for <a href=https://en.wikipedia.org/wiki/X_Window_System>X11</a>.</li><li>It supports tiling, stacking, and tabbing layouts, which it handles dynamically.</li><li>Configuration is achieved via plain text file.</li><li>Keyboard navigation: Hall full control with keyboard navigation.</li><li>Minimalistic: no window decorations or nonsense icons floating around. But you can fully customize it.</li><li>Window management: is left to the user. Windows are held inside containers, which can be split veritically or horizontally. They can also optionally be resized. There are also options for stacking the windows, as well as tabbing them.</li><li>Floating pop-up windows.</li><li>Want more, check <a href=https://i3wm.org/docs/userguide.html>this</a>.</li></ul><h2 id=3-minimal-i3-setup>
 3. Minimal I3 setup
 <a class=anchor href=#3-minimal-i3-setup>#</a>
-</h2>
-<h3 id=31-operating-system>
+</h2><h3 id=31-operating-system>
 3.1. Operating System
 <a class=anchor href=#31-operating-system>#</a>
-</h3>
-<ul>
-<li>Ubuntu 20.04 (Desktop/Server), download the <a href=https://ubuntu.com/download/>installer</a> and install Ubuntu by walking through installer.</li>
-<li>If you choose Ubuntu Server, you&rsquo;ll need a display server so let&rsquo;s install X Window System (<a href=https://wiki.archlinux.org/index.php/Xorg>Xorg</a>).</li>
-</ul>
-<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sudo apt install xinit
-<span style=color:#75715e># The configuration files are stored in /etc/X11/xinit</span>
-<span style=color:#75715e># You can override it by creating and modifying ~/.xinitrc</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id=32-install-i3>
+</h3><ul>
+<li>Ubuntu 20.04 (Desktop/Server), download the <a href=https://ubuntu.com/download/>installer</a> and install Ubuntu by walking through installer.</li><li>If you choose Ubuntu Server, you&rsquo;ll need a display server so let&rsquo;s install X Window System (<a href=https://wiki.archlinux.org/index.php/Xorg>Xorg</a>).</li></ul><div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo apt install xinit
+</span></span><span style=display:flex><span><span style=color:#75715e># The configuration files are stored in /etc/X11/xinit</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># You can override it by creating and modifying ~/.xinitrc</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=32-install-i3>
 3.2. Install I3
 <a class=anchor href=#32-install-i3>#</a>
-</h3>
-<ul>
-<li>You can install i3 from <a href="https://packages.ubuntu.com/search?keywords=i3">Ubuntu repository</a>. It includes the window manager, a screen locker and two programs which write a status line to i3bar through stdout.</li>
-</ul>
-<blockquote class="book-hint warning">
+</h3><ul>
+<li>You can install i3 from <a href="https://packages.ubuntu.com/search?keywords=i3">Ubuntu repository</a>. It includes the window manager, a screen locker and two programs which write a status line to i3bar through stdout.</li></ul><blockquote class="book-hint warning">
 Note that, i3-wm conflicts with <a href=https://github.com/Airblader/i3>i3-gaps</a> (a fork of i3 with gaps and other features).
-</blockquote>
-<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sudo apt install i3
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>Or build from source, I have a personal fork - <a href=https://github.com/ntk148v/i3>Rounded i3-gaps</a>.</li>
-</ul>
-<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># Dependencies</span>
-sudo apt install git libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev <span style=color:#8045ff>\
-</span><span style=color:#8045ff></span>    libxcb-util0-dev libxcb-icccm4-dev libyajl-dev <span style=color:#8045ff>\
-</span><span style=color:#8045ff></span>    libstartup-notification0-dev libxcb-randr0-dev <span style=color:#8045ff>\
-</span><span style=color:#8045ff></span>    libev-dev libxcb-cursor-dev libxcb-xinerama0-dev <span style=color:#8045ff>\
-</span><span style=color:#8045ff></span>    libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev <span style=color:#8045ff>\
-</span><span style=color:#8045ff></span>    autoconf libxcb-xrm0 libxcb-xrm-dev automake i3status <span style=color:#8045ff>\
-</span><span style=color:#8045ff></span>    ninja-build meson libxcb-shape0-dev build-essential -y
-git clone https://github.com/ntk148v/i3.git
-<span style=color:#111>cd</span> i3/
-<span style=color:#75715e># Compile</span>
-mkdir -p build <span style=color:#f92672>&amp;&amp;</span> <span style=color:#111>cd</span> build
-meson ..
-ninja
-sudo ninja install
-</code></pre></td></tr></table>
-</div>
-</div><ul>
+</blockquote><div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo apt install i3
+</span></span></code></pre></td></tr></table></div></div><ul>
+<li>Or build from source, I have a personal fork - <a href=https://github.com/ntk148v/i3>Rounded i3-gaps</a>.</li></ul><div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Dependencies</span>
+</span></span><span style=display:flex><span>sudo apt install git libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev <span style=color:#8045ff>\
+</span></span></span><span style=display:flex><span><span style=color:#8045ff></span>    libxcb-util0-dev libxcb-icccm4-dev libyajl-dev <span style=color:#8045ff>\
+</span></span></span><span style=display:flex><span><span style=color:#8045ff></span>    libstartup-notification0-dev libxcb-randr0-dev <span style=color:#8045ff>\
+</span></span></span><span style=display:flex><span><span style=color:#8045ff></span>    libev-dev libxcb-cursor-dev libxcb-xinerama0-dev <span style=color:#8045ff>\
+</span></span></span><span style=display:flex><span><span style=color:#8045ff></span>    libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev <span style=color:#8045ff>\
+</span></span></span><span style=display:flex><span><span style=color:#8045ff></span>    autoconf libxcb-xrm0 libxcb-xrm-dev automake i3status <span style=color:#8045ff>\
+</span></span></span><span style=display:flex><span><span style=color:#8045ff></span>    ninja-build meson libxcb-shape0-dev build-essential -y
+</span></span><span style=display:flex><span>git clone https://github.com/ntk148v/i3.git
+</span></span><span style=display:flex><span><span style=color:#111>cd</span> i3/
+</span></span><span style=display:flex><span><span style=color:#75715e># Compile</span>
+</span></span><span style=display:flex><span>mkdir -p build <span style=color:#f92672>&amp;&amp;</span> <span style=color:#111>cd</span> build
+</span></span><span style=display:flex><span>meson ..
+</span></span><span style=display:flex><span>ninja
+</span></span><span style=display:flex><span>sudo ninja install
+</span></span></code></pre></td></tr></table></div></div><ul>
 <li>
-<p>Reboot. After reboot, choose i3 as your WM/DE.</p>
-</li>
-<li>
-<p>A prompt will be shown to create a config file, just hit <code>&lt;Enter></code>.</p>
-</li>
-</ul>
-<link rel=stylesheet href=https://ntk148v.github.io/blog/css/hugo-easy-gallery.css>
+<p>Reboot. After reboot, choose i3 as your WM/DE.</p></li><li>
+<p>A prompt will be shown to create a config file, just hit <code>&lt;Enter></code>.</p></li></ul><link rel=stylesheet href=https://ntk148v.github.io/blog/css/hugo-easy-gallery.css>
 <div class=box>
 <figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
 <div class=img>
 <img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/i3-prompt.png>
-</div>
-<a href=/blog/photos/getting-started-tiling-wm-part-1/i3-prompt.png itemprop=contentUrl></a>
-</figure>
-</div>
-<ul>
+</div><a href=/blog/photos/getting-started-tiling-wm-part-1/i3-prompt.png itemprop=contentUrl></a>
+</figure></div><ul>
 <li>
-<p><code>&lt;mod></code> key is <code>Window</code> now. Hit <code>&lt;mod>+Enter</code> to start terminal emulator.</p>
-</li>
-<li>
-<p>We have i3 first setup here with the default configuration. As mentioned before, configuration is achieved via plain text file.</p>
-</li>
-</ul>
-<div class=box>
+<p><code>&lt;mod></code> key is <code>Window</code> now. Hit <code>&lt;mod>+Enter</code> to start terminal emulator.</p></li><li>
+<p>We have i3 first setup here with the default configuration. As mentioned before, configuration is achieved via plain text file.</p></li></ul><div class=box>
 <figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
 <div class=img>
 <img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/i3-default-config-file.png>
-</div>
-<a href=/blog/photos/getting-started-tiling-wm-part-1/i3-default-config-file.png itemprop=contentUrl></a>
-</figure>
-</div>
-<h2 id=4-usage>
+</div><a href=/blog/photos/getting-started-tiling-wm-part-1/i3-default-config-file.png itemprop=contentUrl></a>
+</figure></div><h2 id=4-usage>
 4. Usage
 <a class=anchor href=#4-usage>#</a>
-</h2>
-<p>This post doesn&rsquo;t aim to cover everything about i3, see the <a href=https://i3wm.org/docs/userguide.html>official documentation</a> for more information.</p>
-<h3 id=41-keybindings>
+</h2><p>This post doesn&rsquo;t aim to cover everything about i3, see the <a href=https://i3wm.org/docs/userguide.html>official documentation</a> for more information.</p><h3 id=41-keybindings>
 4.1. Keybindings
 <a class=anchor href=#41-keybindings>#</a>
-</h3>
-<ul>
-<li>In i3, commands are invoked with a modifier key, referred to as <code>$mod</code>. This is <code>Alt (Mod1)</code> by default, with <code>Super (Mod4)</code> being a popular alternative. Super is the key usually represented on a keyboard as a Windows icon, or on an Apple keyboard as a Command key.</li>
-<li>See <a href=https://i3wm.org/docs/refcard.html>i3 reference card</a> and <a href=https://i3wm.org/docs/userguide.html#_using_i3>Using i3</a> for defaults.</li>
-</ul>
-<div class=box>
+</h3><ul>
+<li>In i3, commands are invoked with a modifier key, referred to as <code>$mod</code>. This is <code>Alt (Mod1)</code> by default, with <code>Super (Mod4)</code> being a popular alternative. Super is the key usually represented on a keyboard as a Windows icon, or on an Apple keyboard as a Command key.</li><li>See <a href=https://i3wm.org/docs/refcard.html>i3 reference card</a> and <a href=https://i3wm.org/docs/userguide.html#_using_i3>Using i3</a> for defaults.</li></ul><div class=box>
 <figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
 <div class=img>
 <img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/i3-refcard.png>
-</div>
-<a href=/blog/photos/getting-started-tiling-wm-part-1/i3-refcard.png itemprop=contentUrl></a>
-</figure>
-</div>
-<h3 id=42-workspace-container-and-window>
+</div><a href=/blog/photos/getting-started-tiling-wm-part-1/i3-refcard.png itemprop=contentUrl></a>
+</figure></div><h3 id=42-workspace-container-and-window>
 4.2. Workspace, Container and Window
 <a class=anchor href=#42-workspace-container-and-window>#</a>
-</h3>
-<p class=mermaid align=center>
+</h3><p class=mermaid align=center>
 graph TD;
 i3-->Workspace1;
 i3-->Workspace2;
@@ -337,109 +206,46 @@ style Workspace2 fill:#ea9999;
 style Container1 fill:#6fa8dc;
 style Container2 fill:#6fa8dc;
 style Container3 fill:#6fa8dc;
-</p>
+</p><ul>
+<li>In i3, <strong>workspace</strong> is simply the equivalent of a <a href=https://en.wikipedia.org/wiki/Virtual_desktop>virtual desktop</a>. You can have as many workspaces as you want.</li><li>i3 manages windows in a tree structure, with <strong>containers</strong> as building blocks.</li><li>A container contains one or multiple <strong>windows</strong>. Its windows will be positioned depending on the container&rsquo;s layout.</li><li>There are 3 different layouts possible:
 <ul>
-<li>In i3, <strong>workspace</strong> is simply the equivalent of a <a href=https://en.wikipedia.org/wiki/Virtual_desktop>virtual desktop</a>. You can have as many workspaces as you want.</li>
-<li>i3 manages windows in a tree structure, with <strong>containers</strong> as building blocks.</li>
-<li>A container contains one or multiple <strong>windows</strong>. Its windows will be positioned depending on the container&rsquo;s layout.</li>
-<li>There are 3 different layouts possible:
-<ul>
-<li><strong>Split</strong>: Each window share the container space and are split horizontally (<em>splith</em>) or vertically (<em>splitv</em>). This is the default layout.</li>
-<li><strong>Stacked</strong> - The focused window is visible and the other ones are stacked behind. You can change the window’s focus via keystrokes easily. You have access to the list of windows open too, at the top of the container itself.</li>
-<li><strong>Tabbed</strong> - This layout is similar as the stacked layout, except that the windows’ list is vertically split, and not horizontally.</li>
-</ul>
-</li>
-<li>A window, where an application is running, can be created in a container. It will automatically position itself and be in focus, depending on the container’s layout. You can move them around or even change the layout of the container using keystrokes.</li>
-<li>There are two different sorts of windows: <strong>fixed window</strong>s (by default) and <strong>floating windows</strong>.</li>
-</ul>
-<h3 id=43-application-launcher>
+<li><strong>Split</strong>: Each window share the container space and are split horizontally (<em>splith</em>) or vertically (<em>splitv</em>). This is the default layout.</li><li><strong>Stacked</strong> - The focused window is visible and the other ones are stacked behind. You can change the window’s focus via keystrokes easily. You have access to the list of windows open too, at the top of the container itself.</li><li><strong>Tabbed</strong> - This layout is similar as the stacked layout, except that the windows’ list is vertically split, and not horizontally.</li></ul></li><li>A window, where an application is running, can be created in a container. It will automatically position itself and be in focus, depending on the container’s layout. You can move them around or even change the layout of the container using keystrokes.</li><li>There are two different sorts of windows: <strong>fixed window</strong>s (by default) and <strong>floating windows</strong>.</li></ul><h3 id=43-application-launcher>
 4.3. Application launcher
 <a class=anchor href=#43-application-launcher>#</a>
-</h3>
-<ul>
-<li>i3 uses <a href=https://wiki.archlinux.org/title/Dmenu>dmenu</a> as an application launcher, which is bound by default to <code>$mod+d</code>.</li>
-<li><a href=https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-2-rofi/>rofi</a> is a popular dmenu replacement and more that can list dekstop entries.</li>
-</ul>
-<h2 id=5-configuration>
+</h3><ul>
+<li>i3 uses <a href=https://wiki.archlinux.org/title/Dmenu>dmenu</a> as an application launcher, which is bound by default to <code>$mod+d</code>.</li><li><a href=https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-2-rofi/>rofi</a> is a popular dmenu replacement and more that can list dekstop entries.</li></ul><h2 id=5-configuration>
 5. Configuration
 <a class=anchor href=#5-configuration>#</a>
-</h2>
-<ul>
-<li>You can use my minimal configuration. It requires some extra packages.</li>
-</ul>
-<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sudo apt install hsetroot rofi compton -y
-</code></pre></td></tr></table>
-</div>
-</div><details open><summary>Minimal I3 configuration</summary>
+</h2><ul>
+<li>You can use my minimal configuration. It requires some extra packages.</li></ul><div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo apt install hsetroot rofi compton -y
+</span></span></code></pre></td></tr></table></div></div><details open><summary>Minimal I3 configuration</summary>
 <div class=markdown-inner>
 <h2 id=cheat-sheat-shortcut>
 Cheat sheat shortcut
 <a class=anchor href=#cheat-sheat-shortcut>#</a>
-</h2>
-<table>
+</h2><table>
 <thead>
 <tr>
-<th>Shortcut</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
+<th>Shortcut</th><th>Description</th></tr></thead><tbody>
 <tr>
-<td><kbd>$mod</kbd> + <kbd>Enter</kbd></td>
-<td>Open a terminal</td>
-</tr>
-<tr>
-<td><kbd>$mod</kbd> + <kbd>d</kbd></td>
-<td>Open application launcher</td>
-</tr>
-<tr>
-<td><kbd>$mod</kbd> + <kbd>c</kbd></td>
-<td>Kill focused window</td>
-</tr>
-<tr>
-<td><kbd>$mod</kbd> + <kbd>right/left/up/down</kbd></td>
-<td>Change focus</td>
-</tr>
-<tr>
-<td><kbd>$mod</kbd> + <kbd>Shift</kbd> + <kbd>right/left/up/down</kbd></td>
-<td>Move focused window in direction</td>
-</tr>
-<tr>
-<td><kbd>$mod</kbd> + <kbd>1/2/3&mldr;</kbd></td>
-<td>Switch workspace</td>
-</tr>
-<tr>
-<td><kbd>$mod</kbd> + <kbd>Shift</kbd> + <kbd>1/2/3&mldr;</kbd></td>
-<td>Move focused window to the specified workspace</td>
-</tr>
-<tr>
-<td><kbd>$mod</kbd> + <kbd>space</kbd></td>
-<td>Change between focus and floating mode</td>
-</tr>
-<tr>
-<td><kbd>$mod</kbd> + <kbd>Shift</kbd> + <kbd>r</kbd></td>
-<td>Restart i3</td>
-</tr>
-<tr>
-<td><kbd>$mod</kbd> + <kbd>Shift</kbd> + <kbd>c</kbd></td>
-<td>Reload config i3</td>
-</tr>
-<tr>
-<td><kbd>$mod</kbd> + <kbd>q</kbd></td>
-<td>Quit i3</td>
-</tr>
-</tbody>
-</table>
-<h2 id=minimal-configuration-file>
+<td><kbd>$mod</kbd> + <kbd>Enter</kbd></td><td>Open a terminal</td></tr><tr>
+<td><kbd>$mod</kbd> + <kbd>d</kbd></td><td>Open application launcher</td></tr><tr>
+<td><kbd>$mod</kbd> + <kbd>c</kbd></td><td>Kill focused window</td></tr><tr>
+<td><kbd>$mod</kbd> + <kbd>right/left/up/down</kbd></td><td>Change focus</td></tr><tr>
+<td><kbd>$mod</kbd> + <kbd>Shift</kbd> + <kbd>right/left/up/down</kbd></td><td>Move focused window in direction</td></tr><tr>
+<td><kbd>$mod</kbd> + <kbd>1/2/3&mldr;</kbd></td><td>Switch workspace</td></tr><tr>
+<td><kbd>$mod</kbd> + <kbd>Shift</kbd> + <kbd>1/2/3&mldr;</kbd></td><td>Move focused window to the specified workspace</td></tr><tr>
+<td><kbd>$mod</kbd> + <kbd>space</kbd></td><td>Change between focus and floating mode</td></tr><tr>
+<td><kbd>$mod</kbd> + <kbd>Shift</kbd> + <kbd>r</kbd></td><td>Restart i3</td></tr><tr>
+<td><kbd>$mod</kbd> + <kbd>Shift</kbd> + <kbd>c</kbd></td><td>Reload config i3</td></tr><tr>
+<td><kbd>$mod</kbd> + <kbd>q</kbd></td><td>Quit i3</td></tr></tbody></table><h2 id=minimal-configuration-file>
 Minimal configuration file
 <a class=anchor href=#minimal-configuration-file>#</a>
-</h2>
-<pre tabindex=0><code># i3 config file
+</h2><pre tabindex=0><code># i3 config file
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 # Set modifier
@@ -455,10 +261,10 @@ font pango:DejaVu Sans Mono 0
 floating_modifier $mod
 
 # Here is the trick to disable titlebar completely
-for_window [class=&quot;^.*&quot;] border pixel 0
+for_window [class=&#34;^.*&#34;] border pixel 0
 
 # Autostart
-exec --no-startup-id hsetroot -solid &quot;#F1CCBB&quot;
+exec --no-startup-id hsetroot -solid &#34;#F1CCBB&#34;
 exec --no-startup-id xsettingsd &amp;
 exec --no-startup-id compton -b
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
@@ -471,8 +277,8 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+c kill
 bindsym $alt+F4 kill
 # start rofi
-bindsym $mod+Shift+d exec i3-dmenu-desktop --dmenu=&quot;dmenu -i -fn 'DejaVu Sans:size=8'&quot;
-bindsym $mod+d exec rofi -lines 12 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font 'DejaVu Sans 8'
+bindsym $mod+Shift+d exec i3-dmenu-desktop --dmenu=&#34;dmenu -i -fn &#39;DejaVu Sans:size=8&#39;&#34;
+bindsym $mod+d exec rofi -lines 12 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font &#39;DejaVu Sans 8&#39;
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% &amp;&amp; $refresh_i3status
@@ -517,16 +323,16 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 &quot;1&quot;
-set $ws2 &quot;2&quot;
-set $ws3 &quot;3&quot;
-set $ws4 &quot;4&quot;
-set $ws5 &quot;5&quot;
-set $ws6 &quot;6&quot;
-set $ws7 &quot;7&quot;
-set $ws8 &quot;8&quot;
-set $ws9 &quot;9&quot;
-set $ws10 &quot;10&quot;
+set $ws1 &#34;1&#34;
+set $ws2 &#34;2&#34;
+set $ws3 &#34;3&#34;
+set $ws4 &#34;4&#34;
+set $ws5 &#34;5&#34;
+set $ws6 &#34;6&#34;
+set $ws7 &#34;7&#34;
+set $ws8 &#34;8&#34;
+set $ws9 &#34;9&#34;
+set $ws10 &#34;10&#34;
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -557,17 +363,17 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec &quot;i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'&quot;
+bindsym $mod+Shift+e exec &#34;i3-nagbar -t warning -m &#39;You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.&#39; -B &#39;Yes, exit i3&#39; &#39;i3-msg exit&#39;&#34;
 
 # resize window (you can also use the mouse for that)
-mode &quot;resize&quot; {
+mode &#34;resize&#34; {
         bindsym Left resize shrink width 5 px or 5 ppt
         bindsym Down resize grow height 5 px or 5 ppt
         bindsym Up resize shrink height 5 px or 5 ppt
         bindsym Right resize grow width 5 px or 5 ppt
-        bindsym Return mode &quot;default&quot;
+        bindsym Return mode &#34;default&#34;
 }
-bindsym $mod+r mode &quot;resize&quot;
+bindsym $mod+r mode &#34;resize&#34;
 
 # panel
 bar {
@@ -597,133 +403,73 @@ border_radius 10
 hide_edge_borders smart_no_gaps
 
 # reload
-exec_always hsetroot -solid &quot;#F1CCBB&quot;
-</code></pre>
-</div>
-</details>
+exec_always hsetroot -solid &#34;#F1CCBB&#34;
+</code></pre></div></details>
 <h2 id=6-some-tricks-and-tips>
 6. Some tricks and tips
 <a class=anchor href=#6-some-tricks-and-tips>#</a>
-</h2>
-<ul>
+</h2><ul>
 <li>
-<p>A trick with terminal emulator:</p>
-<ul>
-<li>Disable scrollbar and menubar.</li>
-</ul>
-<div class=box>
+<p>A trick with terminal emulator:</p><ul>
+<li>Disable scrollbar and menubar.</li></ul><div class=box>
 <figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
 <div class=img>
 <img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/terminal-trick-1.png>
-</div>
-<a href=/blog/photos/getting-started-tiling-wm-part-1/terminal-trick-1.png itemprop=contentUrl></a>
-</figure>
-</div>
-<div class=box>
+</div><a href=/blog/photos/getting-started-tiling-wm-part-1/terminal-trick-1.png itemprop=contentUrl></a>
+</figure></div><div class=box>
 <figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
 <div class=img>
 <img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/terminal-trick-2.png>
-</div>
-<a href=/blog/photos/getting-started-tiling-wm-part-1/terminal-trick-2.png itemprop=contentUrl></a>
-</figure>
-</div>
-<ul>
-<li>Configure padding for vte-terminal.</li>
-</ul>
-</li>
-</ul>
-<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>mkdir -p ~/.config/gtk-3.0
-cat <span style=color:#d88200>&lt;&lt;EOT &gt;&gt; ~/.config/gtk-3.0/gtk.css
-</span><span style=color:#d88200>vte-terminal {
-</span><span style=color:#d88200>    padding: 30px;
-</span><span style=color:#d88200>}
-</span><span style=color:#d88200>EOT</span>
-</code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>Result.</li>
-</ul>
-<div class=box>
+</div><a href=/blog/photos/getting-started-tiling-wm-part-1/terminal-trick-2.png itemprop=contentUrl></a>
+</figure></div><ul>
+<li>Configure padding for vte-terminal.</li></ul></li></ul><div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>mkdir -p ~/.config/gtk-3.0
+</span></span><span style=display:flex><span>cat <span style=color:#d88200>&lt;&lt;EOT &gt;&gt; ~/.config/gtk-3.0/gtk.css
+</span></span></span><span style=display:flex><span><span style=color:#d88200>vte-terminal {
+</span></span></span><span style=display:flex><span><span style=color:#d88200>    padding: 30px;
+</span></span></span><span style=display:flex><span><span style=color:#d88200>}
+</span></span></span><span style=display:flex><span><span style=color:#d88200>EOT</span>
+</span></span></code></pre></td></tr></table></div></div><ul>
+<li>Result.</li></ul><div class=box>
 <figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject>
 <div class=img>
 <img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/i3-gaps-config.png>
-</div>
-<a href=/blog/photos/getting-started-tiling-wm-part-1/i3-gaps-config.png itemprop=contentUrl></a>
-</figure>
-</div>
-<h2 id=7-references>
+</div><a href=/blog/photos/getting-started-tiling-wm-part-1/i3-gaps-config.png itemprop=contentUrl></a>
+</figure></div><h2 id=7-references>
 7. References
 <a class=anchor href=#7-references>#</a>
-</h2>
-<ol>
-<li><a href=https://www.lifewire.com/window-manager-vs-the-desktop-environment-in-linux-4588338>https://www.lifewire.com/window-manager-vs-the-desktop-environment-in-linux-4588338</a></li>
-<li><a href=https://en.wikipedia.org/wiki/X_window_manager>https://en.wikipedia.org/wiki/X_window_manager</a></li>
-<li><a href=https://i3wm.org/docs>https://i3wm.org/docs</a></li>
-<li><a href=https://wiki.archlinux.org/title/i3>https://wiki.archlinux.org/title/i3</a></li>
-</ol>
-</article>
-<footer class=book-footer>
+</h2><ol>
+<li><a href=https://www.lifewire.com/window-manager-vs-the-desktop-environment-in-linux-4588338>https://www.lifewire.com/window-manager-vs-the-desktop-environment-in-linux-4588338</a></li><li><a href=https://en.wikipedia.org/wiki/X_window_manager>https://en.wikipedia.org/wiki/X_window_manager</a></li><li><a href=https://i3wm.org/docs>https://i3wm.org/docs</a></li><li><a href=https://wiki.archlinux.org/title/i3>https://wiki.archlinux.org/title/i3</a></li></ol></article><footer class=book-footer>
 <div class="flex flex-wrap justify-between">
 <div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/ae5748c686c6e96abac4f29eb85ccbf8d0ef9628 title="Last modified by Kien Nguyen | Feb 08, 2022" target=_blank rel=noopener>
 <img src=/blog/svg/calendar.svg class=book-icon alt=Calendar>
 <span>Feb 08, 2022</span>
 </a>
-</div>
-<div>
+</div><div>
 <a class="flex align-center" href=https://github.com/ntk148v/blog/edit/master/content/posts/getting-started-tiling-wm-part-1-i3.md target=_blank rel=noopener>
 <img src=/blog/svg/edit.svg class=book-icon alt=Edit>
 <span>Edit this page</span>
 </a>
-</div>
-</div>
-<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
-</footer>
-<div class=book-comments><section class="article discussion">
+</div></div><script>(function(){function e(n){const e=window.getSelection(),t=document.createRange();t.selectNodeContents(n),e.removeAllRanges(),e.addRange(t)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+</footer><div class=book-comments><section class="article discussion">
 <script src=https://utteranc.es/client.js repo=ntk148v/blog issue-term=pathname theme=github-light crossorigin=anonymous async></script>
-</section></div>
-<label for=menu-control class="hidden book-menu-overlay"></label>
-</div>
-<aside class=book-toc>
+</section></div><label for=menu-control class="hidden book-menu-overlay"></label>
+</div><aside class=book-toc>
 <div class=book-toc-content>
 <nav id=TableOfContents>
 <ul>
 <li><a href=#1-overview-window-manager>1. Overview Window Manager</a>
 <ul>
-<li><a href=#11-desktop-environment-vs-window-manager>1.1. Desktop Environment vs. Window Manager</a></li>
-<li><a href=#12-types-of-window-manager>1.2. Types of Window Manager</a></li>
-</ul>
-</li>
-<li><a href=#2-overview-i3>2. Overview I3</a></li>
-<li><a href=#3-minimal-i3-setup>3. Minimal I3 setup</a>
+<li><a href=#11-desktop-environment-vs-window-manager>1.1. Desktop Environment vs. Window Manager</a></li><li><a href=#12-types-of-window-manager>1.2. Types of Window Manager</a></li></ul></li><li><a href=#2-overview-i3>2. Overview I3</a></li><li><a href=#3-minimal-i3-setup>3. Minimal I3 setup</a>
 <ul>
-<li><a href=#31-operating-system>3.1. Operating System</a></li>
-<li><a href=#32-install-i3>3.2. Install I3</a></li>
-</ul>
-</li>
-<li><a href=#4-usage>4. Usage</a>
+<li><a href=#31-operating-system>3.1. Operating System</a></li><li><a href=#32-install-i3>3.2. Install I3</a></li></ul></li><li><a href=#4-usage>4. Usage</a>
 <ul>
-<li><a href=#41-keybindings>4.1. Keybindings</a></li>
-<li><a href=#42-workspace-container-and-window>4.2. Workspace, Container and Window</a></li>
-<li><a href=#43-application-launcher>4.3. Application launcher</a></li>
-</ul>
-</li>
-<li><a href=#5-configuration>5. Configuration</a></li>
-<li><a href=#6-some-tricks-and-tips>6. Some tricks and tips</a></li>
-<li><a href=#7-references>7. References</a></li>
-</ul>
-</nav>
-</div>
-</aside>
-</main>
-</body>
-</html>
+<li><a href=#41-keybindings>4.1. Keybindings</a></li><li><a href=#42-workspace-container-and-window>4.2. Workspace, Container and Window</a></li><li><a href=#43-application-launcher>4.3. Application launcher</a></li></ul></li><li><a href=#5-configuration>5. Configuration</a></li><li><a href=#6-some-tricks-and-tips>6. Some tricks and tips</a></li><li><a href=#7-references>7. References</a></li></ul></nav></div></aside></main></body></html>

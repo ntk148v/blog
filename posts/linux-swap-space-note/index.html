@@ -12,18 +12,16 @@
 <meta property="og:url" content="https://ntk148v.github.io/blog/posts/linux-swap-space-note/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2020-05-20T09:30:28+07:00">
 <meta property="article:modified_time" content="2020-05-20T10:36:14+07:00"><meta property="og:site_name" content="/home/kiennt">
-<title>Swap space note | /home/kiennt</title>
-<link rel=manifest href=/blog/manifest.json>
+<title>Swap space note | /home/kiennt</title><link rel=manifest href=/blog/manifest.json>
 <link rel=icon href=/blog/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/blog/book.min.2625e69c6b7661c7675edd24ba686fbc2f7d3dfe3fadbf62681b4d2cf2fead9d.css integrity="sha256-JiXmnGt2YcdnXt0kumhvvC99Pf4/rb9iaBtNLPL+rZ0=" crossorigin=anonymous>
 <script defer src=/blog/flexsearch.min.js></script>
-<script defer src=/blog/en.search.min.b0824cd4233f745d479a23f835ffb459c17fef4b6928b9ce3007b0a5e44d9e42.js integrity="sha256-sIJM1CM/dF1HmiP4Nf+0WcF/70tpKLnOMAewpeRNnkI=" crossorigin=anonymous></script>
+<script defer src=/blog/en.search.min.84ddc4785ba1b87879a66dee280bec06787380302425536a298a5f31e2079e53.js integrity="sha256-hN3EeFuhuHh5pm3uKAvsBnhzgDAkJVNqKYpfMeIHnlM=" crossorigin=anonymous></script>
 <script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css>
 <script async defer src=https://buttons.github.io/buttons.js></script>
-</head>
-<body dir=ltr>
+</head><body dir=ltr>
 <input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control>
 <main class="container flex">
@@ -33,22 +31,11 @@
 <h2 class=book-brand>
 <a class="flex align-center" href=/blog/><span>/home/kiennt</span>
 </a>
-</h2>
-<div class=book-search>
+</h2><div class=book-search>
 <input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/>
-<div class="book-search-spinner hidden"></div>
-<ul id=book-search-results></ul>
-</div>
-<ul>
-<li><a href=/blog/about/>About</a></li>
-<li><a href=/blog/posts/>Posts</a></li>
-<li><a href=https://ntk148v.github.io/notes>Notes</a></li>
-</ul>
-</nav>
-<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
-</div>
-</aside>
-<div class=book-page>
+<div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul>
+<li><a href=/blog/about/>About</a></li><li><a href=/blog/posts/>Posts</a></li><li><a href=https://ntk148v.github.io/notes>Notes</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div></aside><div class=book-page>
 <header class=book-header>
 <div class="flex align-center justify-between">
 <label for=menu-control>
@@ -58,209 +45,107 @@
 <label for=toc-control>
 <img src=/blog/svg/toc.svg class=book-icon alt="Table of Contents">
 </label>
-</div>
-<aside class="hidden clearfix">
+</div><aside class="hidden clearfix">
 <nav id=TableOfContents>
 <ul>
-<li><a href=#1-what-is-swap>1. What is Swap?</a></li>
-<li><a href=#2-swap-partition-size>2. Swap partition size</a>
+<li><a href=#1-what-is-swap>1. What is Swap?</a></li><li><a href=#2-swap-partition-size>2. Swap partition size</a>
 <ul>
-<li><a href=#21-old-rule-of-thumb>2.1. Old rule of thumb</a></li>
-<li><a href=#22-what-is-the-right-amount-of-swap-space>2.2. What is the right amount of swap space?</a></li>
-</ul>
-</li>
-<li><a href=#3-common-misconceptions--gotchas>3. Common misconceptions & gotchas</a>
+<li><a href=#21-old-rule-of-thumb>2.1. Old rule of thumb</a></li><li><a href=#22-what-is-the-right-amount-of-swap-space>2.2. What is the right amount of swap space?</a></li></ul></li><li><a href=#3-common-misconceptions--gotchas>3. Common misconceptions & gotchas</a>
 <ul>
-<li><a href=#31-increasing-swap-size-would-increase-performance>3.1. Increasing swap size would increase performance</a></li>
-<li><a href=#32-swappiness>3.2. Swappiness</a></li>
-<li><a href=#33-using-swap-as-emergency-memory>3.3. Using swap as emergency memory</a></li>
-</ul>
-</li>
-<li><a href=#4-references>4. References</a></li>
-</ul>
-</nav>
-</aside>
-</header>
-<article class=markdown>
+<li><a href=#31-increasing-swap-size-would-increase-performance>3.1. Increasing swap size would increase performance</a></li><li><a href=#32-swappiness>3.2. Swappiness</a></li><li><a href=#33-using-swap-as-emergency-memory>3.3. Using swap as emergency memory</a></li></ul></li><li><a href=#4-references>4. References</a></li></ul></nav></aside></header><article class=markdown>
 <h1>
 <a href=/blog/posts/linux-swap-space-note/>Swap space note</a>
-</h1>
-<h5>May 20, 2020</h5>
-<div>
+</h1><h5>May 20, 2020</h5><div>
 <a href=/blog/tags/linux/>#linux</a>
 <a href=/blog/tags/tech/>#tech</a>
-</div>
-<h2 id=1-what-is-swap>
+</div><h2 id=1-what-is-swap>
 1. What is Swap?
 <a class=anchor href=#1-what-is-swap>#</a>
-</h2>
-<p>Swap file systems support virtual memory, data is written to a swap file system when there is not enough RAM to store the data your system is processing.</p>
-<h2 id=2-swap-partition-size>
+</h2><p>Swap file systems support virtual memory, data is written to a swap file system when there is not enough RAM to store the data your system is processing.</p><h2 id=2-swap-partition-size>
 2. Swap partition size
 <a class=anchor href=#2-swap-partition-size>#</a>
-</h2>
-<h3 id=21-old-rule-of-thumb>
+</h2><h3 id=21-old-rule-of-thumb>
 2.1. Old rule of thumb
 <a class=anchor href=#21-old-rule-of-thumb>#</a>
-</h3>
-<pre tabindex=0><code>swap = 2 * the-amount-of-RAM
-</code></pre><p>So if a computer had 64KB of RAM, a swap partition of 128KB would be an optimum size. This rule took into the facts that RAM sizes were typically quite small at the time. Nowadays, RAM has become a <code>cheap</code> & <code>affordable</code> commondity, so the 2x rule is outdated.</p>
-<h3 id=22-what-is-the-right-amount-of-swap-space>
+</h3><pre tabindex=0><code>swap = 2 * the-amount-of-RAM
+</code></pre><p>So if a computer had 64KB of RAM, a swap partition of 128KB would be an optimum size. This rule took into the facts that RAM sizes were typically quite small at the time. Nowadays, RAM has become a <code>cheap</code> & <code>affordable</code> commondity, so the 2x rule is outdated.</p><h3 id=22-what-is-the-right-amount-of-swap-space>
 2.2. What is the right amount of swap space?
 <a class=anchor href=#22-what-is-the-right-amount-of-swap-space>#</a>
-</h3>
-<p>Choosing the correct swap size is important. Too much swap space can hide memory leaks, also the storage space is allocated but idle. It can affect the system performance in general.</p>
-<p>Follow the RedHat (CentOS 7x & RHEL 7) guide, the recommended size of a swap partition depending on the amount of RAM & whether you want sufficient memory for your system.</p>
-<pre tabindex=0><code>swap &lt;= 10% * total-size-hard-drives &amp;&amp; swap &lt;= 128GB (if hibernation is allowed)
+</h3><p>Choosing the correct swap size is important. Too much swap space can hide memory leaks, also the storage space is allocated but idle. It can affect the system performance in general.</p><p>Follow the RedHat (CentOS 7x & RHEL 7) guide, the recommended size of a swap partition depending on the amount of RAM & whether you want sufficient memory for your system.</p><pre tabindex=0><code>swap &lt;= 10% * total-size-hard-drives &amp;&amp; swap &lt;= 128GB (if hibernation is allowed)
 </code></pre><table>
 <thead>
 <tr>
-<th>Amount of RAM</th>
-<th>Recommended swap space</th>
-<th>Recommended swap space if allowing for hibernation</th>
-</tr>
-</thead>
-<tbody>
+<th>Amount of RAM</th><th>Recommended swap space</th><th>Recommended swap space if allowing for hibernation</th></tr></thead><tbody>
 <tr>
-<td>&lt; 2GB</td>
-<td>2 * the-amount-of-RAM</td>
-<td>3 * the-amount-of-RAM</td>
-</tr>
-<tr>
-<td>> 2GB - 8GB</td>
-<td>the-amount-of-RAM</td>
-<td>2 * the-amount-of-RAM</td>
-</tr>
-<tr>
-<td>> 8GB - 64GB</td>
-<td>>= 4GB</td>
-<td>1.5 * the-amount-of-RAM</td>
-</tr>
-<tr>
-<td>> 64GB</td>
-<td>>= 4GB</td>
-<td>Hibernation not recommended</td>
-</tr>
-</tbody>
-</table>
-<h2 id=3-common-misconceptions--gotchas>
+<td>&lt; 2GB</td><td>2 * the-amount-of-RAM</td><td>3 * the-amount-of-RAM</td></tr><tr>
+<td>> 2GB - 8GB</td><td>the-amount-of-RAM</td><td>2 * the-amount-of-RAM</td></tr><tr>
+<td>> 8GB - 64GB</td><td>>= 4GB</td><td>1.5 * the-amount-of-RAM</td></tr><tr>
+<td>> 64GB</td><td>>= 4GB</td><td>Hibernation not recommended</td></tr></tbody></table><h2 id=3-common-misconceptions--gotchas>
 3. Common misconceptions & gotchas
 <a class=anchor href=#3-common-misconceptions--gotchas>#</a>
-</h2>
-<h3 id=31-increasing-swap-size-would-increase-performance>
+</h2><h3 id=31-increasing-swap-size-would-increase-performance>
 3.1. Increasing swap size would increase performance
 <a class=anchor href=#31-increasing-swap-size-would-increase-performance>#</a>
-</h3>
-<ul>
-<li>No, it wouldn&rsquo;t. Remember that the slowest part of memory is your hard-disk - <em>swap</em> just provides the ability to use more memory by swapping some pages out to the disk, which is <strong>slow</strong> compared to RAM operations. Swap can also <a href=https://askubuntu.com/questions/367881/does-swap-file-usage-increase-disk-i-o-and-cpu-load>increase disk I/O & CPU load</a>. This is a tradeoff. Without swap, the OOM may get you. It causes a downtime and in the real life scenario, the application can be slow a bit rather than down completely.</li>
-</ul>
-<h3 id=32-swappiness>
+</h3><ul>
+<li>No, it wouldn&rsquo;t. Remember that the slowest part of memory is your hard-disk - <em>swap</em> just provides the ability to use more memory by swapping some pages out to the disk, which is <strong>slow</strong> compared to RAM operations. Swap can also <a href=https://askubuntu.com/questions/367881/does-swap-file-usage-increase-disk-i-o-and-cpu-load>increase disk I/O & CPU load</a>. This is a tradeoff. Without swap, the OOM may get you. It causes a downtime and in the real life scenario, the application can be slow a bit rather than down completely.</li></ul><h3 id=32-swappiness>
 3.2. Swappiness
 <a class=anchor href=#32-swappiness>#</a>
-</h3>
-<ul>
+</h3><ul>
 <li>
-<p>The linux kernel tunable parameter <code>vm.swappiness</code> (/proc/sys/vm/swappiness) can be used to define how aggressively memory pages are swapped to disk.</p>
-</li>
-<li>
-<p>The default value: <code>60</code>. The lower the value, the less swapping is used & the more memory pages are kept in the physical memory.</p>
-<pre tabindex=0><code>* 0: swap is disable.
+<p>The linux kernel tunable parameter <code>vm.swappiness</code> (/proc/sys/vm/swappiness) can be used to define how aggressively memory pages are swapped to disk.</p></li><li>
+<p>The default value: <code>60</code>. The lower the value, the less swapping is used & the more memory pages are kept in the physical memory.</p><pre tabindex=0><code>* 0: swap is disable.
 * 1: minimum amount of swapping without disabling it entirely.
 * 10: recommended value to improve performance when sufficient memory exists in a system
 * 100: aggressive swapping
-</code></pre></li>
-<li>
-<p>Useful commands:</p>
-<div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
-<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span></code></pre></td>
-<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
-<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># Check the current value</span>
-sysctl vm.swappiness
-<span style=color:#75715e># Adjust the value</span>
-<span style=color:#111>echo</span> <span style=color:#ae81ff>10</span> &gt; /proc/sys/vm/swappiness
-sysctl -w vm.swappiness<span style=color:#f92672>=</span><span style=color:#ae81ff>10</span>
-<span style=color:#111>echo</span> <span style=color:#d88200>&#34;vm.swappiness = 10&#34;</span> &gt;&gt; /etc/sysctl.conf
-</code></pre></td></tr></table>
-</div>
-</div></li>
-<li>
-<p>On SSDs, swapping out anonymous pages and reclaiming file pages are essentially equivalent in terms of performance/latency. On older spinning disks, swap reads are slower due to random reads, so a lower vm.swappiness setting makes sense there.</p>
-</li>
-</ul>
-<h3 id=33-using-swap-as-emergency-memory>
+</code></pre></li><li>
+<p>Useful commands:</p><div class=highlight><div style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Check the current value</span>
+</span></span><span style=display:flex><span>sysctl vm.swappiness
+</span></span><span style=display:flex><span><span style=color:#75715e># Adjust the value</span>
+</span></span><span style=display:flex><span><span style=color:#111>echo</span> <span style=color:#ae81ff>10</span> &gt; /proc/sys/vm/swappiness
+</span></span><span style=display:flex><span>sysctl -w vm.swappiness<span style=color:#f92672>=</span><span style=color:#ae81ff>10</span>
+</span></span><span style=display:flex><span><span style=color:#111>echo</span> <span style=color:#d88200>&#34;vm.swappiness = 10&#34;</span> &gt;&gt; /etc/sysctl.conf
+</span></span></code></pre></td></tr></table></div></div></li><li>
+<p>On SSDs, swapping out anonymous pages and reclaiming file pages are essentially equivalent in terms of performance/latency. On older spinning disks, swap reads are slower due to random reads, so a lower vm.swappiness setting makes sense there.</p></li></ul><h3 id=33-using-swap-as-emergency-memory>
 3.3. Using swap as emergency memory
 <a class=anchor href=#33-using-swap-as-emergency-memory>#</a>
-</h3>
-<ul>
-<li>Swap is not generally about getting emergency memory, it&rsquo;s about making memory reclamation egalitarian and efficient. In fact, using it as &ldquo;emergency memory&rdquo; is generally actively harmful.</li>
-</ul>
-<h2 id=4-references>
+</h3><ul>
+<li>Swap is not generally about getting emergency memory, it&rsquo;s about making memory reclamation egalitarian and efficient. In fact, using it as &ldquo;emergency memory&rdquo; is generally actively harmful.</li></ul><h2 id=4-references>
 4. References
 <a class=anchor href=#4-references>#</a>
-</h2>
-<ol>
+</h2><ol>
 <li>
-<p><a href=https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/installation_guide/sect-disk-partitioning-setup-x86#sect-recommended-partitioning-scheme-x86>RedHad guideline</a></p>
-</li>
-<li>
-<p><a href=https://chrisdown.name/2018/01/02/in-defence-of-swap.html>Chris Down&rsquo;s post</a></p>
-</li>
-<li>
-<p><a href=https://linuxhint.com/understanding_vm_swappiness/>Linux Hint - Understanding vm.swappiness</a></p>
-</li>
-</ol>
-</article>
-<footer class=book-footer>
+<p><a href=https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/installation_guide/sect-disk-partitioning-setup-x86#sect-recommended-partitioning-scheme-x86>RedHad guideline</a></p></li><li>
+<p><a href=https://chrisdown.name/2018/01/02/in-defence-of-swap.html>Chris Down&rsquo;s post</a></p></li><li>
+<p><a href=https://linuxhint.com/understanding_vm_swappiness/>Linux Hint - Understanding vm.swappiness</a></p></li></ol></article><footer class=book-footer>
 <div class="flex flex-wrap justify-between">
 <div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/c551d3bae20e85213a0bf8a3518e2fd147fed987 title="Last modified by Kien Nguyen | May 20, 2020" target=_blank rel=noopener>
 <img src=/blog/svg/calendar.svg class=book-icon alt=Calendar>
 <span>May 20, 2020</span>
 </a>
-</div>
-<div>
+</div><div>
 <a class="flex align-center" href=https://github.com/ntk148v/blog/edit/master/content/posts/linux-swap-space-note.md target=_blank rel=noopener>
 <img src=/blog/svg/edit.svg class=book-icon alt=Edit>
 <span>Edit this page</span>
 </a>
-</div>
-</div>
-<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
-</footer>
-<div class=book-comments><section class="article discussion">
+</div></div><script>(function(){function e(n){const e=window.getSelection(),t=document.createRange();t.selectNodeContents(n),e.removeAllRanges(),e.addRange(t)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+</footer><div class=book-comments><section class="article discussion">
 <script src=https://utteranc.es/client.js repo=ntk148v/blog issue-term=pathname theme=github-light crossorigin=anonymous async></script>
-</section></div>
-<label for=menu-control class="hidden book-menu-overlay"></label>
-</div>
-<aside class=book-toc>
+</section></div><label for=menu-control class="hidden book-menu-overlay"></label>
+</div><aside class=book-toc>
 <div class=book-toc-content>
 <nav id=TableOfContents>
 <ul>
-<li><a href=#1-what-is-swap>1. What is Swap?</a></li>
-<li><a href=#2-swap-partition-size>2. Swap partition size</a>
+<li><a href=#1-what-is-swap>1. What is Swap?</a></li><li><a href=#2-swap-partition-size>2. Swap partition size</a>
 <ul>
-<li><a href=#21-old-rule-of-thumb>2.1. Old rule of thumb</a></li>
-<li><a href=#22-what-is-the-right-amount-of-swap-space>2.2. What is the right amount of swap space?</a></li>
-</ul>
-</li>
-<li><a href=#3-common-misconceptions--gotchas>3. Common misconceptions & gotchas</a>
+<li><a href=#21-old-rule-of-thumb>2.1. Old rule of thumb</a></li><li><a href=#22-what-is-the-right-amount-of-swap-space>2.2. What is the right amount of swap space?</a></li></ul></li><li><a href=#3-common-misconceptions--gotchas>3. Common misconceptions & gotchas</a>
 <ul>
-<li><a href=#31-increasing-swap-size-would-increase-performance>3.1. Increasing swap size would increase performance</a></li>
-<li><a href=#32-swappiness>3.2. Swappiness</a></li>
-<li><a href=#33-using-swap-as-emergency-memory>3.3. Using swap as emergency memory</a></li>
-</ul>
-</li>
-<li><a href=#4-references>4. References</a></li>
-</ul>
-</nav>
-</div>
-</aside>
-</main>
-</body>
-</html>
+<li><a href=#31-increasing-swap-size-would-increase-performance>3.1. Increasing swap size would increase performance</a></li><li><a href=#32-swappiness>3.2. Swappiness</a></li><li><a href=#33-using-swap-as-emergency-memory>3.3. Using swap as emergency memory</a></li></ul></li><li><a href=#4-references>4. References</a></li></ul></nav></div></aside></main></body></html>
