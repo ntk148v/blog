@@ -98,9 +98,12 @@
   }
 }
 
+// Config syntax theme depends on overal color scheme
+// https://gohugo.io/content-management/syntax-highlighting/#generate-syntax-highlighter-css
+// Don't forget to set markup.highlight.noClasses=false
 @media (prefers-color-scheme: dark) {
-  @import 'syntax-dark'
+  @import 'syntax-light'
 }
 @media (prefers-color-scheme: light) {
-  @import 'syntax-light'
+  @import 'syntax-dark'
 }
