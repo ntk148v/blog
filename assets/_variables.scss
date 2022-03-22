@@ -1,0 +1,35 @@
+// Themes
+@mixin theme-light {
+  --gray-100: #f8f9fa;
+  --gray-200: #e9ecef;
+  --gray-500: #adb5bd;
+
+  --color-link: #0184bc;
+  --color-visited-link: #a626a4;
+
+  --body-background: #fafafa;
+  --body-font-color: #383a42;
+
+  --icon-filter: none;
+
+  --hint-color-info: #6bf;
+  --hint-color-warning: #fd6;
+  --hint-color-danger: #f66;
+}
+
+@mixin theme-dark {
+  --gray-100: rgba(255, 255, 255, 0.1);
+  --gray-200: rgba(255, 255, 255, 0.2);
+  --gray-500: rgba(255, 255, 255, 0.5);
+
+  --color-link: #61afef;
+  --color-visited-link: #c678dd;
+
+  --body-background: #282c34;
+  --body-font-color: #dcdfe4;
+  --icon-filter: brightness(0) invert(1);
+
+  --hint-color-info: #6bf;
+  --hint-color-warning: #fd6;
+  --hint-color-danger: #f66;
+}

@@ -27,7 +27,7 @@ ordered = false
 startLevel = 2
 
 [markup.highlight]
-style = 'monokailight'
+style = 'xcode'
 noClasses = true
 codeFences = true
 guessSyntax = false
