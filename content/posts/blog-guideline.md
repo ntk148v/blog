@@ -3,12 +3,17 @@ title: "Blog Guideline"
 date: 2019-08-22T14:40:59+07:00
 comments: true
 authors:
-    - kiennt
+  - kiennt
 showDate: true
 tags: ["blog", "tech"]
-readingTime: true  ## show reading time after article date
+readingTime: true ## show reading time after article date
 toc: true
+draft: true
 ---
+
+{{< hint info >}}
+This guideline doesn't work anymore
+{{< /hint >}}
 
 In the beginning, I supposed that I'm the only one who write-up thing in this blog. But now thing was change, this blog might have multiple [bloggers](https://ntk148v.github.io/blog/authors/). So it needs a guideline to describe how to contribute.
 
@@ -16,18 +21,18 @@ In the beginning, I supposed that I'm the only one who write-up thing in this bl
 
 ## 1. How to submit a new content
 
--   [Here](https://github.com/ntk148v/blog) is the source repo. Fork it & start writing.
--   Create a pull request to submit your content.
--   Make sure to create your author page.
+- [Here](https://github.com/ntk148v/blog) is the source repo. Fork it & start writing.
+- Create a pull request to submit your content.
+- Make sure to create your author page.
 
 ## 2. Create an author page
 
--   Create a directory under [content/authors](https://github.com/ntk148v/blog/tree/master/content/authors), name it as your desire nickname. For example, your name is `amazingblogger`.
+- Create a directory under [content/authors](https://github.com/ntk148v/blog/tree/master/content/authors), name it as your desire nickname. For example, your name is `amazingblogger`.
 
--   Directory structure.
+- Directory structure.
 
 ```bash
-~/Documents/blog master $? via ⬢ v8.10.0 took 6s tree content/authors    
+~/Documents/blog master $? via ⬢ v8.10.0 took 6s tree content/authors
 content/authors
 ├── donghm
 │   ├── avatar.jpg
@@ -41,33 +46,32 @@ content/authors
     └── index.md
 ```
 
--   Write about yourself in `index.md`.
+- Write about yourself in `index.md`.
 
 ```yaml
 ---
 name: "Amazing Blogger"
 contact:
-    twitter: "@blogger"
-    facebook: "blogger"
-    github: "blogger"
-    email: "blogger@gmail.com"
+  twitter: "@blogger"
+  facebook: "blogger"
+  github: "blogger"
+  email: "blogger@gmail.com"
 website: "https://blogger.io/"
 ---
-
 Your amazing personal page here
 ```
 
--   Don't forget to place your avatar in directory. The picture format should be `jpg` or `png`, no name restriction.
+- Don't forget to place your avatar in directory. The picture format should be `jpg` or `png`, no name restriction.
 
 ## 3. Write a post
 
--   Very similar with author page, just place your post under [content/posts](https://github.com/ntk148v/blog/tree/master/content/posts).
+- Very similar with author page, just place your post under [content/posts](https://github.com/ntk148v/blog/tree/master/content/posts).
 
 ```bash
 $ hugo new content/posts/a-new-post.md -t sam
 ```
 
--   A sample post.
+- A sample post.
 
 ```yaml
 ---
@@ -75,15 +79,15 @@ title: "Blog Guideline"
 date: 2019-08-22T14:40:59+07:00
 comments: true
 authors:
-    - kiennt
+  - kiennt
 showDate: true
 tags: ["blog", "tech"]
 ---
 ```
 
--   Multiple authors feature is supported.
--   You can disable or enable comment section with `comment` option. You might want to take look at [how I create comment section](https://ntk148v.github.io/blog/posts/lets-comment/).
--   Don't forget to add a tag.
+- Multiple authors feature is supported.
+- You can disable or enable comment section with `comment` option. You might want to take look at [how I create comment section](https://ntk148v.github.io/blog/posts/lets-comment/).
+- Don't forget to add a tag.
 
 ## 4. Create a photo/art gallery
 
@@ -101,7 +105,7 @@ Just a script to init and update submodule, do git pull (both master and gh-page
 
 I deploy the blog from `gh-pages` branch. You can also tell Github pages to treat your `master` branch as the published site or point to a separate `gh-pages` branch. The latter approach is a bit more complex but has some advantages:
 
--   It keeps your source and generated website in different branches and therefore maintains version control history for both.
--   Unlike the preceding docs/ option, it uses the default public folder.
+- It keeps your source and generated website in different branches and therefore maintains version control history for both.
+- Unlike the preceding docs/ option, it uses the default public folder.
 
 The [publish_to_ghpages.sh](https://github.com/ntk148v/blog/blob/master/publish_to_ghpages.sh) automates the set up steps.
