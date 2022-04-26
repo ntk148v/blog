@@ -288,7 +288,7 @@ lb1$ sudo useradd exabgp
 ```bash
 lb1$ sudo cat <<EOF > /etc/exabgp/exabgp.conf
 neighbor 10.12.12.254 {  # Remote neighbor to peer with
-    router-id 10.12.12.254; # Local router-id
+    router-id 10.12.12.1; # Local router-id, change to 10.12.12.2 on lb2
     local-address 10.12.12.1; # Local update-router, change to 10.12.12.2 on lb2
     local-as 65500; # Local AS
     peer-as 65500; # Peer AS
