@@ -3,7 +3,7 @@ I love customizing desktop. I make changes in my desktop everyday, make it look 
  1. Overview Window Manager #  First of all, you have to know the basic concepts."><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content="Getting Started with Tiling WM [Part 1] - I3"><meta property="og:description" content="Disclaimer
 I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I&rsquo;ve gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.
  1. Overview Window Manager #  First of all, you have to know the basic concepts."><meta property="og:type" content="article"><meta property="og:url" content="https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-1-i3/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-04-19T10:10:21+07:00"><meta property="article:modified_time" content="2022-02-08T10:11:51+07:00"><meta property="og:site_name" content="/home/kiennt"><title>Getting Started with Tiling WM [Part 1] - I3 | /home/kiennt</title><link rel=manifest href=/blog/manifest.json><link rel=icon href=/blog/favicon.png type=image/x-icon><link rel=stylesheet href=/blog/book.min.be2bb509fc1073ca14832e83e6df0a6e3e291a1f28ade557c3028f281a34a35b.css integrity="sha256-viu1CfwQc8oUgy6D5t8Kbj4pGh8oreVXwwKPKBo0o1s=" crossorigin=anonymous><script defer src=/blog/flexsearch.min.js></script>
-<script defer src=/blog/en.search.min.7a41804361c281189717c71f08d8cae65f699718b2525591ca0e945b5a889c87.js integrity="sha256-ekGAQ2HCgRiXF8cfCNjK5l9plxiyUlWRyg6UW1qInIc=" crossorigin=anonymous></script>
+<script defer src=/blog/en.search.min.90edf56b269efeb4d76e18d9accff9a4ef3ba123b661831a5c6141fe956ffcb1.js integrity="sha256-kO31ayae/rTXbhjZrM/5pO87oSO2YYMaXGFB/pVv/LE=" crossorigin=anonymous></script>
 <script defer src=/blog/sw.min.f4bc4151631c92d29816d24dfaacb947aa6b03f91ec1c0cd2738ba8957d04791.js integrity="sha256-9LxBUWMcktKYFtJN+qy5R6prA/kewcDNJzi6iVfQR5E=" crossorigin=anonymous></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css><script async defer src=https://buttons.github.io/buttons.js></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/blog/><span>/home/kiennt</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><a href=/blog/about/>About</a></li><li><a href=/blog/posts/>Posts</a></li><li><a href=https://ntk148v.github.io/notes target=_blank rel=noopener>Notes</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/blog/svg/menu.svg class=book-icon alt=Menu></label>
@@ -83,166 +83,325 @@ style Container3 fill:#6fa8dc;</p><ul><li>In i3, <strong>workspace</strong> is s
 </span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo apt install hsetroot rofi compton -y
 </span></span></code></pre></td></tr></table></div></div><details open><summary>Minimal I3 configuration</summary><div class=markdown-inner><h2 id=cheat-sheat-shortcut>Cheat sheat shortcut
 <a class=anchor href=#cheat-sheat-shortcut>#</a></h2><table><thead><tr><th>Shortcut</th><th>Description</th></tr></thead><tbody><tr><td><kbd>$mod</kbd> + <kbd>Enter</kbd></td><td>Open a terminal</td></tr><tr><td><kbd>$mod</kbd> + <kbd>d</kbd></td><td>Open application launcher</td></tr><tr><td><kbd>$mod</kbd> + <kbd>c</kbd></td><td>Kill focused window</td></tr><tr><td><kbd>$mod</kbd> + <kbd>right/left/up/down</kbd></td><td>Change focus</td></tr><tr><td><kbd>$mod</kbd> + <kbd>Shift</kbd> + <kbd>right/left/up/down</kbd></td><td>Move focused window in direction</td></tr><tr><td><kbd>$mod</kbd> + <kbd>1/2/3&mldr;</kbd></td><td>Switch workspace</td></tr><tr><td><kbd>$mod</kbd> + <kbd>Shift</kbd> + <kbd>1/2/3&mldr;</kbd></td><td>Move focused window to the specified workspace</td></tr><tr><td><kbd>$mod</kbd> + <kbd>space</kbd></td><td>Change between focus and floating mode</td></tr><tr><td><kbd>$mod</kbd> + <kbd>Shift</kbd> + <kbd>r</kbd></td><td>Restart i3</td></tr><tr><td><kbd>$mod</kbd> + <kbd>Shift</kbd> + <kbd>c</kbd></td><td>Reload config i3</td></tr><tr><td><kbd>$mod</kbd> + <kbd>q</kbd></td><td>Quit i3</td></tr></tbody></table><h2 id=minimal-configuration-file>Minimal configuration file
-<a class=anchor href=#minimal-configuration-file>#</a></h2><pre tabindex=0><code># i3 config file
-# Please see https://i3wm.org/docs/userguide.html for a complete reference!
-
-# Set modifier
-set $mod Mod4
-set $alt Mod1
-
-default_orientation auto
-
-# Font for window titles.
-font pango:DejaVu Sans Mono 0
-
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-
-# Here is the trick to disable titlebar completely
-for_window [class=&#34;^.*&#34;] border pixel 0
-
-# Autostart
-exec --no-startup-id hsetroot -solid &#34;#F1CCBB&#34;
-exec --no-startup-id xsettingsd &amp;
-exec --no-startup-id compton -b
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec --no-startup-id nm-applet
-
-# Keybindings
-# start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
-# kill focused window
-bindsym $mod+c kill
-bindsym $alt+F4 kill
-# start rofi
-bindsym $mod+Shift+d exec i3-dmenu-desktop --dmenu=&#34;dmenu -i -fn &#39;DejaVu Sans:size=8&#39;&#34;
-bindsym $mod+d exec rofi -lines 12 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font &#39;DejaVu Sans 8&#39;
-# Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% &amp;&amp; $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% &amp;&amp; $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle &amp;&amp; $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle &amp;&amp; $refresh_i3status
-
-# change focus
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-
-# split in horizontal orientation
-bindsym $mod+h split h
-
-# split in vertical orientation
-bindsym $mod+v split v
-
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
-# focus the parent container
-bindsym $mod+a focus parent
-
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
-set $ws1 &#34;1&#34;
-set $ws2 &#34;2&#34;
-set $ws3 &#34;3&#34;
-set $ws4 &#34;4&#34;
-set $ws5 &#34;5&#34;
-set $ws6 &#34;6&#34;
-set $ws7 &#34;7&#34;
-set $ws8 &#34;8&#34;
-set $ws9 &#34;9&#34;
-set $ws10 &#34;10&#34;
-
-# switch to workspace
-bindsym $mod+1 workspace number $ws1
-bindsym $mod+2 workspace number $ws2
-bindsym $mod+3 workspace number $ws3
-bindsym $mod+4 workspace number $ws4
-bindsym $mod+5 workspace number $ws5
-bindsym $mod+6 workspace number $ws6
-bindsym $mod+7 workspace number $ws7
-bindsym $mod+8 workspace number $ws8
-bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
-
-# move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
-
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec &#34;i3-nagbar -t warning -m &#39;You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.&#39; -B &#39;Yes, exit i3&#39; &#39;i3-msg exit&#39;&#34;
-
-# resize window (you can also use the mouse for that)
-mode &#34;resize&#34; {
-        bindsym Left resize shrink width 5 px or 5 ppt
-        bindsym Down resize grow height 5 px or 5 ppt
-        bindsym Up resize shrink height 5 px or 5 ppt
-        bindsym Right resize grow width 5 px or 5 ppt
-        bindsym Return mode &#34;default&#34;
-}
-bindsym $mod+r mode &#34;resize&#34;
-
-# panel
-bar {
-        colors {
-        background #2f343f
-        statusline #2f343f
-        separator #4b5262
-
-        # colour of border, background, and text
-        focused_workspace       #2f343f #bf616a #d8dee8
-        active_workspace        #2f343f #2f343f #d8dee8
-        inactive_workspace      #2f343f #2f343f #d8dee8
-        urgent_workspacei       #2f343f #ebcb8b #2f343f
-    }
-        status_command i3status
-}
-
-# gaps
-gaps top    20
-gaps left   10
-gaps right  10
-gaps bottom 10
-gaps inner  25
-border_radius 10
-
-# Hide edge borders only if there is one window with no gaps
-hide_edge_borders smart_no_gaps
-
-# reload
-exec_always hsetroot -solid &#34;#F1CCBB&#34;
-</code></pre></div></details><h2 id=6-some-tricks-and-tips>6. Some tricks and tips
+<a class=anchor href=#minimal-configuration-file>#</a></h2><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 20
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 21
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 22
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 23
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 24
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 25
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 26
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 27
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 28
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 29
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 30
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 31
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 32
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 33
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 34
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 35
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 36
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 37
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 38
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 39
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 40
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 41
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 42
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 43
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 44
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 45
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 46
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 47
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 48
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 49
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 50
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 51
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 52
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 53
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 54
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 55
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 56
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 57
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 58
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 59
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 60
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 61
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 62
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 63
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 64
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 65
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 66
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 67
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 68
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 69
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 70
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 71
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 72
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 73
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 74
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 75
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 76
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 77
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 78
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 79
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 80
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 81
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 82
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 83
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 84
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 85
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 86
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 87
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 88
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 89
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 90
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 91
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 92
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 93
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 94
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 95
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 96
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 97
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 98
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 99
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">100
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">101
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">102
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">103
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">104
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">105
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">106
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">107
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">108
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">109
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">110
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">111
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">112
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">113
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">114
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">115
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">116
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">117
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">118
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">119
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">120
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">121
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">122
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">123
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">124
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">125
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">126
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">127
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">128
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">129
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">130
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">131
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">132
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">133
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">134
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">135
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">136
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">137
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">138
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">139
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">140
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">141
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">142
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">143
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">144
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">145
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">146
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">147
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">148
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">149
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">150
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">151
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">152
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">153
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">154
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">155
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">156
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">157
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">158
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">159
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span># i3 config file
+</span></span><span style=display:flex><span># Please see https://i3wm.org/docs/userguide.html for a complete reference!
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># Set modifier
+</span></span><span style=display:flex><span>set $mod Mod4
+</span></span><span style=display:flex><span>set $alt Mod1
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>default_orientation auto
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># Font for window titles.
+</span></span><span style=display:flex><span>font pango:DejaVu Sans Mono 0
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># Use Mouse+$mod to drag floating windows to their wanted position
+</span></span><span style=display:flex><span>floating_modifier $mod
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># Here is the trick to disable titlebar completely
+</span></span><span style=display:flex><span>for_window [class=&#34;^.*&#34;] border pixel 0
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># Autostart
+</span></span><span style=display:flex><span>exec --no-startup-id hsetroot -solid &#34;#F1CCBB&#34;
+</span></span><span style=display:flex><span>exec --no-startup-id xsettingsd &amp;
+</span></span><span style=display:flex><span>exec --no-startup-id compton -b
+</span></span><span style=display:flex><span>exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+</span></span><span style=display:flex><span>exec --no-startup-id nm-applet
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># Keybindings
+</span></span><span style=display:flex><span># start a terminal
+</span></span><span style=display:flex><span>bindsym $mod+Return exec i3-sensible-terminal
+</span></span><span style=display:flex><span># kill focused window
+</span></span><span style=display:flex><span>bindsym $mod+c kill
+</span></span><span style=display:flex><span>bindsym $alt+F4 kill
+</span></span><span style=display:flex><span># start rofi
+</span></span><span style=display:flex><span>bindsym $mod+Shift+d exec i3-dmenu-desktop --dmenu=&#34;dmenu -i -fn &#39;DejaVu Sans:size=8&#39;&#34;
+</span></span><span style=display:flex><span>bindsym $mod+d exec rofi -lines 12 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font &#39;DejaVu Sans 8&#39;
+</span></span><span style=display:flex><span># Use pactl to adjust volume in PulseAudio.
+</span></span><span style=display:flex><span>set $refresh_i3status killall -SIGUSR1 i3status
+</span></span><span style=display:flex><span>bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% &amp;&amp; $refresh_i3status
+</span></span><span style=display:flex><span>bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% &amp;&amp; $refresh_i3status
+</span></span><span style=display:flex><span>bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle &amp;&amp; $refresh_i3status
+</span></span><span style=display:flex><span>bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle &amp;&amp; $refresh_i3status
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># change focus
+</span></span><span style=display:flex><span>bindsym $mod+Left focus left
+</span></span><span style=display:flex><span>bindsym $mod+Down focus down
+</span></span><span style=display:flex><span>bindsym $mod+Up focus up
+</span></span><span style=display:flex><span>bindsym $mod+Right focus right
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># alternatively, you can use the cursor keys:
+</span></span><span style=display:flex><span>bindsym $mod+Shift+Left move left
+</span></span><span style=display:flex><span>bindsym $mod+Shift+Down move down
+</span></span><span style=display:flex><span>bindsym $mod+Shift+Up move up
+</span></span><span style=display:flex><span>bindsym $mod+Shift+Right move right
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># split in horizontal orientation
+</span></span><span style=display:flex><span>bindsym $mod+h split h
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># split in vertical orientation
+</span></span><span style=display:flex><span>bindsym $mod+v split v
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># enter fullscreen mode for the focused container
+</span></span><span style=display:flex><span>bindsym $mod+f fullscreen toggle
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># change container layout (stacked, tabbed, toggle split)
+</span></span><span style=display:flex><span>bindsym $mod+s layout stacking
+</span></span><span style=display:flex><span>bindsym $mod+w layout tabbed
+</span></span><span style=display:flex><span>bindsym $mod+e layout toggle split
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># toggle tiling / floating
+</span></span><span style=display:flex><span>bindsym $mod+Shift+space floating toggle
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># change focus between tiling / floating windows
+</span></span><span style=display:flex><span>bindsym $mod+space focus mode_toggle
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># focus the parent container
+</span></span><span style=display:flex><span>bindsym $mod+a focus parent
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># Define names for default workspaces for which we configure key bindings later on.
+</span></span><span style=display:flex><span># We use variables to avoid repeating the names in multiple places.
+</span></span><span style=display:flex><span>set $ws1 &#34;1&#34;
+</span></span><span style=display:flex><span>set $ws2 &#34;2&#34;
+</span></span><span style=display:flex><span>set $ws3 &#34;3&#34;
+</span></span><span style=display:flex><span>set $ws4 &#34;4&#34;
+</span></span><span style=display:flex><span>set $ws5 &#34;5&#34;
+</span></span><span style=display:flex><span>set $ws6 &#34;6&#34;
+</span></span><span style=display:flex><span>set $ws7 &#34;7&#34;
+</span></span><span style=display:flex><span>set $ws8 &#34;8&#34;
+</span></span><span style=display:flex><span>set $ws9 &#34;9&#34;
+</span></span><span style=display:flex><span>set $ws10 &#34;10&#34;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># switch to workspace
+</span></span><span style=display:flex><span>bindsym $mod+1 workspace number $ws1
+</span></span><span style=display:flex><span>bindsym $mod+2 workspace number $ws2
+</span></span><span style=display:flex><span>bindsym $mod+3 workspace number $ws3
+</span></span><span style=display:flex><span>bindsym $mod+4 workspace number $ws4
+</span></span><span style=display:flex><span>bindsym $mod+5 workspace number $ws5
+</span></span><span style=display:flex><span>bindsym $mod+6 workspace number $ws6
+</span></span><span style=display:flex><span>bindsym $mod+7 workspace number $ws7
+</span></span><span style=display:flex><span>bindsym $mod+8 workspace number $ws8
+</span></span><span style=display:flex><span>bindsym $mod+9 workspace number $ws9
+</span></span><span style=display:flex><span>bindsym $mod+0 workspace number $ws10
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># move focused container to workspace
+</span></span><span style=display:flex><span>bindsym $mod+Shift+1 move container to workspace number $ws1
+</span></span><span style=display:flex><span>bindsym $mod+Shift+2 move container to workspace number $ws2
+</span></span><span style=display:flex><span>bindsym $mod+Shift+3 move container to workspace number $ws3
+</span></span><span style=display:flex><span>bindsym $mod+Shift+4 move container to workspace number $ws4
+</span></span><span style=display:flex><span>bindsym $mod+Shift+5 move container to workspace number $ws5
+</span></span><span style=display:flex><span>bindsym $mod+Shift+6 move container to workspace number $ws6
+</span></span><span style=display:flex><span>bindsym $mod+Shift+7 move container to workspace number $ws7
+</span></span><span style=display:flex><span>bindsym $mod+Shift+8 move container to workspace number $ws8
+</span></span><span style=display:flex><span>bindsym $mod+Shift+9 move container to workspace number $ws9
+</span></span><span style=display:flex><span>bindsym $mod+Shift+0 move container to workspace number $ws10
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># reload the configuration file
+</span></span><span style=display:flex><span>bindsym $mod+Shift+c reload
+</span></span><span style=display:flex><span># restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+</span></span><span style=display:flex><span>bindsym $mod+Shift+r restart
+</span></span><span style=display:flex><span># exit i3 (logs you out of your X session)
+</span></span><span style=display:flex><span>bindsym $mod+Shift+e exec &#34;i3-nagbar -t warning -m &#39;You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.&#39; -B &#39;Yes, exit i3&#39; &#39;i3-msg exit&#39;&#34;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># resize window (you can also use the mouse for that)
+</span></span><span style=display:flex><span>mode &#34;resize&#34; {
+</span></span><span style=display:flex><span>        bindsym Left resize shrink width 5 px or 5 ppt
+</span></span><span style=display:flex><span>        bindsym Down resize grow height 5 px or 5 ppt
+</span></span><span style=display:flex><span>        bindsym Up resize shrink height 5 px or 5 ppt
+</span></span><span style=display:flex><span>        bindsym Right resize grow width 5 px or 5 ppt
+</span></span><span style=display:flex><span>        bindsym Return mode &#34;default&#34;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>bindsym $mod+r mode &#34;resize&#34;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># panel
+</span></span><span style=display:flex><span>bar {
+</span></span><span style=display:flex><span>        colors {
+</span></span><span style=display:flex><span>        background #2f343f
+</span></span><span style=display:flex><span>        statusline #2f343f
+</span></span><span style=display:flex><span>        separator #4b5262
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        # colour of border, background, and text
+</span></span><span style=display:flex><span>        focused_workspace       #2f343f #bf616a #d8dee8
+</span></span><span style=display:flex><span>        active_workspace        #2f343f #2f343f #d8dee8
+</span></span><span style=display:flex><span>        inactive_workspace      #2f343f #2f343f #d8dee8
+</span></span><span style=display:flex><span>        urgent_workspacei       #2f343f #ebcb8b #2f343f
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>        status_command i3status
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># gaps
+</span></span><span style=display:flex><span>gaps top    20
+</span></span><span style=display:flex><span>gaps left   10
+</span></span><span style=display:flex><span>gaps right  10
+</span></span><span style=display:flex><span>gaps bottom 10
+</span></span><span style=display:flex><span>gaps inner  25
+</span></span><span style=display:flex><span>border_radius 10
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># Hide edge borders only if there is one window with no gaps
+</span></span><span style=display:flex><span>hide_edge_borders smart_no_gaps
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># reload
+</span></span><span style=display:flex><span>exec_always hsetroot -solid &#34;#F1CCBB&#34;
+</span></span></code></pre></td></tr></table></div></div></div></details><h2 id=6-some-tricks-and-tips>6. Some tricks and tips
 <a class=anchor href=#6-some-tricks-and-tips>#</a></h2><ul><li><p>A trick with terminal emulator:</p><ul><li>Disable scrollbar and menubar.</li></ul><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/terminal-trick-1.png></div><a href=/blog/photos/getting-started-tiling-wm-part-1/terminal-trick-1.png itemprop=contentUrl></a></figure></div><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/terminal-trick-2.png></div><a href=/blog/photos/getting-started-tiling-wm-part-1/terminal-trick-2.png itemprop=contentUrl></a></figure></div><ul><li>Configure padding for vte-terminal.</li></ul></li></ul><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
