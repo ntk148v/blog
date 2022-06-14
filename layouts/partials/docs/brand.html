@@ -1,0 +1,6 @@
+<h3 class="terminal-logo">
+    <div class="logo terminal-prompt">
+        <a href="{{ cond (not .Site.Home.File) .Sites.First.Home.RelPermalink .Site.Home.RelPermalink }}"
+            class="no-style site-name"><strong>{{ .Site.Title }}</strong></a>:~#
+    </div>
+</h3>

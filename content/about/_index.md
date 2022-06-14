@@ -1,5 +1,5 @@
 ---
-title: "About"
+title: "./about/"
 menu:
   after:
     name: about

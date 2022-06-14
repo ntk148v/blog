@@ -48,6 +48,6 @@ title = "/home/kiennt"
 
 [menu]
 [[menu.after]]
-name = "Notes"
+name = "./notes/"
 url = "https://ntk148v.github.io/notes"
 weight = 10

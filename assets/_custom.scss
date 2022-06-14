@@ -98,12 +98,43 @@
   }
 }
 
+.terminal .logo,
+.terminal strong {
+  // font-size: var(--global-font-size);
+  font-style: bold;
+  color: var(--color-link);
+}
+
+.terminal-prompt {
+  position: relative;
+  white-space: nowrap
+}
+
+.terminal-prompt::before {
+  content: "> "
+}
+
+.terminal-prompt::after {
+  content: "";
+  -webkit-animation: cursor .8s infinite;
+  animation: cursor .8s infinite;
+  background: var(--body-font-color);
+  border-radius: 0;
+  display: inline-block;
+  height: 1em;
+  margin-left: .2em;
+  width: 5px;
+  bottom: -2px;
+  position: relative;
+}
+
 // Config syntax theme depends on overal color scheme
 // https://gohugo.io/content-management/syntax-highlighting/#generate-syntax-highlighter-css
 // Don't forget to set markup.highlight.noClasses=false
 @media (prefers-color-scheme: dark) {
-  @import 'syntax-light'
+  @import 'syntax-light';
 }
+
 @media (prefers-color-scheme: light) {
-  @import 'syntax-dark'
+  @import 'syntax-dark';
 }
