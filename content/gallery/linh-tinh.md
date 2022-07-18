@@ -7,4 +7,4 @@ tags: ["gallery"]
 
 Thỉnh thoảng chụp xong cũng không nhớ chụp hôm nào, chụp về chủ đề gì, tại sao lại chụp. Thôi để tạm đây vậy...
 
-{{< gallery dir="/photos/linh-tinh" />}}
+{{< gallery dir="photos/linh-tinh" />}}

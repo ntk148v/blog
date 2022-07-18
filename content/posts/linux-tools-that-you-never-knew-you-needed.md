@@ -10,7 +10,7 @@ tags: ["linux", "tips", "tech"]
 - [bat](https://github.com/sharkdp/bat): A cat(1) clone with syntax highlighting and Git integration.
 - Example:
 
-{{< figure src="/photos/linux-tools-that-you-never-knew-you-needed/bat.png" >}}
+{{< figure src="photos/linux-tools-that-you-never-knew-you-needed/bat.png" >}}
 
 ## 2. fd - (find alternative)
 
@@ -59,11 +59,11 @@ $ rg 'fn write\('
 - [delta](https://github.com/dandavison/delta): Code evolves, and we all spend time studying diffs. Delta aims to make this both efficient and enjoyable: it allows you to make extensive changes to the layout and styling of diffs, as well as allowing you to stay arbitrarily close to the default git/diff output.
 - Diff/git diff doesn't show you exactly what was changed.
 
-{{< figure src="/photos/linux-tools-that-you-never-knew-you-needed/git-diff.png" >}}
+{{< figure src="photos/linux-tools-that-you-never-knew-you-needed/git-diff.png" >}}
 
 - Delta shows within-line highlights based on a Levenshtein edit inference algorithm.
 
-{{< figure src="/photos/linux-tools-that-you-never-knew-you-needed/delta.png" >}}
+{{< figure src="photos/linux-tools-that-you-never-knew-you-needed/delta.png" >}}
 
 - By default, delta restructures the git output slightly to make the hunk markers human-readable:
 
@@ -144,9 +144,9 @@ $ unalias **<TAB>
 # For more examples, checkout: https://github.com/junegunn/fzf
 ```
 
-{{< figure src="/photos/linux-tools-that-you-never-knew-you-needed/fzf-vim.png" >}}
+{{< figure src="photos/linux-tools-that-you-never-knew-you-needed/fzf-vim.png" >}}
 
-{{< figure src="/photos/linux-tools-that-you-never-knew-you-needed/fzf-cd.png" >}}
+{{< figure src="photos/linux-tools-that-you-never-knew-you-needed/fzf-cd.png" >}}
 
 ## 8. thefuck
 
@@ -174,7 +174,7 @@ Reading package lists... Done
 - [exa](https://the.exa.website): A modern replacement for ls. `exa` is an improved file lister with more features and better defaults. It uses colours to distinguish file types and metadata. It knows about symlinks, extended attributes, and Git. And it’s small, fast, and just one single binary.
 - Examples:
 
-{{< figure src="/photos/linux-tools-that-you-never-knew-you-needed/exa.png" >}}
+{{< figure src="photos/linux-tools-that-you-never-knew-you-needed/exa.png" >}}
 
 - Completely replace `ls` with `exa`:
 
@@ -182,4 +182,4 @@ Reading package lists... Done
 alias ls="exa"
 ```
 
-{{< figure src="/photos/linux-tools-that-you-never-knew-you-needed/exa-ls.png" >}}
+{{< figure src="photos/linux-tools-that-you-never-knew-you-needed/exa-ls.png" >}}

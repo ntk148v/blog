@@ -8,7 +8,7 @@ menu:
 
 ## Brief
 
-{{< figure src="/photos/linh-tinh/DSCF2637.JPG" >}}
+{{< figure src="photos/linh-tinh/DSCF2637.JPG" >}}
 
 - Engineer <a class="github-button" href="https://github.com/ntk148v" data-color-scheme="no-preference: dark; light: dark; dark: dark;" aria-label="Follow @ntk148v on GitHub">Follow @ntk148v</a>
 - Basketball junkie :basketball:

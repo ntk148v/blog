@@ -7,4 +7,4 @@ tags: ["gallery"]
 
 Lang thang quanh hồ Hoàn Kiếm, cầu Long Biên... Vào một ngày hè, cụ thể ngày nào thì quên mất rồi :see_no_evil:
 
-{{< gallery dir="/photos/hanoi-hoankiem-longbien" />}}
+{{< gallery dir="photos/hanoi-hoankiem-longbien" />}}

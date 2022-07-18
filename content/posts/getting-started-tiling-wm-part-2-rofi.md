@@ -87,9 +87,9 @@ rofi -lines 12 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -colum
 ```
 {{</ details >}}
 
-{{< figure src="/photos/getting-started-tiling-wm-part-1/rofi-default.png" >}}
+{{< figure src="photos/getting-started-tiling-wm-part-1/rofi-default.png" >}}
 
-{{< figure src="/photos/getting-started-tiling-wm-part-1/rofi-default-2.png" >}}
+{{< figure src="photos/getting-started-tiling-wm-part-1/rofi-default-2.png" >}}
 
 - Press hot key (defined in i3 configuration file) `<Window>+d` to start rofi. Use `<Shift>+<left/right>` to switch between mode.
 - More details you can found in [rofi github](https://github.com/davatorium/rofi).
@@ -180,7 +180,7 @@ entry {
 rofi -theme ~/.config/rofi/themes/onedark.theme -show drun
 ```
 
-{{< figure src="/photos/getting-started-tiling-wm-part-1/rofi-custom.png" >}}
+{{< figure src="photos/getting-started-tiling-wm-part-1/rofi-custom.png" >}}
 
 - Don't forget to update hotkey in i3 configuration file.
 
