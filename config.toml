@@ -51,3 +51,8 @@ title = "/home/kiennt"
 name = "./notes/"
 url = "https://ntk148v.github.io/notes"
 weight = 10
+
+[[menu.after]]
+name = "./mammam/"
+url = "https://ntk148v.github.io/mammam"
+weight = 11
