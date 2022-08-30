@@ -18,6 +18,7 @@ So..
 
 ## Prepare your site
 
+- Migrate from utterances: [convert the existing issues into discussions](https://docs.github.com/en/discussions/managing-discussions-for-your-community/moderating-discussions#converting-an-issue-to-a-discussion).
 - Follow [Giscus](https://giscus.app/), it's quite simple.
 
 `Leave a comment :point_down:`
