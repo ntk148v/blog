@@ -1,9 +1,16 @@
-@import url('https://ntk148v.github.io/iosevkawebfont/latest/iosevka.css');
+@font-face {
+	font-family: 'Iosevka Web';
+	font-display: swap;
+	font-weight: 500;
+	font-stretch: normal;
+	font-style: normal;
+	src: url('https://ntk148v.github.io/iosevkawebfont/latest/woff2/iosevka-medium.woff2') format('woff2');
+}
 
 body {
-    font-family: 'Iosevka Web';
+    font-family: 'Iosevka Web', sans-serif;
 }
 
 code {
-    font-family: 'Iosevka Web';
+    font-family: 'Iosevka Web', monospace;
 }
