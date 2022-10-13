@@ -2,8 +2,8 @@
 This guide describes how to automatically scale out your Compute instances in response to heavy system usage. By combining with Prometheus pre-defined rules that consider factors such as CPU or memory usage, you can configure OpenStack Orchestration (Heat) to add and remove additional instances automatically, when they are needed.
 1. The standard OpenStack Autoscaling approach # Let&rsquo;s talk about the standard OpenStack Autoscaling approach before goes to the new approach."><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content="Openstack Autoscaling New Approach"><meta property="og:description" content="NOTE(kiennt): There is a legacy Faythe guideline. The new version is coming soon, check its repository for status.
 This guide describes how to automatically scale out your Compute instances in response to heavy system usage. By combining with Prometheus pre-defined rules that consider factors such as CPU or memory usage, you can configure OpenStack Orchestration (Heat) to add and remove additional instances automatically, when they are needed.
-1. The standard OpenStack Autoscaling approach # Let&rsquo;s talk about the standard OpenStack Autoscaling approach before goes to the new approach."><meta property="og:type" content="article"><meta property="og:url" content="https://ntk148v.github.io/blog/posts/openstack-autoscaling-new-approach/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2019-08-19T21:19:38+07:00"><meta property="article:modified_time" content="2021-11-05T15:30:00+07:00"><meta property="og:site_name" content="/home/kiennt"><title>Openstack Autoscaling New Approach | /home/kiennt</title><link rel=manifest href=/blog/manifest.json><link rel=icon href=/blog/favicon.png type=image/x-icon><link rel=stylesheet href=/blog/book.min.749f20d0a261aa0bb95d687336444f67fa1b87174afd2d6078b496789264851b.css integrity="sha256-dJ8g0KJhqgu5XWhzNkRPZ/obhxdK/S1geLSWeJJkhRs=" crossorigin=anonymous><script defer src=/blog/flexsearch.min.js></script>
-<script defer src=/blog/en.search.min.5fef8740dee657a2e4dea34123a24596768b7be82b5a3466eebc16f9b2bd8943.js integrity="sha256-X++HQN7mV6Lk3qNBI6JFlnaLe+grWjRm7rwW+bK9iUM=" crossorigin=anonymous></script>
+1. The standard OpenStack Autoscaling approach # Let&rsquo;s talk about the standard OpenStack Autoscaling approach before goes to the new approach."><meta property="og:type" content="article"><meta property="og:url" content="https://ntk148v.github.io/blog/posts/openstack-autoscaling-new-approach/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2019-08-19T21:19:38+07:00"><meta property="article:modified_time" content="2021-11-05T15:30:00+07:00"><meta property="og:site_name" content="/home/kiennt"><title>Openstack Autoscaling New Approach | /home/kiennt</title><link rel=manifest href=/blog/manifest.json><link rel=icon href=/blog/favicon.png type=image/x-icon><link rel=stylesheet href=/blog/book.min.a5bf7937fce34ae403bbf28b60c98624ab97f695de0743a483a7b6cfabed3d92.css integrity="sha256-pb95N/zjSuQDu/KLYMmGJKuX9pXeB0Okg6e2z6vtPZI=" crossorigin=anonymous><script defer src=/blog/flexsearch.min.js></script>
+<script defer src=/blog/en.search.min.485b2c51d44ced879665877f4066dce824c6f8abb55aa8eb14a3d6d881ca3bed.js integrity="sha256-SFssUdRM7YeWZYd/QGbc6CTG+Ku1WqjrFKPW2IHKO+0=" crossorigin=anonymous></script>
 <script defer src=/blog/sw.min.e30dcfc647efc866455c67b26b2aabda17816f06fe2dd202ac21b4422180bd9b.js integrity="sha256-4w3PxkfvyGZFXGeyayqr2heBbwb+LdICrCG0QiGAvZs=" crossorigin=anonymous></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css><script async defer src=https://buttons.github.io/buttons.js></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h3 class=terminal-logo><div class="logo terminal-prompt"><a href=/blog/ class="no-style site-name"><strong>/home/kiennt</strong></a>:~#</div></h3><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><a href=/blog/about/>./about/</a></li><li><a href=/blog/posts/>./posts/</a></li><li><a href=https://ntk148v.github.io/notes target=_blank rel=noopener>./notes/</a></li><li><a href=https://ntk148v.github.io/mammam target=_blank rel=noopener>./mammam/</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/blog/svg/menu.svg class=book-icon alt=Menu></label>
@@ -72,239 +72,123 @@ This guide describes how to automatically scale out your Compute instances in re
 +-----------------------+
 
 </pre><blockquote><p>NOTE: The stack leverages OpenStack instance metadata and Prometheus labels.</p></blockquote><ul><li>Prometheus server scrapes metrics from exporters that launch inside Instance.</li><li>Prometheus server evaluates metrics with pre-defined rules.</li><li>Prometheus server fires alert to Prometheus alertmanager.</li><li>Prometheus alertmanager sends Alerts via pre-configured webhook URL - Faythe endpoint.</li><li>Faythe receives and processes Alerts (dedup, group alert and generate a Heat signal URL) and creates a POST request to scale endpoint.</li></ul><h3 id=23-guideline>2.3. Guideline
-<a class=anchor href=#23-guideline>#</a></h3><p>The current aprroach requires some further setup and configuration from Prometheus and Heat stack. You will see that it&rsquo;s quite complicated.</p><p><strong>The simplify in logic is paid by the complex config steps.</strong></p><p><strong>Step 1:</strong> Create a stack - the following is the sample template. It has several requirements:</p><ul><li>OS::Heat::ScalingPolicy has to be named as <code>scaleout_policy</code> and <code>scalein_policy</code>.</li><li>OS::Heat::AutoScalingGroup&rsquo;s instance metadata has to contain <code>stack_asg_name</code> and <code>stack_asg_id</code>. It will be used to generate signal URL.</li><li>Instance should have a cloud init script to enable and start Prometheus exporters automatically.</li></ul><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#000>---</span>
-</span></span><span style=display:flex><span><span style=color:#000>resources</span>:
-</span></span><span style=display:flex><span>  <span style=color:#000>asg</span>:
-</span></span><span style=display:flex><span>    <span style=color:#000>type</span>: <span style=color:#1c01ce>OS::Heat::AutoScalingGroup</span>
-</span></span><span style=display:flex><span>    <span style=color:#000>properties</span>:
-</span></span><span style=display:flex><span>      <span style=color:#000>min_size</span>: { <span style=color:#000>get_param</span>: <span style=color:#1c01ce>min_size }</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>max_size</span>: { <span style=color:#000>get_param</span>: <span style=color:#1c01ce>max_size }</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>resource</span>:
-</span></span><span style=display:flex><span>        <span style=color:#000>type</span>: { <span style=color:#000>get_param</span>: <span style=color:#1c01ce>service_template }</span>
-</span></span><span style=display:flex><span>        <span style=color:#000>properties</span>:
-</span></span><span style=display:flex><span>          <span style=color:#000>flavor</span>: { <span style=color:#000>get_param</span>: <span style=color:#1c01ce>flavor }</span>
-</span></span><span style=display:flex><span>          <span style=color:#000>image</span>: { <span style=color:#000>get_param</span>: <span style=color:#1c01ce>image }</span>
-</span></span><span style=display:flex><span>          <span style=color:#000>key_name</span>: { <span style=color:#000>get_param</span>: <span style=color:#1c01ce>key_name }</span>
-</span></span><span style=display:flex><span>          <span style=color:#000>network</span>: { <span style=color:#000>get_param</span>: <span style=color:#1c01ce>network }</span>
-</span></span><span style=display:flex><span>          <span style=color:#000>subnet</span>: { <span style=color:#000>get_param</span>: <span style=color:#1c01ce>subnet }</span>
-</span></span><span style=display:flex><span>          <span style=color:#000>metadata</span>: {
-</span></span><span style=display:flex><span>              <span style=color:#000>&#34;monitoring&#34;: </span><span style=color:#c41a16>&#34;1&#34;</span>, <span style=color:#177500>## Required</span>
-</span></span><span style=display:flex><span>              <span style=color:#000>&#34;service&#34;: </span><span style=color:#c41a16>&#34;myservice&#34;</span>,
-</span></span><span style=display:flex><span>              <span style=color:#000>&#34;stack_asg_name&#34;: </span>{ <span style=color:#000>get_param</span>: <span style=color:#c41a16>&#34;OS::stack_name&#34;</span> }, <span style=color:#177500>## Required</span>
-</span></span><span style=display:flex><span>              <span style=color:#000>&#34;stack_asg_id&#34;: </span>{ <span style=color:#000>get_param</span>: <span style=color:#c41a16>&#34;OS::stack_id&#34;</span> }, <span style=color:#177500>## Required</span>
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>          <span style=color:#000>security_group</span>: { <span style=color:#000>get_param</span>: <span style=color:#1c01ce>security_group }</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:#000>scaleout_policy</span>: <span style=color:#177500>## Have to be named as `scaleout_policy`</span>
-</span></span><span style=display:flex><span>    <span style=color:#000>type</span>: <span style=color:#1c01ce>OS::Heat::ScalingPolicy</span>
-</span></span><span style=display:flex><span>    <span style=color:#000>properties</span>:
-</span></span><span style=display:flex><span>      <span style=color:#000>adjustment_type</span>: <span style=color:#1c01ce>change_in_capacity</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>auto_scaling_group_id</span>: { <span style=color:#000>get_resource</span>: <span style=color:#1c01ce>asg }</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>cooldown</span>: { <span style=color:#000>get_param</span>: <span style=color:#1c01ce>scale_out_cooldown }</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>scaling_adjustment</span>: { <span style=color:#000>get_param</span>: <span style=color:#1c01ce>scaling_out_adjustment }</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:#000>scalein_policy</span>: <span style=color:#177500>## Have to be named as `scalein_policy`</span>
-</span></span><span style=display:flex><span>    <span style=color:#000>type</span>: <span style=color:#1c01ce>OS::Heat::ScalingPolicy</span>
-</span></span><span style=display:flex><span>    <span style=color:#000>properties</span>:
-</span></span><span style=display:flex><span>      <span style=color:#000>adjustment_type</span>: <span style=color:#1c01ce>change_in_capacity</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>auto_scaling_group_id</span>: { <span style=color:#000>get_resource</span>: <span style=color:#1c01ce>asg }</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>cooldown</span>: { <span style=color:#000>get_param</span>: <span style=color:#1c01ce>scale_in_cooldown }</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>scaling_adjustment</span>: { <span style=color:#000>get_param</span>: <span style=color:#1c01ce>scaling_in_adjustment }</span>
-</span></span></code></pre></td></tr></table></div></div><p><strong>Step 2:</strong> Configure Prometheus openstack discovery</p><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span>- <span style=color:#000>job_name</span>: <span style=color:#1c01ce>openstack_scale_test</span>
-</span></span><span style=display:flex><span>  <span style=color:#000>openstack_sd_configs</span>:
-</span></span><span style=display:flex><span>    - <span style=color:#000>role</span>: <span style=color:#1c01ce>instance</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>identity_endpoint</span>: <span style=color:#c41a16>&#34;&lt;openstackendpoint&gt;&#34;</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>username</span>: <span style=color:#c41a16>&#34;&lt;openstackusername&gt;&#34;</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>password</span>: <span style=color:#c41a16>&#34;&lt;openstackpassword&gt;&#34;</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>domain_name</span>: <span style=color:#c41a16>&#34;default&#34;</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>port</span>: <span style=color:#1c01ce>9100</span> <span style=color:#177500>## Exporter endpoint</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>refresh_interval</span>: <span style=color:#1c01ce>20s</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>region</span>: <span style=color:#c41a16>&#34;RegionOne&#34;</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>project_name</span>: <span style=color:#c41a16>&#34;&lt;openstackproject&gt;&#34;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:#000>relabel_configs</span>:
-</span></span><span style=display:flex><span>    <span style=color:#177500>## Only keep metrics from ACTIVE instance</span>
-</span></span><span style=display:flex><span>    - <span style=color:#000>source_labels</span>: [<span style=color:#1c01ce>__meta_openstack_instance_status]</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>action</span>: <span style=color:#1c01ce>keep</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>regex</span>: <span style=color:#1c01ce>ACTIVE</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#177500>## Only scrape from instance with monitoring tag</span>
-</span></span><span style=display:flex><span>    - <span style=color:#000>source_labels</span>: [<span style=color:#1c01ce>__meta_openstack_tag_monitoring]</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>action</span>: <span style=color:#1c01ce>keep</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>regex</span>: <span style=color:#1c01ce>1</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    - <span style=color:#000>source_labels</span>: [<span style=color:#1c01ce>__meta_openstack_project_id]</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>target_label</span>: <span style=color:#1c01ce>project_id</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>replacement</span>: <span style=color:#1c01ce>$1</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    - <span style=color:#000>source_labels</span>: [<span style=color:#1c01ce>__meta_openstack_tag_stack_asg_name]</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>target_label</span>: <span style=color:#1c01ce>stack_asg_name</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>replacement</span>: <span style=color:#1c01ce>$1</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    - <span style=color:#000>source_labels</span>: [<span style=color:#1c01ce>__meta_openstack_tag_stack_asg_id]</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>target_label</span>: <span style=color:#1c01ce>stack_asg_id</span>
-</span></span><span style=display:flex><span>      <span style=color:#000>replacement</span>: <span style=color:#1c01ce>$1</span>
-</span></span></code></pre></td></tr></table></div></div><p><strong>Step 3:</strong> Define a Prometheus rule, for example:</p><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#000>groups</span>:
-</span></span><span style=display:flex><span>  - <span style=color:#000>name</span>: <span style=color:#1c01ce>targets</span>
-</span></span><span style=display:flex><span>    <span style=color:#000>rules</span>:
-</span></span><span style=display:flex><span>      - <span style=color:#000>alert</span>: <span style=color:#1c01ce>high_memory_load</span>
-</span></span><span style=display:flex><span>        <span style=color:#000>expr</span>: <span style=color:#1c01ce>avg by(stack_asg_id, stack_asg_name, project_id) ((node_memory_MemTotal_bytes{service=&#34;myservice&#34;} - node_memory_MemFree_bytes{service=&#34;myservice&#34;}) / node_memory_MemTotal_bytes{service=&#34;myservice&#34;} * 100) &gt; 80</span>
-</span></span><span style=display:flex><span>        <span style=color:#000>for</span>: <span style=color:#1c01ce>5m</span>
-</span></span><span style=display:flex><span>        <span style=color:#000>labels</span>:
-</span></span><span style=display:flex><span>          <span style=color:#000>severity</span>: <span style=color:#1c01ce>critical</span>
-</span></span><span style=display:flex><span>        <span style=color:#000>annotations</span>:
-</span></span><span style=display:flex><span>          <span style=color:#000>summary</span>: <span style=color:#c41a16>&#34;High memory&#34;</span>
-</span></span><span style=display:flex><span>          <span style=color:#000>description</span>: <span style=color:#c41a16>&#34;Instance {{ $labels.instance }} of job {{ $labels.job }} (stack {{ $labels.stack_id }} has been high af for 5m&#34;</span>
-</span></span></code></pre></td></tr></table></div></div><p><strong>Step 4:</strong> Configure Prometheus Alertmanager webhook, for example:</p><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#000>route</span>:
-</span></span><span style=display:flex><span>  <span style=color:#000>receiver</span>: <span style=color:#c41a16>&#34;custom_alert&#34;</span>
-</span></span><span style=display:flex><span>  <span style=color:#000>group_wait</span>: <span style=color:#1c01ce>20s</span>
-</span></span><span style=display:flex><span>  <span style=color:#000>group_interval</span>: <span style=color:#1c01ce>3m</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#000>receivers</span>:
-</span></span><span style=display:flex><span>  - <span style=color:#000>name</span>: <span style=color:#c41a16>&#34;custom_alert&#34;</span>
-</span></span><span style=display:flex><span>    <span style=color:#000>webhook_configs</span>:
-</span></span><span style=display:flex><span>      - <span style=color:#000>send_resolved</span>: <span style=color:#a90d91>true</span>
-</span></span><span style=display:flex><span>        <span style=color:#000>url</span>: <span style=color:#1c01ce>http://&lt;faythe-host&gt;:&lt;faythe-port&gt;/openstack/autoscaling/openstack-1f</span>
-</span></span><span style=display:flex><span>        <span style=color:#000>http_config</span>:
-</span></span><span style=display:flex><span>          <span style=color:#000>basic_auth</span>:
-</span></span><span style=display:flex><span>            <span style=color:#000>username</span>: <span style=color:#c41a16>&#34;admin&#34;</span>
-</span></span><span style=display:flex><span>            <span style=color:#000>password</span>: <span style=color:#c41a16>&#34;password&#34;</span>
-</span></span></code></pre></td></tr></table></div></div><p>Note that, <code>openstack-1f</code> has to be the name of OpenStack configuration group in Faythe config file. It helps Faythe to work with multiple OpenStack.</p><p><strong>Step 5:</strong> Configure Faythe</p><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#177500>## OpenStackConfiguration.</span>
-</span></span><span style=display:flex><span><span style=color:#000>openstack_configs</span>:
-</span></span><span style=display:flex><span>  <span style=color:#000>openstack-1f</span>:
-</span></span><span style=display:flex><span>    <span style=color:#000>region_name</span>: <span style=color:#c41a16>&#34;RegionOne&#34;</span>
-</span></span><span style=display:flex><span>    <span style=color:#000>domain_name</span>: <span style=color:#c41a16>&#34;Default&#34;</span>
-</span></span><span style=display:flex><span>    <span style=color:#000>auth_url</span>: <span style=color:#c41a16>&#34;&lt;openstackendpoint&gt;&#34;</span>
-</span></span><span style=display:flex><span>    <span style=color:#000>username</span>: <span style=color:#c41a16>&#34;&lt;openstackusername&gt;&#34;</span>
-</span></span><span style=display:flex><span>    <span style=color:#000>password</span>: <span style=color:#c41a16>&#34;&lt;openstackpassword&gt;&#34;</span>
-</span></span><span style=display:flex><span>    <span style=color:#000>project_name</span>: <span style=color:#c41a16>&#34;&lt;openstackproject&gt;&#34;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#000>server_config</span>:
-</span></span><span style=display:flex><span>  <span style=color:#177500>## Example:</span>
-</span></span><span style=display:flex><span>  <span style=color:#177500>## &#34;www.example.com&#34;</span>
-</span></span><span style=display:flex><span>  <span style=color:#177500>## &#34;([a-z]+).domain.com&#34;</span>
-</span></span><span style=display:flex><span>  <span style=color:#177500>## remote_host_pattern: &#34;10.240.202.209.*&#34;</span>
-</span></span><span style=display:flex><span>  <span style=color:#000>basic_auth</span>:
-</span></span><span style=display:flex><span>    <span style=color:#000>username</span>: <span style=color:#c41a16>&#34;admin&#34;</span>
-</span></span><span style=display:flex><span>    <span style=color:#000>password</span>: <span style=color:#c41a16>&#34;password&#34;</span>
-</span></span><span style=display:flex><span>  <span style=color:#000>log_dir</span>: <span style=color:#c41a16>&#34;/whatever/directory/faythe-logs&#34;</span>
-</span></span></code></pre></td></tr></table></div></div><p><strong>Step 6:</strong> Let&rsquo;s make them work:</p><ul><li>Prometheus server.</li><li>Prometheus alertmanager.</li><li>Faythe.</li></ul><center><iframe src=https://giphy.com/embed/cLlVn5zC5UOSmQZKJ7 width=480 height=270 frameborder=0 class=giphy-embed allowfullscreen></iframe><p><a href=https://giphy.com/gifs/RobertEBlackmon-bye-go-away-anna-wintour-cLlVn5zC5UOSmQZKJ7>via GIPHY</a></p></center><h3 id=24-drawbacks-and-todo>2.4. Drawbacks and TODO
+<a class=anchor href=#23-guideline>#</a></h3><p>The current aprroach requires some further setup and configuration from Prometheus and Heat stack. You will see that it&rsquo;s quite complicated.</p><p><strong>The simplify in logic is paid by the complex config steps.</strong></p><p><strong>Step 1:</strong> Create a stack - the following is the sample template. It has several requirements:</p><ul><li>OS::Heat::ScalingPolicy has to be named as <code>scaleout_policy</code> and <code>scalein_policy</code>.</li><li>OS::Heat::AutoScalingGroup&rsquo;s instance metadata has to contain <code>stack_asg_name</code> and <code>stack_asg_id</code>. It will be used to generate signal URL.</li><li>Instance should have a cloud init script to enable and start Prometheus exporters automatically.</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nn>---</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>resources</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>asg</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>OS::Heat::AutoScalingGroup</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>properties</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>min_size</span><span class=p>:</span><span class=w> </span>{<span class=w> </span><span class=nt>get_param</span><span class=p>:</span><span class=w> </span><span class=l>min_size }</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>max_size</span><span class=p>:</span><span class=w> </span>{<span class=w> </span><span class=nt>get_param</span><span class=p>:</span><span class=w> </span><span class=l>max_size }</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>resource</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>type</span><span class=p>:</span><span class=w> </span>{<span class=w> </span><span class=nt>get_param</span><span class=p>:</span><span class=w> </span><span class=l>service_template }</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>properties</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>flavor</span><span class=p>:</span><span class=w> </span>{<span class=w> </span><span class=nt>get_param</span><span class=p>:</span><span class=w> </span><span class=l>flavor }</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>image</span><span class=p>:</span><span class=w> </span>{<span class=w> </span><span class=nt>get_param</span><span class=p>:</span><span class=w> </span><span class=l>image }</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>key_name</span><span class=p>:</span><span class=w> </span>{<span class=w> </span><span class=nt>get_param</span><span class=p>:</span><span class=w> </span><span class=l>key_name }</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>network</span><span class=p>:</span><span class=w> </span>{<span class=w> </span><span class=nt>get_param</span><span class=p>:</span><span class=w> </span><span class=l>network }</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>subnet</span><span class=p>:</span><span class=w> </span>{<span class=w> </span><span class=nt>get_param</span><span class=p>:</span><span class=w> </span><span class=l>subnet }</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>metadata</span><span class=p>:</span><span class=w> </span>{<span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>&#34;monitoring&#34;: </span><span class=s2>&#34;1&#34;</span><span class=p>,</span><span class=w> </span><span class=c>## Required</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>&#34;service&#34;: </span><span class=s2>&#34;myservice&#34;</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>&#34;stack_asg_name&#34;: </span>{<span class=w> </span><span class=nt>get_param</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;OS::stack_name&#34;</span><span class=w> </span>}<span class=p>,</span><span class=w> </span><span class=c>## Required</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>              </span><span class=nt>&#34;stack_asg_id&#34;: </span>{<span class=w> </span><span class=nt>get_param</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;OS::stack_id&#34;</span><span class=w> </span>}<span class=p>,</span><span class=w> </span><span class=c>## Required</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span>}<span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>security_group</span><span class=p>:</span><span class=w> </span>{<span class=w> </span><span class=nt>get_param</span><span class=p>:</span><span class=w> </span><span class=l>security_group }</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>scaleout_policy</span><span class=p>:</span><span class=w> </span><span class=c>## Have to be named as `scaleout_policy`</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>OS::Heat::ScalingPolicy</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>properties</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>adjustment_type</span><span class=p>:</span><span class=w> </span><span class=l>change_in_capacity</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>auto_scaling_group_id</span><span class=p>:</span><span class=w> </span>{<span class=w> </span><span class=nt>get_resource</span><span class=p>:</span><span class=w> </span><span class=l>asg }</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>cooldown</span><span class=p>:</span><span class=w> </span>{<span class=w> </span><span class=nt>get_param</span><span class=p>:</span><span class=w> </span><span class=l>scale_out_cooldown }</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>scaling_adjustment</span><span class=p>:</span><span class=w> </span>{<span class=w> </span><span class=nt>get_param</span><span class=p>:</span><span class=w> </span><span class=l>scaling_out_adjustment }</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>scalein_policy</span><span class=p>:</span><span class=w> </span><span class=c>## Have to be named as `scalein_policy`</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>OS::Heat::ScalingPolicy</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>properties</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>adjustment_type</span><span class=p>:</span><span class=w> </span><span class=l>change_in_capacity</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>auto_scaling_group_id</span><span class=p>:</span><span class=w> </span>{<span class=w> </span><span class=nt>get_resource</span><span class=p>:</span><span class=w> </span><span class=l>asg }</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>cooldown</span><span class=p>:</span><span class=w> </span>{<span class=w> </span><span class=nt>get_param</span><span class=p>:</span><span class=w> </span><span class=l>scale_in_cooldown }</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>scaling_adjustment</span><span class=p>:</span><span class=w> </span>{<span class=w> </span><span class=nt>get_param</span><span class=p>:</span><span class=w> </span><span class=l>scaling_in_adjustment }</span><span class=w>
+</span></span></span></code></pre></div><p><strong>Step 2:</strong> Configure Prometheus openstack discovery</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl>- <span class=nt>job_name</span><span class=p>:</span><span class=w> </span><span class=l>openstack_scale_test</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>openstack_sd_configs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>role</span><span class=p>:</span><span class=w> </span><span class=l>instance</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>identity_endpoint</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;&lt;openstackendpoint&gt;&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>username</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;&lt;openstackusername&gt;&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>password</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;&lt;openstackpassword&gt;&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>domain_name</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;default&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>port</span><span class=p>:</span><span class=w> </span><span class=m>9100</span><span class=w> </span><span class=c>## Exporter endpoint</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>refresh_interval</span><span class=p>:</span><span class=w> </span><span class=l>20s</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>region</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;RegionOne&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>project_name</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;&lt;openstackproject&gt;&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>relabel_configs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c>## Only keep metrics from ACTIVE instance</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>source_labels</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=l>__meta_openstack_instance_status]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>action</span><span class=p>:</span><span class=w> </span><span class=l>keep</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>regex</span><span class=p>:</span><span class=w> </span><span class=l>ACTIVE</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c>## Only scrape from instance with monitoring tag</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>source_labels</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=l>__meta_openstack_tag_monitoring]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>action</span><span class=p>:</span><span class=w> </span><span class=l>keep</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>regex</span><span class=p>:</span><span class=w> </span><span class=m>1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>source_labels</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=l>__meta_openstack_project_id]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>target_label</span><span class=p>:</span><span class=w> </span><span class=l>project_id</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>replacement</span><span class=p>:</span><span class=w> </span><span class=l>$1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>source_labels</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=l>__meta_openstack_tag_stack_asg_name]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>target_label</span><span class=p>:</span><span class=w> </span><span class=l>stack_asg_name</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>replacement</span><span class=p>:</span><span class=w> </span><span class=l>$1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>source_labels</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=l>__meta_openstack_tag_stack_asg_id]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>target_label</span><span class=p>:</span><span class=w> </span><span class=l>stack_asg_id</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>replacement</span><span class=p>:</span><span class=w> </span><span class=l>$1</span><span class=w>
+</span></span></span></code></pre></div><p><strong>Step 3:</strong> Define a Prometheus rule, for example:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>groups</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>targets</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>rules</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>alert</span><span class=p>:</span><span class=w> </span><span class=l>high_memory_load</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class=l>avg by(stack_asg_id, stack_asg_name, project_id) ((node_memory_MemTotal_bytes{service=&#34;myservice&#34;} - node_memory_MemFree_bytes{service=&#34;myservice&#34;}) / node_memory_MemTotal_bytes{service=&#34;myservice&#34;} * 100) &gt; 80</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>for</span><span class=p>:</span><span class=w> </span><span class=l>5m</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>labels</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>severity</span><span class=p>:</span><span class=w> </span><span class=l>critical</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>annotations</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>summary</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;High memory&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>description</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;Instance {{ $labels.instance }} of job {{ $labels.job }} (stack {{ $labels.stack_id }} has been high af for 5m&#34;</span><span class=w>
+</span></span></span></code></pre></div><p><strong>Step 4:</strong> Configure Prometheus Alertmanager webhook, for example:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>route</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>receiver</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;custom_alert&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>group_wait</span><span class=p>:</span><span class=w> </span><span class=l>20s</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>group_interval</span><span class=p>:</span><span class=w> </span><span class=l>3m</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>receivers</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;custom_alert&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>webhook_configs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span>- <span class=nt>send_resolved</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>url</span><span class=p>:</span><span class=w> </span><span class=l>http://&lt;faythe-host&gt;:&lt;faythe-port&gt;/openstack/autoscaling/openstack-1f</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>http_config</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>basic_auth</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>username</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;admin&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>password</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;password&#34;</span><span class=w>
+</span></span></span></code></pre></div><p>Note that, <code>openstack-1f</code> has to be the name of OpenStack configuration group in Faythe config file. It helps Faythe to work with multiple OpenStack.</p><p><strong>Step 5:</strong> Configure Faythe</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=c>## OpenStackConfiguration.</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>openstack_configs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>openstack-1f</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>region_name</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;RegionOne&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>domain_name</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;Default&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>auth_url</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;&lt;openstackendpoint&gt;&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>username</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;&lt;openstackusername&gt;&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>password</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;&lt;openstackpassword&gt;&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>project_name</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;&lt;openstackproject&gt;&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>server_config</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c>## Example:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c>## &#34;www.example.com&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c>## &#34;([a-z]+).domain.com&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c>## remote_host_pattern: &#34;10.240.202.209.*&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>basic_auth</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>username</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;admin&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>password</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;password&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>log_dir</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;/whatever/directory/faythe-logs&#34;</span><span class=w>
+</span></span></span></code></pre></div><p><strong>Step 6:</strong> Let&rsquo;s make them work:</p><ul><li>Prometheus server.</li><li>Prometheus alertmanager.</li><li>Faythe.</li></ul><center><iframe src=https://giphy.com/embed/cLlVn5zC5UOSmQZKJ7 width=480 height=270 frameborder=0 class=giphy-embed allowfullscreen></iframe><p><a href=https://giphy.com/gifs/RobertEBlackmon-bye-go-away-anna-wintour-cLlVn5zC5UOSmQZKJ7>via GIPHY</a></p></center><h3 id=24-drawbacks-and-todo>2.4. Drawbacks and TODO
 <a class=anchor href=#24-drawbacks-and-todo>#</a></h3><p><strong>Drawbacks</strong></p><ul><li>The configuration steps is way too complicated, many manual steps have to be done.</li></ul><p><strong>TODO</strong></p><ul><li>Simplify strategy, might need a service discovery.</li></ul></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/4a2cdf393549afb9851b13a15c09d0fe8c54e6c4 title='Last modified by Kien Nguyen | Nov 05, 2021' target=_blank rel=noopener><img src=/blog/svg/calendar.svg class=book-icon alt=Calendar>
 <span>Nov 05, 2021</span></a></div><div><a class="flex align-center" href=https://github.com/ntk148v/blog/edit/master/content/posts/openstack-autoscaling-new-approach.md target=_blank rel=noopener><img src=/blog/svg/edit.svg class=book-icon alt=Edit>
 <span>Edit this page</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><section class="article discussion"><script src=https://giscus.app/client.js data-repo=ntk148v/blog data-repo-id="MDEwOlJlcG9zaXRvcnkyMDMyOTc1ODk=" data-category="Show and tell" data-category-id=DIC_kwDODB4TNc4CRH6q data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=preferred_color_scheme data-lang=en data-loading=lazy crossorigin=anonymous async></script></section></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#1-the-standard-openstack-autoscaling-approach>1. The standard OpenStack Autoscaling approach</a><ul><li><a href=#11-main-components>1.1. Main components</a></li><li><a href=#12-autoscaling-process>1.2. Autoscaling process</a></li><li><a href=#13-drawbacks>1.3. Drawbacks</a></li></ul></li><li><a href=#2-the-new-approach-with-faythe>2. The new approach with Faythe</a><ul><li><a href=#21-the-idea>2.1. The idea</a></li><li><a href=#22-the-implementation>2.2. The implementation</a></li><li><a href=#23-guideline>2.3. Guideline</a></li><li><a href=#24-drawbacks-and-todo>2.4. Drawbacks and TODO</a></li></ul></li></ul></nav></div></aside></main></body></html>

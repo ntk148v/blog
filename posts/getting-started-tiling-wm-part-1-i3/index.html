@@ -2,8 +2,8 @@
 I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I&rsquo;ve gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.
 1. Overview Window Manager # First of all, you have to know the basic concepts."><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content="Getting Started with Tiling WM [Part 1] - I3"><meta property="og:description" content="Disclaimer
 I love customizing desktop. I make changes in my desktop everyday, make it look eye candy. My colleagues ask me how to make their desktop look like mine. But there are many steps and things to learn and follow, I know because I&rsquo;ve gone throught it. Therefore I decide to write this getting-started guide to give people a shortest path to Fancy world.
-1. Overview Window Manager # First of all, you have to know the basic concepts."><meta property="og:type" content="article"><meta property="og:url" content="https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-1-i3/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-04-19T10:10:21+07:00"><meta property="article:modified_time" content="2022-07-18T15:02:59+07:00"><meta property="og:site_name" content="/home/kiennt"><title>Getting Started with Tiling WM [Part 1] - I3 | /home/kiennt</title><link rel=manifest href=/blog/manifest.json><link rel=icon href=/blog/favicon.png type=image/x-icon><link rel=stylesheet href=/blog/book.min.749f20d0a261aa0bb95d687336444f67fa1b87174afd2d6078b496789264851b.css integrity="sha256-dJ8g0KJhqgu5XWhzNkRPZ/obhxdK/S1geLSWeJJkhRs=" crossorigin=anonymous><script defer src=/blog/flexsearch.min.js></script>
-<script defer src=/blog/en.search.min.5fef8740dee657a2e4dea34123a24596768b7be82b5a3466eebc16f9b2bd8943.js integrity="sha256-X++HQN7mV6Lk3qNBI6JFlnaLe+grWjRm7rwW+bK9iUM=" crossorigin=anonymous></script>
+1. Overview Window Manager # First of all, you have to know the basic concepts."><meta property="og:type" content="article"><meta property="og:url" content="https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-1-i3/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-04-19T10:10:21+07:00"><meta property="article:modified_time" content="2022-07-18T15:02:59+07:00"><meta property="og:site_name" content="/home/kiennt"><title>Getting Started with Tiling WM [Part 1] - I3 | /home/kiennt</title><link rel=manifest href=/blog/manifest.json><link rel=icon href=/blog/favicon.png type=image/x-icon><link rel=stylesheet href=/blog/book.min.a5bf7937fce34ae403bbf28b60c98624ab97f695de0743a483a7b6cfabed3d92.css integrity="sha256-pb95N/zjSuQDu/KLYMmGJKuX9pXeB0Okg6e2z6vtPZI=" crossorigin=anonymous><script defer src=/blog/flexsearch.min.js></script>
+<script defer src=/blog/en.search.min.485b2c51d44ced879665877f4066dce824c6f8abb55aa8eb14a3d6d881ca3bed.js integrity="sha256-SFssUdRM7YeWZYd/QGbc6CTG+Ku1WqjrFKPW2IHKO+0=" crossorigin=anonymous></script>
 <script defer src=/blog/sw.min.e30dcfc647efc866455c67b26b2aabda17816f06fe2dd202ac21b4422180bd9b.js integrity="sha256-4w3PxkfvyGZFXGeyayqr2heBbwb+LdICrCG0QiGAvZs=" crossorigin=anonymous></script>
 <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css type=text/css><script async defer src=https://buttons.github.io/buttons.js></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h3 class=terminal-logo><div class="logo terminal-prompt"><a href=/blog/ class="no-style site-name"><strong>/home/kiennt</strong></a>:~#</div></h3><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><a href=/blog/about/>./about/</a></li><li><a href=/blog/posts/>./posts/</a></li><li><a href=https://ntk148v.github.io/notes target=_blank rel=noopener>./notes/</a></li><li><a href=https://ntk148v.github.io/mammam target=_blank rel=noopener>./mammam/</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/blog/svg/menu.svg class=book-icon alt=Menu></label>
@@ -20,46 +20,27 @@ B --> C[X Windows];</p><h3 id=12-types-of-window-manager>1.2. Types of Window Ma
 <a class=anchor href=#12-types-of-window-manager>#</a></h3><ul><li><strong>Stack window manager</strong>:<ul><li>A stack window manager renders the window one-by-one onto the screen at specific co-orinates. If one window&rsquo;s area overlaps another, then the window &ldquo;on top&rdquo; overwites part of the other&rsquo;s visible appearance. This results in the appearance familiar to many users in which windows act a little like pieces of paper on a desktop, which can be moved around and allowed to overlap.</li><li>Openbox, Fluxbox, Enlightenment&mldr;</li></ul></li><li><strong>Tiling window manager</strong>:<ul><li>A window manager with an organization of the screen into mutually non-overlapping frames (hence the name tiling), as opposed to the traditional approach of coordinate-based stacking of objects (windows) that tries to emulate the desk paradigm.</li><li>Awesome,<strong>i3</strong> (here we go), dwm, bspwm&mldr;</li></ul></li><li><strong>Compositing window manager</strong>:<ul><li>A compositing window manager may appear to the user similar to a stacking window manager. However, the individual windows are first renders in individual buffers, and then theirs images are composited onto the screen buffer; this two-step process means that visual effects (such as shadows, translucency) can be applied.</li><li>Mutter (GNOME), Xfwm (XFCE), Compiz (Unity), KWin (KDE)</li></ul></li></ul><h2 id=2-overview-i3>2. Overview I3
 <a class=anchor href=#2-overview-i3>#</a></h2><ul><li><a href=https://i3wm.org>i3wm</a> is a tiling window manager designed for <a href=https://en.wikipedia.org/wiki/X_Window_System>X11</a>.</li><li>It supports tiling, stacking, and tabbing layouts, which it handles dynamically.</li><li>Configuration is achieved via plain text file.</li><li>Keyboard navigation: Hall full control with keyboard navigation.</li><li>Minimalistic: no window decorations or nonsense icons floating around. But you can fully customize it.</li><li>Window management: is left to the user. Windows are held inside containers, which can be split veritically or horizontally. They can also optionally be resized. There are also options for stacking the windows, as well as tabbing them.</li><li>Floating pop-up windows.</li><li>Want more, check <a href=https://i3wm.org/docs/userguide.html>this</a>.</li></ul><h2 id=3-minimal-i3-setup>3. Minimal I3 setup
 <a class=anchor href=#3-minimal-i3-setup>#</a></h2><h3 id=31-operating-system>3.1. Operating System
-<a class=anchor href=#31-operating-system>#</a></h3><ul><li>Ubuntu 20.04 (Desktop/Server), download the <a href=https://ubuntu.com/download/>installer</a> and install Ubuntu by walking through installer.</li><li>If you choose Ubuntu Server, you&rsquo;ll need a display server so let&rsquo;s install X Window System (<a href=https://wiki.archlinux.org/index.php/Xorg>Xorg</a>).</li></ul><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo apt install xinit
-</span></span><span style=display:flex><span><span style=color:#177500># The configuration files are stored in /etc/X11/xinit</span>
-</span></span><span style=display:flex><span><span style=color:#177500># You can override it by creating and modifying ~/.xinitrc</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=32-install-i3>3.2. Install I3
-<a class=anchor href=#32-install-i3>#</a></h3><ul><li>You can install i3 from <a href="https://packages.ubuntu.com/search?keywords=i3">Ubuntu repository</a>. It includes the window manager, a screen locker and two programs which write a status line to i3bar through stdout.</li></ul><blockquote class="book-hint warning">Note that, i3-wm conflicts with <a href=https://github.com/Airblader/i3>i3-gaps</a> (a fork of i3 with gaps and other features).</blockquote><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo apt install i3
-</span></span></code></pre></td></tr></table></div></div><ul><li>Or build from source, I have a personal fork - <a href=https://github.com/ntk148v/i3>Rounded i3-gaps</a>.</li></ul><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#177500># Dependencies</span>
-</span></span><span style=display:flex><span>sudo apt install git libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev <span style=color:#c41a16>\
-</span></span></span><span style=display:flex><span><span style=color:#c41a16></span>    libxcb-util0-dev libxcb-icccm4-dev libyajl-dev <span style=color:#c41a16>\
-</span></span></span><span style=display:flex><span><span style=color:#c41a16></span>    libstartup-notification0-dev libxcb-randr0-dev <span style=color:#c41a16>\
-</span></span></span><span style=display:flex><span><span style=color:#c41a16></span>    libev-dev libxcb-cursor-dev libxcb-xinerama0-dev <span style=color:#c41a16>\
-</span></span></span><span style=display:flex><span><span style=color:#c41a16></span>    libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev <span style=color:#c41a16>\
-</span></span></span><span style=display:flex><span><span style=color:#c41a16></span>    autoconf libxcb-xrm0 libxcb-xrm-dev automake i3status <span style=color:#c41a16>\
-</span></span></span><span style=display:flex><span><span style=color:#c41a16></span>    ninja-build meson libxcb-shape0-dev build-essential -y
-</span></span><span style=display:flex><span>git clone https://github.com/ntk148v/i3.git
-</span></span><span style=display:flex><span><span style=color:#a90d91>cd</span> i3/
-</span></span><span style=display:flex><span><span style=color:#177500># Compile</span>
-</span></span><span style=display:flex><span>mkdir -p build <span style=color:#000>&amp;&amp;</span> <span style=color:#a90d91>cd</span> build
-</span></span><span style=display:flex><span>meson ..
-</span></span><span style=display:flex><span>ninja
-</span></span><span style=display:flex><span>sudo ninja install
-</span></span></code></pre></td></tr></table></div></div><ul><li><p>Reboot. After reboot, choose i3 as your WM/DE.</p></li><li><p>A prompt will be shown to create a config file, just hit <code>&lt;Enter></code>.</p></li></ul><link rel=stylesheet href=https://ntk148v.github.io/blog/css/hugo-easy-gallery.css><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/i3-prompt.png></div><a href=/blog/photos/getting-started-tiling-wm-part-1/i3-prompt.png itemprop=contentUrl></a></figure></div><ul><li><p><code>&lt;mod></code> key is <code>Window</code> now. Hit <code>&lt;mod>+Enter</code> to start terminal emulator.</p></li><li><p>We have i3 first setup here with the default configuration. As mentioned before, configuration is achieved via plain text file.</p></li></ul><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/i3-default-config-file.png></div><a href=/blog/photos/getting-started-tiling-wm-part-1/i3-default-config-file.png itemprop=contentUrl></a></figure></div><h2 id=4-usage>4. Usage
+<a class=anchor href=#31-operating-system>#</a></h3><ul><li>Ubuntu 20.04 (Desktop/Server), download the <a href=https://ubuntu.com/download/>installer</a> and install Ubuntu by walking through installer.</li><li>If you choose Ubuntu Server, you&rsquo;ll need a display server so let&rsquo;s install X Window System (<a href=https://wiki.archlinux.org/index.php/Xorg>Xorg</a>).</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt install xinit
+</span></span><span class=line><span class=cl><span class=c1># The configuration files are stored in /etc/X11/xinit</span>
+</span></span><span class=line><span class=cl><span class=c1># You can override it by creating and modifying ~/.xinitrc</span>
+</span></span></code></pre></div><h3 id=32-install-i3>3.2. Install I3
+<a class=anchor href=#32-install-i3>#</a></h3><ul><li>You can install i3 from <a href="https://packages.ubuntu.com/search?keywords=i3">Ubuntu repository</a>. It includes the window manager, a screen locker and two programs which write a status line to i3bar through stdout.</li></ul><blockquote class="book-hint warning">Note that, i3-wm conflicts with <a href=https://github.com/Airblader/i3>i3-gaps</a> (a fork of i3 with gaps and other features).</blockquote><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt install i3
+</span></span></code></pre></div><ul><li>Or build from source, I have a personal fork - <a href=https://github.com/ntk148v/i3>Rounded i3-gaps</a>.</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Dependencies</span>
+</span></span><span class=line><span class=cl>sudo apt install git libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    libxcb-util0-dev libxcb-icccm4-dev libyajl-dev <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    libstartup-notification0-dev libxcb-randr0-dev <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    libev-dev libxcb-cursor-dev libxcb-xinerama0-dev <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    autoconf libxcb-xrm0 libxcb-xrm-dev automake i3status <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    ninja-build meson libxcb-shape0-dev build-essential -y
+</span></span><span class=line><span class=cl>git clone https://github.com/ntk148v/i3.git
+</span></span><span class=line><span class=cl><span class=nb>cd</span> i3/
+</span></span><span class=line><span class=cl><span class=c1># Compile</span>
+</span></span><span class=line><span class=cl>mkdir -p build <span class=o>&amp;&amp;</span> <span class=nb>cd</span> build
+</span></span><span class=line><span class=cl>meson ..
+</span></span><span class=line><span class=cl>ninja
+</span></span><span class=line><span class=cl>sudo ninja install
+</span></span></code></pre></div><ul><li><p>Reboot. After reboot, choose i3 as your WM/DE.</p></li><li><p>A prompt will be shown to create a config file, just hit <code>&lt;Enter></code>.</p></li></ul><link rel=stylesheet href=https://ntk148v.github.io/blog/css/hugo-easy-gallery.css><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/i3-prompt.png></div><a href=/blog/photos/getting-started-tiling-wm-part-1/i3-prompt.png itemprop=contentUrl></a></figure></div><ul><li><p><code>&lt;mod></code> key is <code>Window</code> now. Hit <code>&lt;mod>+Enter</code> to start terminal emulator.</p></li><li><p>We have i3 first setup here with the default configuration. As mentioned before, configuration is achieved via plain text file.</p></li></ul><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/i3-default-config-file.png></div><a href=/blog/photos/getting-started-tiling-wm-part-1/i3-default-config-file.png itemprop=contentUrl></a></figure></div><h2 id=4-usage>4. Usage
 <a class=anchor href=#4-usage>#</a></h2><p>This post doesn&rsquo;t aim to cover everything about i3, see the <a href=https://i3wm.org/docs/userguide.html>official documentation</a> for more information.</p><h3 id=41-keybindings>4.1. Keybindings
 <a class=anchor href=#41-keybindings>#</a></h3><ul><li>In i3, commands are invoked with a modifier key, referred to as <code>$mod</code>. This is <code>Alt (Mod1)</code> by default, with <code>Super (Mod4)</code> being a popular alternative. Super is the key usually represented on a keyboard as a Windows icon, or on an Apple keyboard as a Command key.</li><li>See <a href=https://i3wm.org/docs/refcard.html>i3 reference card</a> and <a href=https://i3wm.org/docs/userguide.html#_using_i3>Using i3</a> for defaults.</li></ul><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/i3-refcard.png></div><a href=/blog/photos/getting-started-tiling-wm-part-1/i3-refcard.png itemprop=contentUrl></a></figure></div><h3 id=42-workspace-container-and-window>4.2. Workspace, Container and Window
 <a class=anchor href=#42-workspace-container-and-window>#</a></h3><p class=mermaid align=center>graph TD;
@@ -79,342 +60,176 @@ style Container1 fill:#6fa8dc;
 style Container2 fill:#6fa8dc;
 style Container3 fill:#6fa8dc;</p><ul><li>In i3, <strong>workspace</strong> is simply the equivalent of a <a href=https://en.wikipedia.org/wiki/Virtual_desktop>virtual desktop</a>. You can have as many workspaces as you want.</li><li>i3 manages windows in a tree structure, with <strong>containers</strong> as building blocks.</li><li>A container contains one or multiple <strong>windows</strong>. Its windows will be positioned depending on the container&rsquo;s layout.</li><li>There are 3 different layouts possible:<ul><li><strong>Split</strong>: Each window share the container space and are split horizontally (<em>splith</em>) or vertically (<em>splitv</em>). This is the default layout.</li><li><strong>Stacked</strong> - The focused window is visible and the other ones are stacked behind. You can change the window’s focus via keystrokes easily. You have access to the list of windows open too, at the top of the container itself.</li><li><strong>Tabbed</strong> - This layout is similar as the stacked layout, except that the windows’ list is vertically split, and not horizontally.</li></ul></li><li>A window, where an application is running, can be created in a container. It will automatically position itself and be in focus, depending on the container’s layout. You can move them around or even change the layout of the container using keystrokes.</li><li>There are two different sorts of windows: <strong>fixed window</strong>s (by default) and <strong>floating windows</strong>.</li></ul><h3 id=43-application-launcher>4.3. Application launcher
 <a class=anchor href=#43-application-launcher>#</a></h3><ul><li>i3 uses <a href=https://wiki.archlinux.org/title/Dmenu>dmenu</a> as an application launcher, which is bound by default to <code>$mod+d</code>.</li><li><a href=https://ntk148v.github.io/blog/posts/getting-started-tiling-wm-part-2-rofi/>rofi</a> is a popular dmenu replacement and more that can list dekstop entries.</li></ul><h2 id=5-configuration>5. Configuration
-<a class=anchor href=#5-configuration>#</a></h2><ul><li>You can use my minimal configuration. It requires some extra packages.</li></ul><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sudo apt install hsetroot rofi compton -y
-</span></span></code></pre></td></tr></table></div></div><details open><summary>Minimal I3 configuration</summary><div class=markdown-inner><h2 id=cheat-sheat-shortcut>Cheat sheat shortcut
+<a class=anchor href=#5-configuration>#</a></h2><ul><li>You can use my minimal configuration. It requires some extra packages.</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt install hsetroot rofi compton -y
+</span></span></code></pre></div><details open><summary>Minimal I3 configuration</summary><div class=markdown-inner><h2 id=cheat-sheat-shortcut>Cheat sheat shortcut
 <a class=anchor href=#cheat-sheat-shortcut>#</a></h2><table><thead><tr><th>Shortcut</th><th>Description</th></tr></thead><tbody><tr><td><kbd>$mod</kbd> + <kbd>Enter</kbd></td><td>Open a terminal</td></tr><tr><td><kbd>$mod</kbd> + <kbd>d</kbd></td><td>Open application launcher</td></tr><tr><td><kbd>$mod</kbd> + <kbd>c</kbd></td><td>Kill focused window</td></tr><tr><td><kbd>$mod</kbd> + <kbd>right/left/up/down</kbd></td><td>Change focus</td></tr><tr><td><kbd>$mod</kbd> + <kbd>Shift</kbd> + <kbd>right/left/up/down</kbd></td><td>Move focused window in direction</td></tr><tr><td><kbd>$mod</kbd> + <kbd>1/2/3&mldr;</kbd></td><td>Switch workspace</td></tr><tr><td><kbd>$mod</kbd> + <kbd>Shift</kbd> + <kbd>1/2/3&mldr;</kbd></td><td>Move focused window to the specified workspace</td></tr><tr><td><kbd>$mod</kbd> + <kbd>space</kbd></td><td>Change between focus and floating mode</td></tr><tr><td><kbd>$mod</kbd> + <kbd>Shift</kbd> + <kbd>r</kbd></td><td>Restart i3</td></tr><tr><td><kbd>$mod</kbd> + <kbd>Shift</kbd> + <kbd>c</kbd></td><td>Reload config i3</td></tr><tr><td><kbd>$mod</kbd> + <kbd>q</kbd></td><td>Quit i3</td></tr></tbody></table><h2 id=minimal-configuration-file>Minimal configuration file
-<a class=anchor href=#minimal-configuration-file>#</a></h2><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  1
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  2
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  3
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  4
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  5
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  6
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  7
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  8
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">  9
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 10
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 11
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 12
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 13
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 14
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 15
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 16
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 17
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 18
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 19
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 20
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 21
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 22
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 23
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 24
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 25
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 26
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 27
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 28
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 29
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 30
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 31
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 32
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 33
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 34
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 35
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 36
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 37
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 38
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 39
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 40
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 41
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 42
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 43
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 44
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 45
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 46
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 47
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 48
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 49
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 50
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 51
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 52
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 53
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 54
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 55
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 56
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 57
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 58
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 59
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 60
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 61
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 62
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 63
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 64
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 65
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 66
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 67
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 68
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 69
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 70
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 71
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 72
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 73
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 74
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 75
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 76
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 77
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 78
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 79
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 80
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 81
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 82
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 83
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 84
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 85
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 86
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 87
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 88
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 89
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 90
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 91
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 92
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 93
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 94
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 95
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 96
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 97
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 98
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 99
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">100
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">101
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">102
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">103
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">104
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">105
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">106
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">107
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">108
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">109
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">110
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">111
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">112
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">113
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">114
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">115
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">116
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">117
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">118
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">119
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">120
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">121
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">122
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">123
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">124
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">125
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">126
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">127
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">128
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">129
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">130
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">131
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">132
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">133
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">134
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">135
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">136
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">137
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">138
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">139
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">140
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">141
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">142
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">143
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">144
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">145
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">146
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">147
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">148
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">149
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">150
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">151
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">152
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">153
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">154
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">155
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">156
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">157
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">158
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">159
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span># i3 config file
-</span></span><span style=display:flex><span># Please see https://i3wm.org/docs/userguide.html for a complete reference!
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span># Set modifier
-</span></span><span style=display:flex><span>set $mod Mod4
-</span></span><span style=display:flex><span>set $alt Mod1
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>default_orientation auto
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span># Font for window titles.
-</span></span><span style=display:flex><span>font pango:DejaVu Sans Mono 0
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span># Use Mouse+$mod to drag floating windows to their wanted position
-</span></span><span style=display:flex><span>floating_modifier $mod
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span># Here is the trick to disable titlebar completely
-</span></span><span style=display:flex><span>for_window [class=&#34;^.*&#34;] border pixel 0
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span># Autostart
-</span></span><span style=display:flex><span>exec --no-startup-id hsetroot -solid &#34;#F1CCBB&#34;
-</span></span><span style=display:flex><span>exec --no-startup-id xsettingsd &amp;
-</span></span><span style=display:flex><span>exec --no-startup-id compton -b
-</span></span><span style=display:flex><span>exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-</span></span><span style=display:flex><span>exec --no-startup-id nm-applet
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span># Keybindings
-</span></span><span style=display:flex><span># start a terminal
-</span></span><span style=display:flex><span>bindsym $mod+Return exec i3-sensible-terminal
-</span></span><span style=display:flex><span># kill focused window
-</span></span><span style=display:flex><span>bindsym $mod+c kill
-</span></span><span style=display:flex><span>bindsym $alt+F4 kill
-</span></span><span style=display:flex><span># start rofi
-</span></span><span style=display:flex><span>bindsym $mod+Shift+d exec i3-dmenu-desktop --dmenu=&#34;dmenu -i -fn &#39;DejaVu Sans:size=8&#39;&#34;
-</span></span><span style=display:flex><span>bindsym $mod+d exec rofi -lines 12 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font &#39;DejaVu Sans 8&#39;
-</span></span><span style=display:flex><span># Use pactl to adjust volume in PulseAudio.
-</span></span><span style=display:flex><span>set $refresh_i3status killall -SIGUSR1 i3status
-</span></span><span style=display:flex><span>bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% &amp;&amp; $refresh_i3status
-</span></span><span style=display:flex><span>bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% &amp;&amp; $refresh_i3status
-</span></span><span style=display:flex><span>bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle &amp;&amp; $refresh_i3status
-</span></span><span style=display:flex><span>bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle &amp;&amp; $refresh_i3status
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span># change focus
-</span></span><span style=display:flex><span>bindsym $mod+Left focus left
-</span></span><span style=display:flex><span>bindsym $mod+Down focus down
-</span></span><span style=display:flex><span>bindsym $mod+Up focus up
-</span></span><span style=display:flex><span>bindsym $mod+Right focus right
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span># alternatively, you can use the cursor keys:
-</span></span><span style=display:flex><span>bindsym $mod+Shift+Left move left
-</span></span><span style=display:flex><span>bindsym $mod+Shift+Down move down
-</span></span><span style=display:flex><span>bindsym $mod+Shift+Up move up
-</span></span><span style=display:flex><span>bindsym $mod+Shift+Right move right
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span># split in horizontal orientation
-</span></span><span style=display:flex><span>bindsym $mod+h split h
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span># split in vertical orientation
-</span></span><span style=display:flex><span>bindsym $mod+v split v
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span># enter fullscreen mode for the focused container
-</span></span><span style=display:flex><span>bindsym $mod+f fullscreen toggle
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span># change container layout (stacked, tabbed, toggle split)
-</span></span><span style=display:flex><span>bindsym $mod+s layout stacking
-</span></span><span style=display:flex><span>bindsym $mod+w layout tabbed
-</span></span><span style=display:flex><span>bindsym $mod+e layout toggle split
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span># toggle tiling / floating
-</span></span><span style=display:flex><span>bindsym $mod+Shift+space floating toggle
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span># change focus between tiling / floating windows
-</span></span><span style=display:flex><span>bindsym $mod+space focus mode_toggle
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span># focus the parent container
-</span></span><span style=display:flex><span>bindsym $mod+a focus parent
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span># Define names for default workspaces for which we configure key bindings later on.
-</span></span><span style=display:flex><span># We use variables to avoid repeating the names in multiple places.
-</span></span><span style=display:flex><span>set $ws1 &#34;1&#34;
-</span></span><span style=display:flex><span>set $ws2 &#34;2&#34;
-</span></span><span style=display:flex><span>set $ws3 &#34;3&#34;
-</span></span><span style=display:flex><span>set $ws4 &#34;4&#34;
-</span></span><span style=display:flex><span>set $ws5 &#34;5&#34;
-</span></span><span style=display:flex><span>set $ws6 &#34;6&#34;
-</span></span><span style=display:flex><span>set $ws7 &#34;7&#34;
-</span></span><span style=display:flex><span>set $ws8 &#34;8&#34;
-</span></span><span style=display:flex><span>set $ws9 &#34;9&#34;
-</span></span><span style=display:flex><span>set $ws10 &#34;10&#34;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span># switch to workspace
-</span></span><span style=display:flex><span>bindsym $mod+1 workspace number $ws1
-</span></span><span style=display:flex><span>bindsym $mod+2 workspace number $ws2
-</span></span><span style=display:flex><span>bindsym $mod+3 workspace number $ws3
-</span></span><span style=display:flex><span>bindsym $mod+4 workspace number $ws4
-</span></span><span style=display:flex><span>bindsym $mod+5 workspace number $ws5
-</span></span><span style=display:flex><span>bindsym $mod+6 workspace number $ws6
-</span></span><span style=display:flex><span>bindsym $mod+7 workspace number $ws7
-</span></span><span style=display:flex><span>bindsym $mod+8 workspace number $ws8
-</span></span><span style=display:flex><span>bindsym $mod+9 workspace number $ws9
-</span></span><span style=display:flex><span>bindsym $mod+0 workspace number $ws10
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span># move focused container to workspace
-</span></span><span style=display:flex><span>bindsym $mod+Shift+1 move container to workspace number $ws1
-</span></span><span style=display:flex><span>bindsym $mod+Shift+2 move container to workspace number $ws2
-</span></span><span style=display:flex><span>bindsym $mod+Shift+3 move container to workspace number $ws3
-</span></span><span style=display:flex><span>bindsym $mod+Shift+4 move container to workspace number $ws4
-</span></span><span style=display:flex><span>bindsym $mod+Shift+5 move container to workspace number $ws5
-</span></span><span style=display:flex><span>bindsym $mod+Shift+6 move container to workspace number $ws6
-</span></span><span style=display:flex><span>bindsym $mod+Shift+7 move container to workspace number $ws7
-</span></span><span style=display:flex><span>bindsym $mod+Shift+8 move container to workspace number $ws8
-</span></span><span style=display:flex><span>bindsym $mod+Shift+9 move container to workspace number $ws9
-</span></span><span style=display:flex><span>bindsym $mod+Shift+0 move container to workspace number $ws10
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span># reload the configuration file
-</span></span><span style=display:flex><span>bindsym $mod+Shift+c reload
-</span></span><span style=display:flex><span># restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-</span></span><span style=display:flex><span>bindsym $mod+Shift+r restart
-</span></span><span style=display:flex><span># exit i3 (logs you out of your X session)
-</span></span><span style=display:flex><span>bindsym $mod+Shift+e exec &#34;i3-nagbar -t warning -m &#39;You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.&#39; -B &#39;Yes, exit i3&#39; &#39;i3-msg exit&#39;&#34;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span># resize window (you can also use the mouse for that)
-</span></span><span style=display:flex><span>mode &#34;resize&#34; {
-</span></span><span style=display:flex><span>        bindsym Left resize shrink width 5 px or 5 ppt
-</span></span><span style=display:flex><span>        bindsym Down resize grow height 5 px or 5 ppt
-</span></span><span style=display:flex><span>        bindsym Up resize shrink height 5 px or 5 ppt
-</span></span><span style=display:flex><span>        bindsym Right resize grow width 5 px or 5 ppt
-</span></span><span style=display:flex><span>        bindsym Return mode &#34;default&#34;
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>bindsym $mod+r mode &#34;resize&#34;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span># panel
-</span></span><span style=display:flex><span>bar {
-</span></span><span style=display:flex><span>        colors {
-</span></span><span style=display:flex><span>        background #2f343f
-</span></span><span style=display:flex><span>        statusline #2f343f
-</span></span><span style=display:flex><span>        separator #4b5262
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        # colour of border, background, and text
-</span></span><span style=display:flex><span>        focused_workspace       #2f343f #bf616a #d8dee8
-</span></span><span style=display:flex><span>        active_workspace        #2f343f #2f343f #d8dee8
-</span></span><span style=display:flex><span>        inactive_workspace      #2f343f #2f343f #d8dee8
-</span></span><span style=display:flex><span>        urgent_workspacei       #2f343f #ebcb8b #2f343f
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>        status_command i3status
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span># gaps
-</span></span><span style=display:flex><span>gaps top    20
-</span></span><span style=display:flex><span>gaps left   10
-</span></span><span style=display:flex><span>gaps right  10
-</span></span><span style=display:flex><span>gaps bottom 10
-</span></span><span style=display:flex><span>gaps inner  25
-</span></span><span style=display:flex><span>border_radius 10
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span># Hide edge borders only if there is one window with no gaps
-</span></span><span style=display:flex><span>hide_edge_borders smart_no_gaps
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span># reload
-</span></span><span style=display:flex><span>exec_always hsetroot -solid &#34;#F1CCBB&#34;
-</span></span></code></pre></td></tr></table></div></div></div></details><h2 id=6-some-tricks-and-tips>6. Some tricks and tips
-<a class=anchor href=#6-some-tricks-and-tips>#</a></h2><ul><li><p>A trick with terminal emulator:</p><ul><li>Disable scrollbar and menubar.</li></ul><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/terminal-trick-1.png></div><a href=/blog/photos/getting-started-tiling-wm-part-1/terminal-trick-1.png itemprop=contentUrl></a></figure></div><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/terminal-trick-2.png></div><a href=/blog/photos/getting-started-tiling-wm-part-1/terminal-trick-2.png itemprop=contentUrl></a></figure></div><ul><li>Configure padding for vte-terminal.</li></ul></li></ul><div class=highlight><div style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
-</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
-</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>mkdir -p ~/.config/gtk-3.0
-</span></span><span style=display:flex><span>cat <span style=color:#c41a16>&lt;&lt;EOT &gt;&gt; ~/.config/gtk-3.0/gtk.css
-</span></span></span><span style=display:flex><span><span style=color:#c41a16>vte-terminal {
-</span></span></span><span style=display:flex><span><span style=color:#c41a16>    padding: 30px;
-</span></span></span><span style=display:flex><span><span style=color:#c41a16>}
-</span></span></span><span style=display:flex><span><span style=color:#c41a16>EOT</span>
-</span></span></code></pre></td></tr></table></div></div><ul><li>Result.</li></ul><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/i3-gaps-config.png></div><a href=/blog/photos/getting-started-tiling-wm-part-1/i3-gaps-config.png itemprop=contentUrl></a></figure></div><h2 id=7-references>7. References
+<a class=anchor href=#minimal-configuration-file>#</a></h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># i3 config file
+</span></span><span class=line><span class=cl># Please see https://i3wm.org/docs/userguide.html for a complete reference!
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># Set modifier
+</span></span><span class=line><span class=cl>set $mod Mod4
+</span></span><span class=line><span class=cl>set $alt Mod1
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>default_orientation auto
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># Font for window titles.
+</span></span><span class=line><span class=cl>font pango:DejaVu Sans Mono 0
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># Use Mouse+$mod to drag floating windows to their wanted position
+</span></span><span class=line><span class=cl>floating_modifier $mod
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># Here is the trick to disable titlebar completely
+</span></span><span class=line><span class=cl>for_window [class=&#34;^.*&#34;] border pixel 0
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># Autostart
+</span></span><span class=line><span class=cl>exec --no-startup-id hsetroot -solid &#34;#F1CCBB&#34;
+</span></span><span class=line><span class=cl>exec --no-startup-id xsettingsd &amp;
+</span></span><span class=line><span class=cl>exec --no-startup-id compton -b
+</span></span><span class=line><span class=cl>exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+</span></span><span class=line><span class=cl>exec --no-startup-id nm-applet
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># Keybindings
+</span></span><span class=line><span class=cl># start a terminal
+</span></span><span class=line><span class=cl>bindsym $mod+Return exec i3-sensible-terminal
+</span></span><span class=line><span class=cl># kill focused window
+</span></span><span class=line><span class=cl>bindsym $mod+c kill
+</span></span><span class=line><span class=cl>bindsym $alt+F4 kill
+</span></span><span class=line><span class=cl># start rofi
+</span></span><span class=line><span class=cl>bindsym $mod+Shift+d exec i3-dmenu-desktop --dmenu=&#34;dmenu -i -fn &#39;DejaVu Sans:size=8&#39;&#34;
+</span></span><span class=line><span class=cl>bindsym $mod+d exec rofi -lines 12 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font &#39;DejaVu Sans 8&#39;
+</span></span><span class=line><span class=cl># Use pactl to adjust volume in PulseAudio.
+</span></span><span class=line><span class=cl>set $refresh_i3status killall -SIGUSR1 i3status
+</span></span><span class=line><span class=cl>bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% &amp;&amp; $refresh_i3status
+</span></span><span class=line><span class=cl>bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% &amp;&amp; $refresh_i3status
+</span></span><span class=line><span class=cl>bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle &amp;&amp; $refresh_i3status
+</span></span><span class=line><span class=cl>bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle &amp;&amp; $refresh_i3status
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># change focus
+</span></span><span class=line><span class=cl>bindsym $mod+Left focus left
+</span></span><span class=line><span class=cl>bindsym $mod+Down focus down
+</span></span><span class=line><span class=cl>bindsym $mod+Up focus up
+</span></span><span class=line><span class=cl>bindsym $mod+Right focus right
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># alternatively, you can use the cursor keys:
+</span></span><span class=line><span class=cl>bindsym $mod+Shift+Left move left
+</span></span><span class=line><span class=cl>bindsym $mod+Shift+Down move down
+</span></span><span class=line><span class=cl>bindsym $mod+Shift+Up move up
+</span></span><span class=line><span class=cl>bindsym $mod+Shift+Right move right
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># split in horizontal orientation
+</span></span><span class=line><span class=cl>bindsym $mod+h split h
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># split in vertical orientation
+</span></span><span class=line><span class=cl>bindsym $mod+v split v
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># enter fullscreen mode for the focused container
+</span></span><span class=line><span class=cl>bindsym $mod+f fullscreen toggle
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># change container layout (stacked, tabbed, toggle split)
+</span></span><span class=line><span class=cl>bindsym $mod+s layout stacking
+</span></span><span class=line><span class=cl>bindsym $mod+w layout tabbed
+</span></span><span class=line><span class=cl>bindsym $mod+e layout toggle split
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># toggle tiling / floating
+</span></span><span class=line><span class=cl>bindsym $mod+Shift+space floating toggle
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># change focus between tiling / floating windows
+</span></span><span class=line><span class=cl>bindsym $mod+space focus mode_toggle
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># focus the parent container
+</span></span><span class=line><span class=cl>bindsym $mod+a focus parent
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># Define names for default workspaces for which we configure key bindings later on.
+</span></span><span class=line><span class=cl># We use variables to avoid repeating the names in multiple places.
+</span></span><span class=line><span class=cl>set $ws1 &#34;1&#34;
+</span></span><span class=line><span class=cl>set $ws2 &#34;2&#34;
+</span></span><span class=line><span class=cl>set $ws3 &#34;3&#34;
+</span></span><span class=line><span class=cl>set $ws4 &#34;4&#34;
+</span></span><span class=line><span class=cl>set $ws5 &#34;5&#34;
+</span></span><span class=line><span class=cl>set $ws6 &#34;6&#34;
+</span></span><span class=line><span class=cl>set $ws7 &#34;7&#34;
+</span></span><span class=line><span class=cl>set $ws8 &#34;8&#34;
+</span></span><span class=line><span class=cl>set $ws9 &#34;9&#34;
+</span></span><span class=line><span class=cl>set $ws10 &#34;10&#34;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># switch to workspace
+</span></span><span class=line><span class=cl>bindsym $mod+1 workspace number $ws1
+</span></span><span class=line><span class=cl>bindsym $mod+2 workspace number $ws2
+</span></span><span class=line><span class=cl>bindsym $mod+3 workspace number $ws3
+</span></span><span class=line><span class=cl>bindsym $mod+4 workspace number $ws4
+</span></span><span class=line><span class=cl>bindsym $mod+5 workspace number $ws5
+</span></span><span class=line><span class=cl>bindsym $mod+6 workspace number $ws6
+</span></span><span class=line><span class=cl>bindsym $mod+7 workspace number $ws7
+</span></span><span class=line><span class=cl>bindsym $mod+8 workspace number $ws8
+</span></span><span class=line><span class=cl>bindsym $mod+9 workspace number $ws9
+</span></span><span class=line><span class=cl>bindsym $mod+0 workspace number $ws10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># move focused container to workspace
+</span></span><span class=line><span class=cl>bindsym $mod+Shift+1 move container to workspace number $ws1
+</span></span><span class=line><span class=cl>bindsym $mod+Shift+2 move container to workspace number $ws2
+</span></span><span class=line><span class=cl>bindsym $mod+Shift+3 move container to workspace number $ws3
+</span></span><span class=line><span class=cl>bindsym $mod+Shift+4 move container to workspace number $ws4
+</span></span><span class=line><span class=cl>bindsym $mod+Shift+5 move container to workspace number $ws5
+</span></span><span class=line><span class=cl>bindsym $mod+Shift+6 move container to workspace number $ws6
+</span></span><span class=line><span class=cl>bindsym $mod+Shift+7 move container to workspace number $ws7
+</span></span><span class=line><span class=cl>bindsym $mod+Shift+8 move container to workspace number $ws8
+</span></span><span class=line><span class=cl>bindsym $mod+Shift+9 move container to workspace number $ws9
+</span></span><span class=line><span class=cl>bindsym $mod+Shift+0 move container to workspace number $ws10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># reload the configuration file
+</span></span><span class=line><span class=cl>bindsym $mod+Shift+c reload
+</span></span><span class=line><span class=cl># restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+</span></span><span class=line><span class=cl>bindsym $mod+Shift+r restart
+</span></span><span class=line><span class=cl># exit i3 (logs you out of your X session)
+</span></span><span class=line><span class=cl>bindsym $mod+Shift+e exec &#34;i3-nagbar -t warning -m &#39;You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.&#39; -B &#39;Yes, exit i3&#39; &#39;i3-msg exit&#39;&#34;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># resize window (you can also use the mouse for that)
+</span></span><span class=line><span class=cl>mode &#34;resize&#34; {
+</span></span><span class=line><span class=cl>        bindsym Left resize shrink width 5 px or 5 ppt
+</span></span><span class=line><span class=cl>        bindsym Down resize grow height 5 px or 5 ppt
+</span></span><span class=line><span class=cl>        bindsym Up resize shrink height 5 px or 5 ppt
+</span></span><span class=line><span class=cl>        bindsym Right resize grow width 5 px or 5 ppt
+</span></span><span class=line><span class=cl>        bindsym Return mode &#34;default&#34;
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>bindsym $mod+r mode &#34;resize&#34;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># panel
+</span></span><span class=line><span class=cl>bar {
+</span></span><span class=line><span class=cl>        colors {
+</span></span><span class=line><span class=cl>        background #2f343f
+</span></span><span class=line><span class=cl>        statusline #2f343f
+</span></span><span class=line><span class=cl>        separator #4b5262
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        # colour of border, background, and text
+</span></span><span class=line><span class=cl>        focused_workspace       #2f343f #bf616a #d8dee8
+</span></span><span class=line><span class=cl>        active_workspace        #2f343f #2f343f #d8dee8
+</span></span><span class=line><span class=cl>        inactive_workspace      #2f343f #2f343f #d8dee8
+</span></span><span class=line><span class=cl>        urgent_workspacei       #2f343f #ebcb8b #2f343f
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>        status_command i3status
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># gaps
+</span></span><span class=line><span class=cl>gaps top    20
+</span></span><span class=line><span class=cl>gaps left   10
+</span></span><span class=line><span class=cl>gaps right  10
+</span></span><span class=line><span class=cl>gaps bottom 10
+</span></span><span class=line><span class=cl>gaps inner  25
+</span></span><span class=line><span class=cl>border_radius 10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># Hide edge borders only if there is one window with no gaps
+</span></span><span class=line><span class=cl>hide_edge_borders smart_no_gaps
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># reload
+</span></span><span class=line><span class=cl>exec_always hsetroot -solid &#34;#F1CCBB&#34;
+</span></span></code></pre></div></div></details><h2 id=6-some-tricks-and-tips>6. Some tricks and tips
+<a class=anchor href=#6-some-tricks-and-tips>#</a></h2><ul><li><p>A trick with terminal emulator:</p><ul><li>Disable scrollbar and menubar.</li></ul><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/terminal-trick-1.png></div><a href=/blog/photos/getting-started-tiling-wm-part-1/terminal-trick-1.png itemprop=contentUrl></a></figure></div><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/terminal-trick-2.png></div><a href=/blog/photos/getting-started-tiling-wm-part-1/terminal-trick-2.png itemprop=contentUrl></a></figure></div><ul><li>Configure padding for vte-terminal.</li></ul></li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mkdir -p ~/.config/gtk-3.0
+</span></span><span class=line><span class=cl>cat <span class=s>&lt;&lt;EOT &gt;&gt; ~/.config/gtk-3.0/gtk.css
+</span></span></span><span class=line><span class=cl><span class=s>vte-terminal {
+</span></span></span><span class=line><span class=cl><span class=s>    padding: 30px;
+</span></span></span><span class=line><span class=cl><span class=s>}
+</span></span></span><span class=line><span class=cl><span class=s>EOT</span>
+</span></span></code></pre></div><ul><li>Result.</li></ul><div class=box><figure itemprop=associatedMedia itemscope itemtype=http://schema.org/ImageObject><div class=img><img itemprop=thumbnail src=/blog/photos/getting-started-tiling-wm-part-1/i3-gaps-config.png></div><a href=/blog/photos/getting-started-tiling-wm-part-1/i3-gaps-config.png itemprop=contentUrl></a></figure></div><h2 id=7-references>7. References
 <a class=anchor href=#7-references>#</a></h2><ol><li><a href=https://www.lifewire.com/window-manager-vs-the-desktop-environment-in-linux-4588338>https://www.lifewire.com/window-manager-vs-the-desktop-environment-in-linux-4588338</a></li><li><a href=https://en.wikipedia.org/wiki/X_window_manager>https://en.wikipedia.org/wiki/X_window_manager</a></li><li><a href=https://i3wm.org/docs>https://i3wm.org/docs</a></li><li><a href=https://wiki.archlinux.org/title/i3>https://wiki.archlinux.org/title/i3</a></li></ol></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/ntk148v/blog/commit/4f4fa44aa1e9db40279701cfcfb74e485b017e2f title='Last modified by Kien Nguyen | Jul 18, 2022' target=_blank rel=noopener><img src=/blog/svg/calendar.svg class=book-icon alt=Calendar>
 <span>Jul 18, 2022</span></a></div><div><a class="flex align-center" href=https://github.com/ntk148v/blog/edit/master/content/posts/getting-started-tiling-wm-part-1-i3.md target=_blank rel=noopener><img src=/blog/svg/edit.svg class=book-icon alt=Edit>
 <span>Edit this page</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments><section class="article discussion"><script src=https://giscus.app/client.js data-repo=ntk148v/blog data-repo-id="MDEwOlJlcG9zaXRvcnkyMDMyOTc1ODk=" data-category="Show and tell" data-category-id=DIC_kwDODB4TNc4CRH6q data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=preferred_color_scheme data-lang=en data-loading=lazy crossorigin=anonymous async></script></section></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#1-overview-window-manager>1. Overview Window Manager</a><ul><li><a href=#11-desktop-environment-vs-window-manager>1.1. Desktop Environment vs. Window Manager</a></li><li><a href=#12-types-of-window-manager>1.2. Types of Window Manager</a></li></ul></li><li><a href=#2-overview-i3>2. Overview I3</a></li><li><a href=#3-minimal-i3-setup>3. Minimal I3 setup</a><ul><li><a href=#31-operating-system>3.1. Operating System</a></li><li><a href=#32-install-i3>3.2. Install I3</a></li></ul></li><li><a href=#4-usage>4. Usage</a><ul><li><a href=#41-keybindings>4.1. Keybindings</a></li><li><a href=#42-workspace-container-and-window>4.2. Workspace, Container and Window</a></li><li><a href=#43-application-launcher>4.3. Application launcher</a></li></ul></li><li><a href=#5-configuration>5. Configuration</a></li><li><a href=#6-some-tricks-and-tips>6. Some tricks and tips</a></li><li><a href=#7-references>7. References</a></li></ul></nav></div></aside></main></body></html>
