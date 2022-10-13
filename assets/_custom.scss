@@ -53,11 +53,6 @@
     padding-top: 6px;
     margin-right: 1.8em;
     font-size: 1.6em;
-
-    &:hover {
-      text-decoration: underline;
-      cursor: pointer;
-    }
   }
 
   .posts-list {
@@ -68,8 +63,6 @@
   }
 
   .post-item {
-    border-bottom: 1px var(--gray-500) dashed;
-
     a {
       display: flex;
       justify-content: space-between;
@@ -85,15 +78,20 @@
 }
 
 .markdown {
-  a {
-    text-decoration: none;
+  .figure a {
+    border-bottom: none;
 
     &:hover {
-      text-decoration: underline;
+      border-bottom: none;
     }
+  }
+  a {
+    border-bottom: 2px var(--color-link) dashed;
 
-    &:visited {
-      color: var(--color-link);
+    &:hover {
+      text-decoration: none;
+      color: var(--gray-500);
+      border-bottom: 2px var(--gray-500) solid;
     }
   }
 }
@@ -107,22 +105,22 @@
 
 .terminal-prompt {
   position: relative;
-  white-space: nowrap
+  white-space: nowrap;
 }
 
 .terminal-prompt::before {
-  content: "> "
+  content: "> ";
 }
 
 .terminal-prompt::after {
   content: "";
-  -webkit-animation: cursor .8s infinite;
-  animation: cursor .8s infinite;
+  -webkit-animation: cursor 0.8s infinite;
+  animation: cursor 0.8s infinite;
   background: var(--body-font-color);
   border-radius: 0;
   display: inline-block;
   height: 1em;
-  margin-left: .2em;
+  margin-left: 0.2em;
   width: 5px;
   bottom: -2px;
   position: relative;
@@ -132,9 +130,9 @@
 // https://gohugo.io/content-management/syntax-highlighting/#generate-syntax-highlighter-css
 // Don't forget to set markup.highlight.noClasses=false
 // @media (prefers-color-scheme: dark) {
-  // @import 'syntax-light';
+//   @import 'syntax-light';
 // }
 
 // @media (prefers-color-scheme: light) {
-  // @import 'syntax-dark';
+//   @import 'syntax-dark';
 // }
