@@ -27,13 +27,13 @@ ordered = false
 startLevel = 2
 
 [markup.highlight]
-style = 'xcode'
-noClasses = true
+style = "algol_nu"
+noClasses = false
 codeFences = true
 guessSyntax = true
 hl_Lines = ""
 lineNoStart = 1
-lineNos = true
+lineNos = false
 lineNumbersInTable = true
 tabWidth = 4
 
