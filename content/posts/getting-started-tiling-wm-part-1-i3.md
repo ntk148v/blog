@@ -112,13 +112,13 @@ sudo ninja install
 
 - A prompt will be shown to create a config file, just hit `<Enter>`.
 
-{{< figure src="photos/getting-started-tiling-wm-part-1/i3-prompt.png" >}}
+{{< figure class="figure" src="photos/getting-started-tiling-wm-part-1/i3-prompt.png" >}}
 
 - `<mod>` key is `Window` now. Hit `<mod>+Enter` to start terminal emulator.
 
 - We have i3 first setup here with the default configuration. As mentioned before, configuration is achieved via plain text file.
 
-{{< figure src="photos/getting-started-tiling-wm-part-1/i3-default-config-file.png" >}}
+{{< figure class="figure" src="photos/getting-started-tiling-wm-part-1/i3-default-config-file.png" >}}
 
 ## 4. Usage
 
@@ -129,7 +129,7 @@ This post doesn't aim to cover everything about i3, see the [official documentat
 - In i3, commands are invoked with a modifier key, referred to as `$mod`. This is `Alt (Mod1)` by default, with `Super (Mod4)` being a popular alternative. Super is the key usually represented on a keyboard as a Windows icon, or on an Apple keyboard as a Command key.
 - See [i3 reference card](https://i3wm.org/docs/refcard.html) and [Using i3](https://i3wm.org/docs/userguide.html#_using_i3) for defaults.
 
-{{< figure src="photos/getting-started-tiling-wm-part-1/i3-refcard.png" >}}
+{{< figure class="figure" src="photos/getting-started-tiling-wm-part-1/i3-refcard.png" >}}
 
 ### 4.2. Workspace, Container and Window
 
@@ -367,9 +367,9 @@ exec_always hsetroot -solid "#F1CCBB"
 - A trick with terminal emulator:
   - Disable scrollbar and menubar.
 
-  {{< figure src="photos/getting-started-tiling-wm-part-1/terminal-trick-1.png" >}}
+  {{< figure class="figure" src="photos/getting-started-tiling-wm-part-1/terminal-trick-1.png" >}}
 
-  {{< figure src="photos/getting-started-tiling-wm-part-1/terminal-trick-2.png" >}}
+  {{< figure class="figure" src="photos/getting-started-tiling-wm-part-1/terminal-trick-2.png" >}}
 
   - Configure padding for vte-terminal.
 
@@ -384,7 +384,7 @@ EOT
 
 - Result.
 
-{{< figure src="photos/getting-started-tiling-wm-part-1/i3-gaps-config.png" >}}
+{{< figure class="figure" src="photos/getting-started-tiling-wm-part-1/i3-gaps-config.png" >}}
 
 ## 7. References
 

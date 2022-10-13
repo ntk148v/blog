@@ -10,14 +10,14 @@ tags: ["linux", "tips", "tech"]
 - [bat](https://github.com/sharkdp/bat): A cat(1) clone with syntax highlighting and Git integration.
 - Example:
 
-{{< figure src="photos/linux-tools-that-you-never-knew-you-needed/bat.png" >}}
+{{< figure class="figure" src="photos/linux-tools-that-you-never-knew-you-needed/bat.png" >}}
 
 ## 2. fd - (find alternative)
 
 - [fd](https://github.com/sharkdp/fd): a simple, fast and user-friendly alternative to `find`.
 - Examples:
 
-{{< figure src="https://raw.githubusercontent.com/sharkdp/fd/master/doc/screencast.svg" >}}
+{{< figure class="figure" src="https://raw.githubusercontent.com/sharkdp/fd/master/doc/screencast.svg" >}}
 
 ## 3. httpie - (wget/curl alternative)
 
@@ -59,15 +59,15 @@ $ rg 'fn write\('
 - [delta](https://github.com/dandavison/delta): Code evolves, and we all spend time studying diffs. Delta aims to make this both efficient and enjoyable: it allows you to make extensive changes to the layout and styling of diffs, as well as allowing you to stay arbitrarily close to the default git/diff output.
 - Diff/git diff doesn't show you exactly what was changed.
 
-{{< figure src="photos/linux-tools-that-you-never-knew-you-needed/git-diff.png" >}}
+{{< figure class="figure" src="photos/linux-tools-that-you-never-knew-you-needed/git-diff.png" >}}
 
 - Delta shows within-line highlights based on a Levenshtein edit inference algorithm.
 
-{{< figure src="photos/linux-tools-that-you-never-knew-you-needed/delta.png" >}}
+{{< figure class="figure" src="photos/linux-tools-that-you-never-knew-you-needed/delta.png" >}}
 
 - By default, delta restructures the git output slightly to make the hunk markers human-readable:
 
-{{< figure src="https://user-images.githubusercontent.com/52205/81059276-254cf980-8e9e-11ea-95c3-8b757a4c11b5.png" >}}
+{{< figure class="figure" src="https://user-images.githubusercontent.com/52205/81059276-254cf980-8e9e-11ea-95c3-8b757a4c11b5.png" >}}
 
 - Example config:
 
@@ -144,15 +144,15 @@ $ unalias **<TAB>
 # For more examples, checkout: https://github.com/junegunn/fzf
 ```
 
-{{< figure src="photos/linux-tools-that-you-never-knew-you-needed/fzf-vim.png" >}}
+{{< figure class="figure" src="photos/linux-tools-that-you-never-knew-you-needed/fzf-vim.png" >}}
 
-{{< figure src="photos/linux-tools-that-you-never-knew-you-needed/fzf-cd.png" >}}
+{{< figure class="figure" src="photos/linux-tools-that-you-never-knew-you-needed/fzf-cd.png" >}}
 
 ## 8. thefuck
 
 - [thefuck](https://github.com/nvbn/thefuck): Magnificent app which corrects your previous console command.
 
-{{< figure src="https://raw.githubusercontent.com/nvbn/thefuck/master/example.gif" >}}
+{{< figure class="figure" src="https://raw.githubusercontent.com/nvbn/thefuck/master/example.gif" >}}
 
 - Examples:
 
@@ -174,7 +174,7 @@ Reading package lists... Done
 - [exa](https://the.exa.website): A modern replacement for ls. `exa` is an improved file lister with more features and better defaults. It uses colours to distinguish file types and metadata. It knows about symlinks, extended attributes, and Git. And it’s small, fast, and just one single binary.
 - Examples:
 
-{{< figure src="photos/linux-tools-that-you-never-knew-you-needed/exa.png" >}}
+{{< figure class="figure" src="photos/linux-tools-that-you-never-knew-you-needed/exa.png" >}}
 
 - Completely replace `ls` with `exa`:
 
@@ -182,4 +182,4 @@ Reading package lists... Done
 alias ls="exa"
 ```
 
-{{< figure src="photos/linux-tools-that-you-never-knew-you-needed/exa-ls.png" >}}
+{{< figure class="figure" src="photos/linux-tools-that-you-never-knew-you-needed/exa-ls.png" >}}
