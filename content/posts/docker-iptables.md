@@ -219,9 +219,9 @@ I have create a repository for this, which is highly inspired by [systemd-servic
   # -A DOCKER-USER -i ens192 -p tcp -m tcp -m conntrack --ctorigdstport 80 -j ACCEPT
 
   # By default reject all packets
-  -A DOCKER-USER -m comment --comment "Default: Log DROP-USER input dropped packets in external inteface" -j LOG --log-prefix "iptables DOCKER-USER INPUT DROP in external interface" --log-level 7
+  -A DOCKER-USER -i extinf -m comment --comment "Default: Log DROP-USER input dropped packets in external inteface" -j LOG --log-prefix "iptables DOCKER-USER INPUT DROP in external interface" --log-level 7
   -A DOCKER-USER -i extinf -j REJECT
-  -A DOCKER-USER -m comment --comment "Default: Log DROP-USER output dropped packets in external inteface" -j LOG --log-prefix "iptables DOCKER-USER OUTPUT DROP in external interface" --log-level 7
+  -A DOCKER-USER -o extinf -m comment --comment "Default: Log DROP-USER output dropped packets in external inteface" -j LOG --log-prefix "iptables DOCKER-USER OUTPUT DROP in external interface" --log-level 7
   -A DOCKER-USER -o extinf -j REJECT
 
   -A DOCKER-USER -j RETURN
