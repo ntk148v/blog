@@ -1,8 +1,16 @@
 # Nothing but Blog
 
-My personal blog using [Hugo](https://gohugo.io/). Visit [here](https://ntk148v.github.io/blog).
+> **This theme is archived in order to move to new [site](https://ntk148v.github.io)!**
+> 
+> **Q**: Why change?
+> 
+> **A**: I've created a [complete new Hugo theme](https://github.com/ntk148v/hugo-toigian), and I'am very excited about it. Just want to know how it look in reality.
+> 
+> **Q**: Why you don't just change your theme in this repository?
+> 
+> **A**: This [repository](https://github.com/ntk148v/blog) is too large now, many many commits and files. I just want to a fresh start.
 
-[Blog Guideline](https://ntk148v.github.io/blog/posts/blog-guideline/)
+My personal blog using [Hugo](https://gohugo.io/). Visit [here](https://ntk148v.github.io/blog).
 
 > NOTE: The previous versions used:
 >
